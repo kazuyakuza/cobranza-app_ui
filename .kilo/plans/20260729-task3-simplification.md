@@ -1,103 +1,121 @@
-# Simplification Plan — Task 3: Define Project Structure
+# Task 3 Simplification Plan — Clean-up & Build Verification
 
-> **Date:** 2026-07-29
-> **TODO:** `.agent/todos/20260729/20260729-todo-0.md`
-> **Task:** 3 — Define Project Structure
-> **Step:** 4.3 Code Review & Simplification
-> **Branch:** `feat/ui-library-setup`
+> **Scope:** Review-only simplification opportunities for Phase 0 Task 7 (clean-up & build verification).  
+> **Do NOT implement** the changes below; this file is input for the next implementer/code-review cycle.
 
 ---
 
-## Files Reviewed
+## Build / test state observed
 
-- `.agent/project-structure.md`
-- `src/lib/public-api.ts`
-- `src/lib/components/modal/index.ts`
-- `src/lib/components/skeleton/index.ts`
-- `src/lib/components/empty-state/index.ts`
-- `src/lib/components/badge/index.ts`
-- `src/lib/components/card/index.ts`
-- `src/lib/components/button/index.ts`
-- `src/lib/components/module-container/index.ts`
-- `src/lib/components/module-header/index.ts`
+- `npm run build` exits `0` and produces the expected `dist/` layout.
+- `npm test` exits `0` but prints a `jest-haste-map` naming-collision warning.
+- `npm run lint` exits `0` with no errors.
+- No leftover CLI components, NgModules, or application boilerplate were found.
 
 ---
 
-## Findings
+## Simplification findings
 
-### 1. Verbose placeholder JSDoc in `public-api.ts`
+### 1. `.gitignore` is missing common Angular / Jest / TypeScript artifacts
 
-The header explains ng-packagr, MFE consumption, and lists every future component/directive/theme export in a `@todo` block. This inventory duplicates the folder list recorded in `.agent/project-structure.md` and the per-component barrels.
+Current `.gitignore` covers the basics (`dist/`, `node_modules/`, OS files, `.env` variants), but omits directories/files that will appear as soon as tooling is used more broadly:
 
-### 2. Repeated placeholder JSDoc in component barrels
+- `.angular/` — Angular CLI cache directory (created by `ng`/`ng-packagr` when the CLI is involved).
+- `coverage/` — Jest coverage reports when `npm test -- --coverage` is run.
+- `.eslintcache` — ESLint persistent cache if enabled later.
+- `*.tsbuildinfo` — TypeScript incremental build info files.
 
-All 8 component `index.ts` files share the same multi-line JSDoc shape. Only the component name changes. The `@todo` and example `export *` line are redundant once the barrel convention is established.
+**Recommendation:** Add these entries to `.gitignore` to keep the working tree clean and avoid accidental commits.
 
-### 3. Minor verbosity in `.agent/project-structure.md`
+### 2. `package-lock.json` is ignored despite an explicit "update lockfile" task
 
-A few folder comments carry more detail than needed. They can be tightened without losing AI-agent context.
+The project context lists *"Update the lockfile"* as a completed Phase 0 task, and `package-lock.json` exists in the working tree. However, `.gitignore` line 41 ignores `package-lock.json`, so the lockfile cannot be tracked.
 
----
+**Recommendation:** Decide whether the lockfile should be committed.
+- If the team wants reproducible CI / install reproducibility, **remove `package-lock.json` from `.gitignore`** and track it.
+- If the library intentionally avoids a lockfile, **update the project context** to remove the "Update the lockfile" task and delete the local `package-lock.json` to avoid confusion.
 
-## Proposed Edits
+The current mixed state is the most confusing option and should be resolved.
 
-### A. Simplify `src/lib/public-api.ts`
+### 3. `npm test` emits a `jest-haste-map` collision warning
 
-Replace the current header with a concise description that does not duplicate the component inventory.
+`npm test` prints:
 
-```ts
-/**
- * Public entry point for @cobranza-apps/ui.
- * Re-exports components, directives and theme once implemented.
- */
-export {};
+```text
+jest-haste-map: Haste module naming collision: @cobranza-apps/ui
+  The following files share their name; please adjust your hasteImpl:
+    * <rootDir>\package.json
+    * <rootDir>\dist\package.json
 ```
 
-### B. Simplify all component `index.ts` files
+This happens because Jest scans the whole project root and finds two `package.json` files with the same package name. The warning is benign today but adds noise and will recur after every build.
 
-Replace the multi-line JSDoc with a single-line placeholder comment. Apply to every component folder, substituting only the component name.
+**Recommendation:** Tell Jest to ignore the build output directory.
 
-Example for `src/lib/components/button/index.ts`:
+Options:
+- Add `modulePathIgnorePatterns: ['<rootDir>/dist/']` to `jest.config.js`.
+- Or restrict Jest roots to `src/` with `roots: ['<rootDir>/src']`.
 
-```ts
-/** Barrel placeholder for CbaButton. */
-export {};
+Both are small, low-risk changes that make the test output clean.
+
+### 4. `src/lib/public-api.ts` comment references the wrong barrel filename
+
+The doc block in `src/lib/public-api.ts` says:
+
+```text
+3. Add a `export * from './<path>/public-api'` line below
 ```
 
-Apply the same pattern to:
+The actual barrel files are named `index.ts` (e.g., `src/lib/components/button/index.ts`). New contributors will follow the comment and fail.
 
-- `src/lib/components/module-header/index.ts` → `ModuleHeader`
-- `src/lib/components/module-container/index.ts` → `ModuleContainer`
-- `src/lib/components/button/index.ts` → `CbaButton`
-- `src/lib/components/card/index.ts` → `CbaCard`
-- `src/lib/components/badge/index.ts` → `CbaBadge`
-- `src/lib/components/empty-state/index.ts` → `CbaEmptyState`
-- `src/lib/components/skeleton/index.ts` → `CbaSkeleton`
-- `src/lib/components/modal/index.ts` → `CbaModal`
+**Recommendation:** Change the comment to reference `index.ts` (or the generic term "barrel file"). No code change is needed.
 
-### C. Tighten `.agent/project-structure.md` comments
+### 5. No `clean` script for reproducible build verification
 
-Update the following lines to remove redundancy:
+The implementation plan manually deletes `dist/` before rebuilding. A dedicated `clean` script in `package.json` would make build verification simpler and less error-prone, especially as `.angular/` cache is introduced.
 
-- `src/lib/theme/`: change comment to `SCSS theme variables, utilities, mixins and entry file`
-- `src/lib/directives/`: change comment to `attribute directives created on demand`
-- `src/lib/components/module-header/`: shorten to `ModuleHeader component: title, size/collapse/fullscreen actions and status indicator`
-- `src/lib/components/module-container/`: shorten to `ModuleContainer component: wraps header + MFE content with size, collapse, fullscreen and scroll`
+**Recommendation:** Add a `clean` script.
+
+- Cross-platform option: add `rimraf` as a dev dependency and use `"clean": "rimraf dist .angular coverage"`.
+- Windows-only option (current environment): `"clean": "if exist dist rmdir /s /q dist && if exist .angular rmdir /s /q .angular && if exist coverage rmdir /s /q coverage"`.
+
+The `rimraf` route is preferred because it keeps the script platform-independent.
+
+### 6. Component barrel placeholders are empty scaffolding
+
+Eight files under `src/lib/components/*/index.ts` exist with only `export {};` and nearly identical comments. They do not currently export anything and are not imported by `src/lib/public-api.ts`.
+
+**Recommendation:** Either
+- **Keep them** as intentional skeletons (update `project-structure.md` to clarify they are placeholders), or
+- **Remove them** and recreate each barrel when the corresponding component is implemented.
+
+Removing them is the simpler state for Phase 0, but it requires updating `project-structure.md` so the documented folder list stays accurate.
+
+### 7. `.git-credentials` file exists on disk
+
+A `.git-credentials` file is present in the repository root. It is correctly ignored by `.gitignore`, but leaving credentials on disk is a security risk.
+
+**Recommendation:** Delete the file from the working tree and rotate the credentials if they are real.
 
 ---
 
-## Rationale
+## Proposed implementation order
 
-- Removes duplication between `public-api.ts`, per-component barrels, and `.agent/project-structure.md`.
-- Keeps barrel files self-documenting without placeholder noise.
-- Preserves the intent and AI-agent context.
-- All files remain well under the 200-line limit.
+If these simplifications are approved, implement them in this order:
+
+1. **Resolve lockfile status** first (decide + update `.gitignore` or context).
+2. **Update `.gitignore`** with missing artifacts and `.git-credentials` note if needed.
+3. **Add Jest ignore** for `dist/` in `jest.config.js`.
+4. **Fix `public-api.ts` comment** referencing `index.ts`.
+5. **Add `clean` script** to `package.json` (and `rimraf` dev dependency if chosen).
+6. **Delete `.git-credentials`** from disk.
+7. **Decide on component barrel placeholders** and update `project-structure.md` accordingly.
+8. Re-run `npm run clean`, `npm run build`, `npm test`, `npm run lint` to verify.
 
 ---
 
-## Out of Scope
+## Out of scope
 
-- No folder structure changes.
-- No actual export statements added (components are not yet implemented).
-- No file deletions.
-- No git push.
+- No component, directive, or theme implementation.
+- No changes to peer dependencies, `ng-package.json`, or `tsconfig*.json`.
+- No deletion of `src/lib/directives/.gitkeep` (intentional placeholder).
