@@ -1,6 +1,7 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
+    "target": "ES2016",
     "outDir": "./dist/out-tsc/spec",
     "module": "commonjs",
     "moduleResolution": "node10",

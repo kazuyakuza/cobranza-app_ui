@@ -21,7 +21,7 @@
 | @ng-bootstrap/ng-bootstrap | v21 | Forms / overlays |
 | @fortawesome/angular-fontawesome | latest compatible with Angular 22 | solid + regular icon packs |
 | ng-packagr | latest compatible with Angular 22 | Library build |
-| TypeScript | ~5.x (aligned to Angular 22) | |
+| TypeScript | ~6.0.3 | Angular 22 requires TS 6.x, supersedes earlier brief estimate |
 | SCSS | built-in | Theme + optional mixins |
 | Jest | latest | Unit tests where useful |
 | Node | LTS compatible with Angular 22 | |

@@ -4,13 +4,12 @@
     "declaration": true,
     "declarationMap": true,
     "inlineSources": true,
-    "outDir": "./dist/out-tsc/lib",
-    "types": []
+    "outDir": "./dist/out-tsc/lib"
   },
   "angularCompilerOptions": {
     "skipTemplateCodegen": true,
     "compilationMode": "partial"
   },
   "include": ["src/lib/**/*.ts"],
-  "exclude": ["src/lib/**/*.spec.ts", "**/*.stories.ts"]
+  "exclude": ["src/lib/**/*.spec.ts"]
 }
