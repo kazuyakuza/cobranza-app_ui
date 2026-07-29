@@ -14,4 +14,5 @@ module.exports = {
   ...createCjsPreset(),
   setupFilesAfterEnv: ['<rootDir>/setup-jest.ts'],
   testMatch: ['<rootDir>/src/**/*.spec.ts'],
+  modulePathIgnorePatterns: ['<rootDir>/dist/'],
 };
