@@ -34,6 +34,7 @@
 - `bootstrap` (CSS)
 - `@ng-bootstrap/ng-bootstrap`
 - `@fortawesome/angular-fontawesome`
+- `@fortawesome/fontawesome-svg-core`
 - `@fortawesome/free-solid-svg-icons`
 - `@fortawesome/free-regular-svg-icons`
 
