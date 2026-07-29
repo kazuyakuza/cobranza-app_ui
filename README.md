@@ -13,6 +13,7 @@ Shared Angular component library & intermediate-gray design system for the Cobra
 - [Target Consumers](#target-consumers)
 - [Installation](#installation)
 - [Quick Start](#quick-start)
+- [Development Commands](#development-commands)
 - [Component Inventory](#component-inventory)
 - [Design Tokens (Theme)](#design-tokens-theme)
 - [Related Libraries](#related-libraries)
@@ -87,7 +88,32 @@ import { ModuleHeader, ModuleContainer, CbaButton } from '@cobranza-apps/ui';
 For usage patterns and examples, see [`/docs/USAGE.md`](/docs/USAGE.md).
 
 <!-- AI Agent Note: Component contracts (Inputs/Outputs) are defined in brief.md §6.
-     When adding new components, update both the table below and brief.md. -->
+     When adding new components, update both the table below and brief.md §6. -->
+
+## Development Commands
+
+<!-- AI Agent Note: These commands are defined in package.json scripts.
+     Run from the project root. Requires Node.js ^22.22.3 || ^24.15.0 || >=26.0.0. -->
+
+| Command | Description |
+| --- | --- |
+| `npm run build` | Build the library via ng-packagr → outputs to `dist/` |
+| `npm test` | Run Jest unit tests (`--passWithNoTests`) |
+| `npm run lint` | Lint `src/**/*.ts` with ESLint (angular-eslint) |
+| `npm run format` | Format source files with Prettier (TS, SCSS, CSS, JSON, MD) |
+
+**Config files reference:**
+
+| File | Purpose |
+| --- | --- |
+| `ng-package.json` | ng-packagr entry point (`src/lib/public-api.ts`) and output (`dist/`) |
+| `tsconfig.json` | Base TypeScript config (extended by lib and spec configs) |
+| `tsconfig.lib.json` | Library build config — partial compilation, declarations |
+| `tsconfig.spec.json` | Jest test config — CommonJS module, Jest types |
+| `jest.config.js` | Jest config with jest-preset-angular CJS preset |
+| `setup-jest.ts` | Angular Zone.js test environment bootstrap |
+| `eslint.config.js` | Flat ESLint config (angular-eslint recommended) |
+| `.prettierrc.json` | Prettier rules (100 char width, single quotes, LF) |
 
 ## Component Inventory
 

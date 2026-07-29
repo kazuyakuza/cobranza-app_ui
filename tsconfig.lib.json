@@ -1,3 +1,6 @@
+// Library build TypeScript configuration for ng-packagr.
+// AI Agent: used by `npm run build` via ng-package.json. Emits declarations + source maps.
+// compilationMode "partial" is required for Angular libraries — consumers compile templates.
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {

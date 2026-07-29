@@ -1,3 +1,6 @@
+// Base TypeScript configuration for @cobranza-apps/ui.
+// Extended by tsconfig.lib.json (library build) and tsconfig.spec.json (Jest tests).
+// AI Agent: do not compile directly — use tsconfig.lib.json for builds, tsconfig.spec.json for tests.
 {
   "compileOnSave": false,
   "compilerOptions": {

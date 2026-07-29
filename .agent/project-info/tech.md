@@ -16,17 +16,17 @@
 
 | Technology | Version / Choice | Notes |
 | --- | --- | --- |
-| Angular | 22 (latest compatible minor, to pin in Task 4) | Standalone only; no NgModules |
-| Bootstrap | 5.x | CSS-only; never jQuery |
-| @ng-bootstrap/ng-bootstrap | v21 | Forms / overlays |
-| @fortawesome/angular-fontawesome | latest compatible with Angular 22 | solid + regular icon packs |
-| ng-packagr | latest compatible with Angular 22 | Library build |
-| TypeScript | ~6.0.3 | Angular 22 requires TS 6.x, supersedes earlier brief estimate |
+| Angular | ^22.0.0 | Standalone only; no NgModules |
+| Bootstrap | ^5.3.0 | CSS-only; never jQuery |
+| @ng-bootstrap/ng-bootstrap | ^21.0.0 | Forms / overlays |
+| @fortawesome/angular-fontawesome | ^5.0.0 (peer), ^5.1.0 (dev) | solid + regular icon packs |
+| ng-packagr | ^22.1.0 | Library build |
+| TypeScript | ~6.0.3 | Angular 22 requires TS 6.x |
 | SCSS | built-in | Theme + optional mixins |
-| Jest | latest | Unit tests where useful |
-| Node | LTS compatible with Angular 22 | |
-
-> **Note**: Exact minor/patch versions are finalized in Task 4 when `package.json` is created. This file records the major version choices only.
+| Jest | ^30.4.0 | Unit tests via jest-preset-angular |
+| ESLint | ^9.0.0 | Flat config with angular-eslint ^22.0.0 |
+| Prettier | ^3.0.0 | Code formatting |
+| Node.js | ^22.22.3 \|\| ^24.15.0 \|\| >=26.0.0 | Engine requirement in package.json |
 
 ## Peer Dependencies (runtime, expected by consumers)
 
@@ -39,27 +39,31 @@
 
 ## Dev Dependencies (build / test tooling)
 
-- Angular CLI
-- `ng-packagr`
-- TypeScript + `@types/*`
-- Jest + Angular-compatible preset / config
-- SCSS tooling (provided by Angular / ng-packagr)
+- `@angular/cli` ^22.0.9
+- `ng-packagr` ^22.1.0
+- TypeScript ~6.0.3 + `@types/jest` ^30.0.0, `@types/node` ^22.0.0
+- Jest ^30.4.0 + jest-preset-angular ^17.0.0 + jest-environment-jsdom ^30.4.1
+- ESLint ^9.0.0 + angular-eslint ^22.0.0 + typescript-eslint ^8.0.0
+- Prettier ^3.0.0
+- rxjs ^7.8.1, tslib ^2.3.0, zone.js ~0.16.0
 
+## Scripts
 
+Defined in `package.json`:
 
-## Scripts (planned, finalized in Task 4)
-
-- `build` — `ng-packagr` build
-- `test` — Jest unit tests
-- `lint` — code linting
-- `format` — code formatting
+| Script | Command | Purpose |
+| --- | --- | --- |
+| `build` | `ng-packagr -p ng-package.json -c tsconfig.lib.json` | Build library to `dist/` |
+| `test` | `jest --passWithNoTests` | Run Jest unit tests |
+| `lint` | `eslint "src/**/*.ts"` | Lint TypeScript sources |
+| `format` | `prettier --write "src/**/*.{ts,scss,css,json,md}"` | Format source files |
 
 ## Development Setup
 
 1. Clone repository.
-2. `npm install` (after Task 4 creates `package.json`).
-3. `npm run build` outputs `dist/` via `ng-package.json`.
-4. Local consumption: `npm link` or `npm pack` for Shell/MFE integration (documented later in `/docs/USAGE.md`).
+2. `npm install` — installs all dev dependencies.
+3. `npm run build` — outputs `dist/` via `ng-package.json`.
+4. Local consumption: `npm link` or `npm pack` for Shell/MFE integration (see `/docs/USAGE.md`).
 
 ## Tooling Constraints
 

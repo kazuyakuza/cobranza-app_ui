@@ -1,3 +1,4 @@
+# Prettier ignore — AI Agent: these paths are excluded from `npm run format`.
 dist/
 node_modules/
 package-lock.json

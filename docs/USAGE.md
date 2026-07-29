@@ -8,6 +8,7 @@ Patterns and examples for consuming the shared Angular component library and des
 
 ## Table of Contents
 
+- [Development Setup](#development-setup)
 - [Installation](#installation)
 - [Peer Dependencies](#peer-dependencies)
 - [Theme Import](#theme-import)
@@ -23,6 +24,71 @@ Patterns and examples for consuming the shared Angular component library and des
   - [CbaModal](#cbamodal)
 - [Design Tokens Reference](#design-tokens-reference)
 - [AI Agent Guidelines](#ai-agent-guidelines)
+
+## Development Setup
+
+<!-- AI Agent Note: This section is for developers working ON the library (not consumers).
+     Commands map to package.json scripts. Requires Node.js ^22.22.3 || ^24.15.0 || >=26.0.0. -->
+
+### Prerequisites
+
+- **Node.js**: `^22.22.3 || ^24.15.0 || >=26.0.0` (see `package.json` engines)
+- **npm**: comes with Node.js
+
+### Install
+
+```sh
+npm install
+```
+
+### Build
+
+Compiles the library via ng-packagr using `ng-package.json` and `tsconfig.lib.json`. Output goes to `dist/`.
+
+```sh
+npm run build
+```
+
+### Test
+
+Runs Jest unit tests with jest-preset-angular. Uses `--passWithNoTests` so the command succeeds even when no spec files exist yet.
+
+```sh
+npm test
+```
+
+### Lint
+
+Runs ESLint with angular-eslint recommended rules against `src/**/*.ts`.
+
+```sh
+npm run lint
+```
+
+### Format
+
+Runs Prettier on all source files (TS, SCSS, CSS, JSON, MD). Configured in `.prettierrc.json` (100 char width, single quotes, trailing commas, LF line endings).
+
+```sh
+npm run format
+```
+
+### Configuration Files
+
+| File | Purpose |
+| --- | --- |
+| `package.json` | Dependencies, scripts, engine requirements |
+| `ng-package.json` | ng-packagr config — entry file and output directory |
+| `tsconfig.json` | Base TypeScript config (strict mode, ES2022) |
+| `tsconfig.lib.json` | Library build — partial compilation, emits declarations |
+| `tsconfig.spec.json` | Test compilation — CommonJS for Jest compatibility |
+| `jest.config.js` | Jest config — CJS preset, test matching, setup file |
+| `setup-jest.ts` | Angular Zone.js test environment bootstrap |
+| `eslint.config.js` | Flat ESLint config — angular-eslint for Angular 22 |
+| `.prettierrc.json` | Prettier formatting rules |
+| `.prettierignore` | Paths excluded from formatting (dist, node_modules) |
+
+---
 
 ## Installation
 

@@ -1,3 +1,5 @@
+// Jest test TypeScript configuration.
+// AI Agent: used by jest-preset-angular when running `npm test`. CommonJS module for Jest compat.
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
