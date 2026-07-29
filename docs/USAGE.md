@@ -1,0 +1,327 @@
+<!-- AI Agent Note: This file provides usage patterns for consuming @cobranza-apps/ui.
+     Keep examples aligned with brief.md component contracts and design tokens.
+     When adding new components, update both this file and README.md Component Inventory. -->
+
+# @cobranza-apps/ui — Usage Guide
+
+Patterns and examples for consuming the shared Angular component library and design system.
+
+## Table of Contents
+
+- [Installation](#installation)
+- [Peer Dependencies](#peer-dependencies)
+- [Theme Import](#theme-import)
+- [Quick Start](#quick-start)
+- [Component Usage Patterns](#component-usage-patterns)
+  - [ModuleHeader](#moduleheader)
+  - [ModuleContainer](#modulecontainer)
+  - [CbaButton](#cbabutton)
+  - [CbaCard](#cbacard)
+  - [CbaBadge](#cbabadge)
+  - [CbaEmptyState](#cbaemptystate)
+  - [CbaSkeleton](#cbaskeleton)
+  - [CbaModal](#cbamodal)
+- [Design Tokens Reference](#design-tokens-reference)
+- [AI Agent Guidelines](#ai-agent-guidelines)
+
+## Installation
+
+```sh
+npm install @cobranza-apps/ui
+```
+
+## Peer Dependencies
+
+Install the following peer dependencies separately. **Never install jQuery** — Bootstrap is used CSS-only.
+
+| Package | Version | Purpose |
+| --- | --- | --- |
+| `@angular/core` | `^22` | Angular runtime |
+| `@angular/common` | `^22` | Angular common module |
+| `@angular/forms` | `^22` | Angular forms |
+| `bootstrap` | `^5` | CSS framework (no jQuery) |
+| `@ng-bootstrap/ng-bootstrap` | `^21` | Angular Bootstrap components |
+| `@fortawesome/angular-fontawesome` | latest | Icon rendering |
+| `@fortawesome/free-solid-svg-icons` | latest | Solid icon pack |
+| `@fortawesome/free-regular-svg-icons` | latest | Regular icon pack |
+
+```sh
+npm install @angular/core@^22 @angular/common@^22 @angular/forms@^22 \
+  bootstrap@^5 @ng-bootstrap/ng-bootstrap@^21 \
+  @fortawesome/angular-fontawesome @fortawesome/free-solid-svg-icons @fortawesome/free-regular-svg-icons
+```
+
+## Theme Import
+
+Import the theme in your global styles file to apply the intermediate-gray design tokens.
+
+**SCSS import (recommended):**
+
+```scss
+/* global-styles.scss or styles.scss */
+@use '@cobranza-apps/ui/theme';
+```
+
+**CSS variables only (if not using SCSS):**
+
+```css
+/* global-styles.css */
+@import '@cobranza-apps/ui/theme.css';
+```
+
+> **Note:** Exact import paths are tentative until the library build is finalized. The canonical form is `@cobranza-apps/ui/theme`.
+
+The theme provides CSS custom properties with the `--cba-` prefix (e.g., `--cba-bg-primary`, `--cba-text-primary`, `--cba-accent-primary`).
+
+## Quick Start
+
+### 1. Shell Application (hosting MFEs)
+
+```ts
+// app.component.ts
+import { Component } from '@angular/core';
+import { ModuleHeader, ModuleContainer } from '@cobranza-apps/ui';
+
+@Component({
+  selector: 'app-shell',
+  standalone: true,
+  imports: [ModuleHeader, ModuleContainer],
+  template: `
+    <cba-module-container [size]="size" [isCollapsed]="isCollapsed" [isFullscreen]="isFullscreen">
+      <cba-module-header
+        title="Customer Module"
+        [size]="size"
+        [isCollapsed]="isCollapsed"
+        [isFullscreen]="isFullscreen"
+        status="loaded"
+        (collapseToggle)="onCollapseToggle()"
+        (sizeToggle)="onSizeToggle($event)"
+        (fullscreenToggle)="onFullscreenToggle()"
+        (remove)="onRemove()">
+      </cba-module-header>
+
+      <!-- MFE content goes here -->
+      <div class="mfe-content">
+        <p>Module content</p>
+      </div>
+    </cba-module-container>
+  `
+})
+export class AppComponent {
+  size: '50%' | '100%' = '100%';
+  isCollapsed = false;
+  isFullscreen = false;
+
+  onCollapseToggle(): void {
+    this.isCollapsed = !this.isCollapsed;
+  }
+
+  onSizeToggle(size: '50%' | '100%'): void {
+    this.size = size;
+  }
+
+  onFullscreenToggle(): void {
+    this.isFullscreen = !this.isFullscreen;
+  }
+
+  onRemove(): void {
+    // Handle module removal
+  }
+}
+```
+
+### 2. MFE Application (using basic components)
+
+```ts
+// mfe-dashboard.component.ts
+import { Component } from '@angular/core';
+import { CbaButton, CbaCard, CbaBadge } from '@cobranza-apps/ui';
+
+@Component({
+  selector: 'app-dashboard',
+  standalone: true,
+  imports: [CbaButton, CbaCard, CbaBadge],
+  template: `
+    <cba-card>
+      <cba-badge variant="success">Active</cba-badge>
+      <h3>Dashboard</h3>
+      <p>Welcome to the dashboard</p>
+      <cba-button variant="primary" (clicked)="onSave()">Save</cba-button>
+    </cba-card>
+  `
+})
+export class DashboardComponent {
+  onSave(): void {
+    // Save logic
+  }
+}
+```
+
+## Component Usage Patterns
+
+### ModuleHeader
+
+Shell-injected header above each MFE module.
+
+```html
+<cba-module-header
+  title="Module Title"
+  size="100%"
+  [isCollapsed]="false"
+  [isFullscreen]="false"
+  status="loading"
+  (collapseToggle)="onCollapse()"
+  (sizeToggle)="onSizeChange($event)"
+  (fullscreenToggle)="onFullscreen()"
+  (remove)="onRemove()">
+</cba-module-header>
+```
+
+**Status values:** `loading` | `loaded` | `success` | `warning` | `error` | `dirty` | `null`
+
+**Outputs:** `collapseToggle`, `sizeToggle`, `remove`, `fullscreenToggle`
+
+### ModuleContainer
+
+Wraps `ModuleHeader` + MFE content.
+
+```html
+<cba-module-container
+  size="100%"
+  [isCollapsed]="false"
+  [isFullscreen]="false"
+  padding="sm">
+  <!-- Content here -->
+</cba-module-container>
+```
+
+**Padding options:** `none` | `sm` | `md` (default: `sm`)
+
+### CbaButton
+
+Variants: `primary`, `secondary`, `ghost`, `danger`, `success`. Sizes: `sm` | `md`.
+
+```html
+<cba-button variant="primary" size="md" [loading]="isSaving" (clicked)="onSave()">
+  Save
+</cba-button>
+
+<cba-button variant="ghost" size="sm" [icon]="['fas', 'trash']" (clicked)="onDelete()">
+  Delete
+</cba-button>
+```
+
+### CbaCard
+
+Optional header & footer.
+
+```html
+<cba-card>
+  <div header>Card Header</div>
+  <p>Card content</p>
+  <div footer>Card Footer</div>
+</cba-card>
+```
+
+### CbaBadge
+
+Semantic colours: `success`, `warning`, `danger`, `info`, `secondary`. Styles: `solid` | `outline`.
+
+```html
+<cba-badge variant="success" style="solid">Active</cba-badge>
+<cba-badge variant="warning" style="outline">Pending</cba-badge>
+```
+
+### CbaEmptyState
+
+Slots: icon, title, description, primary action.
+
+```html
+<cba-empty-state
+  icon="inbox"
+  title="No items found"
+  description="Try adjusting your filters">
+  <cba-button variant="primary" (clicked)="onReset()">Reset Filters</cba-button>
+</cba-empty-state>
+```
+
+### CbaSkeleton
+
+Variants: `text`, `avatar`, `card`, `table-row`, `generic`.
+
+```html
+<cba-skeleton variant="card"></cba-skeleton>
+<cba-skeleton variant="text" [lines]="3"></cba-skeleton>
+<cba-skeleton variant="table-row" [columns]="5"></cba-skeleton>
+```
+
+### CbaModal
+
+Thin wrapper around ng-bootstrap modal.
+
+```ts
+import { CbaModal } from '@cobranza-apps/ui';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+
+@Component({
+  standalone: true,
+  imports: [CbaModal],
+  template: `
+    <cba-modal title="Confirm Action">
+      <p>Are you sure?</p>
+      <div footer>
+        <cba-button variant="secondary" (clicked)="activeModal.dismiss()">Cancel</cba-button>
+        <cba-button variant="primary" (clicked)="activeModal.close('confirmed')">Confirm</cba-button>
+      </div>
+    </cba-modal>
+  `
+})
+export class ConfirmModalComponent {
+  constructor(public activeModal: NgbActiveModal) {}
+}
+```
+
+## Design Tokens Reference
+
+All tokens use the `--cba-` prefix. Full reference in [brief.md §5](../.agent/project-info/brief.md#5-design-tokens-theme-proposal).
+
+**Backgrounds:** `--cba-bg-primary`, `--cba-bg-secondary`, `--cba-bg-tertiary`, `--cba-bg-elevated`, `--cba-bg-overlay`
+
+**Text:** `--cba-text-primary`, `--cba-text-secondary`, `--cba-text-muted`, `--cba-text-inverse`
+
+**Borders:** `--cba-border-subtle`, `--cba-border-default`, `--cba-border-strong`
+
+**Accents:** `--cba-accent-primary`, `--cba-accent-success`, `--cba-accent-warning`, `--cba-accent-danger`, `--cba-accent-info`
+
+**Spacing:** `--cba-space-1` (4px) through `--cba-space-8` (32px)
+
+**Radius:** `--cba-radius-sm` (6px), `--cba-radius-md` (10px), `--cba-radius-lg` (14px)
+
+**Utility classes:** `.cba-bg-primary`, `.cba-bg-secondary`, `.cba-text-primary`, `.cba-text-secondary`, `.cba-text-muted`
+
+## AI Agent Guidelines
+
+<!-- AI Agent Note: This section helps future agents understand how to consume and contribute to the library. -->
+
+**Consuming the library:**
+
+- Import theme globally in `global-styles.scss` or `styles.scss`.
+- Import components individually in standalone components: `import { CbaButton } from '@cobranza-apps/ui'`.
+- Use design tokens via CSS variables or utility classes for consistency.
+- Follow the component contracts in [brief.md §6](../.agent/project-info/brief.md#6-core-components-proposal).
+
+**Contributing to the library:**
+
+- Read [AGENTS.md](../AGENTS.md) and `.agent/project-info/` before making changes.
+- Follow workflows in `.agent/WORKFLOWS.md` and rules in `.kilo/rules/`.
+- All components are standalone (no NgModules).
+- Use JSDoc on every public `@Input()`, `@Output()`, and component class.
+- Update this USAGE.md when adding new components or patterns.
+- Keep examples aligned with brief.md contracts.
+
+**Cross-references:**
+
+- [README.md](../README.md) — Library overview and component inventory.
+- [brief.md](../.agent/project-info/brief.md) — Source of truth for scope, tokens, and component specs.
+- [architecture.md](../.agent/project-info/architecture.md) — Build strategy and folder layout.
+- [tech.md](../.agent/project-info/tech.md) — Exact versions and dependencies.

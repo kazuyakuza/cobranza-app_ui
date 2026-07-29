@@ -1,3 +1,8 @@
+<!-- AI Agent Note: This README is the primary entry point for consumers and AI agents.
+     Structure: Overview → Installation → Quick Start → Components → Theme → Integration → Docs → Contributing.
+     For detailed usage patterns and code examples, see /docs/USAGE.md.
+     For project scope and design tokens, see .agent/project-info/brief.md. -->
+
 # @cobranza-apps/ui
 
 Shared Angular component library & intermediate-gray design system for the Cobranza App Company Back-office.
@@ -79,7 +84,10 @@ Install the major ranges declared in package.json peerDependencies: `@angular/co
 import { ModuleHeader, ModuleContainer, CbaButton } from '@cobranza-apps/ui';
 ```
 
-For usage patterns and examples, see [`/docs/USAGE.md`](#documentation) (planned).
+For usage patterns and examples, see [`/docs/USAGE.md`](/docs/USAGE.md).
+
+<!-- AI Agent Note: Component contracts (Inputs/Outputs) are defined in brief.md §6.
+     When adding new components, update both the table below and brief.md. -->
 
 ## Component Inventory
 
@@ -138,11 +146,20 @@ For the full token reference, see [brief.md §5](.agent/project-info/brief.md#5-
 - This library emits **only pure UI events** from `ModuleHeader` (`collapseToggle`, `sizeToggle`, `remove`, `fullscreenToggle`). It never dispatches workspace or routing events.
 - **Drag-and-drop is not part of this library** — it is owned by the Shell and `mfe-events`.
 
+<!-- AI Agent Note: Keep this section updated when adding new documentation files.
+     All docs should be linked from both README and brief.md §10. -->
+
 ## Documentation
 
-- `/docs/USAGE.md` — Patterns and examples for consuming the library (planned).
+- [`/docs/USAGE.md`](/docs/USAGE.md) — Patterns and examples for consuming the library.
 - [Project brief](.agent/project-info/brief.md) — Source of truth for scope, design tokens, and component contracts.
+- [Product info](.agent/project-info/product.md) — Product goals, target consumers, UX focus.
+- [Architecture](.agent/project-info/architecture.md) — Build strategy, folder layout, integration patterns.
+- [Tech stack](.agent/project-info/tech.md) — Exact versions, dependencies, tooling constraints.
 - JSDoc on every public `@Input()`, `@Output()`, and component class.
+
+<!-- AI Agent Note: Before contributing, read AGENTS.md and .agent/project-info/ files.
+     Follow workflows in .agent/WORKFLOWS.md and rules in .kilo/rules/. -->
 
 ## Contributing & AI Agent Onboarding
 
