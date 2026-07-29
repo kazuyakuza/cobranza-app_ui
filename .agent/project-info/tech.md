@@ -33,7 +33,7 @@
 - Jest + Angular-compatible preset / config
 - SCSS tooling (provided by Angular / ng-packagr)
 
-Exact pins are set in Task 4 (`package.json`).
+
 
 ## Scripts (planned, finalized in Task 4)
 
@@ -56,12 +56,7 @@ Exact pins are set in Task 4 (`package.json`).
 - **No Storybook** for now.
 - Manual QA first; Playwright integration tests added later.
 - JSDoc required on every public `@Input()`, `@Output()`, and component class.
-- Code rules from `.kilo/rules/` apply:
-  - Max 200 lines per source file in `src/`.
-  - Max 50 lines per method.
-  - Max 2 constructor / method parameters (use a config/options object beyond 2).
-  - Max 2 levels of nesting (extract into methods beyond that).
-  - Prefer private members by default.
+- Code rules from `.kilo/rules/` apply (e.g., line/method limits, parameter caps, nesting depth, and private-by-default members).
 - No domain logic, BFF communication, or workspace state in this library.
 
 ## Cross-Reference

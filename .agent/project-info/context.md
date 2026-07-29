@@ -19,8 +19,6 @@
 1. **Task 2**: Update `README.md` for `@cobranza-apps/ui` consumers.
 2. **Task 3**: Define project structure (create folders under `src/lib/`).
 3. **Task 4**: Create `package.json` + `ng-package.json`, install dependencies.
-4. **Task 5**: Implement `ModuleHeader` component.
-5. **Task 6**: Implement `ModuleContainer` component.
 
 ## Open Items / Risks
 
