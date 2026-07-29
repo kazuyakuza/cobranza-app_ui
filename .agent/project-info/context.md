@@ -16,26 +16,32 @@
 
 ## Current Work Focus
 
-- **Bootstrapping the library**: initializing project-info documentation (this TODO Task 1).
-- Repository is pre-`package.json`; `src/` contains only `.gitkeep`.
-- Branch: `feat/ui-library-setup`.
+- **Library bootstrap complete**: all four initial TODO tasks finished.
+- `main` branch is clean, up to date, and pushed to `origin`.
+- `npm run build`, `npm test`, `npm run lint` all pass.
+- Ready for component-level implementation.
 
 ## Recent Changes
 
-- Cleaned up base-project template files.
-- Created `feat/ui-library-setup` branch.
-- Authored `brief.md` (project brief, source of truth).
+- Initialized all project-info files (`brief.md`, `product.md`, `architecture.md`, `tech.md`, `context.md`).
+- Rewrote `README.md` for `@cobranza-apps/ui` consumers; created `USAGE.md` with integration examples.
+- Defined project structure under `src/lib/` with folders: `components`, `directives`, `pipes`, `services`, `models`, `utils`, `styles`, `theme`.
+- Created `src/public-api.ts` as the library entry point (barrel file).
+- Set up `package.json` (Angular 22, Bootstrap 5, ng-bootstrap v21, rxjs) with `ng-packagr` build config.
+- Installed all dependencies — `npm install` completed successfully.
+- Merged `feat/ui-library-setup` branch into `main` and pushed to `origin`.
 
 ## Immediate Next Steps
 
-1. **Task 2**: Update `README.md` for `@cobranza-apps/ui` consumers.
-2. **Task 3**: Define project structure (create folders under `src/lib/`).
-3. **Task 4**: Create `package.json` + `ng-package.json`, install dependencies.
+1. Implement individual components (e.g., `ModuleHeader`, `ModuleContainer`).
+2. Create theme SCSS files (`src/lib/theme/`).
+3. Set up CI/CD pipeline for automated build and publish.
+4. Publish `@cobranza-apps/mfe-events` package for event contracts.
 
 ## Open Items / Risks
 
 - `@cobranza-apps/mfe-events` not yet published — workspace event contracts deferred.
-- Exact minor/patch versions of Angular 22 / Bootstrap 5 / ng-bootstrap v21 to be finalized in Task 4 (`package.json`).
+- Components not yet implemented; no test coverage beyond scaffolding.
 
 ## Cross-Reference
 
@@ -43,5 +49,5 @@
 - [Product Info](product.md) — product goals, target consumers, UX focus.
 - [Architecture](architecture.md) — standalone components, ng-packagr build, theme encapsulation, integration patterns.
 - [Tech Stack](tech.md) — exact versions, dependencies, tooling constraints.
-- [TODO file](../todos/20260729/20260729-todo-0.md) — active tasks.
+- [TODO file](../todos/20260729/20260729-todo-0-DONE.md) — completed tasks.
 - [Global plan](../../.kilo/plans/20260729-ui-library-setup.md) — overall workflow.
