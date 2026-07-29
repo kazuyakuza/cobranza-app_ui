@@ -1,5 +1,10 @@
 # Project Structure
 
+> **AI Agent Guidance:** This file is the canonical map of the `src/` directory.
+> Before creating, moving, or deleting any file or folder, agents MUST consult this file to verify the target location is valid.
+> Each line below describes one folder's purpose. If a folder is missing or its description is outdated, update this file as part of your work.
+> The `# Folders in src/` section covers source code only. The `# Other folders` section covers project-level support directories.
+
 # Folders in src/
 
 - src/lib/ - root of the publishable Angular library (ng-packagr entry via src/lib/public-api.ts)
