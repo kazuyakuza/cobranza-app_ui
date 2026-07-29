@@ -1,3 +1,15 @@
+<!--
+  FILE: context.md — Project Context & Status
+  PURPOSE: Tracks current work focus, recent changes, immediate next steps, and open risks for @cobranza-apps/ui.
+  AUDIENCE: AI agents and developers needing a quick status overview.
+  RELATIONSHIPS:
+    - brief.md — source of truth for scope, tokens, and component specs.
+    - product.md — product goals, target consumers, UX focus.
+    - architecture.md — build strategy, folder layout, integration patterns.
+    - tech.md — exact versions, dependencies, tooling constraints.
+  MAINTENANCE: Update after each significant change or task completion. Keep "Recent Changes" and "Next Steps" current.
+-->
+
 # @cobranza-apps/ui — Context
 
 [Project Info: Active]
@@ -28,6 +40,7 @@
 ## Cross-Reference
 
 - [Project Brief](brief.md) — scope, tokens, component specs, source of truth.
+- [Product Info](product.md) — product goals, target consumers, UX focus.
 - [Architecture](architecture.md) — standalone components, ng-packagr build, theme encapsulation, integration patterns.
 - [Tech Stack](tech.md) — exact versions, dependencies, tooling constraints.
 - [TODO file](../todos/20260729/20260729-todo-0.md) — active tasks.

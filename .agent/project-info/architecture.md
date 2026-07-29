@@ -1,3 +1,15 @@
+<!--
+  FILE: architecture.md — Architecture
+  PURPOSE: Documents the high-level architecture, folder layout, build strategy, public API strategy, theme encapsulation, and integration patterns for @cobranza-apps/ui.
+  AUDIENCE: AI agents, architects, and developers.
+  RELATIONSHIPS:
+    - brief.md — source of truth for tokens and component specifications.
+    - product.md — product goals, target consumers, UX focus.
+    - context.md — current work status and next steps.
+    - tech.md — exact versions, dependencies, tooling constraints.
+  MAINTENANCE: Update when architecture decisions change (e.g., entry points, build tooling, integration patterns).
+-->
+
 # @cobranza-apps/ui — Architecture
 
 ## High-Level Architecture
@@ -76,5 +88,6 @@ Responsibilities: apply size classes, hide body on collapse, apply border-radius
 ## Cross-Reference
 
 - [Project Brief](brief.md) — source of truth for tokens and component specifications.
-- [Tech Stack](tech.md) — exact versions, dependencies, tooling constraints.
 - [Product Info](product.md) — product goals, UX focus, target consumers.
+- [Context](context.md) — current work status, recent changes, next steps.
+- [Tech Stack](tech.md) — exact versions, dependencies, tooling constraints.

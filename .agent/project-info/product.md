@@ -1,3 +1,15 @@
+<!--
+  FILE: product.md — Product Info
+  PURPOSE: Defines the problem, product goals, target consumers, scope, UX focus, and accessibility goals for @cobranza-apps/ui.
+  AUDIENCE: AI agents, product managers, and developers.
+  RELATIONSHIPS:
+    - brief.md — source of truth for scope, tokens, and component specs.
+    - context.md — current work status and next steps.
+    - architecture.md — build strategy, public API, integration patterns.
+    - tech.md — exact versions, dependencies, tooling constraints.
+  MAINTENANCE: Update when product goals, scope, or UX priorities change.
+-->
+
 # @cobranza-apps/ui — Product Info
 
 ## Problem Definition
@@ -56,5 +68,6 @@ The Company Back-office Shell hosts multiple MFEs. Each team independently imple
 ## Cross-Reference
 
 - [Project Brief](brief.md) — source of truth for scope, tokens, and component specs.
+- [Context](context.md) — current work status, recent changes, next steps.
 - [Architecture](architecture.md) — build strategy, public API, integration patterns.
 - [Tech Stack](tech.md) — exact versions, dependencies, tooling constraints.

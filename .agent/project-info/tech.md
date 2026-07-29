@@ -1,3 +1,15 @@
+<!--
+  FILE: tech.md — Tech Stack
+  PURPOSE: Records the exact technology versions, peer/dev dependencies, planned scripts, development setup, and tooling constraints for @cobranza-apps/ui.
+  AUDIENCE: AI agents and developers setting up or maintaining the build environment.
+  RELATIONSHIPS:
+    - brief.md — token values, component specs, tooling decisions.
+    - architecture.md — build strategy, public API, integration patterns.
+    - product.md — product goals, target consumers, UX focus.
+    - context.md — current work status and next steps.
+  MAINTENANCE: Update when dependency versions change or new tooling is adopted. Pin exact versions in Task 4 (package.json).
+-->
+
 # @cobranza-apps/ui — Tech Stack
 
 ## Stack Versions
@@ -63,3 +75,5 @@
 
 - [Project Brief](brief.md) — token values, component specs, tooling decisions.
 - [Architecture](architecture.md) — build strategy, public API, integration patterns.
+- [Product Info](product.md) — product goals, target consumers, UX focus.
+- [Context](context.md) — current work status, recent changes, next steps.

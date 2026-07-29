@@ -1,6 +1,33 @@
+<!--
+  FILE: brief.md — Project Brief (source of truth)
+  PURPOSE: Defines scope, design tokens, component specs, design principles, and integration notes for @cobranza-apps/ui.
+  AUDIENCE: AI agents, architects, and developers.
+  RELATIONSHIPS:
+    - product.md  — product goals, target consumers, UX focus.
+    - context.md  — current work status, recent changes, next steps.
+    - architecture.md — build strategy, folder layout, integration patterns.
+    - tech.md     — exact versions, dependencies, tooling constraints.
+  MAINTENANCE: Update this file when scope, tokens, or component contracts change. Keep other files consistent.
+-->
+
 # @cobranza-apps/ui — Project Brief
 
 **Target consumers:** Company Back-office Shell + all Micro-frontends (MFEs)
+
+## Table of Contents
+
+- [1. Purpose](#1-purpose)
+- [2. Scope](#2-scope)
+- [3. Design Principles](#3-design-principles)
+- [4. Technical Stack](#4-technical-stack)
+- [5. Design Tokens (Theme)](#5-design-tokens-theme-proposal)
+- [6. Core Components](#6-core-components-proposal)
+- [7. Library Structure](#7-library-structure-suggested)
+- [8. Integration Notes](#8-integration-notes)
+- [9. Accessibility & Quality](#9-accessibility--quality)
+- [10. Documentation Expectations](#10-documentation-expectations)
+- [11. Related Libraries](#11-some-related-libraries)
+- [Cross-Reference](#cross-reference)
 
 ## 1. Purpose
 
@@ -297,6 +324,13 @@ ui/
 | `@cobranza-apps/ui` | Visual components + theme (this brief) |
 | `@cobranza-apps/entities` | Shared domain models (already exists on npm) |
 | `@cobranza-apps/mfe-events` | Typed event contracts Shell ↔ MFE (no runtime logic) (not available yet) |
+
+## Cross-Reference
+
+- [Product Info](product.md) — product goals, target consumers, UX focus.
+- [Context](context.md) — current work status, recent changes, next steps.
+- [Architecture](architecture.md) — build strategy, folder layout, integration patterns.
+- [Tech Stack](tech.md) — exact versions, dependencies, tooling constraints.
 
 <!-- DO NOT DELETE NEXT SECTION -->
 
