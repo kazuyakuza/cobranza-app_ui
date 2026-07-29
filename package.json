@@ -1,0 +1,63 @@
+{
+  "name": "@cobranza-apps/ui",
+  "version": "0.1.0",
+  "description": "Shared Angular component library and design system for the Cobranza App Company Back-office.",
+  "license": "UNLICENSED",
+  "private": false,
+  "sideEffects": false,
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": "^22.22.3 || ^24.15.0 || >=26.0.0"
+  },
+  "scripts": {
+    "build": "ng-packagr -p ng-package.json -c tsconfig.lib.json",
+    "test": "jest --passWithNoTests",
+    "lint": "eslint \"src/**/*.ts\"",
+    "format": "prettier --write \"src/**/*.{ts,scss,css,json,md}\""
+  },
+  "peerDependencies": {
+    "@angular/common": "^22.0.0",
+    "@angular/core": "^22.0.0",
+    "@angular/forms": "^22.0.0",
+    "@fortawesome/angular-fontawesome": "^5.0.0",
+    "@fortawesome/free-regular-svg-icons": "^7.3.0",
+    "@fortawesome/free-solid-svg-icons": "^7.3.0",
+    "@ng-bootstrap/ng-bootstrap": "^21.0.0",
+    "bootstrap": "^5.3.0"
+  },
+  "devDependencies": {
+    "@angular-eslint/eslint-plugin": "^22.0.0",
+    "@angular-eslint/eslint-plugin-template": "^22.0.0",
+    "@angular-eslint/template-parser": "^22.0.0",
+    "@angular/cli": "^22.0.9",
+    "@angular/common": "^22.0.8",
+    "@angular/compiler": "^22.0.8",
+    "@angular/compiler-cli": "^22.0.8",
+    "@angular/core": "^22.0.8",
+    "@angular/forms": "^22.0.8",
+    "@angular/localize": "^22.0.8",
+    "@angular/platform-browser": "^22.0.8",
+    "@fortawesome/angular-fontawesome": "^5.1.0",
+    "@fortawesome/fontawesome-svg-core": "^7.3.0",
+    "@fortawesome/free-regular-svg-icons": "^7.3.1",
+    "@fortawesome/free-solid-svg-icons": "^7.3.1",
+    "@ng-bootstrap/ng-bootstrap": "^21.0.0",
+    "@popperjs/core": "^2.11.8",
+    "@types/jest": "^30.0.0",
+    "@types/node": "^22.0.0",
+    "angular-eslint": "^22.0.0",
+    "bootstrap": "^5.3.8",
+    "eslint": "^9.0.0",
+    "jest": "^30.4.0",
+    "jest-environment-jsdom": "^30.4.1",
+    "jest-preset-angular": "^17.0.0",
+    "ng-packagr": "^22.1.0",
+    "prettier": "^3.0.0",
+    "rxjs": "^7.8.1",
+    "tslib": "^2.3.0",
+    "typescript": "~6.0.3",
+    "zone.js": "~0.16.0"
+  }
+}

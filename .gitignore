@@ -35,3 +35,9 @@ dist/
 
 # Kilo agent manager
 .kilo/agent-manager.json
+
+# Node / npm
+node_modules/
+package-lock.json
+yarn.lock
+.pnp.*
