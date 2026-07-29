@@ -1,0 +1,11 @@
+//
+// theme.scss — @cobranza-apps/ui theme entry point.
+//
+// Aggregates the theme partials so consumers can load the whole theme by
+// importing this single file. Tokens, utilities and mixins arrive in
+// Phase 1; for now the partials are empty placeholders that establish the
+// folder structure the build expects.
+//
+@use 'variables';
+@use 'utilities';
+@use 'mixins';
