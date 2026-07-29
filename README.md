@@ -18,7 +18,7 @@ Shared Angular component library & intermediate-gray design system for the Cobra
 
 ## Overview
 
-`@cobranza-apps/ui` provides a shared visual foundation for all Company Back-office applications — the Shell and every Micro-frontend (MFE). It eliminates duplicated UI effort and establishes a single source of truth for the intermediate-gray design system.
+`@cobranza-apps/ui` is the shared visual foundation for the Company Back-office Shell and every MFE. It provides a single source of truth for the intermediate-gray design system and removes duplicated UI effort.
 
 **What this library provides:**
 
@@ -27,6 +27,7 @@ Shared Angular component library & intermediate-gray design system for the Cobra
 - **Basic components** — `CbaButton`, `CbaCard`, `CbaBadge`, `CbaEmptyState`, `CbaSkeleton`, `CbaModal`.
 - **Form controls** — Thin wrappers around Bootstrap / ng-bootstrap inputs, selects, and datepickers.
 - **Icons** — Font Awesome Free (solid + regular) via `@fortawesome/angular-fontawesome`.
+- **Directives** — Lightweight helpers (e.g., autofocus, click-outside) when needed.
 
 **What this library is NOT:**
 
@@ -49,7 +50,7 @@ Shared Angular component library & intermediate-gray design system for the Cobra
 npm install @cobranza-apps/ui
 ```
 
-Consumers must also install peer dependencies (never jQuery). Exact versions are declared as `peerDependencies` in `package.json`; install the following major ranges:
+Install peer dependencies separately (jQuery is never required). Exact versions are declared in `package.json`; use these major ranges:
 
 | Package | Purpose |
 | --- | --- |
@@ -58,6 +59,8 @@ Consumers must also install peer dependencies (never jQuery). Exact versions are
 | `@ng-bootstrap/ng-bootstrap` | Forms & overlays (v21) |
 | `@fortawesome/angular-fontawesome` | Icon rendering |
 | `@fortawesome/free-solid-svg-icons`, `@fortawesome/free-regular-svg-icons` | Icon packs (solid + regular) |
+
+Install the major ranges declared in package.json peerDependencies: `@angular/core@^22`, `@angular/common@^22`, `@angular/forms@^22`, `bootstrap@^5`, `@ng-bootstrap/ng-bootstrap@^21`, plus the latest compatible `@fortawesome/angular-fontawesome` and icon packs.
 
 ## Quick Start
 
@@ -76,7 +79,7 @@ Consumers must also install peer dependencies (never jQuery). Exact versions are
 import { ModuleHeader, ModuleContainer, CbaButton } from '@cobranza-apps/ui';
 ```
 
-For full usage patterns and examples, see the [planned `/docs/USAGE.md`](#documentation).
+For usage patterns and examples, see [`/docs/USAGE.md`](#documentation) (planned).
 
 ## Component Inventory
 
@@ -92,11 +95,11 @@ For full usage patterns and examples, see the [planned `/docs/USAGE.md`](#docume
 | `CbaModal` | Thin wrapper around ng-bootstrap modal. |
 | Form controls | Thin wrappers around ng-bootstrap/Bootstrap inputs, selects, datepickers. |
 
-Full Input/Output contracts for each component are documented inline via JSDoc and in the [project brief](.agent/project-info/brief.md#6-core-components-proposal).
+Full Input/Output contracts are in JSDoc and the [project brief](.agent/project-info/brief.md#6-core-components-proposal).
 
 ## Design Tokens (Theme)
 
-All design tokens live under the `--cba-` prefix and are published as SCSS via `@cobranza-apps/ui/theme`. Token categories:
+Design tokens are published as SCSS via `@cobranza-apps/ui/theme` and use the `--cba-` prefix:
 
 - **Backgrounds**: primary, secondary, tertiary, elevated, overlay
 - **Text**: primary, secondary, muted, inverse
@@ -127,8 +130,8 @@ For the full token reference, see [brief.md §5](.agent/project-info/brief.md#5-
 
 ## Integration Notes (Shell ↔ MFE)
 
-- The **Shell** imports the library and uses `ModuleHeader` + `ModuleContainer` to host every remote MFE.
-- Each **MFE** imports the encapsulated theme and may use basic components.
+- The **Shell** uses `ModuleHeader` and `ModuleContainer` to host each remote MFE.
+- Each **MFE** imports the theme and may use basic components.
 - Resize / collapse / fullscreen state:
   - Shell → MFE via component `@Input()` bindings.
   - MFE → Shell via custom events defined in `@cobranza-apps/mfe-events`.
@@ -137,16 +140,16 @@ For the full token reference, see [brief.md §5](.agent/project-info/brief.md#5-
 
 ## Documentation
 
-- `/docs/USAGE.md` — Patterns and examples for consuming the library (planned, see step 4.4).
+- `/docs/USAGE.md` — Patterns and examples for consuming the library (planned).
 - [Project brief](.agent/project-info/brief.md) — Source of truth for scope, design tokens, and component contracts.
 - JSDoc on every public `@Input()`, `@Output()`, and component class.
 
 ## Contributing & AI Agent Onboarding
 
-This project follows the workflows defined in [AGENTS.md](AGENTS.md) and the [Critical Workflow](.kilo/commands/critical-workflow.md). AI agents and contributors should review these before making changes. The project info files under `.agent/project-info/` are the source of truth for scope, architecture, tech stack, and status.
+Review [AGENTS.md](AGENTS.md) and the project info files under `.agent/project-info/` before making changes.
 
 ## License
 
-**License: Proprietary — © Cobranza App Company. All rights reserved.** See `LICENSE`.
+**License: Proprietary — © <company>. See `LICENSE`.**
 
 > TODO: Confirm license terms with the maintainer. This is a placeholder until a `LICENSE` file is added.
