@@ -134,7 +134,7 @@ Padding applies to the **body region only** (the header band is unaffected).
 | `sm` (default) | `var(--cba-space-2)` | `cba-module-container--padding-sm` |
 | `md` | `var(--cba-space-4)` | `cba-module-container--padding-md` |
 
-All values come from `--cba-*` spacing tokens (see `src/lib/theme/_variables.scss`).
+All values come from `--cba-*` spacing tokens (see `src/theme/_variables.scss`).
 
 ## Scroll behaviour
 

@@ -106,7 +106,7 @@ For usage patterns and examples, see [`/docs/USAGE.md`](/docs/USAGE.md).
 
 | File | Purpose |
 | --- | --- |
-| `ng-package.json` | ng-packagr entry point (`src/lib/public-api.ts`) and output (`dist/`) |
+| `ng-package.json` | ng-packagr entry point (`src/public-api.ts`) and output (`dist/`) |
 | `tsconfig.json` | Base TypeScript config (extended by lib and spec configs) |
 | `tsconfig.lib.json` | Library build config — partial compilation, declarations |
 | `tsconfig.spec.json` | Jest test config — CommonJS module, Jest types |
@@ -152,7 +152,7 @@ Design tokens are published as SCSS via `@cobranza-apps/ui/theme` and use the `-
 - `.cba-bg-primary`, `.cba-bg-secondary`, `.cba-bg-tertiary`
 - `.cba-text-primary`, `.cba-text-secondary`, `.cba-text-muted`
 
-For the full token reference, see [brief.md §5](.agent/project-info/brief.md#5-design-tokens-theme-proposal) and the SCSS source files under `src/lib/theme/`.
+For the full token reference, see [brief.md §5](.agent/project-info/brief.md#5-design-tokens-theme-proposal) and the SCSS source files under `src/theme/`.
 
 For a quick reference, see [`/docs/THEME.md`](/docs/THEME.md).
 
