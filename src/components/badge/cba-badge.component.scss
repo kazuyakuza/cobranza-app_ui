@@ -1,0 +1,77 @@
+:host {
+  display: inline-flex;
+}
+
+.cba-badge__content {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--cba-space-1);
+  padding: var(--cba-space-1) var(--cba-space-2);
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  line-height: 1;
+  border: 1px solid transparent;
+}
+
+// Solid variants
+.cba-badge--solid.cba-badge--primary .cba-badge__content {
+  background-color: var(--cba-accent-primary);
+  color: var(--cba-text-inverse);
+}
+
+.cba-badge--solid.cba-badge--success .cba-badge__content {
+  background-color: var(--cba-accent-success);
+  color: var(--cba-text-inverse);
+}
+
+.cba-badge--solid.cba-badge--warning .cba-badge__content {
+  background-color: var(--cba-accent-warning);
+  color: var(--cba-text-inverse);
+}
+
+.cba-badge--solid.cba-badge--danger .cba-badge__content {
+  background-color: var(--cba-accent-danger);
+  color: var(--cba-text-inverse);
+}
+
+.cba-badge--solid.cba-badge--info .cba-badge__content {
+  background-color: var(--cba-accent-info);
+  color: var(--cba-text-inverse);
+}
+
+.cba-badge--solid.cba-badge--neutral .cba-badge__content {
+  background-color: var(--cba-bg-elevated);
+  color: var(--cba-text-secondary);
+}
+
+// Outline variants
+.cba-badge--outline.cba-badge--primary .cba-badge__content {
+  border-color: var(--cba-accent-primary);
+  color: var(--cba-accent-primary);
+}
+
+.cba-badge--outline.cba-badge--success .cba-badge__content {
+  border-color: var(--cba-accent-success);
+  color: var(--cba-accent-success);
+}
+
+.cba-badge--outline.cba-badge--warning .cba-badge__content {
+  border-color: var(--cba-accent-warning);
+  color: var(--cba-accent-warning);
+}
+
+.cba-badge--outline.cba-badge--danger .cba-badge__content {
+  border-color: var(--cba-accent-danger);
+  color: var(--cba-accent-danger);
+}
+
+.cba-badge--outline.cba-badge--info .cba-badge__content {
+  border-color: var(--cba-accent-info);
+  color: var(--cba-accent-info);
+}
+
+.cba-badge--outline.cba-badge--neutral .cba-badge__content {
+  border-color: var(--cba-border-default);
+  color: var(--cba-text-muted);
+}
