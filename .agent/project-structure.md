@@ -17,6 +17,10 @@
 - src/components/empty-state/ - CbaEmptyState component: slots for icon, title, description and primary action
 - src/components/skeleton/ - CbaSkeleton component: variants text, avatar, card, table-row and generic
 - src/components/modal/ - CbaModal component: thin wrapper around ng-bootstrap modal
+- src/components/form-field/ - internal shared CbaFieldComponent + CbaControlValueAccessor base used by input/select/datepicker (not exported publicly)
+- src/components/input/ - CbaInput component: native input wrapper with ControlValueAccessor and shared field layout
+- src/components/select/ - CbaSelect component: native select wrapper with projected options and ControlValueAccessor
+- src/components/datepicker/ - CbaDatepicker component: thin wrapper around ng-bootstrap NgbInputDatepicker with shared field layout
 - src/theme/ - SCSS theme variables, utilities, mixins and entry file
 - src/directives/ - attribute directives created on demand
 
