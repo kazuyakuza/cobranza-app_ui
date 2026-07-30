@@ -88,10 +88,7 @@
   color: var(--cba-accent-info);
 }
 
-.cba-module-header__status--loaded {
-  color: var(--cba-accent-success);
-}
-
+.cba-module-header__status--loaded,
 .cba-module-header__status--success {
   color: var(--cba-accent-success);
 }
@@ -113,7 +110,7 @@
     transition: none;
   }
 
-  .fa-spin {
+  :host ::ng-deep .fa-spin {
     animation: none;
   }
 }

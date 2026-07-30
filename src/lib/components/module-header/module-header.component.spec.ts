@@ -72,4 +72,24 @@ describe('ModuleHeaderComponent', () => {
     fixture.detectChanges();
     expect(statusSection.querySelector('fa-icon')).not.toBeNull();
   });
+
+  it('emits remove when the remove button is clicked', () => {
+    const component = setup();
+    let emitted = 0;
+    component.remove.subscribe(() => (emitted += 1));
+
+    queryButton('Remove module').click();
+
+    expect(emitted).toBe(1);
+  });
+
+  it('emits fullscreenToggle when the fullscreen button is clicked', () => {
+    const component = setup();
+    let emitted = 0;
+    component.fullscreenToggle.subscribe(() => (emitted += 1));
+
+    queryButton('Enter fullscreen').click();
+
+    expect(emitted).toBe(1);
+  });
 });

@@ -82,7 +82,7 @@ Install the major ranges declared in package.json peerDependencies: `@angular/co
 **2. Import components** in your Angular standalone component or module:
 
 ```ts
-import { ModuleHeader, ModuleContainer, CbaButton } from '@cobranza-apps/ui';
+import { ModuleHeaderComponent, ModuleContainer, CbaButton } from '@cobranza-apps/ui';
 ```
 
 For usage patterns and examples, see [`/docs/USAGE.md`](/docs/USAGE.md).
@@ -119,7 +119,7 @@ For usage patterns and examples, see [`/docs/USAGE.md`](/docs/USAGE.md).
 
 | Component | Description |
 | --- | --- |
-| `ModuleHeader` | Shell-injected header above each MFE module (title, size, collapse, fullscreen, status). |
+| `ModuleHeaderComponent` | Shell-injected header above each MFE module (title, size, collapse, fullscreen, status). |
 | `ModuleContainer` | Wraps `ModuleHeader` + MFE content; handles size, collapse, padding, scroll. |
 | `CbaButton` | Variants: primary, secondary, ghost, danger, success; sizes sm/md; loading; icon support. |
 | `CbaCard` | Optional header & footer; no forced hover elevation. |

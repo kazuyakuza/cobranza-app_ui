@@ -146,12 +146,12 @@ The theme provides CSS custom properties with the `--cba-` prefix (e.g., `--cba-
 ```ts
 // app.component.ts
 import { Component } from '@angular/core';
-import { ModuleHeader, ModuleContainer } from '@cobranza-apps/ui';
+import { ModuleHeaderComponent, ModuleContainer } from '@cobranza-apps/ui';
 
 @Component({
   selector: 'app-shell',
   standalone: true,
-  imports: [ModuleHeader, ModuleContainer],
+  imports: [ModuleHeaderComponent, ModuleContainer],
   template: `
     <cba-module-container [size]="size" [isCollapsed]="isCollapsed" [isFullscreen]="isFullscreen">
       <cba-module-header

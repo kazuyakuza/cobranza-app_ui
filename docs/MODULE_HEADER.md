@@ -11,7 +11,6 @@ Shell-injected header rendered above each MFE module in the Company Back-office 
 ```html
 <cba-module-header
   title="Customer Module"
-  size="100%"
   [size]="size"
   [isCollapsed]="isCollapsed"
   [isFullscreen]="isFullscreen"

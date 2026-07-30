@@ -1,60 +1,17 @@
-<header class="cba-module-header">
-  @if (isFullscreen()) {
-    <div class="cba-module-header__section cba-module-header__section--title">
-      {{ title() }}
-    </div>
-  } @else {
-    <div
-      class="cba-module-header__section cba-module-header__section--status"
-      [class]="statusVisual()?.modifierClass ?? ''">
-      @if (statusVisual(); as visual) {
-        <fa-icon
-          [icon]="visual.icon"
-          [animation]="visual.animation"
-          aria-hidden="true" />
-      }
-    </div>
-
-    <div class="cba-module-header__section cba-module-header__section--title">
-      {{ title() }}
-    </div>
-
-    <nav class="cba-module-header__section cba-module-header__section--actions">
-      <button
-        type="button"
-        class="cba-module-header__action"
-        [attr.aria-label]="collapseLabel()"
-        [title]="collapseLabel()"
-        (click)="onCollapseClick()">
-        <fa-icon [icon]="collapseIcon()" aria-hidden="true" />
-      </button>
-
-      <button
-        type="button"
-        class="cba-module-header__action"
-        [attr.aria-label]="sizeToggleLabel()"
-        [title]="sizeToggleLabel()"
-        (click)="onSizeToggleClick()">
-        <fa-icon [icon]="sizeToggleIcon()" aria-hidden="true" />
-      </button>
-
-      <button
-        type="button"
-        class="cba-module-header__action"
-        aria-label="Remove module"
-        title="Remove module"
-        (click)="onRemoveClick()">
-        <fa-icon [icon]="faRemoveIcon" aria-hidden="true" />
-      </button>
-
-      <button
-        type="button"
-        class="cba-module-header__action"
-        aria-label="Enter fullscreen"
-        title="Enter fullscreen"
-        (click)="onFullscreenClick()">
-        <fa-icon [icon]="faFullscreenIcon" aria-hidden="true" />
-      </button>
-    </nav>
-  }
+<header class="cba-module-header" [class.cba-module-header--fullscreen]="isFullscreen()"> @if (isFullscreen()) { <div class="cba-module-header__section cba-module-header__section--title"> {{ title() }} </div> } @else { <div class="cba-module-header__section cba-module-header__section--status" [class]="statusClass() ?? ''"> @if (statusVisual(); as visual) { <fa-icon [icon]="visual.icon" [animation]="visual.animation" aria-hidden="true" /> } </div>
+  <div class="cba-module-header__section cba-module-header__section--title"> {{ title() }} </div>
+  <nav class="cba-module-header__section cba-module-header__section--actions">
+    <button type="button" class="cba-module-header__action" [attr.aria-label]="isCollapsed() ? 'Expand module' : 'Collapse module'" [title]="isCollapsed() ? 'Expand module' : 'Collapse module'" (click)="collapseToggle.emit()">
+      <fa-icon [icon]="isCollapsed() ? faChevronDown : faChevronUp" aria-hidden="true" />
+    </button>
+    <button type="button" class="cba-module-header__action" [attr.aria-label]="size() === '100%' ? 'Shrink module to 50%' : 'Expand module to 100%'" [title]="size() === '100%' ? 'Shrink module to 50%' : 'Expand module to 100%'" (click)="sizeToggle.emit(size() === '100%' ? '50%' : '100%')">
+      <fa-icon [icon]="size() === '100%' ? faCompress : faExpand" aria-hidden="true" />
+    </button>
+    <button type="button" class="cba-module-header__action" aria-label="Remove module" title="Remove module" (click)="remove.emit()">
+      <fa-icon [icon]="faRemoveIcon" aria-hidden="true" />
+    </button>
+    <button type="button" class="cba-module-header__action" aria-label="Enter fullscreen" title="Enter fullscreen" (click)="fullscreenToggle.emit()">
+      <fa-icon [icon]="faFullscreenIcon" aria-hidden="true" />
+    </button>
+  </nav> }
 </header>

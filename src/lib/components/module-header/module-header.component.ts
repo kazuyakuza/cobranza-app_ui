@@ -8,6 +8,7 @@ import {
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 import {
+  faCheck,
   faChevronDown,
   faChevronUp,
   faCircleCheck,
@@ -17,7 +18,6 @@ import {
   faPen,
   faSpinner,
   faTriangleExclamation,
-  faUpRightAndDownLeftFromCenter,
   faXmark,
 } from '@fortawesome/free-solid-svg-icons';
 import {
@@ -28,18 +28,17 @@ import {
 /** Visual configuration derived from a non-null status value. */
 interface StatusVisual {
   readonly icon: IconDefinition;
-  readonly animation: 'spin' | undefined;
-  readonly modifierClass: string;
+  readonly animation?: 'spin';
 }
 
 /** Static status → visual mapping. `null` renders no icon. */
 const STATUS_VISUALS: Readonly<Record<Exclude<ModuleHeaderStatus, null>, StatusVisual>> = {
-  loading: { icon: faSpinner, animation: 'spin', modifierClass: 'cba-module-header__status--loading' },
-  loaded: { icon: faCircleCheck, animation: undefined, modifierClass: 'cba-module-header__status--loaded' },
-  success: { icon: faCircleCheck, animation: undefined, modifierClass: 'cba-module-header__status--success' },
-  warning: { icon: faTriangleExclamation, animation: undefined, modifierClass: 'cba-module-header__status--warning' },
-  error: { icon: faCircleXmark, animation: undefined, modifierClass: 'cba-module-header__status--error' },
-  dirty: { icon: faPen, animation: undefined, modifierClass: 'cba-module-header__status--dirty' },
+  loading: { icon: faSpinner, animation: 'spin' },
+  loaded: { icon: faCheck },
+  success: { icon: faCircleCheck },
+  warning: { icon: faTriangleExclamation },
+  error: { icon: faCircleXmark },
+  dirty: { icon: faPen },
 };
 
 /**
@@ -60,7 +59,7 @@ const STATUS_VISUALS: Readonly<Record<Exclude<ModuleHeaderStatus, null>, StatusV
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './module-header.component.html',
   styleUrl: './module-header.component.scss',
-  host: { '[class.cba-module-header--fullscreen]': 'isFullscreen()' },
+  host: {},
 })
 export class ModuleHeaderComponent {
   /** Module title rendered in the center section. Provided by the MFE / Shell. Required. */
@@ -90,60 +89,22 @@ export class ModuleHeaderComponent {
   /** Emitted when the user clicks the fullscreen button. */
   readonly fullscreenToggle = output<void>();
 
-  /** Target size opposite to the current `size` (emitted on size-toggle click). */
-  readonly targetSize = computed<ModuleHeaderSize>(() =>
-    this.size() === '100%' ? '50%' : '100%',
-  );
-
   /** Status visual config or `null` when no status is set (icon hidden). */
   readonly statusVisual = computed<StatusVisual | null>(() => {
     const current = this.status();
     return current === null ? null : STATUS_VISUALS[current] ?? null;
   });
 
-  /** Icon definition for the collapse/expand button (dependant on `isCollapsed`). */
-  readonly collapseIcon = computed(() =>
-    this.isCollapsed() ? faChevronDown : faChevronUp,
-  );
+  /** CSS modifier class for the status section, derived from the current status. */
+  readonly statusClass = computed<string | null>(() => {
+    const current = this.status();
+    return current === null ? null : `cba-module-header__status--${current}`;
+  });
 
-  /** Accessible label for the collapse/expand button. */
-  readonly collapseLabel = computed(() =>
-    this.isCollapsed() ? 'Expand module' : 'Collapse module',
-  );
-
-  /** Icon definition for the size-toggle button (represents the target action). */
-  readonly sizeToggleIcon = computed(() =>
-    this.size() === '100%' ? faCompress : faExpand,
-  );
-
-  /** Accessible label for the size-toggle button, describing the target size. */
-  readonly sizeToggleLabel = computed(() =>
-    this.size() === '100%' ? 'Shrink module to 50%' : 'Expand module to 100%',
-  );
-
-  /** Click handler for the collapse/expand button. */
-  onCollapseClick(): void {
-    this.collapseToggle.emit();
-  }
-
-  /** Click handler for the size-toggle button. Emits the computed target size. */
-  onSizeToggleClick(): void {
-    this.sizeToggle.emit(this.targetSize());
-  }
-
-  /** Click handler for the remove button. */
-  onRemoveClick(): void {
-    this.remove.emit();
-  }
-
-  /** Click handler for the fullscreen button. */
-  onFullscreenClick(): void {
-    this.fullscreenToggle.emit();
-  }
-
-  /** Icon definition bound to the remove button (template-referenced constant). */
-  readonly faRemoveIcon = faXmark;
-
-  /** Icon definition bound to the fullscreen button (template-referenced constant). */
-  readonly faFullscreenIcon = faUpRightAndDownLeftFromCenter;
+  protected readonly faChevronDown = faChevronDown;
+  protected readonly faChevronUp = faChevronUp;
+  protected readonly faCompress = faCompress;
+  protected readonly faExpand = faExpand;
+  protected readonly faRemoveIcon = faXmark;
+  protected readonly faFullscreenIcon = faExpand;
 }
