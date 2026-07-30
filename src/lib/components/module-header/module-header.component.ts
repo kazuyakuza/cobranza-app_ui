@@ -49,8 +49,26 @@ const STATUS_VISUALS: Readonly<Record<Exclude<ModuleHeaderStatus, null>, StatusV
  * and drop are intentionally NOT implemented here (owned by the Shell +
  * `@cobranza-apps/mfe-events`); the title is never editable from this header.
  *
+ * Exported from `@cobranza-apps/ui` via `src/lib/public-api.ts`.
+ *
+ * @usageNotes
+ * ```html
+ * <cba-module-header
+ *   title="Customers"
+ *   [size]="size"
+ *   [isCollapsed]="isCollapsed"
+ *   [isFullscreen]="isFullscreen"
+ *   [status]="status"
+ *   (collapseToggle)="onCollapse()"
+ *   (sizeToggle)="onSizeChange($event)"
+ *   (remove)="onRemove()"
+ *   (fullscreenToggle)="onFullscreen()">
+ * </cba-module-header>
+ * ```
+ *
  * @see {@link ModuleHeaderSize}
  * @see {@link ModuleHeaderStatus}
+ * @see [MODULE_HEADER.md](/docs/MODULE_HEADER.md) — full API, status values, fullscreen & drag notes.
  */
 @Component({
   selector: 'cba-module-header',
@@ -101,10 +119,21 @@ export class ModuleHeaderComponent {
     return current === null ? null : `cba-module-header__status--${current}`;
   });
 
-  protected readonly faChevronDown = faChevronDown;
+  /** Icon for the collapse button (visible when `isCollapsed === false`). Template-referenced. */
   protected readonly faChevronUp = faChevronUp;
+
+  /** Icon for the expand button (visible when `isCollapsed === true`). Template-referenced. */
+  protected readonly faChevronDown = faChevronDown;
+
+  /** Icon for the size-toggle button when current size is `100%` (action: shrink to 50%). Template-referenced. */
   protected readonly faCompress = faCompress;
+
+  /** Icon for the size-toggle button when current size is `50%` (action: expand to 100%) and for the fullscreen button. Template-referenced. */
   protected readonly faExpand = faExpand;
+
+  /** Icon for the remove button (`fa-xmark`). Template-referenced. */
   protected readonly faRemoveIcon = faXmark;
+
+  /** Icon for the fullscreen button (`fa-expand`). Template-referenced. */
   protected readonly faFullscreenIcon = faExpand;
 }
