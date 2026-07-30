@@ -212,7 +212,7 @@ import { CbaButton, CbaCard, CbaBadge } from '@cobranza-apps/ui';
       <cba-badge variant="success">Active</cba-badge>
       <h3>Dashboard</h3>
       <p>Welcome to the dashboard</p>
-      <cba-button variant="primary" (clicked)="onSave()">Save</cba-button>
+      <cba-button variant="primary" (cbaClick)="onSave()">Save</cba-button>
     </cba-card>
   `
 })
@@ -268,58 +268,69 @@ Wraps `ModuleHeader` + MFE content.
 Variants: `primary`, `secondary`, `ghost`, `danger`, `success`. Sizes: `sm` | `md`.
 
 ```html
-<cba-button variant="primary" size="md" [loading]="isSaving" (clicked)="onSave()">
+<cba-button variant="primary" size="md" [loading]="isSaving" (cbaClick)="onSave()">
   Save
 </cba-button>
 
-<cba-button variant="ghost" size="sm" [icon]="['fas', 'trash']" (clicked)="onDelete()">
+<cba-button [icon]="faTrash" iconPosition="leading" variant="danger" (cbaClick)="onDelete()">
   Delete
 </cba-button>
 ```
 
+See [`CBA_BUTTON.md`](./CBA_BUTTON.md) for the full API.
+
 ### CbaCard
 
-Optional header & footer.
+Optional header & footer via content projection attributes.
 
 ```html
 <cba-card>
-  <div header>Card Header</div>
+  <div cbaCardHeader>Card Header</div>
   <p>Card content</p>
-  <div footer>Card Footer</div>
+  <div cbaCardFooter>Card Footer</div>
 </cba-card>
 ```
 
+See [`CBA_CARD.md`](./CBA_CARD.md) for the full API.
+
 ### CbaBadge
 
-Semantic colours: `success`, `warning`, `danger`, `info`, `secondary`. Styles: `solid` | `outline`.
+Semantic colours: `primary`, `success`, `warning`, `danger`, `info`, `neutral`. Appearances: `solid` | `outline`.
 
 ```html
-<cba-badge variant="success" style="solid">Active</cba-badge>
-<cba-badge variant="warning" style="outline">Pending</cba-badge>
+<cba-badge variant="success" appearance="solid">Active</cba-badge>
+<cba-badge variant="warning" appearance="outline">Pending</cba-badge>
 ```
+
+See [`CBA_BADGE.md`](./CBA_BADGE.md) for the full API.
 
 ### CbaEmptyState
 
-Slots: icon, title, description, primary action.
+Slots: icon, title, description, primary action. Title is a required string input; icon and action are content-projected.
 
 ```html
 <cba-empty-state
-  icon="inbox"
   title="No items found"
   description="Try adjusting your filters">
-  <cba-button variant="primary" (clicked)="onReset()">Reset Filters</cba-button>
+  <fa-icon cbaEmptyStateIcon [icon]="['fas', 'inbox']" aria-hidden="true"></fa-icon>
+  <cba-button cbaEmptyStateAction variant="primary" (cbaClick)="onReset()">Reset Filters</cba-button>
 </cba-empty-state>
 ```
 
+See [`CBA_EMPTY_STATE.md`](./CBA_EMPTY_STATE.md) for the full API.
+
 ### CbaSkeleton
 
-Variants: `text`, `avatar`, `card`, `table-row`, `generic`.
+Variants: `text`, `avatar`, `card`, `table-row`, `generic`. Optional `width` and `height` inputs override defaults.
 
 ```html
 <cba-skeleton variant="card"></cba-skeleton>
-<cba-skeleton variant="text" [lines]="3"></cba-skeleton>
-<cba-skeleton variant="table-row" [columns]="5"></cba-skeleton>
+<cba-skeleton variant="text" [width]="'80%'"></cba-skeleton>
+<cba-skeleton variant="avatar" [width]="'3rem'" [height]="'3rem'"></cba-skeleton>
+<cba-skeleton variant="table-row"></cba-skeleton>
 ```
+
+See [`CBA_SKELETON.md`](./CBA_SKELETON.md) for the full API.
 
 ### CbaModal
 
@@ -336,8 +347,8 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
     <cba-modal title="Confirm Action">
       <p>Are you sure?</p>
       <div footer>
-        <cba-button variant="secondary" (clicked)="activeModal.dismiss()">Cancel</cba-button>
-        <cba-button variant="primary" (clicked)="activeModal.close('confirmed')">Confirm</cba-button>
+        <cba-button variant="secondary" (cbaClick)="activeModal.dismiss()">Cancel</cba-button>
+        <cba-button variant="primary" (cbaClick)="activeModal.close('confirmed')">Confirm</cba-button>
       </div>
     </cba-modal>
   `

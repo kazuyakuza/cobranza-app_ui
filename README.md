@@ -183,6 +183,11 @@ For a quick reference, see [`/docs/THEME.md`](/docs/THEME.md).
 - [`/docs/THEME.md`](/docs/THEME.md) — Theme import, tokens, and utility classes.
 - [`/docs/MODULE_HEADER.md`](/docs/MODULE_HEADER.md) — `ModuleHeader` selector, API, status values, fullscreen & drag notes.
 - [`/docs/MODULE_CONTAINER.md`](/docs/MODULE_CONTAINER.md) — `ModuleContainer` selector, API, size/collapse/fullscreen/padding behaviour, scroll & chrome notes.
+- [`/docs/CBA_BUTTON.md`](/docs/CBA_BUTTON.md) — `CbaButton` selector, API, variant mapping, size options, loading/disabled behaviour.
+- [`/docs/CBA_CARD.md`](/docs/CBA_CARD.md) — `CbaCard` selector, content projection slots, layout examples.
+- [`/docs/CBA_BADGE.md`](/docs/CBA_BADGE.md) — `CbaBadge` selector, API, variant colours, solid vs outline.
+- [`/docs/CBA_EMPTY_STATE.md`](/docs/CBA_EMPTY_STATE.md) — `CbaEmptyState` selector, content projection slots, usage example.
+- [`/docs/CBA_SKELETON.md`](/docs/CBA_SKELETON.md) — `CbaSkeleton` selector, API, variant descriptions, usage examples.
 - [Project brief](.agent/project-info/brief.md) — Source of truth for scope, design tokens, and component contracts.
 - [Product info](.agent/project-info/product.md) — Product goals, target consumers, UX focus.
 - [Architecture](.agent/project-info/architecture.md) — Build strategy, folder layout, integration patterns.
