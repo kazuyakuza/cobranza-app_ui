@@ -1,0 +1,157 @@
+# ModuleContainer
+
+Wrapper that hosts a projected module header and the MFE body inside the Company Back-office Shell workspace. Provides consistent chrome (border, radius, shadow), size mode, collapse, fullscreen, and internal scrolling.
+
+## Table of Contents
+
+- [Selector](#selector)
+- [Basic usage](#basic-usage)
+- [Content projection](#content-projection)
+- [Inputs](#inputs)
+- [Size behaviour](#size-behaviour)
+- [Collapsed behaviour](#collapsed-behaviour)
+- [Fullscreen behaviour](#fullscreen-behaviour)
+- [Padding options](#padding-options)
+- [Scroll behaviour](#scroll-behaviour)
+- [Accessibility](#accessibility)
+- [Related docs](#related-docs)
+
+## Selector
+
+`<cba-module-container>` — standalone component exported from `@cobranza-apps/ui`.
+
+## Basic usage
+
+### Template (HTML)
+
+```html
+<cba-module-container
+  [size]="size"
+  [isCollapsed]="isCollapsed"
+  [isFullscreen]="isFullscreen"
+  [padding]="padding">
+
+  <cba-module-header
+    cbaModuleContainerHeader
+    title="Customer Module"
+    [size]="size"
+    [isCollapsed]="isCollapsed"
+    [isFullscreen]="isFullscreen"
+    status="loaded"
+    (collapseToggle)="onCollapse()"
+    (sizeToggle)="onSizeChange($event)"
+    (fullscreenToggle)="onFullscreen()"
+    (remove)="onRemove()">
+  </cba-module-header>
+
+  <!-- Projected MFE body content -->
+  <app-customers-mfe></app-customers-mfe>
+</cba-module-container>
+```
+
+### Host component (TypeScript)
+
+```ts
+import { Component } from '@angular/core';
+import {
+  ModuleHeaderComponent,
+  ModuleContainerComponent,
+  ModuleContainerSize,
+  ModuleContainerPadding,
+} from '@cobranza-apps/ui';
+
+@Component({
+  selector: 'app-shell',
+  standalone: true,
+  imports: [ModuleHeaderComponent, ModuleContainerComponent],
+  templateUrl: './shell.component.html',
+})
+export class ShellComponent {
+  size: ModuleContainerSize = '100%';
+  isCollapsed = false;
+  isFullscreen = false;
+  padding: ModuleContainerPadding = 'sm';
+
+  onCollapse(): void { this.isCollapsed = !this.isCollapsed; }
+  onSizeChange(target: ModuleContainerSize): void { this.size = target; }
+  onFullscreen(): void { this.isFullscreen = !this.isFullscreen; }
+  onRemove(): void { /* Shell handles removal */ }
+}
+```
+
+## Content projection
+
+| Slot | Selector | Purpose |
+| --- | --- | --- |
+| Header | `[cbaModuleContainerHeader]` attribute | Projects the module header (typically `<cba-module-header>`). Rendered in a fixed, non-scrollable flex band. |
+| Body | default `<ng-content>` | Projects the MFE content. This region is the internal scroll container while expanded. |
+
+## Inputs
+
+| Name | Type | Default | Required | Description |
+| --- | --- | --- | --- | --- |
+| size | `'50%' \| '100%'` | `'100%'` | no | Workspace width mode. Drives the `cba-module-container--size-50` / `--size-100` host modifier. |
+| isCollapsed | `boolean` | `false` | no | When `true` the body region is removed from the DOM (no layout box, no scroll). Adds the `--collapsed` host modifier. |
+| isFullscreen | `boolean` | `false` | no | When `true` module chrome (border-radius, shadow) is suppressed; the Shell fullscreen view owns the outer chrome. Adds the `--fullscreen` host modifier. |
+| padding | `'none' \| 'sm' \| 'md'` | `'sm'` | no | Internal padding of the body region. Drives the `--padding-none/sm/md` host modifiers. |
+
+The container never mutates these values — the Shell owns the source of truth and re-binds state on every change.
+
+## Size behaviour
+
+| Value | Host modifier | Layout |
+| --- | --- | --- |
+| `'100%'` (default) | `cba-module-container--size-100` | Container takes the full available width of its parent row/cell. |
+| `'50%'` | `cba-module-container--size-50` | Container takes half of the available width (Shell row handles the other half). |
+
+Size is applied via CSS classes on the host element so the Shell layout can rely on a stable contract.
+
+## Collapsed behaviour
+
+When `isCollapsed === true`:
+
+- The body region (`.cba-module-container__body`) is removed from the DOM via Angular `@if` control flow.
+- No layout box is rendered and no scroll area exists while collapsed.
+- The host receives the `cba-module-container--collapsed` modifier.
+- The header band remains rendered and never scrolls.
+
+## Fullscreen behaviour
+
+When `isFullscreen === true`:
+
+- The host receives the `cba-module-container--fullscreen` modifier.
+- **Border-radius and module shadow are suppressed** (`box-shadow: var(--cba-shadow-module)` and `border-radius` are only applied under `:host(:not(.cba-module-container--fullscreen))`). Background and border are also removed.
+- The Shell fullscreen view owns the outer chrome.
+- The container still hosts both the projected header and the body.
+
+## Padding options
+
+Padding applies to the **body region only** (the header band is unaffected).
+
+| Value | Suggested padding | Host modifier |
+| --- | --- | --- |
+| `none` | `0` | `cba-module-container--padding-none` |
+| `sm` (default) | `var(--cba-space-2)` | `cba-module-container--padding-sm` |
+| `md` | `var(--cba-space-4)` | `cba-module-container--padding-md` |
+
+All values come from `--cba-*` spacing tokens (see `src/lib/theme/_variables.scss`).
+
+## Scroll behaviour
+
+- Scroll exists **only** while the module is expanded (`isCollapsed === false`).
+- The body region (`.cba-module-container__body`) is the scroll container: `overflow-y: auto`, `flex: 1 1 auto`, `min-height: 0`, and `overscroll-behavior: contain`.
+- Scroll never bubbles outside the body; the Shell workspace scrolls independently.
+- Scrollbar styling is CSS-only and thin by default; the WebKit thumb widens on hover. Optional top/bottom jump buttons are out of scope for this phase.
+
+## Accessibility
+
+- The container itself introduces no interactive controls; interactive elements live in the projected `cba-module-header`.
+- `:focus-visible` indicators (via `--cba-focus-ring`) come from the projected header buttons.
+- `prefers-reduced-motion: reduce` keeps the hover scrollbar at its default (thin) width.
+
+## Related docs
+
+- [README.md](../README.md)
+- [USAGE.md](./USAGE.md)
+- [THEME.md](./THEME.md)
+- [MODULE_HEADER.md](./MODULE_HEADER.md)
