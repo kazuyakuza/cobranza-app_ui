@@ -41,13 +41,6 @@
   overflow: hidden;
 }
 
-/* Task 4 — fullscreen: the Shell owns outer chrome. */
-:host(.cba-module-container--fullscreen) {
-  border: none;
-  border-radius: 0;
-  box-shadow: none;
-}
-
 /* Task 7 — header band never scrolls, never shrinks. */
 .cba-module-container__header {
   flex: 0 0 auto;
@@ -63,29 +56,36 @@
   overscroll-behavior: contain;
   scrollbar-width: thin;
   scrollbar-color: var(--cba-border-default) transparent;
-}
 
-.cba-module-container__body::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
-}
+  &::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
 
-.cba-module-container__body:hover::-webkit-scrollbar {
-  width: 9px;
-  height: 9px;
-}
+  &:hover::-webkit-scrollbar {
+    width: 9px;
+    height: 9px;
+  }
 
-.cba-module-container__body::-webkit-scrollbar-track {
-  background: transparent;
-}
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
 
-.cba-module-container__body::-webkit-scrollbar-thumb {
-  background-color: var(--cba-border-default);
-  border-radius: var(--cba-radius-sm);
-}
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--cba-border-default);
+    border-radius: var(--cba-radius-sm);
+  }
 
-.cba-module-container__body:hover::-webkit-scrollbar-thumb {
-  background-color: var(--cba-border-strong);
+  &:hover::-webkit-scrollbar-thumb {
+    background-color: var(--cba-border-strong);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    &:hover::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+  }
 }
 
 /* Task 5 — padding modifiers (body only, host-driven). */
@@ -99,11 +99,4 @@
 
 :host(.cba-module-container--padding-md) .cba-module-container__body {
   padding: var(--cba-space-4);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .cba-module-container__body:hover::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
-  }
 }
