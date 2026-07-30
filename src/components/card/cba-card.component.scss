@@ -1,0 +1,35 @@
+:host {
+  display: block;
+}
+
+.cba-card__surface {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--cba-bg-secondary);
+  border: 1px solid var(--cba-border-subtle);
+  border-radius: var(--cba-radius-md);
+  overflow: hidden;
+}
+
+.cba-card__header {
+  padding: var(--cba-space-3) var(--cba-space-4);
+  border-bottom: 1px solid var(--cba-border-subtle);
+
+  &:empty {
+    display: none;
+  }
+}
+
+.cba-card__body {
+  flex: 1 1 auto;
+  padding: var(--cba-space-4);
+}
+
+.cba-card__footer {
+  padding: var(--cba-space-3) var(--cba-space-4);
+  border-top: 1px solid var(--cba-border-subtle);
+
+  &:empty {
+    display: none;
+  }
+}

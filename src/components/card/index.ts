@@ -8,4 +8,4 @@
  * When implementing CbaCard, add `export * from './cba-card.component'`
  * here. Do not export internal types or test helpers.
  */
-export {};
+export * from './cba-card.component';
