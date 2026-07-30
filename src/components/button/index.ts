@@ -8,5 +8,4 @@
  * When implementing CbaButton, add `export * from './cba-button.component'`
  * here. Do not export internal types or test helpers.
  */
-export * from './button.types';
 export * from './cba-button.component';

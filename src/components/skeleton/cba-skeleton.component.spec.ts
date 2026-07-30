@@ -1,13 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { CbaSkeletonComponent } from './cba-skeleton.component';
-import { CbaSkeletonVariant } from './skeleton.types';
+import { CbaSkeletonComponent, CbaSkeletonVariant } from './cba-skeleton.component';
+import { hostEl } from '../testing/test-helpers';
 
 describe('CbaSkeletonComponent', () => {
   let fixture: ComponentFixture<CbaSkeletonComponent>;
-
-  function hostEl(): HTMLElement {
-    return fixture.nativeElement as HTMLElement;
-  }
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -19,7 +15,7 @@ describe('CbaSkeletonComponent', () => {
   });
 
   it('renders the generic variant by default', () => {
-    expect(hostEl().classList.contains('cba-skeleton--generic')).toBe(true);
+    expect(hostEl(fixture).classList.contains('cba-skeleton--generic')).toBe(true);
     const shape = fixture.nativeElement.querySelector('.cba-skeleton__shape--generic');
     expect(shape).not.toBeNull();
   });
@@ -29,7 +25,7 @@ describe('CbaSkeletonComponent', () => {
     for (const v of variants) {
       fixture.componentRef.setInput('variant', v);
       fixture.detectChanges();
-      expect(hostEl().classList.contains(`cba-skeleton--${v}`)).toBe(true);
+      expect(hostEl(fixture).classList.contains(`cba-skeleton--${v}`)).toBe(true);
     }
   });
 

@@ -1,5 +1,61 @@
 :host {
   display: inline-flex;
+  // Defaults — overridden per variant/appearance below
+  --_badge-bg: transparent;
+  --_badge-color: var(--cba-text-muted);
+  --_badge-border: transparent;
+
+  // Solid variants
+  &.cba-badge--solid.cba-badge--primary {
+    --_badge-bg: var(--cba-accent-primary);
+    --_badge-color: var(--cba-text-inverse);
+  }
+  &.cba-badge--solid.cba-badge--success {
+    --_badge-bg: var(--cba-accent-success);
+    --_badge-color: var(--cba-text-inverse);
+  }
+  &.cba-badge--solid.cba-badge--warning {
+    --_badge-bg: var(--cba-accent-warning);
+    --_badge-color: var(--cba-text-inverse);
+  }
+  &.cba-badge--solid.cba-badge--danger {
+    --_badge-bg: var(--cba-accent-danger);
+    --_badge-color: var(--cba-text-inverse);
+  }
+  &.cba-badge--solid.cba-badge--info {
+    --_badge-bg: var(--cba-accent-info);
+    --_badge-color: var(--cba-text-inverse);
+  }
+  &.cba-badge--solid.cba-badge--neutral {
+    --_badge-bg: var(--cba-bg-elevated);
+    --_badge-color: var(--cba-text-secondary);
+  }
+
+  // Outline variants
+  &.cba-badge--outline.cba-badge--primary {
+    --_badge-border: var(--cba-accent-primary);
+    --_badge-color: var(--cba-accent-primary);
+  }
+  &.cba-badge--outline.cba-badge--success {
+    --_badge-border: var(--cba-accent-success);
+    --_badge-color: var(--cba-accent-success);
+  }
+  &.cba-badge--outline.cba-badge--warning {
+    --_badge-border: var(--cba-accent-warning);
+    --_badge-color: var(--cba-accent-warning);
+  }
+  &.cba-badge--outline.cba-badge--danger {
+    --_badge-border: var(--cba-accent-danger);
+    --_badge-color: var(--cba-accent-danger);
+  }
+  &.cba-badge--outline.cba-badge--info {
+    --_badge-border: var(--cba-accent-info);
+    --_badge-color: var(--cba-accent-info);
+  }
+  &.cba-badge--outline.cba-badge--neutral {
+    --_badge-border: var(--cba-border-default);
+    --_badge-color: var(--cba-text-muted);
+  }
 }
 
 .cba-badge__content {
@@ -12,66 +68,7 @@
   font-weight: 500;
   line-height: 1;
   border: 1px solid transparent;
-}
-
-// Solid variants
-.cba-badge--solid.cba-badge--primary .cba-badge__content {
-  background-color: var(--cba-accent-primary);
-  color: var(--cba-text-inverse);
-}
-
-.cba-badge--solid.cba-badge--success .cba-badge__content {
-  background-color: var(--cba-accent-success);
-  color: var(--cba-text-inverse);
-}
-
-.cba-badge--solid.cba-badge--warning .cba-badge__content {
-  background-color: var(--cba-accent-warning);
-  color: var(--cba-text-inverse);
-}
-
-.cba-badge--solid.cba-badge--danger .cba-badge__content {
-  background-color: var(--cba-accent-danger);
-  color: var(--cba-text-inverse);
-}
-
-.cba-badge--solid.cba-badge--info .cba-badge__content {
-  background-color: var(--cba-accent-info);
-  color: var(--cba-text-inverse);
-}
-
-.cba-badge--solid.cba-badge--neutral .cba-badge__content {
-  background-color: var(--cba-bg-elevated);
-  color: var(--cba-text-secondary);
-}
-
-// Outline variants
-.cba-badge--outline.cba-badge--primary .cba-badge__content {
-  border-color: var(--cba-accent-primary);
-  color: var(--cba-accent-primary);
-}
-
-.cba-badge--outline.cba-badge--success .cba-badge__content {
-  border-color: var(--cba-accent-success);
-  color: var(--cba-accent-success);
-}
-
-.cba-badge--outline.cba-badge--warning .cba-badge__content {
-  border-color: var(--cba-accent-warning);
-  color: var(--cba-accent-warning);
-}
-
-.cba-badge--outline.cba-badge--danger .cba-badge__content {
-  border-color: var(--cba-accent-danger);
-  color: var(--cba-accent-danger);
-}
-
-.cba-badge--outline.cba-badge--info .cba-badge__content {
-  border-color: var(--cba-accent-info);
-  color: var(--cba-accent-info);
-}
-
-.cba-badge--outline.cba-badge--neutral .cba-badge__content {
-  border-color: var(--cba-border-default);
-  color: var(--cba-text-muted);
+  background-color: var(--_badge-bg);
+  color: var(--_badge-color);
+  border-color: var(--_badge-border);
 }

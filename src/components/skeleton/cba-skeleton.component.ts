@@ -1,9 +1,12 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  computed,
   input,
 } from '@angular/core';
-import { CbaSkeletonVariant } from './skeleton.types';
+
+/** Preset skeleton shape. */
+export type CbaSkeletonVariant = 'text' | 'avatar' | 'card' | 'table-row' | 'generic';
 
 /**
  * Skeleton placeholder for content that is still loading.
@@ -48,4 +51,19 @@ export class CbaSkeletonComponent {
 
   /** Optional height override (e.g. `'1rem'`, `'4rem'`). */
   readonly height = input<string | null>(null);
+
+  /** Default dimensions keyed by variant. */
+  private readonly defaultDimensions: Record<CbaSkeletonVariant, { width: string; height: string }> = {
+    text: { width: '100%', height: '0.875rem' },
+    avatar: { width: '2.5rem', height: '2.5rem' },
+    card: { width: '100%', height: '6rem' },
+    'table-row': { width: '100%', height: '1rem' },
+    generic: { width: '100%', height: '1rem' },
+  };
+
+  /** Resolved width using the provided override or the variant default. */
+  protected readonly resolvedWidth = computed(() => this.width() ?? this.defaultDimensions[this.variant()].width);
+
+  /** Resolved height using the provided override or the variant default. */
+  protected readonly resolvedHeight = computed(() => this.height() ?? this.defaultDimensions[this.variant()].height);
 }

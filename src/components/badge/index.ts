@@ -8,5 +8,4 @@
  * When implementing CbaBadge, add `export * from './cba-badge.component'`
  * here. Do not export internal types or test helpers.
  */
-export * from './badge.types';
 export * from './cba-badge.component';

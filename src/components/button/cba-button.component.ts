@@ -7,12 +7,18 @@ import {
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
-import {
-  CbaButtonIconPosition,
-  CbaButtonSize,
-  CbaButtonType,
-  CbaButtonVariant,
-} from './button.types';
+
+/** Visual style of a CbaButton. */
+export type CbaButtonVariant = 'primary' | 'secondary' | 'ghost' | 'danger' | 'success';
+
+/** Control size. */
+export type CbaButtonSize = 'sm' | 'md';
+
+/** Native button type forwarded to the inner `<button>`. */
+export type CbaButtonType = 'button' | 'submit' | 'reset';
+
+/** Position of the optional icon relative to the label. */
+export type CbaButtonIconPosition = 'leading' | 'trailing';
 
 /**
  * Primary action button for the Cobranza App design system.

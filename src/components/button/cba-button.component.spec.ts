@@ -2,8 +2,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Component } from '@angular/core';
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
-import { CbaButtonComponent } from './cba-button.component';
-import { CbaButtonVariant } from './button.types';
+import { CbaButtonComponent, CbaButtonVariant } from './cba-button.component';
+import { hostEl } from '../testing/test-helpers';
 
 /**
  * Helper: creates a TestHost wrapper that allows testing projected content.
@@ -23,10 +23,6 @@ describe('CbaButtonComponent', () => {
 
     function button(): HTMLButtonElement {
       return fixture.nativeElement.querySelector('button.cba-button__control') as HTMLButtonElement;
-    }
-
-    function hostEl(): HTMLElement {
-      return fixture.nativeElement as HTMLElement;
     }
 
     beforeEach(async () => {
@@ -65,7 +61,7 @@ describe('CbaButtonComponent', () => {
     });
 
     it('applies the cba-button--primary class by default', () => {
-      expect(hostEl().classList.contains('cba-button--primary')).toBe(true);
+      expect(hostEl(fixture).classList.contains('cba-button--primary')).toBe(true);
     });
 
     it('applies the variant host class for each variant', () => {
@@ -73,19 +69,19 @@ describe('CbaButtonComponent', () => {
       for (const v of variants) {
         fixture.componentRef.setInput('variant', v);
         fixture.detectChanges();
-        expect(hostEl().classList.contains(`cba-button--${v}`)).toBe(true);
+        expect(hostEl(fixture).classList.contains(`cba-button--${v}`)).toBe(true);
       }
     });
 
     it('applies the size host class for sm and md', () => {
       fixture.componentRef.setInput('size', 'sm');
       fixture.detectChanges();
-      expect(hostEl().classList.contains('cba-button--sm')).toBe(true);
-      expect(hostEl().classList.contains('cba-button--md')).toBe(false);
+      expect(hostEl(fixture).classList.contains('cba-button--sm')).toBe(true);
+      expect(hostEl(fixture).classList.contains('cba-button--md')).toBe(false);
 
       fixture.componentRef.setInput('size', 'md');
       fixture.detectChanges();
-      expect(hostEl().classList.contains('cba-button--md')).toBe(true);
+      expect(hostEl(fixture).classList.contains('cba-button--md')).toBe(true);
     });
 
     it('renders a leading icon when icon is provided', () => {

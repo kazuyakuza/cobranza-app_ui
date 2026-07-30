@@ -3,7 +3,12 @@ import {
   Component,
   input,
 } from '@angular/core';
-import { CbaBadgeAppearance, CbaBadgeVariant } from './badge.types';
+
+/** Semantic colour of a CbaBadge. */
+export type CbaBadgeVariant = 'primary' | 'success' | 'warning' | 'danger' | 'info' | 'neutral';
+
+/** Fill style. */
+export type CbaBadgeAppearance = 'solid' | 'outline';
 
 /**
  * Compact status indicator that renders a pill-shaped label.

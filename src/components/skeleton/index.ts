@@ -8,5 +8,4 @@
  * When implementing CbaSkeleton, add `export * from './cba-skeleton.component'`
  * here. Do not export internal types or test helpers.
  */
-export * from './skeleton.types';
 export * from './cba-skeleton.component';
