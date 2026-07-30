@@ -1,0 +1,17 @@
+<cba-field
+  [label]="label()"
+  [hint]="hint()"
+  [error]="error()"
+  [disabled]="isDisabled()"
+  [controlId]="controlId">
+  <select
+    [id]="controlId"
+    [disabled]="isDisabled()"
+    [attr.aria-describedby]="describedBy()"
+    [attr.aria-invalid]="error() ? 'true' : null"
+    (change)="onSelectChange($event)"
+    (blur)="onBlur()"
+    class="cba-select__control">
+    <ng-content select="option"></ng-content>
+  </select>
+</cba-field>
