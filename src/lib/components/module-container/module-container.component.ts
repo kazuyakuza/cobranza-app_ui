@@ -75,15 +75,50 @@ import {
   },
 })
 export class ModuleContainerComponent {
-  /** Workspace width mode. Drives the size modifier class on the host element. */
+  /**
+   * Workspace width mode.
+   *
+   * Drives the host modifier class:
+   * - `'50%'`  → `cba-module-container--size-50`
+   * - `'100%'` → `cba-module-container--size-100` (default)
+   *
+   * @default '100%'
+   */
   readonly size = input<ModuleContainerSize>('100%');
 
-  /** When `true`, the body region is removed from the DOM (no layout box, no scroll). */
+  /**
+   * Controls body visibility and scroll participation.
+   *
+   * When `true`:
+   * - The body region is removed from the DOM.
+   * - The host receives `cba-module-container--collapsed`.
+   * - No layout box is rendered; no scroll area exists.
+   *
+   * @default false
+   */
   readonly isCollapsed = input<boolean>(false);
 
-  /** When `true`, module chrome modifier classes are present for Block B to suppress border-radius and shadow. */
+  /**
+   * Suppresses module chrome (border-radius, shadow).
+   *
+   * When `true`:
+   * - The host receives `cba-module-container--fullscreen`.
+   * - Block B styles suppress `border-radius` and `box-shadow`.
+   * - The Shell fullscreen view owns the outer chrome.
+   *
+   * @default false
+   */
   readonly isFullscreen = input<boolean>(false);
 
-  /** Body internal padding. Drives the padding modifier class applied to the body region by Block B. */
+  /**
+   * Body internal padding.
+   *
+   * Drives the host modifier class applied to the body region:
+   * - `'none'` → `cba-module-container--padding-none` (0 padding)
+   * - `'sm'`   → `cba-module-container--padding-sm` (small, balanced)
+   * - `'md'`   → `cba-module-container--padding-md` (medium spacing)
+   *
+   * @default 'sm'
+   */
   readonly padding = input<ModuleContainerPadding>('sm');
 }
