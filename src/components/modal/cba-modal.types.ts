@@ -3,7 +3,12 @@ import { NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 /** Width variant supported by {@link CbaModalComponent} and {@link CbaModalService}. */
 export type CbaModalSize = 'sm' | 'md' | 'lg';
 
-/** Reason values that may be returned when a `CbaModal` is dismissed. */
+/**
+ * Reason values that may be returned when a `CbaModal` is dismissed.
+ *
+ * This is a consumer-facing type; CbaModalService does not emit it directly.
+ * Components use it in type annotations when reading `NgbModalRef.dismissed`.
+ */
 export type CbaModalDismissReason = 'backdrop' | 'escape' | 'close' | string;
 
 /**

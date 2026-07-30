@@ -2,16 +2,20 @@
   display: block;
 }
 
-.cba-modal__header {
+.cba-modal__header,
+.cba-modal__footer {
   display: flex;
   align-items: center;
   gap: var(--cba-space-3);
   padding: var(--cba-space-4) var(--cba-space-5);
-  border-bottom: 1px solid var(--cba-border-subtle);
 
   &:empty {
     display: none;
   }
+}
+
+.cba-modal__header {
+  border-bottom: 1px solid var(--cba-border-subtle);
 }
 
 .cba-modal__title {
@@ -52,14 +56,6 @@
 }
 
 .cba-modal__footer {
-  display: flex;
-  align-items: center;
   justify-content: flex-end;
-  gap: var(--cba-space-3);
-  padding: var(--cba-space-4) var(--cba-space-5);
   border-top: 1px solid var(--cba-border-subtle);
-
-  &:empty {
-    display: none;
-  }
 }

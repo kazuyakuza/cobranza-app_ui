@@ -27,18 +27,16 @@ export class CbaModalService {
 
   /** Translate wrapper options into ng-bootstrap options. */
   private toNgbOptions(options?: CbaModalOptions): NgbModalOptions {
-    if (!options) {
-      return { backdropClass: 'cba-modal-backdrop', windowClass: 'cba-modal-window' };
-    }
-    const { size, centered, dismissible, ...rest } = options;
+    const opts = options ?? {};
+    const isStatic = opts.dismissible === false;
     return {
-      ...rest,
-      size,
-      centered,
-      backdrop: dismissible === false ? 'static' : true,
-      keyboard: dismissible !== false,
-      backdropClass: rest.backdropClass ?? 'cba-modal-backdrop',
-      windowClass: rest.windowClass ?? 'cba-modal-window',
+      ...opts,
+      size: opts.size,
+      centered: opts.centered,
+      backdrop: isStatic ? 'static' : true,
+      keyboard: !isStatic,
+      backdropClass: opts.backdropClass ?? 'cba-modal-backdrop',
+      windowClass: opts.windowClass ?? 'cba-modal-window',
     };
   }
 }
