@@ -1,1 +1,23 @@
-// Placeholder for SCSS mixins. Defined in Phase 1.
+/**
+ * Theme mixins — reusable SCSS mixins consuming `--cba-*` tokens.
+ * Mixins emit no CSS until invoked by a component or utility via @include.
+ * Tokens are defined in `_variables.scss`.
+ */
+
+@mixin cba-focus-ring {
+  outline: none;
+  box-shadow: var(--cba-focus-ring);
+}
+
+@mixin cba-elevated-surface {
+  background-color: var(--cba-bg-elevated);
+  border: 1px solid var(--cba-border-subtle);
+  border-radius: var(--cba-radius-md);
+  box-shadow: var(--cba-shadow-module);
+}
+
+@mixin cba-hover-surface {
+  &:hover {
+    background-color: var(--cba-hover);
+  }
+}
