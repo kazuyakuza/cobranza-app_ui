@@ -14,4 +14,5 @@
  * Do NOT export internal helpers or private utilities from this file.
  * Everything exported here becomes part of the library's public semver contract.
  */
-export {};
+/** Components. */
+export * from './components/module-header';
