@@ -1,0 +1,31 @@
+<cba-field
+  [label]="label()"
+  [hint]="hint()"
+  [error]="error()"
+  [disabled]="isDisabled()"
+  [controlId]="controlId">
+  <div class="cba-datepicker__input-wrapper">
+    <input
+      [id]="controlId"
+      [placeholder]="placeholder() ?? ''"
+      [disabled]="isDisabled()"
+      [ngModel]="value()"
+      (ngModelChange)="onDateChange($event)"
+      (blur)="onBlur()"
+      ngbDatepicker
+      #dp="ngbDatepicker"
+      [datepickerClass]="'cba-datepicker-popup'"
+      [attr.aria-describedby]="describedBy()"
+      [attr.aria-invalid]="error() ? 'true' : null"
+      class="cba-datepicker__control" />
+
+    <button
+      type="button"
+      class="cba-datepicker__toggle"
+      aria-label="Open date picker"
+      [disabled]="isDisabled()"
+      (click)="dp.toggle()">
+      <fa-icon [icon]="faCalendar" aria-hidden="true" />
+    </button>
+  </div>
+</cba-field>

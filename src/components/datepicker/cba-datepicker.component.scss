@@ -1,0 +1,49 @@
+:host {
+  display: block;
+}
+
+.cba-datepicker__input-wrapper {
+  display: flex;
+  align-items: center;
+  gap: var(--cba-space-2);
+}
+
+.cba-datepicker__control {
+  flex: 1 1 auto;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: inherit;
+  font: inherit;
+  padding: var(--cba-space-2) var(--cba-space-3);
+}
+
+.cba-datepicker__toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  width: var(--cba-space-6);
+  height: var(--cba-space-6);
+  padding: 0;
+  border: none;
+  border-radius: var(--cba-radius-sm);
+  background: transparent;
+  color: var(--cba-text-secondary);
+  cursor: pointer;
+
+  &:hover {
+    background: var(--cba-hover);
+    color: var(--cba-text-primary);
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: var(--cba-focus-ring);
+  }
+}
+
+.cba-datepicker--disabled .cba-datepicker__toggle,
+.cba-datepicker--disabled .cba-datepicker__control {
+  cursor: not-allowed;
+}
