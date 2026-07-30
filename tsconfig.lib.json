@@ -13,6 +13,6 @@
     "skipTemplateCodegen": true,
     "compilationMode": "partial"
   },
-  "include": ["src/lib/**/*.ts"],
-  "exclude": ["src/lib/**/*.spec.ts"]
+  "include": ["src/**/*.ts"],
+  "exclude": ["src/**/*.spec.ts"]
 }

@@ -6,7 +6,9 @@
   "compilerOptions": {
     "baseUrl": "./",
     "paths": {
-      "@cobranza-apps/ui": ["src/lib/public-api.ts"]
+      "@cobranza-apps/ui": [
+        "src/public-api.ts"
+      ]
     },
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
@@ -23,7 +25,10 @@
     "importHelpers": true,
     "module": "ES2022",
     "target": "ES2022",
-    "lib": ["ES2022", "dom"],
+    "lib": [
+      "ES2022",
+      "dom"
+    ],
     "useDefineForClassFields": false,
     "ignoreDeprecations": "6.0"
   },

@@ -4,12 +4,12 @@
   "assets": [
     {
       "glob": "**/*.scss",
-      "input": "src/lib/theme",
+      "input": "src/theme",
       "output": "theme"
     }
   ],
   "lib": {
-    "entryFile": "src/lib/public-api.ts",
-    "styleIncludePaths": ["src/lib/theme"]
+    "entryFile": "src/public-api.ts",
+    "styleIncludePaths": ["src/theme"]
   }
 }
