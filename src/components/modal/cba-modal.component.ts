@@ -18,7 +18,7 @@ let cbaModalTitleUid = 0;
  * @usageNotes
  * ```html
  * <cba-modal title="Confirm deletion">
- *   <ng-container cbaModalBody>This action cannot be undone.</ng-container>
+ *   <p>This action cannot be undone.</p>
  *   <ng-container cbaModalFooter>
  *     <cba-button variant="ghost" (cbaClick)="activeModal.dismiss()">Cancel</cba-button>
  *     <cba-button variant="danger" (cbaClick)="activeModal.close(true)">Delete</cba-button>

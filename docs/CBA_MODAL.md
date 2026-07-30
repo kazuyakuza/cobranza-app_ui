@@ -50,7 +50,7 @@ import { CbaModalComponent, CbaModalService } from '@cobranza-apps/ui';
 | Slot | Selector | Required | Description |
 | --- | --- | --- | --- |
 | Header | `[cbaModalHeader]` | No | Custom header; takes over the header region. |
-| Body | default (or `[cbaModalBody]`) | Yes | Modal body content. |
+| Body | default `<ng-content>` | Yes | Modal body content — any element not matching `[cbaModalHeader]` or `[cbaModalFooter]`. |
 | Footer | `[cbaModalFooter]` | No | Action buttons (typically `cba-button`). |
 
 ## Opening a modal
@@ -69,9 +69,7 @@ import { CbaModalComponent, CbaModalService } from '@cobranza-apps/ui';
   imports: [CbaModalComponent],
   template: `
     <cba-modal title="Confirm deletion">
-      <ng-container cbaModalBody>
-        This action cannot be undone.
-      </ng-container>
+      <p>This action cannot be undone.</p>
       <ng-container cbaModalFooter>
         <button (click)="activeModal.dismiss()">Cancel</button>
         <button (click)="activeModal.close(true)">Delete</button>
@@ -95,9 +93,7 @@ export class ConfirmationModalComponent {
   <div cbaModalHeader>
     <h3>Custom Header</h3>
   </div>
-  <ng-container cbaModalBody>
-    <p>Modal body content goes here.</p>
-  </ng-container>
+  <p>Modal body content goes here.</p>
   <ng-container cbaModalFooter>
     <cba-button variant="secondary" (cbaClick)="activeModal.dismiss()">Cancel</cba-button>
     <cba-button variant="primary" (cbaClick)="activeModal.close('saved')">Save</cba-button>
