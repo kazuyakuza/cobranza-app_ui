@@ -49,7 +49,7 @@ const STATUS_VISUALS: Readonly<Record<Exclude<ModuleHeaderStatus, null>, StatusV
  * and drop are intentionally NOT implemented here (owned by the Shell +
  * `@cobranza-apps/mfe-events`); the title is never editable from this header.
  *
- * Exported from `@cobranza-apps/ui` via `src/lib/public-api.ts`.
+ * Exported from `@cobranza-apps/ui` via `src/public-api.ts`.
  *
  * @usageNotes
  * ```html

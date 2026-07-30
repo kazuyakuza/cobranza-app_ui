@@ -31,7 +31,7 @@ import {
  * Styling of size / chrome / padding / scroll is intentionally handled in
  * Block B. Block A wires the host modifier classes only.
  *
- * Exported from `@cobranza-apps/ui` via `src/lib/public-api.ts`.
+ * Exported from `@cobranza-apps/ui` via `src/public-api.ts`.
  *
  * @usageNotes
  * ```html

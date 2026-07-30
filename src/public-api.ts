@@ -6,7 +6,7 @@
  *
  * ## How to add exports
  *
- * 1. Implement the component, directive, pipe, or service inside `src/lib/`.
+ * 1. Implement the component, directive, pipe, or service inside `src/`.
  * 2. Re-export it from its folder's barrel (`index.ts`).
  * 3. Add a `export * from './<path>'` line below, keeping
  *    alphabetical order and grouping by category (components, directives, theme).
