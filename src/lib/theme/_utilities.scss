@@ -6,73 +6,21 @@
  * to render the line (Bootstrap 5 is an expected peer dependency).
  */
 
-/* Backgrounds */
-.cba-bg-primary {
-  background-color: var(--cba-bg-primary);
-}
+$utility-groups: (
+  bg: (property: background-color, names: (primary, secondary, tertiary, elevated)),
+  text: (property: color, names: (primary, secondary, muted, inverse)),
+  border: (property: border-color, names: (subtle, default, strong)),
+  radius: (property: border-radius, names: (sm, md, lg)),
+  shadow: (property: box-shadow, names: (module, elevated)),
+);
 
-.cba-bg-secondary {
-  background-color: var(--cba-bg-secondary);
-}
-
-.cba-bg-tertiary {
-  background-color: var(--cba-bg-tertiary);
-}
-
-.cba-bg-elevated {
-  background-color: var(--cba-bg-elevated);
-}
-
-/* Text */
-.cba-text-primary {
-  color: var(--cba-text-primary);
-}
-
-.cba-text-secondary {
-  color: var(--cba-text-secondary);
-}
-
-.cba-text-muted {
-  color: var(--cba-text-muted);
-}
-
-.cba-text-inverse {
-  color: var(--cba-text-inverse);
-}
-
-/* Borders (color-only) */
-.cba-border-subtle {
-  border-color: var(--cba-border-subtle);
-}
-
-.cba-border-default {
-  border-color: var(--cba-border-default);
-}
-
-.cba-border-strong {
-  border-color: var(--cba-border-strong);
-}
-
-/* Radius */
-.cba-radius-sm {
-  border-radius: var(--cba-radius-sm);
-}
-
-.cba-radius-md {
-  border-radius: var(--cba-radius-md);
-}
-
-.cba-radius-lg {
-  border-radius: var(--cba-radius-lg);
-}
-
-/* Shadows */
-.cba-shadow-module {
-  box-shadow: var(--cba-shadow-module);
-}
-
-.cba-shadow-elevated {
-  box-shadow: var(--cba-shadow-elevated);
+@each $prefix, $group in $utility-groups {
+  $property: map-get($group, property);
+  @each $name in map-get($group, names) {
+    .cba-#{$prefix}-#{$name} {
+      #{$property}: var(--cba-#{$prefix}-#{$name});
+    }
+  }
 }
 
 /* Spacing helpers — numeric scale matching --cba-space-* */
