@@ -1,0 +1,127 @@
+:host {
+  display: inline-block;
+}
+
+.cba-button__control {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--cba-space-2);
+  border: 1px solid transparent;
+  border-radius: var(--cba-radius-sm);
+  cursor: pointer;
+  font-family: inherit;
+  font-weight: 500;
+  line-height: 1.5;
+  transition: background-color 120ms ease, border-color 120ms ease, color 120ms ease;
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: var(--cba-focus-ring);
+  }
+}
+
+// Size modifiers
+.cba-button--sm .cba-button__control {
+  padding: var(--cba-space-1) var(--cba-space-3);
+  font-size: 0.8125rem;
+}
+
+.cba-button--md .cba-button__control {
+  padding: var(--cba-space-2) var(--cba-space-4);
+  font-size: 0.875rem;
+}
+
+// Variants
+.cba-button--primary .cba-button__control {
+  background-color: var(--cba-accent-primary);
+  color: var(--cba-text-inverse);
+
+  &:hover {
+    background-image: linear-gradient(var(--cba-hover), var(--cba-hover));
+  }
+
+  &:active {
+    background-image: linear-gradient(var(--cba-active), var(--cba-active));
+  }
+}
+
+.cba-button--secondary .cba-button__control {
+  background-color: var(--cba-bg-elevated);
+  border-color: var(--cba-border-subtle);
+  color: var(--cba-text-primary);
+
+  &:hover {
+    background-image: linear-gradient(var(--cba-hover), var(--cba-hover));
+  }
+
+  &:active {
+    background-image: linear-gradient(var(--cba-active), var(--cba-active));
+  }
+}
+
+.cba-button--ghost .cba-button__control {
+  background-color: transparent;
+  color: var(--cba-text-primary);
+
+  &:hover {
+    background-color: var(--cba-hover);
+  }
+
+  &:active {
+    background-color: var(--cba-active);
+  }
+}
+
+.cba-button--danger .cba-button__control {
+  background-color: var(--cba-accent-danger);
+  color: var(--cba-text-inverse);
+
+  &:hover {
+    background-image: linear-gradient(var(--cba-hover), var(--cba-hover));
+  }
+
+  &:active {
+    background-image: linear-gradient(var(--cba-active), var(--cba-active));
+  }
+}
+
+.cba-button--success .cba-button__control {
+  background-color: var(--cba-accent-success);
+  color: var(--cba-text-inverse);
+
+  &:hover {
+    background-image: linear-gradient(var(--cba-hover), var(--cba-hover));
+  }
+
+  &:active {
+    background-image: linear-gradient(var(--cba-active), var(--cba-active));
+  }
+}
+
+// Disabled / loading state
+.cba-button--disabled .cba-button__control,
+.cba-button--loading .cba-button__control {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.cba-button__icon {
+  display: inline-flex;
+  flex: 0 0 auto;
+}
+
+.cba-button__label {
+  flex: 0 1 auto;
+  min-width: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cba-button__control {
+    transition: none;
+  }
+
+  :host ::ng-deep .fa-spin {
+    animation: none;
+  }
+}
