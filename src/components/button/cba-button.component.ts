@@ -17,24 +17,23 @@ import {
 /**
  * Primary action button for the Cobranza App design system.
  *
- * Renders a native `<button>` for full keyboard accessibility and proxies the
- * native click event through the `click` output. Supports five variant styles,
- * two sizes, an optional leading/trailing icon via the `icon` input, and a
- * loading state that shows a spinner and disables interaction.
+ * Renders a native `<button>` for full keyboard accessibility. Supports five
+ * variant styles, two sizes, an optional leading/trailing icon via the `icon`
+ * input, and a loading state that shows a spinner and disables interaction.
  *
  * @usageNotes
  * ```html
  * <!-- Primary (default) -->
- * <cba-button (click)="onSave()">Save</cba-button>
+ * <cba-button (cbaClick)="onSave()">Save</cba-button>
  *
  * <!-- Danger -->
- * <cba-button variant="danger" (click)="onDelete()">Delete</cba-button>
+ * <cba-button variant="danger" (cbaClick)="onDelete()">Delete</cba-button>
  *
  * <!-- With leading icon -->
  * <cba-button [icon]="faPlus" iconPosition="leading">Add</cba-button>
  *
  * <!-- Loading / spinner -->
- * <cba-button [loading]="isSaving" (click)="onSave()">Saving…</cba-button>
+ * <cba-button [loading]="isSaving" (cbaClick)="onSave()">Saving…</cba-button>
  * ```
  *
  * @see [CBA_BUTTON.md](/docs/CBA_BUTTON.md) — full API docs.
@@ -76,7 +75,7 @@ export class CbaButtonComponent {
   readonly type = input<CbaButtonType>('button');
 
   /** Optional leading/trailing icon. */
-  readonly icon = input<IconDefinition | null>(null);
+  readonly icon = input<IconDefinition | undefined>(undefined);
 
   /** Position of the optional icon relative to the label. */
   readonly iconPosition = input<CbaButtonIconPosition>('leading');
@@ -84,10 +83,12 @@ export class CbaButtonComponent {
   /**
    * Emitted when the user clicks the internal native `<button>`.
    *
-   * This is a re-emission of the native click event; use `(click)` on
-   * `<cba-button>` directly — no additional wrapper is needed.
+   * Use the `(cbaClick)` binding on `<cba-button>`:
+   * ```html
+   * <cba-button (cbaClick)="onSave()">Save</cba-button>
+   * ```
    */
-  readonly click = output<void>();
+  readonly cbaClick = output<void>();
 
   /** Whether the button is considered non-interactive (disabled or loading). */
   protected readonly isDisabled = (): boolean => this.disabled() || this.loading();
@@ -102,6 +103,6 @@ export class CbaButtonComponent {
    */
   protected onInternalClick(event: MouseEvent): void {
     event.stopPropagation();
-    this.click.emit();
+    this.cbaClick.emit();
   }
 }

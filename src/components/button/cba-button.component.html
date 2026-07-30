@@ -10,12 +10,12 @@
     <fa-icon class="cba-button__icon cba-button__icon--spinner" [icon]="faSpinner" animation="spin" aria-hidden="true" />
   }
   @if (!loading() && icon() && iconPosition() === 'leading') {
-    <fa-icon class="cba-button__icon cba-button__icon--leading" [icon]="icon()" aria-hidden="true" />
+    <fa-icon class="cba-button__icon cba-button__icon--leading" [icon]="icon()!" aria-hidden="true" />
   }
   <span class="cba-button__label">
     <ng-content></ng-content>
   </span>
   @if (!loading() && icon() && iconPosition() === 'trailing') {
-    <fa-icon class="cba-button__icon cba-button__icon--trailing" [icon]="icon()" aria-hidden="true" />
+    <fa-icon class="cba-button__icon cba-button__icon--trailing" [icon]="icon()!" aria-hidden="true" />
   }
 </button>

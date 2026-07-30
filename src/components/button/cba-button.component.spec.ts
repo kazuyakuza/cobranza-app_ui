@@ -39,25 +39,25 @@ describe('CbaButtonComponent', () => {
       fixture.detectChanges();
     });
 
-    it('emits click when the button is clicked and enabled', () => {
+    it('emits cbaClick when the button is clicked and enabled', () => {
       let emitted = 0;
-      component.click.subscribe(() => (emitted += 1));
+      component.cbaClick.subscribe(() => (emitted += 1));
       button().click();
       expect(emitted).toBe(1);
     });
 
-    it('does not emit click when disabled is true', () => {
+    it('does not emit cbaClick when disabled is true', () => {
       let emitted = 0;
-      component.click.subscribe(() => (emitted += 1));
+      component.cbaClick.subscribe(() => (emitted += 1));
       fixture.componentRef.setInput('disabled', true);
       fixture.detectChanges();
       button().click();
       expect(emitted).toBe(0);
     });
 
-    it('does not emit click when loading is true', () => {
+    it('does not emit cbaClick when loading is true', () => {
       let emitted = 0;
-      component.click.subscribe(() => (emitted += 1));
+      component.cbaClick.subscribe(() => (emitted += 1));
       fixture.componentRef.setInput('loading', true);
       fixture.detectChanges();
       button().click();
