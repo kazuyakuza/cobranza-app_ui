@@ -11,10 +11,15 @@ let cbaDatepickerUid = 0;
 /**
  * Thin wrapper around the ng-bootstrap datepicker (`NgbInputDatepicker`).
  *
- * ng-bootstrap owns the calendar popup, keyboard navigation, focus, and
- * backdrop. This component owns the shared field layout, theme alignment, a
- * calendar toggle button, and bridges the inner `ngModel` to an outer
- * `ControlValueAccessor<NgbDateStruct | null>`.
+ * **Responsibility split:**
+ * - ng-bootstrap owns the calendar popup, keyboard navigation, date parsing,
+ *   focus management, and backdrop.
+ * - This component owns the shared field layout (label / hint / error),
+ *   theme alignment, a calendar toggle button, and bridges the inner
+ *   `ngModel` to an outer `ControlValueAccessor<NgbDateStruct | null>`.
+ *
+ * The value type is `NgbDateStruct | null` — consumers must import
+ * `NgbDateStruct` from `@ng-bootstrap/ng-bootstrap` when typing model bindings.
  *
  * @usageNotes
  * ```html

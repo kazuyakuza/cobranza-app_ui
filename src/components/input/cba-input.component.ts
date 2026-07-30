@@ -14,6 +14,10 @@ export type CbaInputType = 'text' | 'email' | 'password' | 'number' | 'url' | 't
  * Wraps a native `<input>` inside the shared `CbaFieldComponent` layout and
  * exposes `ngModel` / `formControlName` compatibility via `NG_VALUE_ACCESSOR`.
  *
+ * The native input is reset to a transparent, borderless state via the
+ * `%cba-native-control` SCSS placeholder; the visible border, focus ring, and
+ * background come from the parent `CbaFieldComponent` wrapper.
+ *
  * @usageNotes
  * ```html
  * <cba-input label="Email" type="email" hint="We never share your email." />

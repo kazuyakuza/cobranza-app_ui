@@ -7,7 +7,12 @@ let cbaSelectUid = 0;
 
 /**
  * Theme-aligned native select field with projected `<option>` elements and
- * `ControlValueAccessor` integration. No custom dropdown logic.
+ * `ControlValueAccessor` integration. No custom dropdown logic — the browser's
+ * native `<select>` handles the dropdown, keyboard navigation, and option
+ * rendering.
+ *
+ * Project `<option>` elements as content children; they are forwarded into the
+ * inner `<select>` via `<ng-content select="option">`.
  *
  * @usageNotes
  * ```html
