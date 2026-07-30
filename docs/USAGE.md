@@ -227,7 +227,7 @@ export class DashboardComponent {
 
 ### ModuleHeader
 
-Shell-injected header above each MFE module.
+Shell-injected header above each MFE module. See [`MODULE_HEADER.md`](./MODULE_HEADER.md) for the full API and notes.
 
 ```html
 <cba-module-header
