@@ -1,11 +1,9 @@
 /**
- * Barrel file for CbaModal.
+ * Barrel for the CbaModal wrapper.
  *
- * Uses the barrel pattern: this file re-exports the public API of the
- * CbaModal component so consumers and `public-api.ts` can import
- * from a single, stable path (`components/modal`).
- *
- * When implementing CbaModal, add `export * from './cba-modal.component'`
- * here. Do not export internal types or test helpers.
+ * Re-exports the public API of the ng-bootstrap-backed modal wrapper so
+ * `public-api.ts` and consumers can import from `components/modal`.
  */
-export {};
+export * from './cba-modal.component';
+export * from './cba-modal.service';
+export * from './cba-modal.types';

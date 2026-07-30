@@ -1,0 +1,23 @@
+<div class="cba-modal__header">
+  <ng-content select="[cbaModalHeader]"></ng-content>
+  @if (title()) {
+    <h2 class="cba-modal__title" [id]="titleId">{{ title() }}</h2>
+  }
+  @if (dismissible()) {
+    <button
+      type="button"
+      class="cba-modal__close"
+      aria-label="Close"
+      (click)="onClose()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  }
+</div>
+
+<div class="cba-modal__body">
+  <ng-content></ng-content>
+</div>
+
+<div class="cba-modal__footer">
+  <ng-content select="[cbaModalFooter]"></ng-content>
+</div>
