@@ -1,0 +1,12 @@
+<div class="cba-empty-state__layout">
+  <div class="cba-empty-state__icon">
+    <ng-content select="[cbaEmptyStateIcon]"></ng-content>
+  </div>
+  <h3 class="cba-empty-state__title">{{ title() }}</h3>
+  @if (description()) {
+    <p class="cba-empty-state__description">{{ description() }}</p>
+  }
+  <div class="cba-empty-state__action">
+    <ng-content select="[cbaEmptyStateAction]"></ng-content>
+  </div>
+</div>

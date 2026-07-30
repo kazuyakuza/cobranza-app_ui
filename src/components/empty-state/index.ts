@@ -8,4 +8,4 @@
  * When implementing CbaEmptyState, add `export * from './cba-empty-state.component'`
  * here. Do not export internal types or test helpers.
  */
-export {};
+export * from './cba-empty-state.component';
