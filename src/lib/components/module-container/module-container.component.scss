@@ -1,19 +1,109 @@
 /**
- * ModuleContainer component styles.
+ * ModuleContainer component styles — Block B.
  *
- * Block A scope: only the host layout rule needed for the projected
- * header + body to render sensibly. All size / chrome / padding / scroll
- * behaviour is implemented in Block B using the host modifier classes
- * bound in module-container.component.ts:
+ * The `cba-module-container` class and every modifier class live on the
+ * `:host` element (see host bindings in module-container.component.ts):
  *
- *   .cba-module-container--size-50 / --size-100
- *   .cba-module-container--collapsed
- *   .cba-module-container--fullscreen
- *   .cba-module-container--padding-none / --padding-sm / --padding-md
+ *   .cba-module-container--size-50 / --size-100  -> width mode
+ *   .cba-module-container--fullscreen           -> suppress module chrome
+ *   .cba-module-container--padding-none/sm/md    -> body padding
+ *   .cba-module-container--collapsed             -> body removed via @if
+ *
+ * The body region is rendered only while `isCollapsed` is false (template
+ * control flow), so no scroll exists while collapsed.
+ *
+ * All values come from `--cba-*` tokens (see src/lib/theme/_variables.scss).
  */
+
 :host {
   display: flex;
   flex-direction: column;
   height: 100%;
   box-sizing: border-box;
+}
+
+/* Task 3 — width mode driven by Shell. */
+:host(.cba-module-container--size-50) {
+  width: 50%;
+}
+
+:host(.cba-module-container--size-100) {
+  width: 100%;
+}
+
+/* Task 4 — module chrome applied only when NOT fullscreen. */
+:host(:not(.cba-module-container--fullscreen)) {
+  background-color: var(--cba-bg-secondary);
+  border: 1px solid var(--cba-border-subtle);
+  border-radius: var(--cba-radius-md);
+  box-shadow: var(--cba-shadow-module);
+  /* Clip projected header to the rounded corners. */
+  overflow: hidden;
+}
+
+/* Task 4 — fullscreen: the Shell owns outer chrome. */
+:host(.cba-module-container--fullscreen) {
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+/* Task 7 — header band never scrolls, never shrinks. */
+.cba-module-container__header {
+  flex: 0 0 auto;
+  min-width: 0;
+}
+
+/* Task 6 — body is the internal scroll container while expanded. */
+.cba-module-container__body {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  /* Keep scroll inside the body; never bubble to the workspace. */
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  scrollbar-color: var(--cba-border-default) transparent;
+}
+
+.cba-module-container__body::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.cba-module-container__body:hover::-webkit-scrollbar {
+  width: 9px;
+  height: 9px;
+}
+
+.cba-module-container__body::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.cba-module-container__body::-webkit-scrollbar-thumb {
+  background-color: var(--cba-border-default);
+  border-radius: var(--cba-radius-sm);
+}
+
+.cba-module-container__body:hover::-webkit-scrollbar-thumb {
+  background-color: var(--cba-border-strong);
+}
+
+/* Task 5 — padding modifiers (body only, host-driven). */
+:host(.cba-module-container--padding-none) .cba-module-container__body {
+  padding: 0;
+}
+
+:host(.cba-module-container--padding-sm) .cba-module-container__body {
+  padding: var(--cba-space-2);
+}
+
+:host(.cba-module-container--padding-md) .cba-module-container__body {
+  padding: var(--cba-space-4);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cba-module-container__body:hover::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
 }
