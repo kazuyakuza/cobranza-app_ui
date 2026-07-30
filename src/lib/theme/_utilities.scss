@@ -1,1 +1,89 @@
-// Placeholder for utility classes. Defined in Phase 1.
+/**
+ * Utility classes for @cobranza-apps/ui (Phase 1).
+ * All values reference --cba-* tokens defined in _variables.scss (:root).
+ * No hard-coded colors or pixel values live here.
+ * Border utilities are color-only; pair with Bootstrap's .border / .border-1
+ * to render the line (Bootstrap 5 is an expected peer dependency).
+ */
+
+/* Backgrounds */
+.cba-bg-primary {
+  background-color: var(--cba-bg-primary);
+}
+
+.cba-bg-secondary {
+  background-color: var(--cba-bg-secondary);
+}
+
+.cba-bg-tertiary {
+  background-color: var(--cba-bg-tertiary);
+}
+
+.cba-bg-elevated {
+  background-color: var(--cba-bg-elevated);
+}
+
+/* Text */
+.cba-text-primary {
+  color: var(--cba-text-primary);
+}
+
+.cba-text-secondary {
+  color: var(--cba-text-secondary);
+}
+
+.cba-text-muted {
+  color: var(--cba-text-muted);
+}
+
+.cba-text-inverse {
+  color: var(--cba-text-inverse);
+}
+
+/* Borders (color-only) */
+.cba-border-subtle {
+  border-color: var(--cba-border-subtle);
+}
+
+.cba-border-default {
+  border-color: var(--cba-border-default);
+}
+
+.cba-border-strong {
+  border-color: var(--cba-border-strong);
+}
+
+/* Radius */
+.cba-radius-sm {
+  border-radius: var(--cba-radius-sm);
+}
+
+.cba-radius-md {
+  border-radius: var(--cba-radius-md);
+}
+
+.cba-radius-lg {
+  border-radius: var(--cba-radius-lg);
+}
+
+/* Shadows */
+.cba-shadow-module {
+  box-shadow: var(--cba-shadow-module);
+}
+
+.cba-shadow-elevated {
+  box-shadow: var(--cba-shadow-elevated);
+}
+
+/* Spacing helpers — numeric scale matching --cba-space-* */
+$spacing-scales: 1, 2, 3, 4, 5, 6, 8;
+
+@each $scale in $spacing-scales {
+  .cba-p-#{$scale} {
+    padding: var(--cba-space-#{$scale});
+  }
+
+  .cba-m-#{$scale} {
+    margin: var(--cba-space-#{$scale});
+  }
+}
