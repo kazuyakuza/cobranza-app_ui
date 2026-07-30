@@ -1,0 +1,28 @@
+<div class="cba-skeleton__content" aria-hidden="true" role="presentation">
+  @switch (variant()) {
+    @case ('text') {
+      <div class="cba-skeleton__group cba-skeleton__group--text">
+        <div class="cba-skeleton__line" [style.width]="width() ?? '100%'" [style.height]="height() ?? '0.875rem'"></div>
+        <div class="cba-skeleton__line" [style.width]="width() ?? '100%'" [style.height]="height() ?? '0.875rem'"></div>
+        <div class="cba-skeleton__line cba-skeleton__line--short" [style.width]="width() ?? '60%'" [style.height]="height() ?? '0.875rem'"></div>
+      </div>
+    }
+    @case ('avatar') {
+      <div class="cba-skeleton__shape cba-skeleton__shape--avatar" [style.width]="width() ?? '2.5rem'" [style.height]="height() ?? '2.5rem'"></div>
+    }
+    @case ('card') {
+      <div class="cba-skeleton__shape cba-skeleton__shape--card" [style.width]="width() ?? '100%'" [style.height]="height() ?? '6rem'"></div>
+    }
+    @case ('table-row') {
+      <div class="cba-skeleton__group cba-skeleton__group--table-row">
+        <div class="cba-skeleton__cell" [style.height]="height() ?? '1rem'"></div>
+        <div class="cba-skeleton__cell" [style.height]="height() ?? '1rem'"></div>
+        <div class="cba-skeleton__cell" [style.height]="height() ?? '1rem'"></div>
+        <div class="cba-skeleton__cell cba-skeleton__cell--shrink" [style.height]="height() ?? '1rem'"></div>
+      </div>
+    }
+    @default {
+      <div class="cba-skeleton__shape cba-skeleton__shape--generic" [style.width]="width() ?? '100%'" [style.height]="height() ?? '1rem'"></div>
+    }
+  }
+</div>
