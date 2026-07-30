@@ -7,11 +7,47 @@
  */
 
 $utility-groups: (
-  bg: (property: background-color, names: (primary, secondary, tertiary, elevated)),
-  text: (property: color, names: (primary, secondary, muted, inverse)),
-  border: (property: border-color, names: (subtle, default, strong)),
-  radius: (property: border-radius, names: (sm, md, lg)),
-  shadow: (property: box-shadow, names: (module, elevated)),
+  bg: (
+    property: background-color,
+    names: (
+      primary,
+      secondary,
+      tertiary,
+      elevated,
+    ),
+  ),
+  text: (
+    property: color,
+    names: (
+      primary,
+      secondary,
+      muted,
+      inverse,
+    ),
+  ),
+  border: (
+    property: border-color,
+    names: (
+      subtle,
+      default,
+      strong,
+    ),
+  ),
+  radius: (
+    property: border-radius,
+    names: (
+      sm,
+      md,
+      lg,
+    ),
+  ),
+  shadow: (
+    property: box-shadow,
+    names: (
+      module,
+      elevated,
+    ),
+  ),
 );
 
 @each $prefix, $group in $utility-groups {
