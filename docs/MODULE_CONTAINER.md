@@ -90,10 +90,10 @@ export class ShellComponent {
 
 | Name | Type | Default | Required | Description |
 | --- | --- | --- | --- | --- |
-| size | `'50%' \| '100%'` | `'100%'` | no | Workspace width mode. Drives the `cba-module-container--size-50` / `--size-100` host modifier. |
-| isCollapsed | `boolean` | `false` | no | When `true` the body region is removed from the DOM (no layout box, no scroll). Adds the `--collapsed` host modifier. |
-| isFullscreen | `boolean` | `false` | no | When `true` module chrome (border-radius, shadow) is suppressed; the Shell fullscreen view owns the outer chrome. Adds the `--fullscreen` host modifier. |
-| padding | `'none' \| 'sm' \| 'md'` | `'sm'` | no | Internal padding of the body region. Drives the `--padding-none/sm/md` host modifiers. |
+| size | `'50%' \| '100%'` | `'100%'` | no | Workspace width mode. Drives the `cba-module-container--size-50` / `cba-module-container--size-100` host modifier. |
+| isCollapsed | `boolean` | `false` | no | When `true` the body region is removed from the DOM (no layout box, no scroll). Adds the `cba-module-container--collapsed` host modifier. |
+| isFullscreen | `boolean` | `false` | no | When `true` module chrome (border-radius, shadow) is suppressed; the Shell fullscreen view owns the outer chrome. Adds the `cba-module-container--fullscreen` host modifier. |
+| padding | `'none' \| 'sm' \| 'md'` | `'sm'` | no | Internal padding of the body region. Drives the `cba-module-container--padding-none` / `cba-module-container--padding-sm` / `cba-module-container--padding-md` host modifiers. |
 
 The container never mutates these values — the Shell owns the source of truth and re-binds state on every change.
 

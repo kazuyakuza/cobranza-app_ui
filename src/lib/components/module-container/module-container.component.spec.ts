@@ -17,6 +17,10 @@ describe('ModuleContainerComponent', () => {
     return fixture.nativeElement.querySelector('.cba-module-container__body');
   }
 
+  function bodyIsRendered(): boolean {
+    return bodyRegion() !== null;
+  }
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [ModuleContainerComponent],
@@ -37,13 +41,13 @@ describe('ModuleContainerComponent', () => {
 
   it('renders the body by default and removes it when isCollapsed is true', () => {
     setup();
-    expect(bodyRegion()).not.toBeNull();
+    expect(bodyIsRendered()).toBe(true);
     expect(hostHasClass('cba-module-container--collapsed')).toBe(false);
 
     fixture.componentRef.setInput('isCollapsed', true);
     fixture.detectChanges();
 
-    expect(bodyRegion()).toBeNull();
+    expect(bodyIsRendered()).toBe(false);
     expect(hostHasClass('cba-module-container--collapsed')).toBe(true);
   });
 
@@ -54,9 +58,7 @@ describe('ModuleContainerComponent', () => {
     fixture.componentRef.setInput('isFullscreen', true);
     fixture.detectChanges();
 
-    // Chrome (border-radius + box-shadow) is suppressed under
-    // :host(:not(.cba-module-container--fullscreen)); the host modifier is the
-    // verifiable contract at the unit level (jsdom does not compute CSS).
+    // CSS chrome suppression is not testable in jsdom; the host modifier is the contract.
     expect(hostHasClass('cba-module-container--fullscreen')).toBe(true);
   });
 
