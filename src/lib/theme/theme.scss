@@ -1,4 +1,6 @@
-// Theme entry point. Aggregates partials; tokens, mixins and utilities in Phase 1.
+// Main theme entry point for @cobranza-apps/ui.
+// Imports variables, base typography, mixins, and utility classes in the correct order.
 @use 'variables';
+@use 'base';
 @use 'mixins';
 @use 'utilities';
