@@ -1,0 +1,75 @@
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ModuleContainerComponent } from './module-container.component';
+
+describe('ModuleContainerComponent', () => {
+  let fixture: ComponentFixture<ModuleContainerComponent>;
+
+  function setup(): void {
+    fixture = TestBed.createComponent(ModuleContainerComponent);
+    fixture.detectChanges();
+  }
+
+  function hostHasClass(name: string): boolean {
+    return fixture.nativeElement.classList.contains(name);
+  }
+
+  function bodyRegion(): Element | null {
+    return fixture.nativeElement.querySelector('.cba-module-container__body');
+  }
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [ModuleContainerComponent],
+    }).compileComponents();
+  });
+
+  it('applies the size-100 host modifier by default and switches to size-50', () => {
+    setup();
+    expect(hostHasClass('cba-module-container--size-100')).toBe(true);
+    expect(hostHasClass('cba-module-container--size-50')).toBe(false);
+
+    fixture.componentRef.setInput('size', '50%');
+    fixture.detectChanges();
+
+    expect(hostHasClass('cba-module-container--size-50')).toBe(true);
+    expect(hostHasClass('cba-module-container--size-100')).toBe(false);
+  });
+
+  it('renders the body by default and removes it when isCollapsed is true', () => {
+    setup();
+    expect(bodyRegion()).not.toBeNull();
+    expect(hostHasClass('cba-module-container--collapsed')).toBe(false);
+
+    fixture.componentRef.setInput('isCollapsed', true);
+    fixture.detectChanges();
+
+    expect(bodyRegion()).toBeNull();
+    expect(hostHasClass('cba-module-container--collapsed')).toBe(true);
+  });
+
+  it('applies the fullscreen host modifier that suppresses module chrome', () => {
+    setup();
+    expect(hostHasClass('cba-module-container--fullscreen')).toBe(false);
+
+    fixture.componentRef.setInput('isFullscreen', true);
+    fixture.detectChanges();
+
+    // Chrome (border-radius + box-shadow) is suppressed under
+    // :host(:not(.cba-module-container--fullscreen)); the host modifier is the
+    // verifiable contract at the unit level (jsdom does not compute CSS).
+    expect(hostHasClass('cba-module-container--fullscreen')).toBe(true);
+  });
+
+  it('applies the expected padding modifier for none sm and md', () => {
+    setup();
+    expect(hostHasClass('cba-module-container--padding-sm')).toBe(true);
+
+    fixture.componentRef.setInput('padding', 'none');
+    fixture.detectChanges();
+    expect(hostHasClass('cba-module-container--padding-none')).toBe(true);
+
+    fixture.componentRef.setInput('padding', 'md');
+    fixture.detectChanges();
+    expect(hostHasClass('cba-module-container--padding-md')).toBe(true);
+  });
+});
