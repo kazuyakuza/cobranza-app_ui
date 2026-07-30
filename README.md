@@ -154,6 +154,8 @@ Design tokens are published as SCSS via `@cobranza-apps/ui/theme` and use the `-
 
 For the full token reference, see [brief.md §5](.agent/project-info/brief.md#5-design-tokens-theme-proposal) and the SCSS source files under `src/lib/theme/`.
 
+For a quick reference, see [`/docs/THEME.md`](/docs/THEME.md).
+
 ## Related Libraries
 
 | Library | Role |
@@ -178,6 +180,7 @@ For the full token reference, see [brief.md §5](.agent/project-info/brief.md#5-
 ## Documentation
 
 - [`/docs/USAGE.md`](/docs/USAGE.md) — Patterns and examples for consuming the library.
+- [`/docs/THEME.md`](/docs/THEME.md) — Theme import, tokens, and utility classes.
 - [Project brief](.agent/project-info/brief.md) — Source of truth for scope, design tokens, and component contracts.
 - [Product info](.agent/project-info/product.md) — Product goals, target consumers, UX focus.
 - [Architecture](.agent/project-info/architecture.md) — Build strategy, folder layout, integration patterns.
