@@ -1,0 +1,18 @@
+<cba-field
+  [label]="label()"
+  [hint]="hint()"
+  [error]="error()"
+  [disabled]="isDisabled()"
+  [controlId]="controlId">
+  <input
+    [id]="controlId"
+    [type]="type()"
+    [placeholder]="placeholder() ?? ''"
+    [disabled]="isDisabled()"
+    [value]="value() ?? ''"
+    [attr.aria-describedby]="describedBy()"
+    [attr.aria-invalid]="error() ? 'true' : null"
+    (input)="onInput($event)"
+    (blur)="onBlur()"
+    class="cba-input__control" />
+</cba-field>

@@ -1,0 +1,17 @@
+:host {
+  display: block;
+}
+
+.cba-input__control {
+  width: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: inherit;
+  font: inherit;
+  padding: var(--cba-space-2) var(--cba-space-3);
+}
+
+.cba-input--disabled .cba-input__control {
+  cursor: not-allowed;
+}
