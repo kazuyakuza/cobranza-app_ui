@@ -5,6 +5,11 @@
   "license": "UNLICENSED",
   "private": false,
   "sideEffects": false,
+  "exports": {
+    "./theme": {
+      "sass": "./theme/theme.scss"
+    }
+  },
   "publishConfig": {
     "access": "public"
   },
