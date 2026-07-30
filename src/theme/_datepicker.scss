@@ -5,7 +5,7 @@
  * target. Scoped to Cba datepickers via the `datepickerClass="cba-datepicker-popup"`
  * hook set in cba-datepicker.component.html.
  */
-.cba-datepicker-popup .ngb-dp {
+.cba-datepicker-popup {
   background-color: var(--cba-bg-elevated);
   border: 1px solid var(--cba-border-default);
   border-radius: var(--cba-radius-md);
@@ -34,14 +34,16 @@
   box-shadow: var(--cba-focus-ring);
 }
 
-.cba-datepicker-popup .btn-secondary {
+.cba-datepicker-popup .ngb-dp-day .bg-primary {
+  background-color: var(--cba-accent-primary) !important;
+}
+
+.cba-datepicker-popup .ngb-dp-day .text-white {
+  color: var(--cba-text-inverse) !important;
+}
+
+.cba-datepicker-popup ngb-datepicker-navigation-select > .form-select {
   background-color: var(--cba-bg-tertiary);
   border-color: var(--cba-border-subtle);
   color: var(--cba-text-primary);
-}
-
-.cba-datepicker-popup .ngb-dp-day.selected,
-.cba-datepicker-popup .ngb-dp-day.selected:hover {
-  background-color: var(--cba-accent-primary);
-  color: var(--cba-text-inverse);
 }

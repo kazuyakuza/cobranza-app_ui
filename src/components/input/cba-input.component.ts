@@ -1,8 +1,7 @@
-import { ChangeDetectionStrategy, Component, computed, forwardRef, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef, input } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
-import { CbaControlValueAccessor } from '../form-field/cba-control-value-accessor';
+import { CbaFieldControlValueAccessor } from '../form-field/cba-field-control-value-accessor';
 import { CbaFieldComponent } from '../form-field/cba-field.component';
-import { describedByFieldIds } from '../form-field/cba-field-ids';
 
 let cbaInputUid = 0;
 
@@ -42,34 +41,14 @@ export type CbaInputType = 'text' | 'email' | 'password' | 'number' | 'url' | 't
     '[class.cba-input--error]': 'error()',
   },
 })
-export class CbaInputComponent extends CbaControlValueAccessor<string> {
-  /** Visible label rendered above the control. */
-  readonly label = input<string | undefined>(undefined);
-
+export class CbaInputComponent extends CbaFieldControlValueAccessor<string> {
   /** Native input placeholder. */
   readonly placeholder = input<string | undefined>(undefined);
 
   /** Native input type. Defaults to `'text'`. */
   readonly type = input<CbaInputType>('text');
 
-  /** Disabled state, combined with the Angular forms disabled state. */
-  readonly disabled = input<boolean>(false);
-
-  /** Helper text rendered below the control. */
-  readonly hint = input<string | undefined>(undefined);
-
-  /** Visual error message rendered below the control (no validation logic). */
-  readonly error = input<string | undefined>(undefined);
-
-  protected readonly controlId = `cba-input-control-${cbaInputUid++}`;
-  protected readonly isDisabled = computed(() => this.disabled() || this.disabledFromCva());
-  protected readonly describedBy = computed(() =>
-    describedByFieldIds({
-      controlId: this.controlId,
-      hint: this.hint(),
-      error: this.error(),
-    }),
-  );
+  protected override controlId = `cba-input-control-${cbaInputUid++}`;
 
   /** Propagates native input events to the Angular forms layer. */
   protected onInput(event: Event): void {

@@ -31,13 +31,13 @@
   border-color: var(--cba-accent-danger);
 }
 
-.cba-field--disabled .cba-field__control {
-  background-color: var(--cba-bg-tertiary);
-  cursor: not-allowed;
-}
-
 .cba-field--disabled {
   opacity: 0.6;
+
+  .cba-field__control {
+    background-color: var(--cba-bg-tertiary);
+    cursor: not-allowed;
+  }
 }
 
 .cba-field__hint {

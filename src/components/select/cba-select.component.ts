@@ -1,7 +1,6 @@
-import { ChangeDetectionStrategy, Component, computed, forwardRef, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
-import { CbaControlValueAccessor } from '../form-field/cba-control-value-accessor';
-import { describedByFieldIds } from '../form-field/cba-field-ids';
+import { CbaFieldControlValueAccessor } from '../form-field/cba-field-control-value-accessor';
 import { CbaFieldComponent } from '../form-field/cba-field.component';
 
 let cbaSelectUid = 0;
@@ -40,28 +39,8 @@ let cbaSelectUid = 0;
     '[class.cba-select--error]': 'error()',
   },
 })
-export class CbaSelectComponent extends CbaControlValueAccessor<string> {
-  /** Visible label rendered above the control. */
-  readonly label = input<string | undefined>(undefined);
-
-  /** Disabled state, combined with the Angular forms disabled state. */
-  readonly disabled = input<boolean>(false);
-
-  /** Helper text rendered below the control. */
-  readonly hint = input<string | undefined>(undefined);
-
-  /** Visual error message rendered below the control (no validation logic). */
-  readonly error = input<string | undefined>(undefined);
-
-  protected readonly controlId = `cba-select-control-${cbaSelectUid++}`;
-  protected readonly isDisabled = computed(() => this.disabled() || this.disabledFromCva());
-  protected readonly describedBy = computed(() =>
-    describedByFieldIds({
-      controlId: this.controlId,
-      hint: this.hint(),
-      error: this.error(),
-    }),
-  );
+export class CbaSelectComponent extends CbaFieldControlValueAccessor<string> {
+  protected override controlId = `cba-select-control-${cbaSelectUid++}`;
 
   /** Propagates native change events to the Angular forms layer. */
   protected onSelectChange(event: Event): void {

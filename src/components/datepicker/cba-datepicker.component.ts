@@ -1,11 +1,10 @@
-import { ChangeDetectionStrategy, Component, computed, forwardRef, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef, input } from '@angular/core';
 import { FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { faCalendar } from '@fortawesome/free-solid-svg-icons';
 import { NgbInputDatepicker, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
-import { CbaControlValueAccessor } from '../form-field/cba-control-value-accessor';
+import { CbaFieldControlValueAccessor } from '../form-field/cba-field-control-value-accessor';
 import { CbaFieldComponent } from '../form-field/cba-field.component';
-import { describedByFieldIds } from '../form-field/cba-field-ids';
 
 let cbaDatepickerUid = 0;
 
@@ -44,31 +43,11 @@ let cbaDatepickerUid = 0;
     '[class.cba-datepicker--error]': 'error()',
   },
 })
-export class CbaDatepickerComponent extends CbaControlValueAccessor<NgbDateStruct | null> {
-  /** Visible label rendered above the control. */
-  readonly label = input<string | undefined>(undefined);
-
+export class CbaDatepickerComponent extends CbaFieldControlValueAccessor<NgbDateStruct | null> {
   /** Native input placeholder. */
   readonly placeholder = input<string | undefined>(undefined);
 
-  /** Disabled state, combined with the Angular forms disabled state. */
-  readonly disabled = input<boolean>(false);
-
-  /** Helper text rendered below the control. */
-  readonly hint = input<string | undefined>(undefined);
-
-  /** Visual error message rendered below the control (no validation logic). */
-  readonly error = input<string | undefined>(undefined);
-
-  protected readonly controlId = `cba-datepicker-control-${cbaDatepickerUid++}`;
-  protected readonly isDisabled = computed(() => this.disabled() || this.disabledFromCva());
-  protected readonly describedBy = computed(() =>
-    describedByFieldIds({
-      controlId: this.controlId,
-      hint: this.hint(),
-      error: this.error(),
-    }),
-  );
+  protected override controlId = `cba-datepicker-control-${cbaDatepickerUid++}`;
   protected readonly faCalendar = faCalendar;
 
   /** Propagates a date selection from ng-bootstrap to the Angular forms layer. */

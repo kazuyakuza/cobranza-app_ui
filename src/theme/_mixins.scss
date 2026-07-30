@@ -4,6 +4,18 @@
  * Tokens are defined in `_variables.scss`.
  */
 
+/// Placeholder for native form control reset rules shared by input, select, and
+/// datepicker wrappers. Extend via `@extend %cba-native-control`.
+%cba-native-control {
+  width: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: inherit;
+  font: inherit;
+  padding: var(--cba-space-2) var(--cba-space-3);
+}
+
 @mixin cba-focus-ring {
   outline: none;
   box-shadow: var(--cba-focus-ring);
