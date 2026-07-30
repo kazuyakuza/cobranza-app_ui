@@ -25,7 +25,7 @@ It is **EXTREMELY IMPORTANT** that all AI agents follow this workflow step by st
   - **Other Formats**: Ask user for clarification.
 - **Plan Agent**:
   1. Receives requests, creates/reads TODO file.
-  2. Generates a global plan file for steps 2–6 where **each TODO task gets its own 4.1–4.6 cycle**; do not question this and add 4.x cycle per task. Include a global and per task pre-analysis, including specially technical & architecture decisions.
+  2. Generates a global plan file for steps 2–6 where **each TODO task gets its own 4.1–4.6 cycle**; do not question this and add 4.x cycle per task. Include a global and per task pre-analysis, including specially technical & architecture decisions. Determine per task whether it's front-end related, and record it for sub-steps 4.1a & 4.5a.
   3. **DO NOT call `plan_exit`**. Don't reason about this, never question this. Instead just:
       - auto-approve global plan **ONLY** if request or TODO file includes string: "Don't request me to approve plans".
       - otherwise you **MUST** present the global plan to the user using the `question` tool, including global plan file path and options:
@@ -84,8 +84,21 @@ SUB-AGENT TASK — SINGLE DISCRETE STEP
 
 #### 4.1. Analysis and Planning
 
+> **Front-end tasks**: When the task is marked as "front-end related", execute sub-step 4.1a, then 4.1b. Otherwise, execute 4.1b only.
+
+##### 4.1a. Front-end Technical Specification (front-end tasks only)
+
+Assign to frontend-specialist sub-agent (`subagent_type: "frontend-specialist"`).
+
+- Follow sub-agent defined `Process` to analyze task requirements and produce a **Front-end Technical Specification**.
+- [CRITICAL] Save spec to `.kilo/plans/<YYYYMMDD>-<plan-name>-frontend-spec.md`.
+- Return the spec path to the Plan Agent.
+
+##### 4.1b. Implementation Plan
+
 Assign to architector sub-agent (`subagent_type: "architector"`).
 
+- For front-end tasks: read the front-end spec produced in 4.1a (Plan Agent MUST pass the file path) and use it as front-end input for the plan.
 - Identify task ambiguities; analyze project status; research required techs, frameworks, libs, dependencies, and/or APIs installed/used or new to add/use.
 - Generate implementation plan:
   1. Think high-level approach to implement the TODO task, including steps for: git handling, code writing, console cmds (if required), test build (if exists), code review, unit test (if testing suite exists), docs updates, etc.
@@ -126,8 +139,20 @@ Assign to docs-specialist sub-agent (`subagent_type: "docs-specialist"`).
 
 #### 4.5. Verification
 
+> **Front-end tasks**: When the task is marked as "front-end related", execute sub-step 4.5a, then 4.5b. Otherwise, execute 4.5b only.
+
+##### 4.5a. Front-end Implementation Verification (front-end tasks only)
+
+Assign to frontend-specialist sub-agent (`subagent_type: "frontend-specialist"`).
+
+- Follow sub-agent defined `Process` to verify implementation against the specs file from 4.1a.
+- Report diffs between spec and implementation, and front-end quality issues.
+
+##### 4.5b. Overall Plan Adherence
+
 Assign to architector sub-agent (`subagent_type: "architector"`).
 
+- For front-end tasks: incorporate the front-end verification report (Plan Agent MUST pass the report) from 4.5a.
 - Check implementation plan adherence.
 - Report found diffs, if any.
 - Report if deviations from the original plan are acceptable. If not, propose changes in a new TODO file.
@@ -180,14 +205,18 @@ do @.agent/todos/<file-path>
 
 Each entry is a separate `task` tool invocation with the appropriate `subagent_type`:
 
+`(front-end tasks only)`: is included to front-end related tasks; omit for non-front-end tasks.
+
 ```markdown
 - Step 2: Git Feature Branch Setup => implementer
 - Step 3: Version Update => implementer
-- Task 1: 4.1 Analysis & Planning => architector
+- Task 1: 4.1a Front-end Spec (front-end tasks only) => frontend-specialist
+- Task 1: 4.1b Analysis & Planning => architector
 - Task 1: 4.2 Implementation => implementer
 - Task 1: 4.3 Code Review & Simplification => code-reviewer & code-simplifier; 4.3-fix => implementer
 - Task 1: 4.4 Documentation => docs-specialist
-- Task 1: 4.5 Verification => architector
+- Task 1: 4.5a Front-end Verification (front-end tasks only) => frontend-specialist
+- Task 1: 4.5b Overall Plan Adherence => architector
 - Task 1: 4.6 Task Completion => implementer
 - (repeat 4.1–4.6 for each remaining task)
 - Step 5: TODO File Completion => implementer
