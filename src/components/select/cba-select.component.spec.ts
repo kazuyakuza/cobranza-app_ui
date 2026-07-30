@@ -13,6 +13,20 @@ import { CbaSelectComponent } from './cba-select.component';
 })
 class SelectHost {}
 
+@Component({
+  standalone: true,
+  imports: [CbaSelectComponent],
+  template: `<cba-select><option value="active">Active</option></cba-select>`,
+})
+class CvaSelectHost {}
+
+@Component({
+  standalone: true,
+  imports: [CbaSelectComponent],
+  template: `<cba-select label="No error"><option value="">-</option></cba-select>`,
+})
+class SelectNoErrorHost {}
+
 describe('CbaSelectComponent', () => {
   let fixture: ComponentFixture<SelectHost>;
 
@@ -31,6 +45,14 @@ describe('CbaSelectComponent', () => {
     expect(fixture.nativeElement.querySelector('.cba-field__error')?.textContent).toContain('Required');
   });
 
+  it('does not render error when error input is not provided', () => {
+    TestBed.resetTestingModule();
+    TestBed.configureTestingModule({ imports: [SelectNoErrorHost] });
+    const noErrFixture = TestBed.createComponent(SelectNoErrorHost);
+    noErrFixture.detectChanges();
+    expect(noErrFixture.nativeElement.querySelector('.cba-field__error')).toBeNull();
+  });
+
   it('projects native option elements into the select', () => {
     const options = fixture.nativeElement.querySelectorAll('option');
     expect(options.length).toBe(3);
@@ -41,18 +63,24 @@ describe('CbaSelectComponent', () => {
     expect(fixture.nativeElement.querySelector('select').getAttribute('aria-invalid')).toBe('true');
   });
 
+  it('sets aria-describedby ids matching the rendered hint and error elements', () => {
+    const select = fixture.nativeElement.querySelector('select');
+    const describedBy = select.getAttribute('aria-describedby');
+    const hintEl = fixture.nativeElement.querySelector('.cba-field__hint');
+    const errorEl = fixture.nativeElement.querySelector('.cba-field__error');
+    const describedByParts = describedBy!.split(' ');
+    describedByParts.forEach((id: string) => {
+      const el = fixture.nativeElement.querySelector(`#${id}`);
+      expect(el).toBeTruthy();
+    });
+    expect(describedByParts).toContain(hintEl.id);
+    expect(describedByParts).toContain(errorEl.id);
+  });
+
   it('emits the selected value through ControlValueAccessor on change', () => {
     TestBed.resetTestingModule();
-    @Component({
-      standalone: true,
-      imports: [CbaSelectComponent],
-      template: `<cba-select>
-        <option value="active">Active</option>
-      </cba-select>`,
-    })
-    class CvaHost {}
-    TestBed.configureTestingModule({ imports: [CvaHost] });
-    const hostFixture = TestBed.createComponent(CvaHost);
+    TestBed.configureTestingModule({ imports: [CvaSelectHost] });
+    const hostFixture = TestBed.createComponent(CvaSelectHost);
     hostFixture.detectChanges();
     const selectComponent = hostFixture.debugElement.children[0].componentInstance as CbaSelectComponent;
     const onChange = jest.fn();
@@ -61,6 +89,16 @@ describe('CbaSelectComponent', () => {
     selectEl.value = 'active';
     selectEl.dispatchEvent(new Event('change'));
     expect(onChange).toHaveBeenCalledWith('active');
+  });
+
+  it('updates the native select value after writeValue', () => {
+    TestBed.resetTestingModule();
+    TestBed.configureTestingModule({ imports: [CbaSelectComponent] });
+    const f = TestBed.createComponent(CbaSelectComponent);
+    f.detectChanges();
+    f.componentInstance.writeValue('active');
+    f.detectChanges();
+    expect(f.componentInstance['value']()).toBe('active');
   });
 
   it('disables the native select when disabled', () => {

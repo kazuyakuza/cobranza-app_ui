@@ -9,6 +9,7 @@
       [id]="controlId"
       [placeholder]="placeholder() ?? ''"
       [disabled]="isDisabled()"
+      [readOnly]="isDisabled()"
       [ngModel]="value()"
       (ngModelChange)="onDateChange($event)"
       (blur)="onBlur()"
