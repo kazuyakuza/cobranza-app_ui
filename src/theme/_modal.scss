@@ -1,0 +1,22 @@
+/**
+ * Global theming for ng-bootstrap modals driven by @cobranza-apps/ui tokens.
+ *
+ * Reaches elements rendered by ng-bootstrap OUTSIDE any CbaModalComponent host
+ * (`.modal-content`, `.modal-backdrop`), which component-emulated `::ng-deep`
+ * cannot target. Scoped to Cba modals via the default `windowClass`/`backdropClass`
+ * set in CbaModalService so non-Cba ng-bootstrap modals stay on Bootstrap defaults.
+ *
+ * Requires Bootstrap 5 CSS (peer dependency) for `.modal-dialog` sizing classes.
+ */
+.modal-backdrop.cba-modal-backdrop {
+  background-color: var(--cba-bg-overlay);
+  opacity: 1;
+}
+
+.cba-modal-window .modal-content {
+  background-color: var(--cba-bg-elevated);
+  border: 1px solid var(--cba-border-subtle);
+  border-radius: var(--cba-radius-lg);
+  box-shadow: var(--cba-shadow-elevated);
+  color: var(--cba-text-primary);
+}

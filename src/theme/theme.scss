@@ -2,5 +2,6 @@
 // Imports variables, base typography, mixins, and utility classes in the correct order.
 @use 'variables';
 @use 'base';
+@use 'modal';
 @use 'mixins';
 @use 'utilities';
