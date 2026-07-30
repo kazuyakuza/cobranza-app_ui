@@ -77,7 +77,7 @@ Install the major ranges declared in package.json peerDependencies: `@angular/co
 @use '@cobranza-apps/ui/theme';
 ```
 
-> The theme is published as SCSS via the `./theme` package subpath (see `package.json` `exports`). `@use '@cobranza-apps/ui/theme'` is the supported global import; a fallback explicit path `@use '@cobranza-apps/ui/theme/theme'` is also available. Loading the theme emits the `--cba-*` variables on `:root` and the opt-in `.cba-*` utility classes.
+> The theme is published as SCSS via the `./theme` package subpath (see `package.json` `exports`). `@use '@cobranza-apps/ui/theme'` is the supported global import. Loading the theme emits the `--cba-*` variables on `:root` and the opt-in `.cba-*` utility classes.
 
 **2. Import components** in your Angular standalone component or module:
 
