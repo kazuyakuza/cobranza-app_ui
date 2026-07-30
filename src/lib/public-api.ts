@@ -16,3 +16,4 @@
  */
 /** Components. */
 export * from './components/module-header';
+export * from './components/module-container';

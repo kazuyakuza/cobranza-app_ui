@@ -1,0 +1,24 @@
+/**
+ * ModuleContainer component styles.
+ *
+ * Block A scope: only the host layout rule needed for the projected
+ * header + body to render sensibly. All size / chrome / padding / scroll
+ * behaviour is implemented in Block B using the host modifier classes
+ * bound in module-container.component.ts:
+ *
+ *   .cba-module-container--size-50 / --size-100
+ *   .cba-module-container--collapsed
+ *   .cba-module-container--fullscreen
+ *   .cba-module-container--padding-none / --padding-sm / --padding-md
+ */
+:host {
+  display: flex;
+  flex-direction: column;
+}
+
+.cba-module-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  box-sizing: border-box;
+}
