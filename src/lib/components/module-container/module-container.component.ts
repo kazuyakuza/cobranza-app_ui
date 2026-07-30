@@ -64,6 +64,7 @@ import {
   templateUrl: './module-container.component.html',
   styleUrl: './module-container.component.scss',
   host: {
+    'class': 'cba-module-container',
     '[class.cba-module-container--size-50]': "size() === '50%'",
     '[class.cba-module-container--size-100]': "size() === '100%'",
     '[class.cba-module-container--collapsed]': 'isCollapsed()',

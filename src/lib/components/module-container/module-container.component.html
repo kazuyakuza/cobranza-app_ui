@@ -1,11 +1,9 @@
-<section class="cba-module-container">
-  <div class="cba-module-container__header">
-    <ng-content select="[cbaModuleContainerHeader]"></ng-content>
-  </div>
+<div class="cba-module-container__header">
+  <ng-content select="[cbaModuleContainerHeader]"></ng-content>
+</div>
 
-  @if (!isCollapsed()) {
-    <div class="cba-module-container__body">
-      <ng-content></ng-content>
-    </div>
-  }
-</section>
+@if (!isCollapsed()) {
+  <div class="cba-module-container__body">
+    <ng-content></ng-content>
+  </div>
+}
