@@ -1,0 +1,57 @@
+:host {
+  display: block;
+}
+
+.cba-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--cba-space-2);
+}
+
+.cba-field__label {
+  color: var(--cba-text-secondary);
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.cba-field__control {
+  display: block;
+  background-color: var(--cba-bg-secondary);
+  border: 1px solid var(--cba-border-default);
+  border-radius: var(--cba-radius-sm);
+  transition: border-color 120ms ease, box-shadow 120ms ease;
+
+  &:focus-within {
+    border-color: var(--cba-accent-primary);
+    box-shadow: var(--cba-focus-ring);
+  }
+}
+
+.cba-field--error .cba-field__control {
+  border-color: var(--cba-accent-danger);
+}
+
+.cba-field--disabled .cba-field__control {
+  background-color: var(--cba-bg-tertiary);
+  cursor: not-allowed;
+}
+
+.cba-field--disabled {
+  opacity: 0.6;
+}
+
+.cba-field__hint {
+  color: var(--cba-text-muted);
+  font-size: 0.8125rem;
+}
+
+.cba-field__error {
+  color: var(--cba-accent-danger);
+  font-size: 0.8125rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cba-field__control {
+    transition: none;
+  }
+}

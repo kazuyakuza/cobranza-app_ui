@@ -1,0 +1,20 @@
+<div
+  class="cba-field"
+  [class.cba-field--disabled]="disabled()"
+  [class.cba-field--error]="error()">
+  @if (label()) {
+    <label class="cba-field__label" [for]="controlId()">{{ label() }}</label>
+  }
+
+  <div class="cba-field__control">
+    <ng-content></ng-content>
+  </div>
+
+  @if (hint()) {
+    <div class="cba-field__hint" [id]="hintId()">{{ hint() }}</div>
+  }
+
+  @if (error()) {
+    <div class="cba-field__error" [id]="errorId()">{{ error() }}</div>
+  }
+</div>
