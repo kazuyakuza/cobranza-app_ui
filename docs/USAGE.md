@@ -25,6 +25,7 @@ Patterns and examples for consuming the shared Angular component library and des
   - [CbaDropdown](#cbadropdown)
   - [CbaPopover](#cbapopover)
   - [CbaTypeahead](#cbatypeahead)
+  - [CbaAccordion](#cbaaccordion)
   - [CbaModuleFooter](#cbamodulefooter)
 - [Design Tokens Reference](#design-tokens-reference)
 - [AI Agent Guidelines](#ai-agent-guidelines)
@@ -478,6 +479,55 @@ export class StatePickerComponent {
 **Forms:** Control value is the string in the input. Use `itemSelected` to access the selected object.
 
 See [`CBA_TYPEAHEAD.md`](./CBA_TYPEAHEAD.md) for the full API.
+
+### CbaAccordion
+
+Thin wrapper around ng-bootstrap accordion. ng-bootstrap owns expand/collapse, keyboard, focus,
+and `aria-*` wiring; `CbaAccordion` adds a themed surface and thin passthrough inputs/outputs.
+Consumers author the ng-bootstrap item markup directly as projected content.
+
+```html
+<cba-accordion [closeOthers]="true" (shown)="onShown($event)">
+  <div ngbAccordionItem>
+    <div ngbAccordionHeader>
+      <button ngbAccordionButton>Detalles del cliente</button>
+    </div>
+    <div ngbAccordionCollapse>
+      <div ngbAccordionBody>
+        <ng-template><p>Contenido del primer panel.</p></ng-template>
+      </div>
+    </div>
+  </div>
+
+  <div ngbAccordionItem [disabled]="true">
+    <div ngbAccordionHeader>
+      <button ngbAccordionButton>Histórico de pagos</button>
+    </div>
+    <div ngbAccordionCollapse>
+      <div ngbAccordionBody>
+        <ng-template><p>Contenido deshabilitado.</p></ng-template>
+      </div>
+    </div>
+  </div>
+
+  <div ngbAccordionItem>
+    <div ngbAccordionHeader>
+      <button ngbAccordionButton>Documentación</button>
+    </div>
+    <div ngbAccordionCollapse>
+      <div ngbAccordionBody>
+        <ng-template><p>Contenido del tercer panel.</p></ng-template>
+      </div>
+    </div>
+  </div>
+</cba-accordion>
+```
+
+**Inputs:** `closeOthers` (boolean), `destroyOnHide` (boolean), `animation` (boolean)
+**Outputs:** `show`, `shown`, `hide`, `hidden` (all `string` — item id)
+**Projection:** ng-bootstrap item markup directly (`ngbAccordionItem`, `ngbAccordionHeader`, `ngbAccordionButton`, `ngbAccordionCollapse`, `ngbAccordionBody`)
+
+See [`CBA_ACCORDION.md`](./CBA_ACCORDION.md) for the full API.
 
 ### CbaModuleFooter
 

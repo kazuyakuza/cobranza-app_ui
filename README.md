@@ -130,6 +130,7 @@ For usage patterns and examples, see [`/docs/USAGE.md`](/docs/USAGE.md).
 | `CbaDropdown` | Thin wrapper around ng-bootstrap dropdown with themed menu surface. |
 | `CbaPopover` | Thin wrapper around ng-bootstrap popover with themed window surface. |
 | `CbaTypeahead` | Thin wrapper around ng-bootstrap typeahead with themed input and popup surface. |
+| `CbaAccordion` | Thin wrapper around ng-bootstrap accordion with themed surface and passthrough inputs/outputs. |
 | `CbaModuleFooter` | Optional plain footer bar for a module; status text aligned with `ModuleHeaderStatus` plus a default projection slot. |
 | Form controls | Thin wrappers around ng-bootstrap/Bootstrap inputs, selects, datepickers. |
 
@@ -195,6 +196,7 @@ For a quick reference, see [`/docs/THEME.md`](/docs/THEME.md).
 - [`/docs/CBA_DROPDOWN.md`](/docs/CBA_DROPDOWN.md) — `CbaDropdown` selector, API, projection slots, theming, ng-bootstrap behavior notes.
 - [`/docs/CBA_POPOVER.md`](/docs/CBA_POPOVER.md) — `CbaPopover` selector, API, projection slots, theming, ng-bootstrap behavior notes.
 - [`/docs/CBA_TYPEAHEAD.md`](/docs/CBA_TYPEAHEAD.md) — `CbaTypeahead` selector, API, search function, formatters, theming, ng-bootstrap behavior notes.
+- [`/docs/CBA_ACCORDION.md`](/docs/CBA_ACCORDION.md) — `CbaAccordion` selector, API, projection API, theming, ng-bootstrap behavior notes.
 - [`/docs/CBA_MODULE_FOOTER.md`](/docs/CBA_MODULE_FOOTER.md) — `CbaModuleFooter` selector, API, status text mapping, usage examples, theming notes.
 - [Project brief](.agent/project-info/brief.md) — Source of truth for scope, design tokens, and component contracts.
 - [Product info](.agent/project-info/product.md) — Product goals, target consumers, UX focus.
