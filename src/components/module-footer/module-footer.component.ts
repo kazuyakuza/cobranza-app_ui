@@ -14,6 +14,7 @@ import {
   faSpinner,
   faTriangleExclamation,
 } from '@fortawesome/free-solid-svg-icons';
+import { CBA_UI_MESSAGES } from '../../i18n/ui-messages';
 import { ModuleHeaderStatus } from '../module-header/module-header.types';
 
 /** Visual configuration derived from a non-null status value. */
@@ -30,16 +31,6 @@ const STATUS_VISUALS: Readonly<Record<Exclude<ModuleHeaderStatus, null>, StatusV
   warning: { icon: faTriangleExclamation },
   error: { icon: faCircleXmark },
   dirty: { icon: faPen },
-};
-
-/** Default status text used when `statusText` is not provided. `null` renders no text. */
-const STATUS_TEXTS: Readonly<Record<Exclude<ModuleHeaderStatus, null>, string>> = {
-  loading: 'Loading…',
-  loaded: 'Ready',
-  success: 'Saved',
-  warning: 'Attention needed',
-  error: 'Error',
-  dirty: 'Unsaved changes',
 };
 
 /**
@@ -82,8 +73,11 @@ export class ModuleFooterComponent {
   /** Module status aligned with {@link ModuleHeaderStatus}. `null` renders no status region. */
   readonly status = input<ModuleHeaderStatus>(null);
 
-  /** Explicit status text override. When provided, wins over the default `STATUS_TEXTS` mapping. */
+  /** Explicit status text override. When provided, wins over the default `CBA_UI_MESSAGES.moduleFooter.status` mapping. */
   readonly statusText = input<string | undefined>(undefined);
+
+  /** Default status text per `ModuleHeaderStatus`. Sourced from `CBA_UI_MESSAGES`. */
+  protected readonly statusTexts = CBA_UI_MESSAGES.moduleFooter.status;
 
   /** Status visual config or `null` when `status === null` (icon hidden). */
   readonly statusVisual = computed<StatusVisual | null>(() => {
@@ -104,7 +98,7 @@ export class ModuleFooterComponent {
       return explicit;
     }
     const current = this.status();
-    return current === null ? '' : (STATUS_TEXTS[current] ?? '');
+    return current === null ? '' : (this.statusTexts[current] ?? '');
   });
 
   /** Whether the status region (text + icon + live region) should render at all. */

@@ -10,12 +10,12 @@ interface Scenario {
 }
 
 const STATUS_SCENARIOS: Scenario[] = [
-  { status: 'loading', text: 'Loading…', modifier: 'cba-module-footer__status--loading' },
-  { status: 'loaded', text: 'Ready', modifier: 'cba-module-footer__status--loaded' },
-  { status: 'success', text: 'Saved', modifier: 'cba-module-footer__status--success' },
-  { status: 'warning', text: 'Attention needed', modifier: 'cba-module-footer__status--warning' },
+  { status: 'loading', text: 'Cargando…', modifier: 'cba-module-footer__status--loading' },
+  { status: 'loaded', text: 'Listo', modifier: 'cba-module-footer__status--loaded' },
+  { status: 'success', text: 'Guardado', modifier: 'cba-module-footer__status--success' },
+  { status: 'warning', text: 'Requiere atención', modifier: 'cba-module-footer__status--warning' },
   { status: 'error', text: 'Error', modifier: 'cba-module-footer__status--error' },
-  { status: 'dirty', text: 'Unsaved changes', modifier: 'cba-module-footer__status--dirty' },
+  { status: 'dirty', text: 'Cambios sin guardar', modifier: 'cba-module-footer__status--dirty' },
 ];
 
 @Component({
@@ -65,11 +65,11 @@ describe('ModuleFooterComponent', () => {
   it('lets the statusText override win over the default mapping', () => {
     render();
     fixture.componentRef.setInput('status', 'dirty');
-    fixture.componentRef.setInput('statusText', 'Draft mode active');
+    fixture.componentRef.setInput('statusText', 'Borrador activo');
     fixture.detectChanges();
 
-    expect(statusText()).toBe('Draft mode active');
-    expect(statusText()).not.toContain('Unsaved changes');
+    expect(statusText()).toBe('Borrador activo');
+    expect(statusText()).not.toContain('Cambios sin guardar');
   });
 
   it('renders no status region for null status without projection', () => {
@@ -96,7 +96,7 @@ describe('ModuleFooterComponent', () => {
 
     expect(hostFixture.nativeElement.querySelector('.proj')).not.toBeNull();
     expect(hostFixture.nativeElement.querySelector('.cba-module-footer__text')?.textContent).toContain(
-      'Unsaved changes',
+      'Cambios sin guardar',
     );
   });
 
