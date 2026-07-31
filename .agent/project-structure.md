@@ -20,6 +20,7 @@
 - src/components/form-field/ - internal shared CbaFieldComponent + CbaControlValueAccessor base used by input/select/datepicker (not exported publicly)
 - src/components/input/ - CbaInput component: native input wrapper with ControlValueAccessor and shared field layout
 - src/components/select/ - CbaSelect component: native select wrapper with projected options and ControlValueAccessor
+- src/components/typeahead/ - CbaTypeahead component: thin ng-bootstrap NgbTypeahead wrapper reusing shared field layout and ControlValueAccessor
 - src/components/datepicker/ - CbaDatepicker component: thin wrapper around ng-bootstrap NgbInputDatepicker with shared field layout
 - src/components/dropdown/ - CbaDropdown component: thin ng-bootstrap dropdown wrapper with projected toggle and menu items
 - src/components/popover/ - CbaPopover component: thin ng-bootstrap NgbPopover wrapper with projected trigger and string/template body

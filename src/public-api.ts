@@ -28,3 +28,4 @@ export * from './components/module-header';
 export * from './components/popover';
 export * from './components/select';
 export * from './components/skeleton';
+export * from './components/typeahead';
