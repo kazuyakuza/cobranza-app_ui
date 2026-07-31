@@ -22,6 +22,7 @@ Patterns and examples for consuming the shared Angular component library and des
   - [CbaEmptyState](#cbaemptystate)
   - [CbaSkeleton](#cbaskeleton)
   - [CbaModal](#cbamodal)
+  - [CbaDropdown](#cbadropdown)
 - [Design Tokens Reference](#design-tokens-reference)
 - [AI Agent Guidelines](#ai-agent-guidelines)
 
@@ -357,6 +358,29 @@ export class ConfirmModalComponent {
   constructor(public activeModal: NgbActiveModal) {}
 }
 ```
+
+### CbaDropdown
+
+Thin wrapper around ng-bootstrap dropdown. ng-bootstrap owns open/close, keyboard, and positioning; `CbaDropdown` adds themed menu surface and a stable projection API.
+
+```html
+<cba-dropdown [disabled]="isDisabled" (openChange)="onOpen($event)">
+  <cba-button cbaDropdownToggle ngbDropdownToggle variant="secondary"
+              [disabled]="isDisabled">
+    Options
+  </cba-button>
+  <button ngbDropdownItem (click)="onEdit()">Edit</button>
+  <button ngbDropdownItem (click)="onDuplicate()">Duplicate</button>
+  <div class="dropdown-divider"></div>
+  <button ngbDropdownItem [disabled]="true">Delete</button>
+</cba-dropdown>
+```
+
+**Inputs:** `placement` (PlacementArray), `disabled` (boolean)
+**Outputs:** `openChange` (boolean)
+**Projection:** `[cbaDropdownToggle]` for toggle, default slot for menu items (each with `ngbDropdownItem`)
+
+See [`CBA_DROPDOWN.md`](./CBA_DROPDOWN.md) for the full API.
 
 ## Design Tokens Reference
 
