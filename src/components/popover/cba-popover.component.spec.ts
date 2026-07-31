@@ -36,6 +36,16 @@ class TemplateBodyHost {
   @ViewChild('tpl') tpl!: TemplateRef<unknown>;
 }
 
+function getNgbPopover(fixture: ComponentFixture<unknown>): NgbPopover {
+  return fixture.debugElement
+    .query(By.directive(CbaPopoverComponent))
+    .injector.get(NgbPopover);
+}
+
+function getStandaloneNgbPopover(fixture: ComponentFixture<CbaPopoverComponent>): NgbPopover {
+  return fixture.debugElement.injector.get(NgbPopover);
+}
+
 function configureTestBed(): void {
   TestBed.configureTestingModule({
     imports: [CbaPopoverComponent, PopoverHost, TemplateBodyHost],
@@ -58,42 +68,42 @@ describe('CbaPopoverComponent', () => {
   it('forwards body to NgbPopover#ngbPopover', () => {
     const fixture = TestBed.createComponent(PopoverHost);
     fixture.detectChanges();
-    const popover = fixture.debugElement.query(By.directive(CbaPopoverComponent)).injector.get(NgbPopover);
+    const popover = getNgbPopover(fixture);
     expect(popover.ngbPopover).toBe('hint');
   });
 
   it('forwards a TemplateRef body to NgbPopover#ngbPopover', () => {
     const fixture = TestBed.createComponent(TemplateBodyHost);
     fixture.detectChanges();
-    const popover = fixture.debugElement.query(By.directive(CbaPopoverComponent)).injector.get(NgbPopover);
+    const popover = getNgbPopover(fixture);
     expect(popover.ngbPopover instanceof TemplateRef).toBe(true);
   });
 
   it('forwards title to NgbPopover#popoverTitle', () => {
     const fixture = TestBed.createComponent(PopoverHost);
     fixture.detectChanges();
-    const popover = fixture.debugElement.query(By.directive(CbaPopoverComponent)).injector.get(NgbPopover);
+    const popover = getNgbPopover(fixture);
     expect(popover.popoverTitle).toBe('Title');
   });
 
   it('forwards placement to NgbPopover#placement', () => {
     const fixture = TestBed.createComponent(PopoverHost);
     fixture.detectChanges();
-    const popover = fixture.debugElement.query(By.directive(CbaPopoverComponent)).injector.get(NgbPopover);
+    const popover = getNgbPopover(fixture);
     expect(popover.placement).toBe('bottom');
   });
 
   it('forwards triggers to NgbPopover#triggers', () => {
     const fixture = TestBed.createComponent(PopoverHost);
     fixture.detectChanges();
-    const popover = fixture.debugElement.query(By.directive(CbaPopoverComponent)).injector.get(NgbPopover);
+    const popover = getNgbPopover(fixture);
     expect(popover.triggers).toBe('click');
   });
 
   it('defaults triggers to "hover focus"', () => {
     const fixture = TestBed.createComponent(CbaPopoverComponent);
     fixture.detectChanges();
-    const popover = fixture.debugElement.injector.get(NgbPopover);
+    const popover = getStandaloneNgbPopover(fixture);
     expect(popover.triggers).toBe('hover focus');
   });
 
@@ -101,28 +111,28 @@ describe('CbaPopoverComponent', () => {
     const fixture = TestBed.createComponent(PopoverHost);
     fixture.componentInstance.disabled = true;
     fixture.detectChanges();
-    const popover = fixture.debugElement.query(By.directive(CbaPopoverComponent)).injector.get(NgbPopover);
+    const popover = getNgbPopover(fixture);
     expect(popover.disablePopover).toBe(true);
   });
 
   it('sets the default popoverClass window scope on NgbPopover', () => {
     const fixture = TestBed.createComponent(CbaPopoverComponent);
     fixture.detectChanges();
-    const popover = fixture.debugElement.injector.get(NgbPopover);
+    const popover = getStandaloneNgbPopover(fixture);
     expect(popover.popoverClass).toBe('cba-popover-window');
   });
 
   it('appends the popover window to body (container default)', () => {
     const fixture = TestBed.createComponent(CbaPopoverComponent);
     fixture.detectChanges();
-    const popover = fixture.debugElement.injector.get(NgbPopover);
+    const popover = getStandaloneNgbPopover(fixture);
     expect(popover.container).toBe('body');
   });
 
   it('re-emits NgbPopover shown and hidden through the wrapper outputs', () => {
     const fixture = TestBed.createComponent(PopoverHost);
     fixture.detectChanges();
-    const popover = fixture.debugElement.query(By.directive(CbaPopoverComponent)).injector.get(NgbPopover);
+    const popover = getNgbPopover(fixture);
 
     popover.shown.emit();
     expect(fixture.componentInstance.onShown).toHaveBeenCalled();
