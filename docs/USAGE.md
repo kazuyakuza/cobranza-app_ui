@@ -24,6 +24,7 @@ Patterns and examples for consuming the shared Angular component library and des
   - [CbaModal](#cbamodal)
   - [CbaDropdown](#cbadropdown)
   - [CbaPopover](#cbapopover)
+  - [CbaTypeahead](#cbatypeahead)
 - [Design Tokens Reference](#design-tokens-reference)
 - [AI Agent Guidelines](#ai-agent-guidelines)
 
@@ -417,6 +418,65 @@ Thin wrapper around ng-bootstrap popover. ng-bootstrap owns open/close, position
 ```
 
 See [`CBA_POPOVER.md`](./CBA_POPOVER.md) for the full API.
+
+### CbaTypeahead
+
+Thin wrapper around ng-bootstrap typeahead. ng-bootstrap owns the popup list, filtering,
+keyboard navigation, and selection; `CbaTypeahead` adds themed input surface, themed popup,
+and a stable form-field API (label / hint / error).
+
+```html
+<cba-typeahead
+  label="State"
+  placeholder="Start typing a state..."
+  hint="Choose from the list or type freely."
+  [search]="searchStates"
+  [(ngModel)]="selectedState"
+  (itemSelected)="onStateSelected($event)" />
+```
+
+```ts
+import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { Observable, OperatorFunction } from 'rxjs';
+import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
+import { CbaTypeaheadComponent } from '@cobranza-apps/ui';
+import { NgbTypeaheadSelectItemEvent } from '@ng-bootstrap/ng-bootstrap';
+
+const US_STATES = ['Alabama', 'Alaska', 'Arizona', /* ... */];
+
+@Component({
+  standalone: true,
+  imports: [FormsModule, CbaTypeaheadComponent],
+  templateUrl: './state-picker.component.html',
+})
+export class StatePickerComponent {
+  selectedState: string | null = null;
+
+  searchStates: OperatorFunction<string, readonly string[]> = (
+    text$: Observable<string>,
+  ) =>
+    text$.pipe(
+      debounceTime(150),
+      distinctUntilChanged(),
+      map((term) =>
+        term.length < 2
+          ? []
+          : US_STATES.filter((s) => s.toLowerCase().includes(term.toLowerCase())),
+      ),
+    );
+
+  onStateSelected(event: NgbTypeaheadSelectItemEvent): void {
+    console.log('Selected:', event.item);
+  }
+}
+```
+
+**Inputs:** `label` (string), `placeholder` (string), `disabled` (boolean), `hint` (string), `error` (string), `search` (OperatorFunction, **required**), `resultFormatter` (function), `inputFormatter` (function), `editable` (boolean, default `true`), `focusFirst` (boolean, default `true`), `showHint` (boolean), `selectOnExact` (boolean), `placement` (PlacementArray), `popupClass` (string)
+**Outputs:** `itemSelected` (NgbTypeaheadSelectItemEvent)
+**Forms:** Control value is the string in the input. Use `itemSelected` to access the selected object.
+
+See [`CBA_TYPEAHEAD.md`](./CBA_TYPEAHEAD.md) for the full API.
 
 ## Design Tokens Reference
 

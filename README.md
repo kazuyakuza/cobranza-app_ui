@@ -129,6 +129,7 @@ For usage patterns and examples, see [`/docs/USAGE.md`](/docs/USAGE.md).
 | `CbaModal` | Thin wrapper around ng-bootstrap modal. |
 | `CbaDropdown` | Thin wrapper around ng-bootstrap dropdown with themed menu surface. |
 | `CbaPopover` | Thin wrapper around ng-bootstrap popover with themed window surface. |
+| `CbaTypeahead` | Thin wrapper around ng-bootstrap typeahead with themed input and popup surface. |
 | Form controls | Thin wrappers around ng-bootstrap/Bootstrap inputs, selects, datepickers. |
 
 Full Input/Output contracts are in JSDoc and the [project brief](.agent/project-info/brief.md#6-core-components-proposal).
@@ -192,6 +193,7 @@ For a quick reference, see [`/docs/THEME.md`](/docs/THEME.md).
 - [`/docs/CBA_SKELETON.md`](/docs/CBA_SKELETON.md) — `CbaSkeleton` selector, API, variant descriptions, usage examples.
 - [`/docs/CBA_DROPDOWN.md`](/docs/CBA_DROPDOWN.md) — `CbaDropdown` selector, API, projection slots, theming, ng-bootstrap behavior notes.
 - [`/docs/CBA_POPOVER.md`](/docs/CBA_POPOVER.md) — `CbaPopover` selector, API, projection slots, theming, ng-bootstrap behavior notes.
+- [`/docs/CBA_TYPEAHEAD.md`](/docs/CBA_TYPEAHEAD.md) — `CbaTypeahead` selector, API, search function, formatters, theming, ng-bootstrap behavior notes.
 - [Project brief](.agent/project-info/brief.md) — Source of truth for scope, design tokens, and component contracts.
 - [Product info](.agent/project-info/product.md) — Product goals, target consumers, UX focus.
 - [Architecture](.agent/project-info/architecture.md) — Build strategy, folder layout, integration patterns.
