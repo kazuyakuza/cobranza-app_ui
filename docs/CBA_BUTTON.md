@@ -109,6 +109,11 @@ When `loading` is `true`, the icon is replaced by a spinner regardless of `iconP
 - `:focus-visible` uses the `--cba-focus-ring` token.
 - `prefers-reduced-motion: reduce` disables transitions and the spin animation.
 
+## Non-goals
+
+- **No dropdown split** — the button does not render a caret or split menu; use `CbaDropdown` for menus.
+- **No router / link integration** — the button always renders a native `<button>`, never an `<a>`.
+
 ## Related docs
 
 - [README.md](../README.md)

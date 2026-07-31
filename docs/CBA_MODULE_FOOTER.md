@@ -139,6 +139,11 @@ footer acts as a plain bar for projected content only.
   module is fetching data, `dirty` means there are unsaved changes).
 - The footer adds a plain content projection slot that the header does not provide.
 
+## Non-goals
+
+- **Not a toolbar** — the footer is a plain status bar with an optional content slot; it hosts no actions, buttons, or navigation.
+- **v1 is intentionally plain** — background only; no heavy borders, shadows, or toolbar-style layout.
+
 ## Related docs
 
 - [`MODULE_HEADER.md`](./MODULE_HEADER.md) — `ModuleHeader` selector, API, status values.

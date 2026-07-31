@@ -111,6 +111,11 @@ export class CustomerListComponent {
 - Action slot content (e.g. button) retains its own keyboard accessibility.
 - Empty slots (icon, action) are hidden from the DOM when not projected.
 
+## Non-goals
+
+- **No async handling** — the component does not manage loading, error, or retry state; it is purely presentational.
+- **No layout responsibilities** — centering and spacing within a parent layout are owned by the consumer.
+
 ## Related docs
 
 - [README.md](../README.md)

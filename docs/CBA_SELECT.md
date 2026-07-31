@@ -146,6 +146,11 @@ focus ring come from the parent `CbaFieldComponent` wrapper.
 
 Host classes: `cba-select`, `cba-select--disabled`, `cba-select--error`.
 
+## Non-goals
+
+- **No custom dropdown** — the component renders the browser's native `<select>`; there is no search, filtering, or virtual scrolling inside the list.
+- **No validation logic** — `error` is presentational only.
+
 ## Related docs
 
 - [CBA_FORM_FIELD](./CBA_FORM_FIELD.md) — shared label / hint / error conventions.

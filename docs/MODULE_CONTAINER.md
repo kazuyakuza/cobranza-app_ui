@@ -149,6 +149,12 @@ All values come from `--cba-*` spacing tokens (see `src/theme/_variables.scss`).
 - `:focus-visible` indicators (via `--cba-focus-ring`) come from the projected header buttons.
 - `prefers-reduced-motion: reduce` keeps the hover scrollbar at its default (thin) width.
 
+## Non-goals
+
+- **No drag-and-drop** — moving or reordering modules is owned by the Shell and `@cobranza-apps/mfe-events`.
+- **No persistence** — size / collapse / fullscreen / padding state is never stored by the container.
+- **Never mutates state** — the container only reflects its inputs; the Shell owns the source of truth and re-binds state on every change.
+
 ## Related docs
 
 - [README.md](../README.md)

@@ -129,6 +129,11 @@ Override any dimension via the `width` and `height` inputs.
 - The parent container should communicate loading state separately (e.g. `aria-busy="true"` on the content region).
 - The shimmer animation uses `prefers-reduced-motion: reduce` to disable animation for users who prefer reduced motion.
 
+## Non-goals
+
+- **No shimmer configuration** — animation timing, gradient colours, and delay are fixed and not exposed as inputs.
+- **No async integration** — the component does not know when loading ends; the parent controls visibility.
+
 ## Related docs
 
 - [README.md](../README.md)

@@ -121,7 +121,7 @@ export class ConfirmationModalComponent {
 - `role=dialog`, `aria-modal`, focus trap, focus restore come from ng-bootstrap.
 - When `title` is set, `CbaModalComponent` auto-wires `aria-labelledby` to the title element via `NgbActiveModal.update`.
 - When projecting `[cbaModalHeader]`, pass `ariaLabelledBy` via `CbaModalOptions`.
-- Close button uses `aria-label="Close"`.
+- Close button uses `aria-label="Cerrar"` (Spanish-only default, sourced from `CBA_UI_MESSAGES`).
 
 ## Theming notes
 
@@ -129,6 +129,11 @@ export class ConfirmationModalComponent {
 - Backdrop: `--cba-bg-overlay` (global `theme/_modal.scss`).
 - Title: `--cba-text-primary`; body: `--cba-text-secondary`; focus ring: `--cba-focus-ring`.
 - Applies because `CbaModalService` sets `windowClass 'cba-modal-window'` / `backdropClass 'cba-modal-backdrop'`.
+
+## Non-goals
+
+- **No business dialog logic** — confirmation flows, forms, and side effects live in the consumer component.
+- **Open / close / backdrop / focus are owned by ng-bootstrap** — the wrapper only themes the content shell and translates `CbaModalOptions`.
 
 ## Related docs
 

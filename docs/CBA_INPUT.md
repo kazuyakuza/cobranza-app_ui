@@ -147,6 +147,11 @@ focus ring come from the parent `CbaFieldComponent` wrapper.
 
 Host classes: `cba-input`, `cba-input--disabled`, `cba-input--error`.
 
+## Non-goals
+
+- **No validation logic** — `error` is presentational only; validation lives in the consumer's form model.
+- **No masking or formatting** — the component renders a plain native `<input>`.
+
 ## Related docs
 
 - [CBA_FORM_FIELD](./CBA_FORM_FIELD.md) — shared label / hint / error conventions.

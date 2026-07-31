@@ -157,7 +157,7 @@ configuration APIs directly. The current wrapper does not expose these as inputs
   `controlId`.
 - `aria-describedby` lists the hint and/or error element ids when present.
 - `aria-invalid="true"` is set when `error` is truthy.
-- Calendar toggle button has `aria-label="Open date picker"`.
+- Calendar toggle button has `aria-label="Abrir selector de fecha"` (Spanish-only default, sourced from `CBA_UI_MESSAGES`).
 - The calendar icon uses `aria-hidden="true"` (decorative).
 - `:focus-visible` uses the `--cba-focus-ring` token on both the input and the
   toggle button.
@@ -192,6 +192,12 @@ The calendar popup uses the `cba-datepicker-popup` CSS class (set via
 `datepickerClass`) for ng-bootstrap theme integration.
 
 Host classes: `cba-datepicker`, `cba-datepicker--disabled`, `cba-datepicker--error`.
+
+## Non-goals
+
+- **No calendar logic** — popup rendering, keyboard navigation, and date parsing are owned by ng-bootstrap (`NgbInputDatepicker`).
+- **No date-range / min / max inputs** — the wrapper does not expose ng-bootstrap's date configuration; extend the wrapper or use ng-bootstrap APIs directly.
+- **No validation logic** — `error` is presentational only.
 
 ## Related docs
 
