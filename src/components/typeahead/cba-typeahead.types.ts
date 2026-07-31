@@ -23,3 +23,11 @@ export type CbaTypeaheadPlacement = PlacementArray;
  * `NgbTypeaheadSelectItemEvent` from ng-bootstrap.
  */
 export type CbaTypeaheadItemSelectedEvent = NgbTypeaheadSelectItemEvent;
+
+/**
+ * Default formatter used when `inputFormatter` / `resultFormatter` are not
+ * provided. Mirrors ng-bootstrap's fallback: `String(item)` with `''` for
+ * `null` / `undefined`.
+ */
+export const defaultCbaTypeaheadFormatter: CbaTypeaheadFormatter = (item) =>
+  item === undefined || item === null ? '' : `${item}`;

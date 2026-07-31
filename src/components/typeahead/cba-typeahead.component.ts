@@ -1,12 +1,14 @@
 import { ChangeDetectionStrategy, Component, forwardRef, input, output } from '@angular/core';
 import { FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { NgbTypeahead, NgbTypeaheadSelectItemEvent } from '@ng-bootstrap/ng-bootstrap';
+import { NgbTypeahead } from '@ng-bootstrap/ng-bootstrap';
 import { CbaFieldControlValueAccessor } from '../form-field/cba-field-control-value-accessor';
 import { CbaFieldComponent } from '../form-field/cba-field.component';
 import {
   CbaTypeaheadFormatter,
+  CbaTypeaheadItemSelectedEvent,
   CbaTypeaheadPlacement,
   CbaTypeaheadSearchFn,
+  defaultCbaTypeaheadFormatter,
 } from './cba-typeahead.types';
 
 let cbaTypeaheadUid = 0;
@@ -69,39 +71,64 @@ export class CbaTypeaheadComponent extends CbaFieldControlValueAccessor<string> 
   protected override controlId = `cba-typeahead-control-${cbaTypeaheadUid++}`;
 
   /**
-   * Required search function forwarded to `NgbTypeahead`. Owns debounce/filter.
-   * The autocomplete engine is ng-bootstrap; no extra dependency is introduced.
+   * Required search function forwarded to `NgbTypeahead`. Owns debounce and
+   * filtering. Engine is ng-bootstrap; no extra autocomplete dependency.
    */
   readonly search = input.required<CbaTypeaheadSearchFn>();
 
-  /** Native input placeholder. */
+  /**
+   * Placeholder text shown in the native input when it is empty.
+   */
   readonly placeholder = input<string | undefined>(undefined);
 
   /**
-   * Formats each popup result. Mirrors `NgbTypeahead#resultFormatter`.
-   * The engine is ng-bootstrap; no extra dependency is introduced.
+   * Formats each popup result for display. Passthrough to
+   * `NgbTypeahead#resultFormatter`; defaults to `defaultCbaTypeaheadFormatter`
+   * (ng-bootstrap's `toString` fallback) when not provided. Engine is
+   * ng-bootstrap; no extra autocomplete dependency.
    */
-  readonly resultFormatter = input<CbaTypeaheadFormatter | undefined>(undefined);
+  readonly resultFormatter = input<CbaTypeaheadFormatter>(defaultCbaTypeaheadFormatter);
 
   /**
-   * Formats a selected item back into the input. Mirrors `NgbTypeahead#inputFormatter`.
-   * The engine is ng-bootstrap; no extra dependency is introduced.
+   * Formats a selected item back into the input. Passthrough to
+   * `NgbTypeahead#inputFormatter`; defaults to `defaultCbaTypeaheadFormatter`
+   * (ng-bootstrap's `toString` fallback) when not provided. Engine is
+   * ng-bootstrap; no extra autocomplete dependency.
    */
-  readonly inputFormatter = input<CbaTypeaheadFormatter | undefined>(undefined);
+  readonly inputFormatter = input<CbaTypeaheadFormatter>(defaultCbaTypeaheadFormatter);
 
-  /** When `true`, allows free-text values not selected from the popup. */
+  /**
+   * When `true`, allows free-text values not selected from the popup.
+   * Passthrough to `NgbTypeahead#editable`. Engine is ng-bootstrap; no extra
+   * autocomplete dependency.
+   */
   readonly editable = input<boolean>(true);
 
-  /** Auto-focuses the first popup result while typing. */
+  /**
+   * When `true`, keeps the first popup result focused while typing.
+   * Passthrough to `NgbTypeahead#focusFirst`. Engine is ng-bootstrap; no extra
+   * autocomplete dependency.
+   */
   readonly focusFirst = input<boolean>(true);
 
-  /** Shows the matching result as a hint inside the input. */
+  /**
+   * When `true`, shows the matching result as a hint inside the input.
+   * Passthrough to `NgbTypeahead#showHint`. Engine is ng-bootstrap; no extra
+   * autocomplete dependency.
+   */
   readonly showHint = input<boolean>(false);
 
-  /** Auto-selects when only one exact match exists. */
+  /**
+   * When `true`, auto-selects when only one exact match exists.
+   * Passthrough to `NgbTypeahead#selectOnExact`. Engine is ng-bootstrap; no
+   * extra autocomplete dependency.
+   */
   readonly selectOnExact = input<boolean>(false);
 
-  /** Preferred popup placement(s). */
+  /**
+   * Preferred popup placement(s). Passthrough to `NgbTypeahead#placement`.
+   * Engine is ng-bootstrap; no extra autocomplete dependency.
+   */
   readonly placement = input<CbaTypeaheadPlacement>([
     'bottom-start',
     'bottom-end',
@@ -109,11 +136,19 @@ export class CbaTypeaheadComponent extends CbaFieldControlValueAccessor<string> 
     'top-end',
   ]);
 
-  /** CSS class added to the popup window for theming. Defaults to `"cba-typeahead-window"`. */
+  /**
+   * CSS class added to the popup window for theming. Passthrough to
+   * `NgbTypeahead#popupClass`. Defaults to `"cba-typeahead-window"`. Engine is
+   * ng-bootstrap; no extra autocomplete dependency.
+   */
   readonly popupClass = input<string>('cba-typeahead-window');
 
-  /** Emitted when the user selects a popup item. Mirrors `NgbTypeahead#selectItem`. */
-  readonly itemSelected = output<NgbTypeaheadSelectItemEvent>();
+  /**
+   * Emitted when the user selects a popup item. Mirrors
+   * `NgbTypeahead#selectItem`. Engine is ng-bootstrap; no extra autocomplete
+   * dependency.
+   */
+  readonly itemSelected = output<CbaTypeaheadItemSelectedEvent>();
 
   /** Propagates inner input changes to the Angular forms layer. */
   protected onValueChange(value: string | null): void {
@@ -126,7 +161,7 @@ export class CbaTypeaheadComponent extends CbaFieldControlValueAccessor<string> 
   }
 
   /** Re-emits `NgbTypeahead#selectItem` through the wrapper output. */
-  protected onItemSelected(event: NgbTypeaheadSelectItemEvent): void {
+  protected onItemSelected(event: CbaTypeaheadItemSelectedEvent): void {
     this.itemSelected.emit(event);
   }
 }

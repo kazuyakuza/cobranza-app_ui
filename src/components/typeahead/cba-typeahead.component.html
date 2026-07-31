@@ -1,29 +1,3 @@
-<cba-field
-  [label]="label()"
-  [hint]="hint()"
-  [error]="error()"
-  [disabled]="isDisabled()"
-  [controlId]="controlId">
-  <input
-    [id]="controlId"
-    type="text"
-    class="cba-typeahead__control"
-    [placeholder]="placeholder() ?? ''"
-    [disabled]="isDisabled()"
-    [ngbTypeahead]="search()"
-    [inputFormatter]="inputFormatter()!"
-    [resultFormatter]="resultFormatter()!"
-    [editable]="editable()"
-    [focusFirst]="focusFirst()"
-    [showHint]="showHint()"
-    [selectOnExact]="selectOnExact()"
-    [placement]="placement()"
-    [popupClass]="popupClass()"
-    container="body"
-    [ngModel]="value()"
-    (ngModelChange)="onValueChange($event)"
-    (blur)="onBlur()"
-    (selectItem)="onItemSelected($event)"
-    [attr.aria-describedby]="describedBy()"
-    [attr.aria-invalid]="error() ? 'true' : null" />
+<cba-field [label]="label()" [hint]="hint()" [error]="error()" [disabled]="isDisabled()" [controlId]="controlId">
+  <input [id]="controlId" type="text" class="cba-typeahead__control" [placeholder]="placeholder() ?? ''" [disabled]="isDisabled()" [ngbTypeahead]="search()" [inputFormatter]="inputFormatter()" [resultFormatter]="resultFormatter()" [editable]="editable()" [focusFirst]="focusFirst()" [showHint]="showHint()" [selectOnExact]="selectOnExact()" [placement]="placement()" [popupClass]="popupClass()" container="body" [ngModel]="value()" (ngModelChange)="onValueChange($event)" (blur)="onBlur()" (selectItem)="onItemSelected($event)" [attr.aria-describedby]="describedBy()" [attr.aria-invalid]="error() ? 'true' : null" />
 </cba-field>
