@@ -28,6 +28,7 @@
 - src/components/popover/ - CbaPopover component: thin ng-bootstrap NgbPopover wrapper with projected trigger and string/template body
 - src/theme/ - SCSS theme variables, utilities, mixins and entry file
 - src/directives/ - attribute directives created on demand
+- src/i18n/ - Centralized Spanish-only default UI copy constants (CBA_UI_MESSAGES); no i18n framework, single typed consts object
 
 # Other folders
 

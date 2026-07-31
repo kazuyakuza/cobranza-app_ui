@@ -31,3 +31,6 @@ export * from './components/popover';
 export * from './components/select';
 export * from './components/skeleton';
 export * from './components/typeahead';
+
+/** Centralized Spanish-only default UI copy. */
+export * from './i18n/ui-messages';
