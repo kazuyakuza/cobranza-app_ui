@@ -86,6 +86,28 @@ Install the major ranges declared in package.json peerDependencies: `@angular/co
 import { ModuleHeaderComponent, ModuleContainer, CbaButton } from '@cobranza-apps/ui';
 ```
 
+**3. Minimal module template** — compose the workspace chrome around your MFE content:
+
+```html
+<!-- my-module.component.html -->
+<cba-module-container [size]="'50%'">
+  <cba-module-header
+    [title]="'Clientes'"
+    [status]="'loaded'"
+    (collapseToggle)="onCollapse($event)"
+    (sizeToggle)="onSize($event)"
+  />
+  <div class="my-module-body">
+    <!-- MFE / business content here -->
+  </div>
+
+  <!-- optional footer -->
+  <cba-module-footer status="loaded">Listo</cba-module-footer>
+</cba-module-container>
+```
+
+Minimal quick start with `ModuleContainer` + `ModuleHeader` + optional `ModuleFooter`.
+
 For usage patterns and examples, see [`/docs/USAGE.md`](/docs/USAGE.md).
 
 ## Spanish-only UI defaults
@@ -203,11 +225,16 @@ For a quick reference, see [`/docs/THEME.md`](/docs/THEME.md).
 - [`/docs/CBA_BADGE.md`](/docs/CBA_BADGE.md) — `CbaBadge` selector, API, variant colours, solid vs outline.
 - [`/docs/CBA_EMPTY_STATE.md`](/docs/CBA_EMPTY_STATE.md) — `CbaEmptyState` selector, content projection slots, usage example.
 - [`/docs/CBA_SKELETON.md`](/docs/CBA_SKELETON.md) — `CbaSkeleton` selector, API, variant descriptions, usage examples.
+- [`/docs/CBA_MODAL.md`](/docs/CBA_MODAL.md) — `CbaModal` selector, API, `CbaModalService` + options, sizes, dismiss reasons, theming.
+- [`/docs/CBA_INPUT.md`](/docs/CBA_INPUT.md) — `CbaInput` selector, API, control types, ControlValueAccessor, label/hint/error, theming.
+- [`/docs/CBA_SELECT.md`](/docs/CBA_SELECT.md) — `CbaSelect` selector, API, projected options, ControlValueAccessor, theming.
+- [`/docs/CBA_DATEPICKER.md`](/docs/CBA_DATEPICKER.md) — `CbaDatepicker` selector, API, ng-bootstrap NgbInputDateadapter notes, aria toggle label, theming.
 - [`/docs/CBA_DROPDOWN.md`](/docs/CBA_DROPDOWN.md) — `CbaDropdown` selector, API, projection slots, theming, ng-bootstrap behavior notes.
 - [`/docs/CBA_POPOVER.md`](/docs/CBA_POPOVER.md) — `CbaPopover` selector, API, projection slots, theming, ng-bootstrap behavior notes.
 - [`/docs/CBA_TYPEAHEAD.md`](/docs/CBA_TYPEAHEAD.md) — `CbaTypeahead` selector, API, search function, formatters, theming, ng-bootstrap behavior notes.
 - [`/docs/CBA_ACCORDION.md`](/docs/CBA_ACCORDION.md) — `CbaAccordion` selector, API, projection API, theming, ng-bootstrap behavior notes.
 - [`/docs/CBA_MODULE_FOOTER.md`](/docs/CBA_MODULE_FOOTER.md) — `CbaModuleFooter` selector, API, status text mapping, usage examples, theming notes.
+- Internal architecture: [`/docs/CBA_FORM_FIELD.md`](/docs/CBA_FORM_FIELD.md) — shared `CbaField` layout + `CbaControlValueAccessor` used by Input/Select/Datepicker. **Not part of the public API.**
 - [Project brief](.agent/project-info/brief.md) — Source of truth for scope, design tokens, and component contracts.
 - [Product info](.agent/project-info/product.md) — Product goals, target consumers, UX focus.
 - [Architecture](.agent/project-info/architecture.md) — Build strategy, folder layout, integration patterns.
