@@ -48,13 +48,23 @@ type NgbDropdownWithMenu = { _menu?: NgbDropdownMenu };
  * ```
  *
  * @remarks
- * Behavior (open/close, positioning, keyboard) comes from `@ng-bootstrap/ng-bootstrap`.
- * `CbaDropdown` only adds theming and a stable projection API. `NgbDropdown` is
- * instantiated on the host element via `hostDirectives` so projected content
- * (toggle and menu items) can inject it and wire keyboard/click handling. Because
- * `NgbDropdown` resolves its menu through a content query on its own host element,
- * and the themed menu surface lives in this component's view, the menu directive
- * is linked to the `NgbDropdown` instance after view init.
+ * Behavior (open/close, positioning, keyboard) comes from `@ng-bootstrap/ng-bootstrap`;
+ * `CbaDropdown` only adds theming and a stable projection API.
+ *
+ * **Why `hostDirectives: [NgbDropdown]` is required:** the projected toggle and menu
+ * items must inject `NgbDropdown` so ng-bootstrap can wire click/keyboard handling.
+ * Directives on projected content resolve through the injector chain of the element they
+ * are projected into, which is this component's host element. An inner `<div ngbDropdown>`
+ * was empirically rejected: Angular DI does not cross component view boundaries, so
+ * `ngbDropdownToggle`/`ngbDropdownMenu` could not inject `NgbDropdown` from a child
+ * component's template.
+ *
+ * **Why the `_menu` linking is required:** ng-bootstrap v21 resolves its menu through a
+ * `ContentChild(NgbDropdownMenu)` query on the element hosting `NgbDropdown` (this host
+ * element). Content queries never cross component view boundaries, so the themed menu
+ * surface living in this component's view is never discovered by that query.
+ * `linkMenuToDropdown()` assigns the view-child menu to the `NgbDropdown` instance's
+ * private `_menu` reference after view init so positioning and toggle wiring still work.
  *
  * @see [CBA_DROPDOWN.md](/docs/CBA_DROPDOWN.md)
  */

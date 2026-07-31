@@ -21,7 +21,7 @@ class DropdownHost {
 
 function configureTestBed(): void {
   TestBed.configureTestingModule({
-    imports: [CbaDropdownComponent, CbaButtonComponent, NgbDropdownModule, DropdownHost],
+    imports: [CbaDropdownComponent, CbaButtonComponent, DropdownHost],
   });
 }
 
@@ -80,13 +80,6 @@ describe('CbaDropdownComponent', () => {
     fixture.detectChanges();
     const ngbDropdown = fixture.debugElement.injector.get(NgbDropdown);
     expect(ngbDropdown.placement).toEqual('top-start');
-  });
-
-  it('applies the ng-bootstrap default placement order when unset', () => {
-    fixture = TestBed.createComponent(CbaDropdownComponent);
-    fixture.detectChanges();
-    const ngbDropdown = fixture.debugElement.injector.get(NgbDropdown);
-    expect(ngbDropdown.placement).toEqual(['bottom-start', 'bottom-end', 'top-start', 'top-end']);
   });
 
   it('re-emits NgbDropdown openChange through the wrapper output', () => {

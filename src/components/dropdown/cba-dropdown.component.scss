@@ -14,47 +14,47 @@
   box-shadow: var(--cba-shadow-elevated);
   padding: var(--cba-space-1) 0;
   min-width: 12rem;
+}
 
-  [ngbDropdownItem] {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    padding: var(--cba-space-2) var(--cba-space-4);
-    border: none;
-    background: transparent;
-    color: var(--cba-text-primary);
-    font-size: 0.875rem;
-    line-height: 1.5;
-    text-align: left;
-    cursor: pointer;
-    transition: background-color 120ms ease, color 120ms ease;
+.cba-dropdown__menu [ngbDropdownItem] {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: var(--cba-space-2) var(--cba-space-4);
+  border: none;
+  background: transparent;
+  color: var(--cba-text-primary);
+  font-size: 0.875rem;
+  line-height: 1.5;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 120ms ease, color 120ms ease;
+}
 
-    &:hover {
-      background-color: var(--cba-hover);
-    }
+.cba-dropdown__menu [ngbDropdownItem]:hover {
+  background-color: var(--cba-hover);
+}
 
-    &:active,
-    &.active {
-      background-color: var(--cba-active);
-    }
+.cba-dropdown__menu [ngbDropdownItem]:active,
+.cba-dropdown__menu [ngbDropdownItem].active {
+  background-color: var(--cba-active);
+}
 
-    &:focus-visible {
-      outline: none;
-      box-shadow: inset var(--cba-focus-ring);
-    }
+.cba-dropdown__menu [ngbDropdownItem]:focus-visible {
+  outline: none;
+  box-shadow: inset var(--cba-focus-ring);
+}
 
-    &[disabled] {
-      color: var(--cba-text-muted);
-      cursor: not-allowed;
-      opacity: 0.65;
-    }
-  }
+.cba-dropdown__menu [ngbDropdownItem][disabled] {
+  color: var(--cba-text-muted);
+  cursor: not-allowed;
+  opacity: 0.65;
+}
 
-  .dropdown-divider {
-    height: 0;
-    margin: var(--cba-space-1) 0;
-    border-top: 1px solid var(--cba-border-subtle);
-  }
+.cba-dropdown__menu .dropdown-divider {
+  height: 0;
+  margin: var(--cba-space-1) 0;
+  border-top: 1px solid var(--cba-border-subtle);
 }
 
 @media (prefers-reduced-motion: reduce) {
