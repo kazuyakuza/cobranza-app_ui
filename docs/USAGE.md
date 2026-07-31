@@ -23,6 +23,7 @@ Patterns and examples for consuming the shared Angular component library and des
   - [CbaSkeleton](#cbaskeleton)
   - [CbaModal](#cbamodal)
   - [CbaDropdown](#cbadropdown)
+  - [CbaPopover](#cbapopover)
 - [Design Tokens Reference](#design-tokens-reference)
 - [AI Agent Guidelines](#ai-agent-guidelines)
 
@@ -381,6 +382,41 @@ Thin wrapper around ng-bootstrap dropdown. ng-bootstrap owns open/close, keyboar
 **Projection:** `[cbaDropdownToggle]` for toggle, default slot for menu items (each with `ngbDropdownItem`)
 
 See [`CBA_DROPDOWN.md`](./CBA_DROPDOWN.md) for the full API.
+
+### CbaPopover
+
+Thin wrapper around ng-bootstrap popover. ng-bootstrap owns open/close, positioning, and animation; `CbaPopover` adds a themed popover window surface and a stable API.
+
+```html
+<cba-popover body="This action opens the selected module." title="Hint">
+  <cba-button variant="ghost" size="sm">?</cba-button>
+</cba-popover>
+```
+
+**Inputs:** `body` (string | TemplateRef), `title` (string | TemplateRef), `placement` (PlacementArray, default `'auto'`), `triggers` (string, default `'hover focus'`), `disabled` (boolean)
+**Outputs:** `shown` (void), `hidden` (void)
+**Projection:** default slot for the trigger element (must be focusable)
+
+**Hover trigger (Shell-footer pattern):**
+
+```html
+<cba-popover
+  title="Module sections"
+  placement="top"
+  triggers="mouseenter:mouseleave focus:blur"
+  [body]="footerSectionsTemplate">
+  <button class="shell-footer__item">Modules</button>
+</cba-popover>
+
+<ng-template #footerSectionsTemplate>
+  <ul class="shell-footer__popover-list">
+    <li><a href="/modules/a">Section A</a></li>
+    <li><a href="/modules/b">Section B</a></li>
+  </ul>
+</ng-template>
+```
+
+See [`CBA_POPOVER.md`](./CBA_POPOVER.md) for the full API.
 
 ## Design Tokens Reference
 
