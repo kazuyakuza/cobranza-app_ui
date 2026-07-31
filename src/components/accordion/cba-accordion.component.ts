@@ -79,6 +79,7 @@ import { NgbAccordionDirective } from '@ng-bootstrap/ng-bootstrap';
 @Component({
   selector: 'cba-accordion',
   standalone: true,
+  imports: [],
   changeDetection: ChangeDetectionStrategy.OnPush,
   hostDirectives: [NgbAccordionDirective],
   templateUrl: './cba-accordion.component.html',

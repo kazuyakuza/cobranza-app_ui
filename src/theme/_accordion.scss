@@ -19,71 +19,69 @@
   border: 1px solid var(--cba-border-subtle);
   border-radius: var(--cba-radius-md);
   overflow: hidden;
-}
 
-.cba-accordion .accordion-item {
-  background-color: var(--cba-bg-secondary);
-  color: var(--cba-text-primary);
-  border-bottom: 1px solid var(--cba-border-subtle);
-}
+  .accordion-item {
+    background-color: var(--cba-bg-secondary);
+    color: var(--cba-text-primary);
+    border-bottom: 1px solid var(--cba-border-subtle);
 
-.cba-accordion .accordion-item:last-child {
-  border-bottom: none;
-}
-
-.cba-accordion .accordion-header {
-  margin: 0;
-}
-
-.cba-accordion .accordion-button {
-  padding: var(--cba-space-3) var(--cba-space-4);
-  background-color: var(--cba-bg-tertiary);
-  color: var(--cba-text-primary);
-  font-size: 0.875rem;
-  font-weight: 500;
-  border: none;
-  box-shadow: none;
-  transition: background-color 120ms ease, color 120ms ease;
-}
-
-.cba-accordion .accordion-button:hover {
-  background-color: var(--cba-hover);
-}
-
-.cba-accordion .accordion-button:not(.collapsed) {
-  background-color: var(--cba-active);
-  color: var(--cba-text-primary);
-}
-
-.cba-accordion .accordion-button:focus-visible {
-  outline: none;
-  box-shadow: inset var(--cba-focus-ring);
-}
-
-.cba-accordion .accordion-button[disabled] {
-  color: var(--cba-text-muted);
-  cursor: not-allowed;
-  opacity: 0.65;
-  background-color: var(--cba-bg-tertiary);
-}
-
-.cba-accordion .accordion-collapse {
-  border: none;
-}
-
-.cba-accordion .accordion-body {
-  padding: var(--cba-space-4);
-  background-color: var(--cba-bg-secondary);
-  color: var(--cba-text-primary);
-  font-size: 0.875rem;
-  line-height: 1.5;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .cba-accordion .accordion-button {
-    transition: none;
+    &:last-child {
+      border-bottom: none;
+    }
   }
-  .cba-accordion .accordion-collapse {
-    transition: none;
+
+  .accordion-header {
+    margin: 0;
+  }
+
+  .accordion-button {
+    padding: var(--cba-space-3) var(--cba-space-4);
+    background-color: var(--cba-bg-tertiary);
+    color: var(--cba-text-primary);
+    font-size: 0.875rem;
+    font-weight: 500;
+    border: none;
+    box-shadow: none;
+    transition: background-color 120ms ease, color 120ms ease;
+
+    &:hover {
+      background-color: var(--cba-hover);
+    }
+
+    &:not(.collapsed) {
+      background-color: var(--cba-active);
+      color: var(--cba-text-primary);
+    }
+
+    &:focus-visible {
+      outline: none;
+      box-shadow: inset var(--cba-focus-ring);
+    }
+
+    &[disabled] {
+      color: var(--cba-text-muted);
+      cursor: not-allowed;
+      opacity: 0.65;
+      background-color: var(--cba-bg-tertiary);
+    }
+  }
+
+  .accordion-collapse {
+    border: none;
+  }
+
+  .accordion-body {
+    padding: var(--cba-space-4);
+    background-color: var(--cba-bg-secondary);
+    color: var(--cba-text-primary);
+    font-size: 0.875rem;
+    line-height: 1.5;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .accordion-button,
+    .accordion-collapse {
+      transition: none;
+    }
   }
 }

@@ -57,7 +57,13 @@ class AccordionHost {
   onHidden = jest.fn();
 }
 
-function getNgbAccordion(fixture: ComponentFixture<unknown>): NgbAccordionDirective {
+function createAccordionHostFixture(): ComponentFixture<AccordionHost> {
+  const fixture = TestBed.createComponent(AccordionHost);
+  fixture.detectChanges();
+  return fixture;
+}
+
+function getNgbAccordion(fixture: ComponentFixture<AccordionHost>): NgbAccordionDirective {
   return fixture.debugElement
     .query(By.directive(CbaAccordionComponent))
     .injector.get(NgbAccordionDirective);
@@ -66,6 +72,20 @@ function getNgbAccordion(fixture: ComponentFixture<unknown>): NgbAccordionDirect
 function configureTestBed(): void {
   TestBed.configureTestingModule({ imports: [CbaAccordionComponent, AccordionHost] });
 }
+
+type AccordionInputKey = 'closeOthers' | 'destroyOnHide' | 'animation';
+
+interface InputForwardingCase {
+  property: AccordionInputKey;
+  initial: boolean;
+  updated: boolean;
+}
+
+const inputForwardingCases: InputForwardingCase[] = [
+  { property: 'closeOthers', initial: false, updated: true },
+  { property: 'destroyOnHide', initial: true, updated: false },
+  { property: 'animation', initial: true, updated: false },
+];
 
 describe('CbaAccordionComponent', () => {
   beforeEach(async () => {
@@ -81,58 +101,31 @@ describe('CbaAccordionComponent', () => {
   });
 
   it('projects the ng-bootstrap item markup inside the host', () => {
-    const fixture = TestBed.createComponent(AccordionHost);
-    fixture.detectChanges();
+    const fixture = createAccordionHostFixture();
     expect(fixture.nativeElement.querySelectorAll('.item').length).toBe(3);
     expect(fixture.nativeElement.querySelector('.btn')).not.toBeNull();
   });
 
   it('reflects the item disabled state on the accordion button', () => {
-    const fixture = TestBed.createComponent(AccordionHost);
-    fixture.detectChanges();
+    const fixture = createAccordionHostFixture();
     expect(fixture.nativeElement.querySelector('.btn-disabled').hasAttribute('disabled')).toBe(true);
   });
 
-  it('forwards closeOthers to NgbAccordionDirective and re-forwards later changes', () => {
-    const fixture = TestBed.createComponent(AccordionHost);
-    fixture.detectChanges();
-    const accordion = getNgbAccordion(fixture);
-    expect(accordion.closeOthers).toBe(false);
+  it.each(inputForwardingCases)(
+    'forwards $property to NgbAccordionDirective and re-forwards later changes',
+    ({ property, initial, updated }) => {
+      const fixture = createAccordionHostFixture();
+      const accordion = getNgbAccordion(fixture);
+      expect(accordion[property]).toBe(initial);
 
-    fixture.componentInstance.closeOthers.set(true);
-    fixture.detectChanges();
-    expect(accordion.closeOthers).toBe(true);
-
-    fixture.componentInstance.closeOthers.set(false);
-    fixture.detectChanges();
-    expect(accordion.closeOthers).toBe(false);
-  });
-
-  it('forwards destroyOnHide to NgbAccordionDirective', () => {
-    const fixture = TestBed.createComponent(AccordionHost);
-    fixture.detectChanges();
-    const accordion = getNgbAccordion(fixture);
-    expect(accordion.destroyOnHide).toBe(true);
-
-    fixture.componentInstance.destroyOnHide.set(false);
-    fixture.detectChanges();
-    expect(accordion.destroyOnHide).toBe(false);
-  });
-
-  it('forwards animation to NgbAccordionDirective', () => {
-    const fixture = TestBed.createComponent(AccordionHost);
-    fixture.detectChanges();
-    const accordion = getNgbAccordion(fixture);
-    expect(accordion.animation).toBe(true);
-
-    fixture.componentInstance.animation.set(false);
-    fixture.detectChanges();
-    expect(accordion.animation).toBe(false);
-  });
+      fixture.componentInstance[property].set(updated);
+      fixture.detectChanges();
+      expect(accordion[property]).toBe(updated);
+    },
+  );
 
   it('re-emits the NgbAccordionDirective item events through the wrapper outputs', () => {
-    const fixture = TestBed.createComponent(AccordionHost);
-    fixture.detectChanges();
+    const fixture = createAccordionHostFixture();
     const accordion = getNgbAccordion(fixture);
 
     accordion.show.emit('demo-1');
@@ -147,7 +140,7 @@ describe('CbaAccordionComponent', () => {
   });
 
   it('collapses the previously expanded item when closeOthers is enabled', () => {
-    const fixture = TestBed.createComponent(AccordionHost);
+    const fixture = createAccordionHostFixture();
     fixture.componentInstance.closeOthers.set(true);
     fixture.detectChanges();
     const accordion = getNgbAccordion(fixture);
