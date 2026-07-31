@@ -27,6 +27,9 @@ let cbaModalTitleUid = 0;
  * </cba-modal>
  * ```
  *
+ * The close-button aria-label is Spanish by default ("Cerrar", sourced from
+ * `CBA_UI_MESSAGES`). There is no i18n framework; the platform is Spanish-only.
+ *
  * @see [CBA_MODAL.md](/docs/CBA_MODAL.md)
  */
 @Component({
@@ -61,7 +64,7 @@ export class CbaModalComponent implements OnInit {
   /** Stable id for the default title element, used as `aria-labelledby`. */
   protected readonly titleId = `cba-modal-title-${cbaModalTitleUid++}`;
 
-  /** Aria-label for the close button. Sourced from `CBA_UI_MESSAGES`. */
+  /** Aria-label for the close button. Spanish-only ("Cerrar"), sourced from `CBA_UI_MESSAGES`. */
   protected readonly closeAriaLabel = CBA_UI_MESSAGES.modal.aria.close;
 
   /** Wires `aria-labelledby` for the default-title case (spec §8). */

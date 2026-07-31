@@ -67,6 +67,10 @@ const STATUS_VISUALS: Readonly<Record<Exclude<ModuleHeaderStatus, null>, StatusV
  * </cba-module-header>
  * ```
  *
+ * Aria-labels and tooltips for action buttons are Spanish by default (sourced
+ * from `CBA_UI_MESSAGES`). There is no i18n framework; the platform is
+ * Spanish-only.
+ *
  * @see {@link ModuleHeaderSize}
  * @see {@link ModuleHeaderStatus}
  * @see [MODULE_HEADER.md](/docs/MODULE_HEADER.md) — full API, status values, fullscreen & drag notes.
@@ -135,7 +139,7 @@ export class ModuleHeaderComponent {
   /** Icon for the remove button (`fa-xmark`). Template-referenced. */
   protected readonly faXmark = faXmark;
 
-  /** Aria/title defaults for header action buttons. Sourced from `CBA_UI_MESSAGES`. */
+  /** Aria/title defaults for header action buttons. Spanish-only, sourced from `CBA_UI_MESSAGES`. */
   protected readonly aria = CBA_UI_MESSAGES.moduleHeader.aria;
 
   /** Label/tooltip for the collapse button, derived from `isCollapsed`. */

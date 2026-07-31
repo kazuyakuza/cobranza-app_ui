@@ -27,6 +27,10 @@ let cbaDatepickerUid = 0;
  * <cba-datepicker label="Due date" hint="YYYY-MM-DD" [(ngModel)]="due" />
  * ```
  *
+ * The toggle-button aria-label is Spanish by default ("Abrir selector de fecha",
+ * sourced from `CBA_UI_MESSAGES`). There is no i18n framework; the platform is
+ * Spanish-only.
+ *
  * @see [CBA_DATEPICKER.md](/docs/CBA_DATEPICKER.md)
  */
 @Component({
@@ -56,7 +60,7 @@ export class CbaDatepickerComponent extends CbaFieldControlValueAccessor<NgbDate
   protected override controlId = `cba-datepicker-control-${cbaDatepickerUid++}`;
   protected readonly faCalendar = faCalendar;
 
-  /** Aria-label for the datepicker toggle button. Sourced from `CBA_UI_MESSAGES`. */
+  /** Aria-label for the datepicker toggle button. Spanish-only, sourced from `CBA_UI_MESSAGES`. */
   protected readonly toggleAriaLabel = CBA_UI_MESSAGES.datepicker.aria.open;
 
   /** Propagates a date selection from ng-bootstrap to the Angular forms layer. */

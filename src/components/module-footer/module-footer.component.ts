@@ -53,10 +53,11 @@ const STATUS_VISUALS: Readonly<Record<Exclude<ModuleHeaderStatus, null>, StatusV
  * ```
  *
  * @remarks
- * Status values and their default text match {@link ModuleHeaderStatus}. When
- * `statusText` is provided it always overrides the default mapping. The status
- * region uses `role="status"` / `aria-live="polite"` so screen readers announce
- * status changes; the icon is decorative (`aria-hidden="true"`).
+ * Status values and their default text match {@link ModuleHeaderStatus}. Default
+ * status text is Spanish (sourced from `CBA_UI_MESSAGES`); override via the
+ * `statusText` input. The status region uses `role="status"` /
+ * `aria-live="polite"` so screen readers announce status changes; the icon is
+ * decorative (`aria-hidden="true"`).
  *
  * @see {@link ModuleHeaderStatus}
  * @see {@link ModuleHeaderComponent}
@@ -76,7 +77,7 @@ export class ModuleFooterComponent {
   /** Explicit status text override. When provided, wins over the default `CBA_UI_MESSAGES.moduleFooter.status` mapping. */
   readonly statusText = input<string | undefined>(undefined);
 
-  /** Default status text per `ModuleHeaderStatus`. Sourced from `CBA_UI_MESSAGES`. */
+  /** Default status text per `ModuleHeaderStatus`. Spanish-only, sourced from `CBA_UI_MESSAGES`. */
   private readonly statusTexts = CBA_UI_MESSAGES.moduleFooter.status;
 
   /** Status visual config or `null` when `status === null` (icon hidden). */
