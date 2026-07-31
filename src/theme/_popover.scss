@@ -1,0 +1,73 @@
+/**
+ * Global theming for ng-bootstrap popovers driven by @cobranza-apps/ui tokens.
+ *
+ * Reaches the `.popover` window rendered by ng-bootstrap OUTSIDE any
+ * CbaPopoverComponent host (it is appended to <body> and uses
+ * ViewEncapsulation.None), which component-emulated SCSS cannot target.
+ * Scoped to Cba popovers via the default `popoverClass` "cba-popover-window"
+ * set in CbaPopoverComponent's constructor; non-Cba ng-bootstrap popovers keep
+ * Bootstrap defaults.
+ *
+ * Requires Bootstrap 5 CSS (peer dependency) for `.popover` / `.popover-arrow`
+ * base structure and placement classes (`.bs-popover-top`, etc.).
+ */
+
+.cba-popover-window {
+  background-color: var(--cba-bg-elevated);
+  border: 1px solid var(--cba-border-subtle);
+  border-radius: var(--cba-radius-md);
+  box-shadow: var(--cba-shadow-elevated);
+  color: var(--cba-text-secondary);
+}
+
+.cba-popover-window .popover-header {
+  padding: var(--cba-space-3) var(--cba-space-4);
+  background-color: transparent;
+  border-bottom: 1px solid var(--cba-border-subtle);
+  border-top-left-radius: var(--cba-radius-md);
+  border-top-right-radius: var(--cba-radius-md);
+  color: var(--cba-text-primary);
+  font-weight: 600;
+}
+
+.cba-popover-window .popover-body {
+  padding: var(--cba-space-4);
+  color: var(--cba-text-secondary);
+}
+
+/* Arrow border matches window border; arrow fill matches window background. */
+.cba-popover-window .popover-arrow::before {
+  border-color: var(--cba-border-subtle);
+}
+
+.cba-popover-window .popover-arrow::after {
+  border-color: var(--cba-bg-elevated);
+}
+
+/* Per-placement arrow refinement (Bootstrap adds bs-popover-* classes). */
+.cba-popover-window.bs-popover-top .popover-arrow::after,
+.cba-popover-window.bs-popover-bottom .popover-arrow::before {
+  border-top-color: var(--cba-bg-elevated);
+}
+.cba-popover-window.bs-popover-bottom .popover-arrow::after,
+.cba-popover-window.bs-popover-top .popover-arrow::before {
+  border-bottom-color: var(--cba-bg-elevated);
+}
+.cba-popover-window.bs-popover-start .popover-arrow::after,
+.cba-popover-window.bs-popover-end .popover-arrow::before {
+  border-left-color: var(--cba-bg-elevated);
+}
+.cba-popover-window.bs-popover-end .popover-arrow::after,
+.cba-popover-window.bs-popover-start .popover-arrow::before {
+  border-right-color: var(--cba-bg-elevated);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cba-popover-window {
+    transition: none;
+  }
+  .cba-popover-window.fade {
+    transition: none;
+    opacity: 1;
+  }
+}
