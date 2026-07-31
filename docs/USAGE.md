@@ -22,6 +22,9 @@ Patterns and examples for consuming the shared Angular component library and des
   - [CbaEmptyState](#cbaemptystate)
   - [CbaSkeleton](#cbaskeleton)
   - [CbaModal](#cbamodal)
+  - [CbaInput](#cbainput)
+  - [CbaSelect](#cbaselect)
+  - [CbaDatepicker](#cbadatepicker)
   - [CbaDropdown](#cbadropdown)
   - [CbaPopover](#cbapopover)
   - [CbaTypeahead](#cbatypeahead)
@@ -368,6 +371,92 @@ export class ConfirmModalComponent {
   constructor(public activeModal: NgbActiveModal) {}
 }
 ```
+
+### CbaInput
+
+Thin wrapper around a native `<input>` rendered inside the shared field layout (label / hint / error).
+
+Selector: `cba-input`
+
+```ts
+import { CbaInputComponent } from '@cobranza-apps/ui';
+```
+
+```html
+<cba-input
+  label="Email"
+  type="email"
+  hint="We never share your email."
+  [error]="emailInvalid ? 'Email is required' : undefined"
+  [(ngModel)]="email" />
+```
+
+Supports the `CbaInputType` control types (`text | email | password | number | url | tel`) and
+`ControlValueAccessor` integration (`ngModel` / `formControlName`).
+
+Full API: [`CBA_INPUT.md`](./CBA_INPUT.md).
+
+The `label` / `hint` / `error` / `disabled` contract is shared with `CbaSelect` and
+`CbaDatepicker` via [`CBA_FORM_FIELD.md`](./CBA_FORM_FIELD.md).
+
+### CbaSelect
+
+Thin wrapper around the native `<select>` using the shared field layout; options are content-projected.
+
+Selector: `cba-select`
+
+```ts
+import { CbaSelectComponent } from '@cobranza-apps/ui';
+```
+
+```html
+<cba-select
+  label="Country"
+  hint="Choose the billing country."
+  [error]="countryInvalid ? 'Country is required' : undefined"
+  [(ngModel)]="country">
+  <option value="">Choose...</option>
+  <option value="ar">Argentina</option>
+  <option value="br">Brazil</option>
+</cba-select>
+```
+
+The browser's native `<select>` handles the dropdown, keyboard navigation, and option rendering;
+the component adds the shared field layout and `ControlValueAccessor` integration.
+
+Full API: [`CBA_SELECT.md`](./CBA_SELECT.md).
+
+The `label` / `hint` / `error` / `disabled` contract is shared with `CbaInput` and
+`CbaDatepicker` via [`CBA_FORM_FIELD.md`](./CBA_FORM_FIELD.md).
+
+### CbaDatepicker
+
+Thin themed wrapper around ng-bootstrap's `NgbInputDatepicker` with the shared field layout
+and a calendar toggle button.
+
+Selector: `cba-datepicker`
+
+```ts
+import { CbaDatepickerComponent } from '@cobranza-apps/ui';
+import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+```
+
+```html
+<cba-datepicker
+  label="Due date"
+  hint="YYYY-MM-DD"
+  [error]="dueDateInvalid ? 'Due date is required' : undefined"
+  [(ngModel)]="dueDate" />
+```
+
+Calendar popup, keyboard navigation, and date parsing come from ng-bootstrap
+(`NgbInputDatepicker`); the control value type is `NgbDateStruct | null` and the toggle button
+aria-label defaults to Spanish ("Abrir selector de fecha").
+
+Full API: [`CBA_DATEPICKER.md`](./CBA_DATEPICKER.md).
+
+The `label` / `hint` / `error` / `disabled` contract is shared with `CbaInput` and
+`CbaSelect` via [`CBA_FORM_FIELD.md`](./CBA_FORM_FIELD.md).
 
 ### CbaDropdown
 
