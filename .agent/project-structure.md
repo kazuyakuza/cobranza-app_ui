@@ -21,6 +21,7 @@
 - src/components/input/ - CbaInput component: native input wrapper with ControlValueAccessor and shared field layout
 - src/components/select/ - CbaSelect component: native select wrapper with projected options and ControlValueAccessor
 - src/components/datepicker/ - CbaDatepicker component: thin wrapper around ng-bootstrap NgbInputDatepicker with shared field layout
+- src/components/dropdown/ - CbaDropdown component: thin ng-bootstrap dropdown wrapper with projected toggle and menu items
 - src/theme/ - SCSS theme variables, utilities, mixins and entry file
 - src/directives/ - attribute directives created on demand
 
