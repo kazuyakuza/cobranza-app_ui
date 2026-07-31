@@ -7,7 +7,7 @@
     <button
       type="button"
       class="cba-modal__close"
-      aria-label="Close"
+      [attr.aria-label]="closeAriaLabel"
       (click)="onClose()">
       <span aria-hidden="true">&times;</span>
     </button>

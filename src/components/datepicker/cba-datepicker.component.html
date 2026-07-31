@@ -23,7 +23,7 @@
     <button
       type="button"
       class="cba-datepicker__toggle"
-      aria-label="Open date picker"
+      [attr.aria-label]="toggleAriaLabel"
       [disabled]="isDisabled()"
       (click)="dp.toggle()">
       <fa-icon [icon]="faCalendar" aria-hidden="true" />

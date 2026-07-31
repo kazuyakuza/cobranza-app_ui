@@ -45,7 +45,7 @@ describe('CbaDatepickerComponent', () => {
     fixture = TestBed.createComponent(CbaDatepickerComponent);
     fixture.detectChanges();
     const toggle = fixture.nativeElement.querySelector('.cba-datepicker__toggle');
-    expect(toggle.getAttribute('aria-label')).toBe('Open date picker');
+    expect(toggle.getAttribute('aria-label')).toBe('Abrir selector de fecha');
   });
 
   it('sets aria-invalid when error is present', () => {

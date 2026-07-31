@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject, input, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { CBA_UI_MESSAGES } from '../../i18n/ui-messages';
 import { CbaModalSize } from './cba-modal.types';
 
 let cbaModalTitleUid = 0;
@@ -59,6 +60,9 @@ export class CbaModalComponent implements OnInit {
 
   /** Stable id for the default title element, used as `aria-labelledby`. */
   protected readonly titleId = `cba-modal-title-${cbaModalTitleUid++}`;
+
+  /** Aria-label for the close button. Sourced from `CBA_UI_MESSAGES`. */
+  protected readonly closeAriaLabel = CBA_UI_MESSAGES.modal.aria.close;
 
   /** Wires `aria-labelledby` for the default-title case (spec §8). */
   ngOnInit(): void {

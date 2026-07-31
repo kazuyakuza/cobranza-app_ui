@@ -28,7 +28,7 @@ describe('ModuleHeaderComponent', () => {
     let emitted = 0;
     component.collapseToggle.subscribe(() => (emitted += 1));
 
-    queryButton('Collapse module').click();
+    queryButton('Colapsar módulo').click();
 
     expect(emitted).toBe(1);
   });
@@ -38,10 +38,10 @@ describe('ModuleHeaderComponent', () => {
     const sizes: string[] = [];
     component.sizeToggle.subscribe((size) => sizes.push(size));
 
-    queryButton('Shrink module to 50%').click();
+    queryButton('Reducir módulo a 50%').click();
     fixture.componentRef.setInput('size', '50%');
     fixture.detectChanges();
-    queryButton('Expand module to 100%').click();
+    queryButton('Expandir módulo a 100%').click();
 
     expect(sizes).toEqual(['50%', '100%']);
   });
@@ -78,7 +78,7 @@ describe('ModuleHeaderComponent', () => {
     let emitted = 0;
     component.remove.subscribe(() => (emitted += 1));
 
-    queryButton('Remove module').click();
+    queryButton('Quitar módulo').click();
 
     expect(emitted).toBe(1);
   });
@@ -88,7 +88,7 @@ describe('ModuleHeaderComponent', () => {
     let emitted = 0;
     component.fullscreenToggle.subscribe(() => (emitted += 1));
 
-    queryButton('Enter fullscreen').click();
+    queryButton('Pantalla completa').click();
 
     expect(emitted).toBe(1);
   });

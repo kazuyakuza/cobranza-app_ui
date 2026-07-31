@@ -20,6 +20,7 @@ import {
   faTriangleExclamation,
   faXmark,
 } from '@fortawesome/free-solid-svg-icons';
+import { CBA_UI_MESSAGES } from '../../i18n/ui-messages';
 import {
   ModuleHeaderSize,
   ModuleHeaderStatus,
@@ -136,4 +137,7 @@ export class ModuleHeaderComponent {
 
   /** Icon for the fullscreen button (`fa-expand`). Template-referenced. */
   protected readonly faFullscreenIcon = faExpand;
+
+  /** Aria/title defaults for header action buttons. Sourced from `CBA_UI_MESSAGES`. */
+  protected readonly aria = CBA_UI_MESSAGES.moduleHeader.aria;
 }

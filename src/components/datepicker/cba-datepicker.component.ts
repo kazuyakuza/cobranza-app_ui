@@ -3,6 +3,7 @@ import { FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { faCalendar } from '@fortawesome/free-solid-svg-icons';
 import { NgbInputDatepicker, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+import { CBA_UI_MESSAGES } from '../../i18n/ui-messages';
 import { CbaFieldControlValueAccessor } from '../form-field/cba-field-control-value-accessor';
 import { CbaFieldComponent } from '../form-field/cba-field.component';
 
@@ -54,6 +55,9 @@ export class CbaDatepickerComponent extends CbaFieldControlValueAccessor<NgbDate
 
   protected override controlId = `cba-datepicker-control-${cbaDatepickerUid++}`;
   protected readonly faCalendar = faCalendar;
+
+  /** Aria-label for the datepicker toggle button. Sourced from `CBA_UI_MESSAGES`. */
+  protected readonly toggleAriaLabel = CBA_UI_MESSAGES.datepicker.aria.open;
 
   /** Propagates a date selection from ng-bootstrap to the Angular forms layer. */
   protected onDateChange(value: NgbDateStruct | null): void {

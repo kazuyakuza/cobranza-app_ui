@@ -115,7 +115,7 @@ describe('CbaModalComponent', () => {
       fixture.detectChanges();
       const closeBtn: HTMLElement = fixture.nativeElement.querySelector('.cba-modal__close');
       expect(closeBtn).not.toBeNull();
-      expect(closeBtn.getAttribute('aria-label')).toBe('Close');
+      expect(closeBtn.getAttribute('aria-label')).toBe('Cerrar');
       closeBtn.click();
       expect(activeModal.dismiss).toHaveBeenCalledWith('close');
     });
