@@ -95,7 +95,7 @@ aria-labels/tooltips, modal close label, datepicker toggle label — are **Spani
 centralized in `CBA_UI_MESSAGES` (exported from `@cobranza-apps/ui`). The platform is
 not multi-language: there is no i18n framework and no locale switching. Override defaults
 via component inputs (e.g., `statusText`) or content projection, never via a locale
-switcher. See [`docs/USAGE.md#spanish-only-defaults`](/docs/USAGE.md#spanish-only-defaults).
+switcher.
 
 <!-- AI Agent Note: Component contracts (Inputs/Outputs) are defined in brief.md §6.
      When adding new components, update both the table below and brief.md §6. -->

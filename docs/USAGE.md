@@ -230,11 +230,9 @@ export class DashboardComponent {
 
 ### Spanish-only defaults
 
-Library-owned default chrome strings (module footer status text, header
-action aria-labels/tooltips, modal close label, datepicker toggle label)
-are Spanish. The platform is not multi-language; there is no i18n
-framework. Override defaults via component inputs (`statusText`) or content
-projection — never via a locale switcher.
+Library-owned default chrome strings are Spanish by default. See the
+[Spanish-only UI defaults](../README.md#spanish-only-ui-defaults) section in
+[README.md](../README.md) for the canonical policy.
 
 ## Component Usage Patterns
 
@@ -359,10 +357,10 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
   template: `
     <cba-modal title="Confirm Action">
       <p>Are you sure?</p>
-      <div footer>
+      <ng-container cbaModalFooter>
         <cba-button variant="secondary" (cbaClick)="activeModal.dismiss()">Cancel</cba-button>
         <cba-button variant="primary" (cbaClick)="activeModal.close('confirmed')">Confirm</cba-button>
-      </div>
+      </ng-container>
     </cba-modal>
   `
 })
