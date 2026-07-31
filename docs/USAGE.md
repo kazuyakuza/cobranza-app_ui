@@ -25,6 +25,7 @@ Patterns and examples for consuming the shared Angular component library and des
   - [CbaDropdown](#cbadropdown)
   - [CbaPopover](#cbapopover)
   - [CbaTypeahead](#cbatypeahead)
+  - [CbaModuleFooter](#cbamodulefooter)
 - [Design Tokens Reference](#design-tokens-reference)
 - [AI Agent Guidelines](#ai-agent-guidelines)
 
@@ -477,6 +478,28 @@ export class StatePickerComponent {
 **Forms:** Control value is the string in the input. Use `itemSelected` to access the selected object.
 
 See [`CBA_TYPEAHEAD.md`](./CBA_TYPEAHEAD.md) for the full API.
+
+### CbaModuleFooter
+
+Optional plain footer bar for a module. Status text aligned with `ModuleHeaderStatus` plus a
+default projection slot for auxiliary content.
+
+```html
+<cba-module-container [size]="'100%'" [isCollapsed]="false">
+  <cba-module-header title="Invoice Editor" [status]="headerStatus"></cba-module-header>
+  <div class="module-body"><!-- MFE content --></div>
+  <cba-module-footer [status]="'dirty'"></cba-module-footer>
+</cba-module-container>
+```
+
+**Inputs:** `status` (`ModuleHeaderStatus`, default `null`), `statusText` (`string | undefined`, default `undefined`)
+
+**Content projection:** default slot for auxiliary content after the status region.
+
+**Status text mapping:** `loading` → "Loading…", `loaded` → "Ready", `success` → "Saved",
+`warning` → "Attention needed", `error` → "Error", `dirty` → "Unsaved changes", `null` → no status region.
+
+See [`CBA_MODULE_FOOTER.md`](./CBA_MODULE_FOOTER.md) for the full API and examples.
 
 ## Design Tokens Reference
 
