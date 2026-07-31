@@ -228,6 +228,14 @@ export class DashboardComponent {
 }
 ```
 
+### Spanish-only defaults
+
+Library-owned default chrome strings (module footer status text, header
+action aria-labels/tooltips, modal close label, datepicker toggle label)
+are Spanish. The platform is not multi-language; there is no i18n
+framework. Override defaults via component inputs (`statusText`) or content
+projection — never via a locale switcher.
+
 ## Component Usage Patterns
 
 ### ModuleHeader
@@ -546,8 +554,8 @@ default projection slot for auxiliary content.
 
 **Content projection:** default slot for auxiliary content after the status region.
 
-**Status text mapping:** `loading` → "Loading…", `loaded` → "Ready", `success` → "Saved",
-`warning` → "Attention needed", `error` → "Error", `dirty` → "Unsaved changes", `null` → no status region.
+**Status text mapping:** `loading` → "Cargando…", `loaded` → "Listo", `success` → "Guardado",
+`warning` → "Requiere atención", `error` → "Error", `dirty` → "Cambios sin guardar", `null` → no status region.
 
 See [`CBA_MODULE_FOOTER.md`](./CBA_MODULE_FOOTER.md) for the full API and examples.
 

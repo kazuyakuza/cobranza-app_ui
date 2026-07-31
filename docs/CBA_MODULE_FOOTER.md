@@ -39,7 +39,7 @@ import { ModuleFooterComponent } from '@cobranza-apps/ui';
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
 | `status` | `ModuleHeaderStatus` | `null` | Module status aligned with `ModuleHeaderStatus`. `null` renders no status region. |
-| `statusText` | `string \| undefined` | `undefined` | Explicit status text override. When provided, wins over the default `STATUS_TEXTS` mapping. |
+| `statusText` | `string \| undefined` | `undefined` | Explicit status text override. When provided, wins over the default `CBA_UI_MESSAGES.moduleFooter.status` mapping. |
 
 ## Content projection
 
@@ -57,13 +57,15 @@ When `statusText` is not provided, the component uses the following default text
 
 | Status | Default text | Icon | Color token |
 | --- | --- | --- | --- |
-| `loading` | `Loading…` | `faSpinner` (spin) | `--cba-accent-info` |
-| `loaded` | `Ready` | `faCheck` | `--cba-accent-success` |
-| `success` | `Saved` | `faCircleCheck` | `--cba-accent-success` |
-| `warning` | `Attention needed` | `faTriangleExclamation` | `--cba-accent-warning` |
+| `loading` | `Cargando…` | `faSpinner` (spin) | `--cba-accent-info` |
+| `loaded` | `Listo` | `faCheck` | `--cba-accent-success` |
+| `success` | `Guardado` | `faCircleCheck` | `--cba-accent-success` |
+| `warning` | `Requiere atención` | `faTriangleExclamation` | `--cba-accent-warning` |
 | `error` | `Error` | `faCircleXmark` | `--cba-accent-danger` |
-| `dirty` | `Unsaved changes` | `faPen` | `--cba-text-secondary` |
+| `dirty` | `Cambios sin guardar` | `faPen` | `--cba-text-secondary` |
 | `null` | _(no status region)_ | _(none)_ | _(none)_ |
+
+Defaults are Spanish-only and centralized in `CBA_UI_MESSAGES` (`src/i18n/ui-messages.ts`). There is no i18n framework or locale switcher; override via the `statusText` input.
 
 ## Usage examples
 
@@ -77,7 +79,7 @@ When `statusText` is not provided, the component uses the following default text
 </cba-module-container>
 ```
 
-Renders the footer bar with the `faPen` icon and the text "Unsaved changes".
+Renders the footer bar with the `faPen` icon and the text "Cambios sin guardar".
 
 ### Footer with statusText override
 

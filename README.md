@@ -33,6 +33,7 @@ Shared Angular component library & intermediate-gray design system for the Cobra
 - **Basic components** — `CbaButton`, `CbaCard`, `CbaBadge`, `CbaEmptyState`, `CbaSkeleton`, `CbaModal`.
 - **Form controls** — Thin wrappers around Bootstrap / ng-bootstrap inputs, selects, and datepickers.
 - **Icons** — Font Awesome Free (solid + regular) via `@fortawesome/angular-fontawesome`.
+- **Spanish-only defaults** — Library-owned UI copy (status text, aria-labels) is Spanish by default; no i18n framework. Override via inputs/projection.
 - **Directives** — Lightweight helpers (e.g., autofocus, click-outside) when needed.
 
 **What this library is NOT:**
@@ -86,6 +87,15 @@ import { ModuleHeaderComponent, ModuleContainer, CbaButton } from '@cobranza-app
 ```
 
 For usage patterns and examples, see [`/docs/USAGE.md`](/docs/USAGE.md).
+
+## Spanish-only UI defaults
+
+Library-owned default on-screen strings — module footer status text, header action
+aria-labels/tooltips, modal close label, datepicker toggle label — are **Spanish** and
+centralized in `CBA_UI_MESSAGES` (exported from `@cobranza-apps/ui`). The platform is
+not multi-language: there is no i18n framework and no locale switching. Override defaults
+via component inputs (e.g., `statusText`) or content projection, never via a locale
+switcher. See [`docs/USAGE.md#spanish-only-defaults`](/docs/USAGE.md#spanish-only-defaults).
 
 <!-- AI Agent Note: Component contracts (Inputs/Outputs) are defined in brief.md §6.
      When adding new components, update both the table below and brief.md §6. -->
