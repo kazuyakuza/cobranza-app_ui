@@ -24,6 +24,7 @@ export * from './components/empty-state';
 export * from './components/input';
 export * from './components/modal';
 export * from './components/module-container';
+export * from './components/module-footer';
 export * from './components/module-header';
 export * from './components/popover';
 export * from './components/select';

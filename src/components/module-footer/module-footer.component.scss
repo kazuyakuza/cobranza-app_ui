@@ -1,0 +1,55 @@
+:host {
+  display: block;
+}
+
+.cba-module-footer {
+  display: flex;
+  align-items: center;
+  height: var(--cba-module-footer-height, 40px);
+  padding: 0 var(--cba-space-4);
+  gap: var(--cba-space-2);
+  background-color: var(--cba-bg-secondary);
+  border-top: none;
+  box-shadow: none;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.cba-module-footer__status {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--cba-space-2);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.cba-module-footer__status fa-icon {
+  font-size: 0.875em;
+}
+
+.cba-module-footer__status--loading {
+  color: var(--cba-accent-info);
+}
+
+.cba-module-footer__status--loaded,
+.cba-module-footer__status--success {
+  color: var(--cba-accent-success);
+}
+
+.cba-module-footer__status--warning {
+  color: var(--cba-accent-warning);
+}
+
+.cba-module-footer__status--error {
+  color: var(--cba-accent-danger);
+}
+
+.cba-module-footer__status--dirty {
+  color: var(--cba-text-secondary);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :host ::ng-deep .fa-spin {
+    animation: none;
+  }
+}

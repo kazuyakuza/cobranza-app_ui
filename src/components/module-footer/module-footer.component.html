@@ -1,0 +1,19 @@
+<footer class="cba-module-footer">
+  @if (hasStatusRegion()) {
+    <div
+      class="cba-module-footer__status"
+      [class]="statusClass() ?? ''"
+      role="status"
+      aria-live="polite"
+      aria-atomic="true">
+      @if (statusVisual(); as visual) {
+        <fa-icon [icon]="visual.icon" [animation]="visual.animation" aria-hidden="true" />
+      }
+      @if (displayText()) {
+        <span class="cba-module-footer__text">{{ displayText() }}</span>
+      }
+    </div>
+  }
+
+  <ng-content></ng-content>
+</footer>

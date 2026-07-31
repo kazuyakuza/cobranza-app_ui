@@ -11,6 +11,7 @@
 - src/components/ - reusable standalone Angular UI components consumed by Shell and MFEs
 - src/components/module-header/ - ModuleHeader component: title, size/collapse/fullscreen actions and status indicator
 - src/components/module-container/ - ModuleContainer component: wraps header + MFE content with size, collapse, fullscreen and scroll
+- src/components/module-footer/ - CbaModuleFooter component: optional plain module footer bar with status text/icons aligned to ModuleHeaderStatus
 - src/components/button/ - CbaButton component: variants primary/secondary/ghost/danger/success, sizes sm/md, loading state, icon support
 - src/components/card/ - CbaCard component: optional and configurable header & footer
 - src/components/badge/ - CbaBadge component: semantic colours with solid or outline styles
