@@ -154,9 +154,9 @@ export class ExampleComponent {
 
 ## Related docs
 
-- [README](/README.md)
-- [USAGE](/docs/USAGE.md)
-- [THEME](/docs/THEME.md)
-- [CBA_DROPDOWN](/docs/CBA_DROPDOWN.md)
-- [CBA_MODAL](/docs/CBA_MODAL.md)
+- [README](../README.md)
+- [USAGE](./USAGE.md)
+- [THEME](./THEME.md)
+- [CBA_DROPDOWN](./CBA_DROPDOWN.md)
+- [CBA_MODAL](./CBA_MODAL.md)
 - [ng-bootstrap accordion docs](https://ng-bootstrap.github.io/#/components/accordion)

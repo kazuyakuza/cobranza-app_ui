@@ -150,6 +150,7 @@ Set `[disabled]="true"` to prevent the popover from opening:
 ```
 
 When disabled:
+
 - `NgbPopover#disablePopover` is set to `true`.
 - The popover does not open regardless of trigger events.
 
@@ -191,9 +192,9 @@ When disabled:
 
 ## Related docs
 
-- [README](/README.md)
-- [USAGE](/docs/USAGE.md)
-- [THEME](/docs/THEME.md)
-- [CBA_BUTTON](/docs/CBA_BUTTON.md)
-- [CBA_DROPDOWN](/docs/CBA_DROPDOWN.md)
+- [README](../README.md)
+- [USAGE](./USAGE.md)
+- [THEME](./THEME.md)
+- [CBA_BUTTON](./CBA_BUTTON.md)
+- [CBA_DROPDOWN](./CBA_DROPDOWN.md)
 - [ng-bootstrap popover docs](https://ng-bootstrap.github.io/#/components/popover)

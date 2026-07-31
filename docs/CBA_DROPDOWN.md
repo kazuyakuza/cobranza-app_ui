@@ -117,6 +117,7 @@ button is fully disabled.
 ```
 
 When disabled:
+
 - Host receives `cba-dropdown--disabled` class (pointer-events: none, opacity: 0.6).
 - Host receives `aria-disabled="true"`.
 - ng-bootstrap will not open the menu (toggle click is blocked by pointer-events).
@@ -137,6 +138,7 @@ Follows ng-bootstrap `PlacementArray` semantics.
 ```
 
 Placement accepts:
+
 - A single string: `'top'`, `'bottom'`, `'start'`, `'end'`, `'top-start'`, etc.
 - An array of fallbacks: `['bottom-start', 'top-start']` (ng-bootstrap tries each in order).
 
@@ -174,8 +176,8 @@ Placement accepts:
 
 ## Related docs
 
-- [README](/README.md)
-- [USAGE](/docs/USAGE.md)
-- [THEME](/docs/THEME.md)
-- [CBA_BUTTON](/docs/CBA_BUTTON.md)
+- [README](../README.md)
+- [USAGE](./USAGE.md)
+- [THEME](./THEME.md)
+- [CBA_BUTTON](./CBA_BUTTON.md)
 - [ng-bootstrap dropdown docs](https://ng-bootstrap.github.io/#/components/dropdown)

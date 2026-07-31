@@ -152,7 +152,7 @@ switcher.
 | Component | Description |
 | --- | --- |
 | `ModuleHeaderComponent` | Shell-injected header above each MFE module (title, size, collapse, fullscreen, status). |
-| `ModuleContainer` | Wraps `ModuleHeader` + MFE content; handles size, collapse, padding, scroll. |
+| `ModuleContainerComponent` | Wraps `ModuleHeader` + MFE content; handles size, collapse, padding, scroll. |
 | `CbaButton` | Variants: primary, secondary, ghost, danger, success; sizes sm/md; loading; icon support. |
 | `CbaCard` | Optional header & footer; no forced hover elevation. |
 | `CbaBadge` | Semantic colours; solid/outline styles. |
@@ -163,7 +163,7 @@ switcher.
 | `CbaPopover` | Thin wrapper around ng-bootstrap popover with themed window surface. |
 | `CbaTypeahead` | Thin wrapper around ng-bootstrap typeahead with themed input and popup surface. |
 | `CbaAccordion` | Thin wrapper around ng-bootstrap accordion with themed surface and passthrough inputs/outputs. |
-| `CbaModuleFooter` | Optional plain footer bar for a module; status text aligned with `ModuleHeaderStatus` plus a default projection slot. |
+| `ModuleFooterComponent` | Optional plain footer bar for a module; status text aligned with `ModuleHeaderStatus` plus a default projection slot. |
 | Form controls | Thin wrappers around ng-bootstrap/Bootstrap inputs, selects, datepickers. |
 
 Full Input/Output contracts are in JSDoc and the [project brief](.agent/project-info/brief.md#6-core-components-proposal).

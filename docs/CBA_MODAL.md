@@ -137,8 +137,8 @@ export class ConfirmationModalComponent {
 
 ## Related docs
 
-- [README](/README.md)
-- [USAGE](/docs/USAGE.md)
-- [THEME](/docs/THEME.md)
-- [CBA_BUTTON](/docs/CBA_BUTTON.md)
+- [README](../README.md)
+- [USAGE](./USAGE.md)
+- [THEME](./THEME.md)
+- [CBA_BUTTON](./CBA_BUTTON.md)
 - [ng-bootstrap modal docs](https://ng-bootstrap.github.io/#/components/modal)

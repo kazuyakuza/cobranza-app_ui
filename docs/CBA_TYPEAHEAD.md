@@ -247,9 +247,9 @@ onStateSelected(event: NgbTypeaheadSelectItemEvent): void {
 
 ## Related docs
 
-- [README](/README.md)
-- [USAGE](/docs/USAGE.md)
-- [THEME](/docs/THEME.md)
-- [CBA_DROPDOWN](/docs/CBA_DROPDOWN.md)
-- [CBA_POPOVER](/docs/CBA_POPOVER.md)
+- [README](../README.md)
+- [USAGE](./USAGE.md)
+- [THEME](./THEME.md)
+- [CBA_DROPDOWN](./CBA_DROPDOWN.md)
+- [CBA_POPOVER](./CBA_POPOVER.md)
 - [ng-bootstrap typeahead docs](https://ng-bootstrap.github.io/#/components/typeahead)
