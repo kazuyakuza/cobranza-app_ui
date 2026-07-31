@@ -216,6 +216,7 @@ For a quick reference, see [`/docs/THEME.md`](/docs/THEME.md).
 
 ## Documentation
 
+- [`/docs/INDEX.md`](/docs/INDEX.md) — Index of all library documentation pages.
 - [`/docs/USAGE.md`](/docs/USAGE.md) — Patterns and examples for consuming the library.
 - [`/docs/THEME.md`](/docs/THEME.md) — Theme import, tokens, and utility classes.
 - [`/docs/MODULE_HEADER.md`](/docs/MODULE_HEADER.md) — `ModuleHeader` selector, API, status values, fullscreen & drag notes.

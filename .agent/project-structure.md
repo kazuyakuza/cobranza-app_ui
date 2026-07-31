@@ -33,5 +33,6 @@
 # Other folders
 
 - .agent/ - AI-agent context: project-info, todos, project-structure, workflows
+- .agent/docs/ - AI-agent workflow how-to documentation
 - .kilo/ - Kilo agent configuration: rules, commands, modes, plans
-- docs/ - developer documentation files
+- docs/ - consumer-facing library documentation (component contracts, theme, usage)
