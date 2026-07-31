@@ -133,11 +133,42 @@ export class ModuleHeaderComponent {
   protected readonly faExpand = faExpand;
 
   /** Icon for the remove button (`fa-xmark`). Template-referenced. */
-  protected readonly faRemoveIcon = faXmark;
-
-  /** Icon for the fullscreen button (`fa-expand`). Template-referenced. */
-  protected readonly faFullscreenIcon = faExpand;
+  protected readonly faXmark = faXmark;
 
   /** Aria/title defaults for header action buttons. Sourced from `CBA_UI_MESSAGES`. */
   protected readonly aria = CBA_UI_MESSAGES.moduleHeader.aria;
+
+  /** Label/tooltip for the collapse button, derived from `isCollapsed`. */
+  protected readonly collapseLabel = computed<string>(() =>
+    this.isCollapsed()
+      ? CBA_UI_MESSAGES.moduleHeader.aria.collapse.expand
+      : CBA_UI_MESSAGES.moduleHeader.aria.collapse.collapse,
+  );
+
+  /** Icon for the collapse button, derived from `isCollapsed`. */
+  protected readonly collapseIcon = computed<IconDefinition>(() =>
+    this.isCollapsed() ? faChevronDown : faChevronUp,
+  );
+
+  /** Label/tooltip for the size-toggle button, derived from the current size. */
+  protected readonly sizeToggleLabel = computed<string>(() =>
+    this.isFullSize()
+      ? CBA_UI_MESSAGES.moduleHeader.aria.size.shrink
+      : CBA_UI_MESSAGES.moduleHeader.aria.size.expand,
+  );
+
+  /** Icon for the size-toggle button, derived from the current size. */
+  protected readonly sizeToggleIcon = computed<IconDefinition>(() =>
+    this.isFullSize() ? faCompress : faExpand,
+  );
+
+  /** Target size emitted when the size-toggle button is clicked (the opposite of the current size). */
+  protected readonly sizeToggleTarget = computed<ModuleHeaderSize>(() =>
+    this.isFullSize() ? '50%' : '100%',
+  );
+
+  /** Whether the module is currently at full width (`100%`). */
+  private isFullSize(): boolean {
+    return this.size() === '100%';
+  }
 }

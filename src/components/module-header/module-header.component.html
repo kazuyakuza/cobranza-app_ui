@@ -1,17 +1,17 @@
 <header class="cba-module-header" [class.cba-module-header--fullscreen]="isFullscreen()"> @if (isFullscreen()) { <div class="cba-module-header__section cba-module-header__section--title"> {{ title() }} </div> } @else { <div class="cba-module-header__section cba-module-header__section--status" [class]="statusClass() ?? ''"> @if (statusVisual(); as visual) { <fa-icon [icon]="visual.icon" [animation]="visual.animation" aria-hidden="true" /> } </div>
   <div class="cba-module-header__section cba-module-header__section--title"> {{ title() }} </div>
   <nav class="cba-module-header__section cba-module-header__section--actions">
-    <button type="button" class="cba-module-header__action" [attr.aria-label]="isCollapsed() ? aria.collapse.expand : aria.collapse.collapse" [title]="isCollapsed() ? aria.collapse.expand : aria.collapse.collapse" (click)="collapseToggle.emit()">
-      <fa-icon [icon]="isCollapsed() ? faChevronDown : faChevronUp" aria-hidden="true" />
+    <button type="button" class="cba-module-header__action" [attr.aria-label]="collapseLabel()" [title]="collapseLabel()" (click)="collapseToggle.emit()">
+      <fa-icon [icon]="collapseIcon()" aria-hidden="true" />
     </button>
-    <button type="button" class="cba-module-header__action" [attr.aria-label]="size() === '100%' ? aria.size.shrink : aria.size.expand" [title]="size() === '100%' ? aria.size.shrink : aria.size.expand" (click)="sizeToggle.emit(size() === '100%' ? '50%' : '100%')">
-      <fa-icon [icon]="size() === '100%' ? faCompress : faExpand" aria-hidden="true" />
+    <button type="button" class="cba-module-header__action" [attr.aria-label]="sizeToggleLabel()" [title]="sizeToggleLabel()" (click)="sizeToggle.emit(sizeToggleTarget())">
+      <fa-icon [icon]="sizeToggleIcon()" aria-hidden="true" />
     </button>
     <button type="button" class="cba-module-header__action" [attr.aria-label]="aria.remove" [title]="aria.remove" (click)="remove.emit()">
-      <fa-icon [icon]="faRemoveIcon" aria-hidden="true" />
+      <fa-icon [icon]="faXmark" aria-hidden="true" />
     </button>
     <button type="button" class="cba-module-header__action" [attr.aria-label]="aria.fullscreen" [title]="aria.fullscreen" (click)="fullscreenToggle.emit()">
-      <fa-icon [icon]="faFullscreenIcon" aria-hidden="true" />
+      <fa-icon [icon]="faExpand" aria-hidden="true" />
     </button>
   </nav> }
 </header>

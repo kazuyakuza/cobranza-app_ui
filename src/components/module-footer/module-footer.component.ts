@@ -77,7 +77,7 @@ export class ModuleFooterComponent {
   readonly statusText = input<string | undefined>(undefined);
 
   /** Default status text per `ModuleHeaderStatus`. Sourced from `CBA_UI_MESSAGES`. */
-  protected readonly statusTexts = CBA_UI_MESSAGES.moduleFooter.status;
+  private readonly statusTexts = CBA_UI_MESSAGES.moduleFooter.status;
 
   /** Status visual config or `null` when `status === null` (icon hidden). */
   readonly statusVisual = computed<StatusVisual | null>(() => {

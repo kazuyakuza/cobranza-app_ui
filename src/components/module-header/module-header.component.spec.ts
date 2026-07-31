@@ -1,5 +1,20 @@
+import { OutputEmitterRef } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ModuleHeaderComponent } from './module-header.component';
+import { ModuleHeaderSize } from './module-header.types';
+
+interface ActionCase {
+  readonly label: string;
+  readonly output: 'collapseToggle' | 'sizeToggle' | 'remove' | 'fullscreenToggle';
+  readonly payload?: ModuleHeaderSize;
+}
+
+const ACTION_CASES: readonly ActionCase[] = [
+  { label: 'Colapsar módulo', output: 'collapseToggle' },
+  { label: 'Reducir módulo a 50%', output: 'sizeToggle', payload: '50%' },
+  { label: 'Quitar módulo', output: 'remove' },
+  { label: 'Pantalla completa', output: 'fullscreenToggle' },
+];
 
 describe('ModuleHeaderComponent', () => {
   let fixture: ComponentFixture<ModuleHeaderComponent>;
@@ -23,27 +38,30 @@ describe('ModuleHeaderComponent', () => {
     }).compileComponents();
   });
 
-  it('emits collapseToggle when the collapse button is clicked', () => {
+  it.each(ACTION_CASES)('emits $output when the $label button is clicked', ({ label, output, payload }) => {
     const component = setup();
-    let emitted = 0;
-    component.collapseToggle.subscribe(() => (emitted += 1));
+    const emitted: unknown[] = [];
+    (component[output] as OutputEmitterRef<unknown>).subscribe((value) => emitted.push(value));
 
-    queryButton('Colapsar módulo').click();
+    queryButton(label).click();
 
-    expect(emitted).toBe(1);
+    if (payload === undefined) {
+      expect(emitted).toHaveLength(1);
+    } else {
+      expect(emitted).toEqual([payload]);
+    }
   });
 
-  it('emits the opposite target size when the size-toggle button is clicked', () => {
+  it('emits 100% when the expand button is clicked at 50% size', () => {
     const component = setup();
-    const sizes: string[] = [];
+    const sizes: ModuleHeaderSize[] = [];
     component.sizeToggle.subscribe((size) => sizes.push(size));
 
-    queryButton('Reducir módulo a 50%').click();
     fixture.componentRef.setInput('size', '50%');
     fixture.detectChanges();
     queryButton('Expandir módulo a 100%').click();
 
-    expect(sizes).toEqual(['50%', '100%']);
+    expect(sizes).toEqual(['100%']);
   });
 
   it('renders only the title when isFullscreen is true', () => {
@@ -71,25 +89,5 @@ describe('ModuleHeaderComponent', () => {
     fixture.componentRef.setInput('status', 'loading');
     fixture.detectChanges();
     expect(statusSection.querySelector('fa-icon')).not.toBeNull();
-  });
-
-  it('emits remove when the remove button is clicked', () => {
-    const component = setup();
-    let emitted = 0;
-    component.remove.subscribe(() => (emitted += 1));
-
-    queryButton('Quitar módulo').click();
-
-    expect(emitted).toBe(1);
-  });
-
-  it('emits fullscreenToggle when the fullscreen button is clicked', () => {
-    const component = setup();
-    let emitted = 0;
-    component.fullscreenToggle.subscribe(() => (emitted += 1));
-
-    queryButton('Pantalla completa').click();
-
-    expect(emitted).toBe(1);
   });
 });

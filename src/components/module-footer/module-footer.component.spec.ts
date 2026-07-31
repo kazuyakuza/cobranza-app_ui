@@ -52,14 +52,22 @@ describe('ModuleFooterComponent', () => {
     return text ? (text.textContent ?? '').trim() : '';
   }
 
-  describe('default status text', () => {
-    it.each(STATUS_SCENARIOS)('renders the default text for $status', ({ status, text }) => {
-      render();
-      fixture.componentRef.setInput('status', status);
-      fixture.detectChanges();
+  it.each(STATUS_SCENARIOS)('renders the status region for $status', ({ status, text, modifier }) => {
+    render();
+    fixture.componentRef.setInput('status', status);
+    fixture.detectChanges();
 
-      expect(statusText()).toBe(text);
-    });
+    expect(statusText()).toBe(text);
+    expect(statusRegion()?.classList.contains(modifier)).toBe(true);
+    expect(fixture.nativeElement.querySelector('.cba-module-footer__status fa-icon')).not.toBeNull();
+  });
+
+  it('marks the icon as decorative', () => {
+    render();
+    fixture.componentRef.setInput('status', 'success');
+    fixture.detectChanges();
+
+    expect(fixture.nativeElement.querySelector('fa-icon')?.getAttribute('aria-hidden')).toBe('true');
   });
 
   it('lets the statusText override win over the default mapping', () => {
@@ -98,34 +106,6 @@ describe('ModuleFooterComponent', () => {
     expect(hostFixture.nativeElement.querySelector('.cba-module-footer__text')?.textContent).toContain(
       'Cambios sin guardar',
     );
-  });
-
-  describe('status icon', () => {
-    it.each(STATUS_SCENARIOS)('renders the icon for $status', ({ status }) => {
-      render();
-      fixture.componentRef.setInput('status', status);
-      fixture.detectChanges();
-
-      expect(fixture.nativeElement.querySelector('.cba-module-footer__status fa-icon')).not.toBeNull();
-    });
-
-    it('marks the icon as decorative', () => {
-      render();
-      fixture.componentRef.setInput('status', 'success');
-      fixture.detectChanges();
-
-      expect(fixture.nativeElement.querySelector('fa-icon')?.getAttribute('aria-hidden')).toBe('true');
-    });
-  });
-
-  describe('status modifier classes', () => {
-    it.each(STATUS_SCENARIOS)('applies the modifier class for $status', ({ status, modifier }) => {
-      render();
-      fixture.componentRef.setInput('status', status);
-      fixture.detectChanges();
-
-      expect(statusRegion()?.classList.contains(modifier)).toBe(true);
-    });
   });
 
   it('sets live region attributes on the status wrapper', () => {
