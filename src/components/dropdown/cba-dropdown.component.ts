@@ -1,13 +1,25 @@
 import {
+  AfterViewInit,
   ChangeDetectionStrategy,
   Component,
+  effect,
+  inject,
   input,
   output,
+  ViewChild,
 } from '@angular/core';
-import { NgbDropdownModule, PlacementArray } from '@ng-bootstrap/ng-bootstrap';
+import {
+  NgbDropdown,
+  NgbDropdownMenu,
+  NgbDropdownModule,
+  PlacementArray,
+} from '@ng-bootstrap/ng-bootstrap';
 
 /** Placement alias used by `CbaDropdown`. Passthrough to ng-bootstrap's `PlacementArray`. */
 export type CbaDropdownPlacement = PlacementArray;
+
+/** Shape of `NgbDropdown`'s private menu reference, set after view init. */
+type NgbDropdownWithMenu = { _menu?: NgbDropdownMenu };
 
 /**
  * Thin, token-styled wrapper around `@ng-bootstrap/ng-bootstrap` dropdown.
@@ -37,7 +49,12 @@ export type CbaDropdownPlacement = PlacementArray;
  *
  * @remarks
  * Behavior (open/close, positioning, keyboard) comes from `@ng-bootstrap/ng-bootstrap`.
- * `CbaDropdown` only adds theming and a stable projection API.
+ * `CbaDropdown` only adds theming and a stable projection API. `NgbDropdown` is
+ * instantiated on the host element via `hostDirectives` so projected content
+ * (toggle and menu items) can inject it and wire keyboard/click handling. Because
+ * `NgbDropdown` resolves its menu through a content query on its own host element,
+ * and the themed menu surface lives in this component's view, the menu directive
+ * is linked to the `NgbDropdown` instance after view init.
  *
  * @see [CBA_DROPDOWN.md](/docs/CBA_DROPDOWN.md)
  */
@@ -45,6 +62,7 @@ export type CbaDropdownPlacement = PlacementArray;
   selector: 'cba-dropdown',
   standalone: true,
   imports: [NgbDropdownModule],
+  hostDirectives: [NgbDropdown],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './cba-dropdown.component.html',
   styleUrl: './cba-dropdown.component.scss',
@@ -54,7 +72,7 @@ export type CbaDropdownPlacement = PlacementArray;
     '[attr.aria-disabled]': 'disabled() ? "true" : null',
   },
 })
-export class CbaDropdownComponent {
+export class CbaDropdownComponent implements AfterViewInit {
   /**
    * Preferred menu placement, forwarded to `NgbDropdown#placement`.
    * Follows ng-bootstrap positioning semantics
@@ -74,8 +92,23 @@ export class CbaDropdownComponent {
   /** Passthrough for `NgbDropdown#openChange`. Emits `true` on open, `false` on close. */
   readonly openChange = output<boolean>();
 
-  /** Bridges `NgbDropdown#openChange` to the wrapper output. */
-  protected onOpenChange(open: boolean): void {
-    this.openChange.emit(open);
+  private readonly ngbDropdown = inject(NgbDropdown);
+
+  @ViewChild(NgbDropdownMenu) private readonly menu?: NgbDropdownMenu;
+
+  constructor() {
+    this.ngbDropdown.openChange.subscribe((open: boolean) => this.openChange.emit(open));
+    effect(() => {
+      this.ngbDropdown.placement = this.placement();
+    });
+  }
+
+  ngAfterViewInit(): void {
+    this.linkMenuToDropdown();
+  }
+
+  /** Exposes the themed menu surface to the `NgbDropdown` host directive. */
+  private linkMenuToDropdown(): void {
+    (this.ngbDropdown as unknown as NgbDropdownWithMenu)._menu = this.menu;
   }
 }

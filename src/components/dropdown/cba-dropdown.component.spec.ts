@@ -78,21 +78,23 @@ describe('CbaDropdownComponent', () => {
     fixture = TestBed.createComponent(CbaDropdownComponent);
     fixture.componentRef.setInput('placement', 'top-start');
     fixture.detectChanges();
-    const ngbDropdown = fixture.debugElement.query(By.directive(NgbDropdown)).injector.get(NgbDropdown);
+    const ngbDropdown = fixture.debugElement.injector.get(NgbDropdown);
     expect(ngbDropdown.placement).toEqual('top-start');
   });
 
   it('applies the ng-bootstrap default placement order when unset', () => {
     fixture = TestBed.createComponent(CbaDropdownComponent);
     fixture.detectChanges();
-    const ngbDropdown = fixture.debugElement.query(By.directive(NgbDropdown)).injector.get(NgbDropdown);
+    const ngbDropdown = fixture.debugElement.injector.get(NgbDropdown);
     expect(ngbDropdown.placement).toEqual(['bottom-start', 'bottom-end', 'top-start', 'top-end']);
   });
 
   it('re-emits NgbDropdown openChange through the wrapper output', () => {
     const hostFixture = TestBed.createComponent(DropdownHost);
     hostFixture.detectChanges();
-    const ngbDropdown = hostFixture.debugElement.query(By.directive(NgbDropdown)).injector.get(NgbDropdown);
+    const ngbDropdown = hostFixture.debugElement
+      .query(By.directive(CbaDropdownComponent))
+      .injector.get(NgbDropdown);
 
     ngbDropdown.open();
     hostFixture.detectChanges();

@@ -1,9 +1,4 @@
-<div class="cba-dropdown__root"
-     ngbDropdown
-     [placement]="placement()"
-     (openChange)="onOpenChange($event)">
-  <ng-content select="[cbaDropdownToggle]"></ng-content>
-  <div class="cba-dropdown__menu" ngbDropdownMenu>
-    <ng-content></ng-content>
-  </div>
+<ng-content select="[cbaDropdownToggle]"></ng-content>
+<div class="cba-dropdown__menu" ngbDropdownMenu>
+  <ng-content></ng-content>
 </div>
