@@ -15,6 +15,7 @@
  * Everything exported here becomes part of the library's public semver contract.
  */
 /** Components. */
+export * from './components/accordion';
 export * from './components/badge';
 export * from './components/button';
 export * from './components/card';
