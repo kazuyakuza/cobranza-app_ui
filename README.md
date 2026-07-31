@@ -83,7 +83,7 @@ Install the major ranges declared in package.json peerDependencies: `@angular/co
 **2. Import components** in your Angular standalone component or module:
 
 ```ts
-import { ModuleHeaderComponent, ModuleContainer, CbaButton } from '@cobranza-apps/ui';
+import { ModuleHeaderComponent, ModuleContainerComponent, CbaButtonComponent } from '@cobranza-apps/ui';
 ```
 
 **3. Minimal module template** — compose the workspace chrome around your MFE content:
@@ -108,7 +108,7 @@ import { ModuleHeaderComponent, ModuleContainer, CbaButton } from '@cobranza-app
 
 Minimal quick start with `ModuleContainer` + `ModuleHeader` + optional `ModuleFooter`.
 
-For usage patterns and examples, see [`/docs/USAGE.md`](/docs/USAGE.md).
+For usage patterns and examples, see [`./docs/USAGE.md`](./docs/USAGE.md).
 
 ## Spanish-only UI defaults
 
@@ -191,7 +191,7 @@ Design tokens are published as SCSS via `@cobranza-apps/ui/theme` and use the `-
 
 For the full token reference, see [brief.md §5](.agent/project-info/brief.md#5-design-tokens-theme-proposal) and the SCSS source files under `src/theme/`.
 
-For a quick reference, see [`/docs/THEME.md`](/docs/THEME.md).
+For a quick reference, see [`./docs/THEME.md`](./docs/THEME.md).
 
 ## Related Libraries
 
@@ -216,26 +216,26 @@ For a quick reference, see [`/docs/THEME.md`](/docs/THEME.md).
 
 ## Documentation
 
-- [`/docs/INDEX.md`](/docs/INDEX.md) — Index of all library documentation pages.
-- [`/docs/USAGE.md`](/docs/USAGE.md) — Patterns and examples for consuming the library.
-- [`/docs/THEME.md`](/docs/THEME.md) — Theme import, tokens, and utility classes.
-- [`/docs/MODULE_HEADER.md`](/docs/MODULE_HEADER.md) — `ModuleHeader` selector, API, status values, fullscreen & drag notes.
-- [`/docs/MODULE_CONTAINER.md`](/docs/MODULE_CONTAINER.md) — `ModuleContainer` selector, API, size/collapse/fullscreen/padding behaviour, scroll & chrome notes.
-- [`/docs/CBA_BUTTON.md`](/docs/CBA_BUTTON.md) — `CbaButton` selector, API, variant mapping, size options, loading/disabled behaviour.
-- [`/docs/CBA_CARD.md`](/docs/CBA_CARD.md) — `CbaCard` selector, content projection slots, layout examples.
-- [`/docs/CBA_BADGE.md`](/docs/CBA_BADGE.md) — `CbaBadge` selector, API, variant colours, solid vs outline.
-- [`/docs/CBA_EMPTY_STATE.md`](/docs/CBA_EMPTY_STATE.md) — `CbaEmptyState` selector, content projection slots, usage example.
-- [`/docs/CBA_SKELETON.md`](/docs/CBA_SKELETON.md) — `CbaSkeleton` selector, API, variant descriptions, usage examples.
-- [`/docs/CBA_MODAL.md`](/docs/CBA_MODAL.md) — `CbaModal` selector, API, `CbaModalService` + options, sizes, dismiss reasons, theming.
-- [`/docs/CBA_INPUT.md`](/docs/CBA_INPUT.md) — `CbaInput` selector, API, control types, ControlValueAccessor, label/hint/error, theming.
-- [`/docs/CBA_SELECT.md`](/docs/CBA_SELECT.md) — `CbaSelect` selector, API, projected options, ControlValueAccessor, theming.
-- [`/docs/CBA_DATEPICKER.md`](/docs/CBA_DATEPICKER.md) — `CbaDatepicker` selector, API, ng-bootstrap NgbInputDateadapter notes, aria toggle label, theming.
-- [`/docs/CBA_DROPDOWN.md`](/docs/CBA_DROPDOWN.md) — `CbaDropdown` selector, API, projection slots, theming, ng-bootstrap behavior notes.
-- [`/docs/CBA_POPOVER.md`](/docs/CBA_POPOVER.md) — `CbaPopover` selector, API, projection slots, theming, ng-bootstrap behavior notes.
-- [`/docs/CBA_TYPEAHEAD.md`](/docs/CBA_TYPEAHEAD.md) — `CbaTypeahead` selector, API, search function, formatters, theming, ng-bootstrap behavior notes.
-- [`/docs/CBA_ACCORDION.md`](/docs/CBA_ACCORDION.md) — `CbaAccordion` selector, API, projection API, theming, ng-bootstrap behavior notes.
-- [`/docs/CBA_MODULE_FOOTER.md`](/docs/CBA_MODULE_FOOTER.md) — `CbaModuleFooter` selector, API, status text mapping, usage examples, theming notes.
-- Internal architecture: [`/docs/CBA_FORM_FIELD.md`](/docs/CBA_FORM_FIELD.md) — shared `CbaField` layout + `CbaControlValueAccessor` used by Input/Select/Datepicker. **Not part of the public API.**
+- [`./docs/INDEX.md`](./docs/INDEX.md) — Index of all library documentation pages.
+- [`./docs/USAGE.md`](./docs/USAGE.md) — Patterns and examples for consuming the library.
+- [`./docs/THEME.md`](./docs/THEME.md) — Theme import, tokens, and utility classes.
+- [`./docs/MODULE_HEADER.md`](./docs/MODULE_HEADER.md) — `ModuleHeader` selector, API, status values, fullscreen & drag notes.
+- [`./docs/MODULE_CONTAINER.md`](./docs/MODULE_CONTAINER.md) — `ModuleContainer` selector, API, size/collapse/fullscreen/padding behaviour, scroll & chrome notes.
+- [`./docs/CBA_BUTTON.md`](./docs/CBA_BUTTON.md) — `CbaButton` selector, API, variant mapping, size options, loading/disabled behaviour.
+- [`./docs/CBA_CARD.md`](./docs/CBA_CARD.md) — `CbaCard` selector, content projection slots, layout examples.
+- [`./docs/CBA_BADGE.md`](./docs/CBA_BADGE.md) — `CbaBadge` selector, API, variant colours, solid vs outline.
+- [`./docs/CBA_EMPTY_STATE.md`](./docs/CBA_EMPTY_STATE.md) — `CbaEmptyState` selector, content projection slots, usage example.
+- [`./docs/CBA_SKELETON.md`](./docs/CBA_SKELETON.md) — `CbaSkeleton` selector, API, variant descriptions, usage examples.
+- [`./docs/CBA_MODAL.md`](./docs/CBA_MODAL.md) — `CbaModal` selector, API, `CbaModalService` + options, sizes, dismiss reasons, theming.
+- [`./docs/CBA_INPUT.md`](./docs/CBA_INPUT.md) — `CbaInput` selector, API, control types, ControlValueAccessor, label/hint/error, theming.
+- [`./docs/CBA_SELECT.md`](./docs/CBA_SELECT.md) — `CbaSelect` selector, API, projected options, ControlValueAccessor, theming.
+- [`./docs/CBA_DATEPICKER.md`](./docs/CBA_DATEPICKER.md) — `CbaDatepicker` selector, API, ng-bootstrap NgbInputDateadapter notes, aria toggle label, theming.
+- [`./docs/CBA_DROPDOWN.md`](./docs/CBA_DROPDOWN.md) — `CbaDropdown` selector, API, projection slots, theming, ng-bootstrap behavior notes.
+- [`./docs/CBA_POPOVER.md`](./docs/CBA_POPOVER.md) — `CbaPopover` selector, API, projection slots, theming, ng-bootstrap behavior notes.
+- [`./docs/CBA_TYPEAHEAD.md`](./docs/CBA_TYPEAHEAD.md) — `CbaTypeahead` selector, API, search function, formatters, theming, ng-bootstrap behavior notes.
+- [`./docs/CBA_ACCORDION.md`](./docs/CBA_ACCORDION.md) — `CbaAccordion` selector, API, projection API, theming, ng-bootstrap behavior notes.
+- [`./docs/CBA_MODULE_FOOTER.md`](./docs/CBA_MODULE_FOOTER.md) — `CbaModuleFooter` selector, API, status text mapping, usage examples, theming notes.
+- Internal architecture: [`./docs/CBA_FORM_FIELD.md`](./docs/CBA_FORM_FIELD.md) — shared `CbaField` layout + `CbaControlValueAccessor` used by Input/Select/Datepicker. **Not part of the public API.**
 - [Project brief](.agent/project-info/brief.md) — Source of truth for scope, design tokens, and component contracts.
 - [Product info](.agent/project-info/product.md) — Product goals, target consumers, UX focus.
 - [Architecture](.agent/project-info/architecture.md) — Build strategy, folder layout, integration patterns.

@@ -154,12 +154,12 @@ The theme provides CSS custom properties with the `--cba-` prefix (e.g., `--cba-
 ```ts
 // app.component.ts
 import { Component } from '@angular/core';
-import { ModuleHeaderComponent, ModuleContainer } from '@cobranza-apps/ui';
+import { ModuleHeaderComponent, ModuleContainerComponent } from '@cobranza-apps/ui';
 
 @Component({
   selector: 'app-shell',
   standalone: true,
-  imports: [ModuleHeaderComponent, ModuleContainer],
+  imports: [ModuleHeaderComponent, ModuleContainerComponent],
   template: `
     <cba-module-container [size]="size" [isCollapsed]="isCollapsed" [isFullscreen]="isFullscreen">
       <cba-module-header
@@ -209,12 +209,12 @@ export class AppComponent {
 ```ts
 // mfe-dashboard.component.ts
 import { Component } from '@angular/core';
-import { CbaButton, CbaCard, CbaBadge } from '@cobranza-apps/ui';
+import { CbaButtonComponent, CbaCardComponent, CbaBadgeComponent } from '@cobranza-apps/ui';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CbaButton, CbaCard, CbaBadge],
+  imports: [CbaButtonComponent, CbaCardComponent, CbaBadgeComponent],
   template: `
     <cba-card>
       <cba-badge variant="success">Active</cba-badge>
@@ -351,12 +351,12 @@ See [`CBA_SKELETON.md`](./CBA_SKELETON.md) for the full API.
 Thin wrapper around ng-bootstrap modal.
 
 ```ts
-import { CbaModal } from '@cobranza-apps/ui';
+import { CbaModalComponent } from '@cobranza-apps/ui';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   standalone: true,
-  imports: [CbaModal],
+  imports: [CbaModalComponent],
   template: `
     <cba-modal title="Confirm Action">
       <p>Are you sure?</p>
@@ -671,7 +671,7 @@ All tokens use the `--cba-` prefix. Full reference in [brief.md §5](../.agent/p
 **Consuming the library:**
 
 - Import theme globally in `global-styles.scss` or `styles.scss`.
-- Import components individually in standalone components: `import { CbaButton } from '@cobranza-apps/ui'`.
+- Import components individually in standalone components: `import { CbaButtonComponent } from '@cobranza-apps/ui'`.
 - Use design tokens via CSS variables or utility classes for consistency.
 - Follow the component contracts in [brief.md §6](../.agent/project-info/brief.md#6-core-components-proposal).
 

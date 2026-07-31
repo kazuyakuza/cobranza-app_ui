@@ -15,7 +15,7 @@ a stable `cba-accordion` selector, and thin passthroughs for three inputs and fo
 - [Basic usage](#basic-usage)
 - [Theming notes](#theming-notes)
 - [Accessibility](#accessibility)
-- [Important non-goals](#important-non-goals)
+- [Non-goals](#non-goals)
 - [Related docs](#related-docs)
 
 ## Selector
@@ -140,7 +140,7 @@ export class ExampleComponent {
 - The `disabled` attribute on `ngbAccordionItem` disables the native button automatically.
 - No additional `role` is needed on the host container.
 
-## Important non-goals
+## Non-goals
 
 - **No custom item component.** There is no `CbaAccordionItemComponent`. Consumers author the
   ng-bootstrap item markup directly inside `<cba-accordion>` because ng-bootstrap's static
