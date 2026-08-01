@@ -8,7 +8,7 @@ setup-jest.ts
 
 # Development configs
 tsconfig*.json
-.prettierrc
+.prettierrc**
 .prettierignore
 .eslintrc*
 .eslintignore
