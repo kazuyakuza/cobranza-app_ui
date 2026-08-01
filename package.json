@@ -1,6 +1,6 @@
 {
   "name": "@cobranza-apps/ui",
-  "version": "0.7.3",
+  "version": "0.7.4",
   "description": "Shared Angular component library and design system for the Cobranza App Company Back-office.",
   "license": "UNLICENSED",
   "private": false,

@@ -35,6 +35,10 @@ jobs:
         run: npm run build
       - name: Run unit tests
         run: npm run test
+      - name: Copy docs into dist for publishing
+        run: |
+          cp -r docs dist/
+          rm -f dist/docs/how-to-set-up-git.md dist/docs/how-to-write-todo-files.md
       - name: Check published version
         id: check_version
         shell: bash
@@ -53,7 +57,7 @@ jobs:
           fi
       - name: Publish to NPM
         if: steps.check_version.outputs.should_publish == 'true'
-        run: npm publish --access ${{ vars.PRIVATE_PUBLISH == 'true' && 'restricted' || 'public' }}
+        run: npm publish ./dist --access ${{ vars.PRIVATE_PUBLISH == 'true' && 'restricted' || 'public' }}
       - name: Get package version
         id: get_version
         if: steps.check_version.outputs.should_publish == 'true'
