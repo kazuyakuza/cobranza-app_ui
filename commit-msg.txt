@@ -1,8 +1,0 @@
-feat(theme): publish theme.scss as consumable package subpath
-
-- ng-package.json: copy theme SCSS to dist/theme via assets; add
-  lib.styleIncludePaths for component-style token resolution.
-- package.json: expose ./theme subpath (sass condition -> ./theme/theme.scss).
-- README: mark the theme import path as supported (no longer tentative).
-
-Refs: todos/20260729/20260729-todo-2.md Task 6
