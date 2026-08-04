@@ -3,20 +3,20 @@
  * Do NOT rename tokens. Values are authoritative (see brief §5).
  */
 :root {
-  --cba-bg-primary: #2a2d32;
-  --cba-bg-secondary: #34383e;
-  --cba-bg-tertiary: #3e434a;
-  --cba-bg-elevated: #454a52;
-  --cba-bg-overlay: rgba(0, 0, 0, 0.55);
+  --cba-bg-primary: #7a838d;
+  --cba-bg-secondary: #8c95a0;
+  --cba-bg-tertiary: #9da6b0;
+  --cba-bg-elevated: #aeb6bf;
+  --cba-bg-overlay: rgba(0, 0, 0, 0.32);
 
-  --cba-text-primary: #e8eaed;
-  --cba-text-secondary: #b0b4ba;
-  --cba-text-muted: #8b9098;
-  --cba-text-inverse: #1a1d21;
+  --cba-text-primary: #0f1115;
+  --cba-text-secondary: #1e2329;
+  --cba-text-muted: #2a2e35;
+  --cba-text-inverse: #e8eaed;
 
-  --cba-border-subtle: #4a4f57;
-  --cba-border-default: #5a606a;
-  --cba-border-strong: #6b7280;
+  --cba-border-subtle: #aeb6bf;
+  --cba-border-default: #707880;
+  --cba-border-strong: #4a5059;
 
   --cba-accent-primary: #3b82f6;
   --cba-accent-success: #22c55e;
@@ -24,8 +24,8 @@
   --cba-accent-danger: #ef4444;
   --cba-accent-info: #06b6d4;
 
-  --cba-hover: rgba(255, 255, 255, 0.06);
-  --cba-active: rgba(255, 255, 255, 0.1);
+  --cba-hover: rgba(0, 0, 0, 0.06);
+  --cba-active: rgba(0, 0, 0, 0.1);
   --cba-focus-ring: 0 0 0 3px rgba(59, 130, 246, 0.45);
 
   --cba-header-height: 56px;
@@ -36,8 +36,8 @@
   --cba-radius-md: 10px;
   --cba-radius-lg: 14px;
 
-  --cba-shadow-module: 0 4px 16px rgba(0, 0, 0, 0.28);
-  --cba-shadow-elevated: 0 8px 24px rgba(0, 0, 0, 0.35);
+  --cba-shadow-module: 0 4px 16px rgba(0, 0, 0, 0.18);
+  --cba-shadow-elevated: 0 8px 24px rgba(0, 0, 0, 0.25);
 
   --cba-space-1: 4px;
   --cba-space-2: 8px;
