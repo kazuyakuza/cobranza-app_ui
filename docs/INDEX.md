@@ -47,3 +47,4 @@
 - [Project brief](../.agent/project-info/brief.md)
 - [Architecture](../.agent/project-info/architecture.md)
 - [Tech stack](../.agent/project-info/tech.md)
+- [CHANGELOG](../CHANGELOG.md) — Release history (Keep a Changelog format).

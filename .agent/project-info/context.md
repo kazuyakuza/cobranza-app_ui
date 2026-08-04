@@ -31,6 +31,7 @@
 - **Contrast fix applied** (`066b556`) — `--cba-text-secondary` darkened to `#15181c` and `--cba-text-muted` to `#212429` (spec-authoritative values). Both previously failing pairs now pass WCAG AA: `--cba-text-secondary` on `--cba-bg-primary` is 4.63:1, `--cba-text-muted` on `--cba-bg-secondary` is 5.13:1.
 - **Front-end verification completed** in `.kilo/plans/20260803-lighten-gray-theme-task1-verification.md` (Task 1, step 4.5a). Implementation matches the spec exactly; `npm run build` and `npm run lint` pass. Only sub-AA pair remaining: `--cba-text-muted` on `--cba-bg-primary` at 4.05:1 (documented intentional exception).
 - **Overall plan adherence verified** in `.kilo/plans/20260803-lighten-gray-theme-task1-adherence.md` (Task 1, step 4.5b) — implementation ADHERENT with accepted deviations (spec-aligned contrast fix, value-equivalent border-subtle alias, docs-only changes).
+- **CHANGELOG.md created** — initial release changelog documenting v0.8.1 theme lightening changes, contrast fixes, and docs updates. Format follows Keep a Changelog; includes maintainer guidance header and AI agent cross-references.
 - **Phase 0 completed** — all seven scaffolding tasks done on `feat/phase0-library-scaffolding`.
 - Configured peer dependencies in `package.json` (Angular 22, Bootstrap 5, ng-bootstrap 21, Font Awesome 6/7).
 - Installed all dev dependencies and peer packages; lockfile consistent.
@@ -64,3 +65,4 @@
 - [Tech Stack](tech.md) — exact versions, dependencies, tooling constraints.
 - [TODO file](../todos/20260803/20260803-todo-0.md) — Task 1: lighten gray theme.
 - [Global plan](../../.kilo/plans/20260803-lighten-gray-theme.md) — overall workflow.
+- [CHANGELOG](../../CHANGELOG.md) — release changelog (Keep a Changelog format).
