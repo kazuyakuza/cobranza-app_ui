@@ -28,6 +28,40 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > Releases prior to 0.8.1 predate this changelog and are not reconstructed retroactively.
 
+## [0.9.0] - 2026-08-04
+
+### Changed
+
+- Replaced the intermediate-gray palette with the **Minimal Yet Warm** system across
+  `src/theme/_variables.scss`: warm sand/cream/taupe surfaces (canvas `#EAE7DC`,
+  panel `#F3F1E9`, elevated `#FCFBF6`, inset `#D8C3A5`), warm near-black/taupe text,
+  warm border steps, warm-tinted shadows and hover/active overlays.
+- `--cba-accent-primary` is now a warm taupe `#6B5B4F` (was blue `#3b82f6`). Coral
+  (`#E98074` / `#E85A4F`) is reserved for warning/danger/focus accents only.
+- `--cba-focus-ring` is now a warm coral ring (`rgba(232,90,79,0.45)`) to stay visible
+  on warm light surfaces.
+- `--cba-border-subtle` is now a dedicated `#E7E5DE` separator (was an alias of
+  `--cba-bg-elevated`).
+- Module header surface switched to `--cba-bg-elevated`; module footer to
+  `--cba-bg-tertiary` (inset) to expose the four-level surface hierarchy.
+- `docs/theme-preview.html` reduced to a single Minimal Yet Warm theme (theme-list UI
+  retained for future themes).
+
+### Added
+
+- Inline accent-discipline guidance in `src/theme/_variables.scss` (coral reserved for
+  status/focus/small accents; primary CTAs use warm taupe).
+- Muted-text restriction now documented against the warm inset surface
+  (`--cba-bg-tertiary`, ~3.86:1).
+
+### Notes
+
+- **No token names were renamed, added, or removed** — only values, component
+  surface-role token references, and documentation changed. Build/lint pass; this is
+  not a breaking API change for consumers of `--cba-*` tokens.
+- See `.agent/project-info/brief.md` §5 for the authoritative token table and
+  `docs/THEME.md` for the theme quick reference.
+
 ## [0.8.1] - 2026-08-03
 
 ### Added

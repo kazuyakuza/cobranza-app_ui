@@ -8,7 +8,7 @@
 
 # @cobranza-apps/ui — Theme Reference
 
-Quick reference for the intermediate-gray design system: how to import the theme, the token groups emitted on `:root`, and the opt-in utility-class catalog.
+Quick reference for the Minimal Yet Warm design system: how to import the theme, the token groups emitted on `:root`, and the opt-in utility-class catalog.
 
 ## Table of Contents
 

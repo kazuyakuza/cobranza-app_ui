@@ -36,7 +36,7 @@
 It provides:
 
 - Reusable visual components
-- The intermediate gray theme (CSS variables + utility classes)
+- The Minimal Yet Warm theme (warm sand/cream/taupe + coral accents) (CSS variables + utility classes)
 - Layout primitives specific to the floating workspace (`ModuleHeader`, `ModuleContainer`)
 - Thin wrappers around Bootstrap / ng-bootstrap for forms and overlays
 
@@ -51,7 +51,7 @@ It does **not** contain business logic, BFF communication, advanced tables, drag
 | **Layout primitives** | `ModuleHeader`, `ModuleContainer` |
 | **Basic components** | `CbaButton`, `CbaCard`, `CbaBadge`, `CbaEmptyState`, `CbaSkeleton` |
 | **Overlays & forms** | `CbaModal` (thin ng-bootstrap wrapper), basic Input / Select / Datepicker wrappers |
-| **Theme** | Full intermediate gray design tokens + utility classes + optional SCSS mixins |
+| **Theme** | Full Minimal Yet Warm design tokens + utility classes + optional SCSS mixins |
 | **Directives** | Lightweight helpers (e.g. autofocus, click-outside) if needed |
 | **Icons** | Font Awesome Free (solid + regular) via `@fortawesome/angular-fontawesome` |
 
@@ -98,58 +98,55 @@ It does **not** contain business logic, BFF communication, advanced tables, drag
 
 All tokens live under the `--cba-` prefix.
 
-> **Note:** The palette was lightened from the original near-dark gray to a medium-gray
-> palette. Text tokens are now near-black for strong contrast on the lighter backgrounds.
-> All text/background pairs meet WCAG AA 4.5:1 except `--cba-text-muted` on
-> `--cba-bg-primary` (intentionally restricted — see usage guidance below).
+> **Note:** The palette is **Minimal Yet Warm** (warm sand/cream/taupe + controlled coral). Canvas `#EAE7DC`, panel `#F3F1E9`, elevated `#FCFBF6`, inset `#D8C3A5`. Coral (`#E98074` soft, `#E85A4F` strong) is reserved for accent/status/focus — NOT for primary CTAs or large fills. Primary text on panel/elevated and primary/secondary text on every intended surface meet WCAG AA 4.5:1. Muted text on `--cba-bg-tertiary` (inset sand) is ~3.86:1 — use `--cba-text-secondary` on inset.
 
 ```scss
 :root {
-  /* Backgrounds — lighter medium-gray scale */
-  --cba-bg-primary: #7a838d;
-  --cba-bg-secondary: #8c95a0;
-  --cba-bg-tertiary: #9da6b0;
-  --cba-bg-elevated: #aeb6bf;
-  --cba-bg-overlay: rgba(0, 0, 0, 0.32);
+  /* Backgrounds — warm Minimal-Yet-Warm surface scale (canvas → panel → elevated → inset) */
+  --cba-bg-primary: #EAE7DC;
+  --cba-bg-secondary: #F3F1E9;
+  --cba-bg-tertiary: #D8C3A5;
+  --cba-bg-elevated: #FCFBF6;
+  --cba-bg-overlay: rgba(43, 38, 32, 0.45);
 
-  /* Text — near-black for strong contrast on light gray */
-  --cba-text-primary: #0f1115;
-  --cba-text-secondary: #15181c;
-  --cba-text-muted: #212429;
-  --cba-text-inverse: #e8eaed;
+  /* Text — warm near-black/taupe; muted restricted on bg-tertiary (see header) */
+  --cba-text-primary: #2B2620;
+  --cba-text-secondary: #4A4640;
+  --cba-text-muted: #625C55;
+  --cba-text-inverse: #FDFCF8;
 
-  /* Borders */
-  --cba-border-subtle: var(--cba-bg-elevated);
-  --cba-border-default: #707880;
-  --cba-border-strong: #4a5059;
+  /* Borders — visible on cream/sand */
+  --cba-border-subtle: #E7E5DE;
+  --cba-border-default: #A7A6A2;
+  --cba-border-strong: #8E8D8A;
 
-  /* Accents — unchanged */
-  --cba-accent-primary: #3b82f6;
-  --cba-accent-success: #22c55e;
-  --cba-accent-warning: #f59e0b;
-  --cba-accent-danger: #ef4444;
-  --cba-accent-info: #06b6d4;
+  /* Accents — primary is warm taupe (NOT coral); coral reserved for status/focus */
+  --cba-accent-primary: #6B5B4F;
+  --cba-accent-success: #3E6B4F;
+  --cba-accent-warning: #E98074;
+  --cba-accent-danger: #B93E36;
+  --cba-accent-info: #56717E;
 
-  /* Interactive states — dark overlays for light gray surfaces */
-  --cba-hover: rgba(0, 0, 0, 0.06);
-  --cba-active: rgba(0, 0, 0, 0.1);
-  --cba-focus-ring: 0 0 0 3px rgba(59, 130, 246, 0.45);
+  /* Interactive states — warm taupe overlays + warm coral focus ring */
+  --cba-hover: rgba(43, 38, 32, 0.06);
+  --cba-active: rgba(43, 38, 32, 0.10);
+  --cba-focus-ring: 0 0 0 3px rgba(232, 90, 79, 0.45);
 
-  /* Layout constants */
+  /* Layout (unchanged) */
   --cba-header-height: 56px;          /* Shell header */
   --cba-footer-height: 64px;          /* Shell footer */
   --cba-module-header-min-height: 40px;
 
-  /* Radius */
+  /* Radius (unchanged) */
   --cba-radius-sm: 6px;
   --cba-radius-md: 10px;
   --cba-radius-lg: 14px;
 
-  /* Shadows — reduced opacity for lighter surfaces */
-  --cba-shadow-module: 0 4px 16px rgba(0, 0, 0, 0.18);
-  --cba-shadow-elevated: 0 8px 24px rgba(0, 0, 0, 0.25);
+  /* Shadows — warm-tinted, softer than black */
+  --cba-shadow-module: 0 4px 16px rgba(43, 34, 28, 0.12);
+  --cba-shadow-elevated: 0 8px 24px rgba(43, 34, 28, 0.18);
 
-  /* Spacing scale (balanced) */
+  /* Spacing (unchanged) */
   --cba-space-1: 4px;
   --cba-space-2: 8px;
   --cba-space-3: 12px;
@@ -160,7 +157,7 @@ All tokens live under the `--cba-` prefix.
 }
 ```
 
-**`--cba-text-muted` usage restriction:** Must NOT be used on `--cba-bg-primary` (contrast ~4.0:1, fails AA). Approved for `--cba-bg-secondary` (~5.1:1), `--cba-bg-tertiary` (~6.3:1), and `--cba-bg-elevated` (~7.6:1). Prefer `--cba-text-secondary` on `--cba-bg-primary` for lower-emphasis text.
+**`--cba-text-muted` usage restriction:** `#625C55` ≈ passes WCAG AA 4.5:1 on `--cba-bg-primary` (canvas, ~5.33:1), `--cba-bg-secondary` (panel, ~5.84:1) and `--cba-bg-elevated` (cream, ~6.37:1). It is RESTRICTED on `--cba-bg-tertiary` (inset sand, ~3.86:1 — fails AA). Prefer `--cba-text-secondary` on `--cba-bg-tertiary` for lower-emphasis text.
 
 **Typography**
 
