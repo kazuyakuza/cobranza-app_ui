@@ -54,6 +54,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Muted-text restriction now documented against the warm inset surface
   (`--cba-bg-tertiary`, ~3.86:1).
 
+### Fixed
+
+- Accordion disabled button text contrast: `--cba-text-muted` on `--cba-bg-tertiary`
+  (~3.86:1, below WCAG AA) replaced with `--cba-text-secondary` (passes AA). See
+  `src/theme/_accordion.scss`.
+- Theme preview (`docs/theme-preview.html`) no longer demonstrates the restricted
+  muted-on-inset pair; `.search` chip uses `--text-2` (`--cba-text-secondary`).
+- Theme preview now uses static token values matching `--cba-*` exactly, replacing
+  dynamic color-derivation logic that produced slightly different shadows/overlays.
+
 ### Notes
 
 - **No token names were renamed, added, or removed** — only values, component
