@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cobranza UI — Theme picker v3</title>
+  <style>
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Inter,system-ui,sans-serif;font-size:14px;line-height:1.45;background:#111;color:#eee}
+    .app{display:grid;grid-template-columns:340px 1fr;min-height:100vh}
+    .controls{background:#1a1a1a;border-right:1px solid #333;padding:12px 10px;overflow:auto;height:100vh;position:sticky;top:0}
+    .controls h1{margin:0 0 2px;font-size:13px}
+    .hint{font-size:11px;color:#9aa;margin:0 0 10px;line-height:1.35}
+    .theme-list{display:flex;flex-direction:column;gap:4px}
+    .theme-btn{text-align:left;border:1px solid #333;background:#222;border-radius:9px;padding:7px 9px;cursor:pointer;font:inherit;color:#ddd}
+    .theme-btn:hover{border-color:#555}
+    .theme-btn.active{border-color:#7aa2ff;background:#1e2430}
+    .t-name{font-weight:700;font-size:12px;display:block}
+    .t-note{font-size:10.5px;color:#8a9099;display:block;margin-top:1px}
+    .t-dots{display:flex;gap:3px;margin-top:6px;flex-wrap:wrap}
+    .t-dots span{width:12px;height:12px;border-radius:3px;border:1px solid rgba(255,255,255,.15)}
+    .src-hex{margin-top:12px;padding-top:10px;border-top:1px solid #333}
+    .src-hex h2{font-size:10px;text-transform:uppercase;letter-spacing:.06em;color:#888;margin:0 0 6px}
+    .src-hex .row{display:flex;align-items:center;gap:7px;margin-bottom:4px;font-size:10.5px;color:#bbb;font-family:ui-monospace,monospace}
+    .src-hex .row i{width:20px;height:12px;border-radius:3px;border:1px solid rgba(255,255,255,.12);display:block}
+    .map{margin-top:8px;font-size:10.5px;color:#9ab;font-family:ui-monospace,monospace;line-height:1.5}
+    .preview{
+      --canvas:#333;--panel:#444;--elevated:#555;--inset:#3a3a3a;
+      --text:#fff;--text-2:#ccc;--text-3:#999;--border:#666;--border-2:#777;
+      --accent:#4af;--success:#2F9D63;--warning:#D97706;--danger:#DC2626;--info:#3cf;
+      --shadow:0 6px 24px rgba(0,0,0,.35);--hover:rgba(255,255,255,.06);--on-accent:#fff;
+      display:flex;flex-direction:column;min-height:100vh;background:var(--canvas);color:var(--text)
+    }
+    .preview-bar{padding:8px 14px;font-size:12px;color:var(--text-3);border-bottom:1px solid var(--border);background:var(--elevated)}
+    .preview-bar strong{color:var(--text-2)}
+    .shell-header{height:56px;display:flex;align-items:center;gap:12px;padding:0 14px;background:var(--elevated);border-bottom:1px solid var(--border)}
+    .logo{width:28px;height:28px;border-radius:8px;background:var(--inset);border:1px solid var(--border-2)}
+    .brand{font-weight:700}
+    .spacer{flex:1}
+    .search{display:flex;align-items:center;gap:8px;padding:6px 12px;border-radius:999px;border:1px solid var(--border-2);background:var(--inset);color:var(--text-3);font-size:12px;min-width:140px}
+    .icon-btn{width:32px;height:32px;border-radius:999px;border:1px solid var(--border-2);background:var(--panel);color:var(--text-2);display:inline-flex;align-items:center;justify-content:center}
+    .workspace{flex:1;padding:16px}
+    .module{max-width:900px;background:var(--panel);border:1px solid var(--border);border-radius:12px;box-shadow:var(--shadow);overflow:hidden}
+    .module-header{display:flex;align-items:flex-start;gap:10px;padding:10px 12px;background:var(--elevated);border-bottom:1px solid var(--border);min-height:42px}
+    .status{color:var(--success);font-weight:700;width:18px;text-align:center}
+    .module-title{flex:1;font-weight:700}
+    .module-actions{display:flex;gap:4px}
+    .module-actions button{width:28px;height:28px;border:none;border-radius:6px;background:transparent;color:var(--text-2)}
+    .module-actions button:hover{background:var(--hover);color:var(--text)}
+    .module-body{padding:14px}
+    .panel-title-row{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px}
+    .panel-title{font-weight:700;font-size:15px}
+    .panel-meta{font-size:12px;color:var(--text-3);font-weight:600}
+    table{width:100%;border-collapse:collapse;font-size:13.5px}
+    thead th{text-align:left;padding:11px 12px;background:var(--inset);color:var(--text-2);font-weight:700;border-bottom:1px solid var(--border)}
+    tbody td{padding:11px 12px;border-bottom:1px solid var(--border);font-weight:500}
+    tbody tr:hover td{background:var(--hover)}
+    tbody tr:last-child td{border-bottom:none}
+    .module-footer{padding:9px 12px;background:var(--inset);border-top:1px solid var(--border);font-size:12.5px;font-weight:700;color:var(--success)}
+    .shell-footer{height:64px;display:flex;align-items:center;justify-content:center;gap:10px;border-top:1px solid var(--border);background:var(--canvas)}
+    .section-pill{padding:8px 16px;border-radius:999px;border:1px solid var(--border-2);background:var(--panel);color:var(--text-2);font-size:13px;font-weight:700}
+    .section-pill.active{border-color:var(--accent);color:var(--text)}
+    .extras{max-width:900px;margin-top:14px}
+    .text-samples{padding:12px 14px;border-radius:10px;border:1px solid var(--border);background:var(--panel);margin-bottom:10px}
+    .text-samples .p{color:var(--text);font-weight:700;margin-bottom:4px}
+    .text-samples .s{color:var(--text-2);font-weight:600;margin-bottom:4px}
+    .text-samples .m{color:var(--text-3);font-weight:500}
+    .accent-row,.btn-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+    .accent-pill{padding:6px 12px;border-radius:999px;font-size:12px;font-weight:700;border:1px solid transparent}
+    .btn{padding:8px 14px;border-radius:8px;border:1px solid transparent;font-size:13px;font-weight:700}
+    .btn-primary{background:var(--accent);color:var(--on-accent)}
+    .btn-secondary{background:var(--elevated);color:var(--text);border-color:var(--border-2)}
+    .btn-ghost{background:transparent;color:var(--text-2);border-color:var(--border)}
+    .btn-success{background:var(--success);color:var(--on-accent)}
+    .btn-danger{background:var(--danger);color:var(--on-accent)}
+    .raw-strip{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px;max-width:900px}
+    .raw-strip .chip{width:48px;height:36px;border-radius:8px;border:1px solid rgba(0,0,0,.2);box-shadow:inset 0 0 0 1px rgba(255,255,255,.12)}
+  </style>
+</head>
+<body>
+  <div class="app">
+    <aside class="controls">
+      <h1>Theme picker v3</h1>
+      <p class="hint">Fondos forzados donde pediste; resto con claros al canvas. Textos y bordes recalculados por superficie.</p>
+      <div class="theme-list" id="themeList"></div>
+      <div class="src-hex">
+        <h2>HEX fuente</h2>
+        <div id="srcHex"></div>
+        <div class="map" id="roleMap"></div>
+      </div>
+    </aside>
+    <div class="preview" id="preview">
+      <div class="preview-bar">Theme · <strong id="activeName">—</strong></div>
+      <header class="shell-header">
+        <div class="logo"></div><div class="brand">Cobranza</div><div class="spacer"></div>
+        <div class="search">⌕ &nbsp; Ctrl + K</div>
+        <div class="icon-btn">🔔</div><div class="icon-btn">U</div>
+      </header>
+      <main class="workspace">
+        <section class="module">
+          <div class="module-header">
+            <div class="status">✓</div>
+            <div class="module-title">Clientes List</div>
+            <div class="module-actions">
+              <button type="button">⌃</button><button type="button">⛶</button>
+              <button type="button">✕</button><button type="button">⧉</button>
+            </div>
+          </div>
+          <div class="module-body">
+            <div class="panel-title-row">
+              <div class="panel-title">Lista de clientes</div>
+              <div class="panel-meta">100% · expandido</div>
+            </div>
+            <table>
+              <thead><tr><th>Documento</th><th>Nombre</th><th>Deuda actual</th></tr></thead>
+              <tbody>
+                <tr><td>12.345.678-9</td><td>Acme S.A.</td><td>1,200,000</td></tr>
+                <tr><td>9.876.543-2</td><td>Comercial del Norte</td><td>540,000</td></tr>
+                <tr><td>11.223.344-5</td><td>Distribuidora Sur</td><td>0</td></tr>
+                <tr><td>45.678.901-3</td><td>Ferretería El Tornillo</td><td>87,500</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="module-footer">Listo</div>
+        </section>
+        <div class="extras">
+          <div class="text-samples">
+            <div class="p">Texto primary — debe leerse nítido</div>
+            <div class="s">Texto secondary — labels / meta</div>
+            <div class="m">Texto muted — hints</div>
+          </div>
+          <div class="accent-row" id="accentRow"></div>
+          <div class="btn-row">
+            <button class="btn btn-primary" type="button">Primario</button>
+            <button class="btn btn-secondary" type="button">Secundario</button>
+            <button class="btn btn-ghost" type="button">Ghost</button>
+            <button class="btn btn-success" type="button">Éxito</button>
+            <button class="btn btn-danger" type="button">Peligro</button>
+          </div>
+          <div class="raw-strip" id="rawStrip"></div>
+        </div>
+      </main>
+      <footer class="shell-footer">
+        <div class="section-pill active">Clientes</div>
+        <div class="section-pill">Deudas</div>
+        <div class="section-pill">Pagos</div>
+        <div class="section-pill">Reportes</div>
+      </footer>
+    </div>
+  </div>
+<script>
+function hexToRgb(hex){hex=String(hex).replace('#','').trim();if(hex.length===3)hex=hex.split('').map(c=>c+c).join('');if(hex.length!==6)return{r:128,g:128,b:128};return{r:parseInt(hex.slice(0,2),16),g:parseInt(hex.slice(2,4),16),b:parseInt(hex.slice(4,6),16)};}
+function rgbToHex(r,g,b){const c=n=>Math.max(0,Math.min(255,Math.round(n))).toString(16).padStart(2,'0');return`#${c(r)}${c(g)}${c(b)}`.toUpperCase();}
+function mix(a,b,t){const A=hexToRgb(a),B=hexToRgb(b);return rgbToHex(A.r+(B.r-A.r)*t,A.g+(B.g-A.g)*t,A.b+(B.b-A.b)*t);}
+function luminance(hex){const{r,g,b}=hexToRgb(hex);const s=[r,g,b].map(v=>{v/=255;return v<=0.03928?v/12.92:Math.pow((v+0.055)/1.055,2.4);});return 0.2126*s[0]+0.7152*s[1]+0.0722*s[2];}
+function isLight(hex){return luminance(hex)>0.42;}
+function contrastText(bg, preferDark){
+  // stronger contrast than before
+  if(isLight(bg)) return mix('#0E0C0A', bg, 0.04);
+  return mix('#F7F5F1', bg, 0.06);
+}
+function contrastText2(bg){
+  const t=contrastText(bg);
+  return isLight(bg)?mix(t,bg,0.22):mix(t,bg,0.28);
+}
+function contrastText3(bg){
+  const t=contrastText(bg);
+  return isLight(bg)?mix(t,bg,0.38):mix(t,bg,0.42);
+}
+function onAccent(a){return isLight(a)?'#14110E':'#FFFFFF';}
+function sortByLum(h){return[...h].sort((a,b)=>luminance(a)-luminance(b));}
+function chroma(hex){const{r,g,b}=hexToRgb(hex);return Math.max(r,g,b)-Math.min(r,g,b);}
+function borderOn(a,b){
+  // visible border between two surfaces
+  if(isLight(a)&&isLight(b)) return mix('#2A2622', mix(a,b,0.5), 0.72);
+  if(!isLight(a)&&!isLight(b)) return mix('#E8E4DC', mix(a,b,0.5), 0.78);
+  return mix(a,b,0.5);
+}
+
+function buildFromRoles(roles, accents={}){
+  const canvas=roles.canvas;
+  const panel=roles.panel;
+  const elevated=roles.elevated;
+  const inset=roles.inset;
+  const accent=accents.primary||roles.accent||'#3B6FD9';
+  const success=accents.success||'#1F9D63';
+  const warning=accents.warning||'#D97706';
+  const danger=accents.danger||'#DC2626';
+  const info=accents.info||accent;
+  const border=borderOn(panel, elevated);
+  const border2=borderOn(canvas, panel);
+  return{
+    '--canvas':canvas,'--panel':panel,'--elevated':elevated,'--inset':inset,
+    '--text':contrastText(panel),'--text-2':contrastText2(panel),'--text-3':contrastText3(panel),
+    '--border':border,'--border-2':border2,
+    '--accent':accent,'--success':success,'--warning':warning,'--danger':danger,'--info':info,
+    '--shadow':isLight(canvas)?'0 4px 20px rgba(20,16,12,0.12)':'0 6px 24px rgba(0,0,0,0.45)',
+    '--hover':isLight(panel)?'rgba(15,12,10,0.06)':'rgba(255,255,255,0.08)',
+    '--on-accent':onAccent(accent)
+  };
+}
+
+/** Prefer light colors as canvas; dark as text/accents. Explicit canvasHex wins. */
+function autoRoles(source, opts={}){
+  const src=source.map(h=>h.toUpperCase());
+  const byLum=sortByLum(src);
+  const darkFirst=!!opts.darkBg;
+  const forcedCanvas=opts.canvas?opts.canvas.toUpperCase():null;
+
+  let canvas, panel, elevated, inset;
+  if(forcedCanvas){
+    canvas=forcedCanvas;
+    const rest=byLum.filter(h=>h!==canvas);
+    if(isLight(canvas)){
+      // light canvas: panel slightly different light, elevated lightest remaining / mix
+      const lights=rest.filter(isLight);
+      const darks=rest.filter(h=>!isLight(h));
+      elevated=lights[lights.length-1]||mix(canvas,'#F4F1EA',0.35);
+      panel=lights[Math.floor(lights.length/2)]||mix(canvas,elevated,0.35);
+      inset=darks[0]?mix(canvas,darks[0],0.18):mix(canvas,panel,0.4);
+      // if panel too close to canvas, separate
+      if(Math.abs(luminance(panel)-luminance(canvas))<0.03) panel=mix(canvas, elevated, 0.4);
+    } else {
+      // dark canvas: mid panel, lighter elevated from remaining
+      const lights=rest.filter(isLight);
+      const mids=rest.filter(h=>!isLight(h));
+      panel=mids[Math.floor(mids.length/2)]||mix(canvas, lights[0]||'#C8C0B4', 0.35);
+      elevated=lights[lights.length-1]||mix(panel,'#E8E2D8',0.45);
+      inset=mix(canvas,panel,0.45);
+    }
+  } else if(darkFirst){
+    canvas=byLum[0];
+    panel=byLum[Math.min(1,byLum.length-1)];
+    elevated=byLum[byLum.length-1];
+    inset=mix(canvas,panel,0.4);
+    if(chroma(elevated)>90 && byLum.length>2){
+      elevated=mix(panel, byLum[byLum.length-1], 0.35);
+    }
+  } else {
+    // prefer light bg
+    canvas=byLum[byLum.length-1];
+    // if lightest is super chromatic accent, use next quieter light
+    if(chroma(canvas)>85 && byLum.length>2){
+      const quieter=[...byLum].reverse().find(h=>chroma(h)<70);
+      if(quieter) canvas=quieter;
+    }
+    const darker=byLum.filter(h=>h!==canvas);
+    panel=darker.length?mix(canvas, darker[darker.length-1]||darker[0], 0.12):mix(canvas,'#2A2622',0.08);
+    // better: panel as second lightest or soft step from canvas
+    const lights=byLum.filter(isLight);
+    if(lights.length>=2){
+      panel=lights[lights.length-2];
+      if(panel===canvas && lights.length>=3) panel=lights[lights.length-3];
+    } else {
+      panel=mix(canvas, byLum[0], 0.12);
+    }
+    elevated=mix(canvas,'#FFFEFB',0.25);
+    elevated=mix(elevated, canvas, 0.15);
+    inset=mix(canvas, byLum[0], 0.14);
+    if(Math.abs(luminance(panel)-luminance(canvas))<0.025){
+      panel=mix(canvas, byLum[0], 0.16);
+    }
+  }
+
+  // accent: most chromatic that's not canvas
+  const byChroma=[...src].sort((a,b)=>chroma(b)-chroma(a));
+  let accent=opts.accent||byChroma.find(h=>h!==canvas&&h!==panel)||byChroma[0];
+  if(opts.accents&&opts.accents.primary) accent=opts.accents.primary;
+
+  return {
+    roles:{canvas,panel,elevated,inset,accent},
+    accents:Object.assign({
+      primary:accent,
+      success:opts.accents&&opts.accents.success||'#1F9D63',
+      warning:opts.accents&&opts.accents.warning||'#D97706',
+      danger:opts.accents&&opts.accents.danger||'#DC2626',
+      info:opts.accents&&opts.accents.info||accent
+    }, opts.accents||{})
+  };
+}
+
+const themes=[
+  // —— Figma set with your instructions ——
+  {id:'11', group:'Figma', name:'11 · Frozen mist', note:'Crema + canela · texto/bordes reforzados',
+    source:['#FCFBD8','#D9DADF','#DD700B','#7C7D75','#ADACA7'],
+    // explicit roles for readability
+    roles:{
+      canvas:'#F5F3E4',
+      panel:'#FFFEF6',
+      elevated:'#FFFEF6',
+      inset:'#E8E6D8',
+      accent:'#DD700B'
+    },
+    accents:{primary:'#DD700B', warning:'#DD700B', success:'#5A7A3A', danger:'#A33B2A', info:'#6B7280'}
+  },
+  {id:'14', group:'Figma', name:'14 · Copper (bg #C8906D)', note:'Canvas cobre',
+    source:['#C8906D','#BB6C43','#4A413C','#DCAA89','#30525C','#C35627'],
+    roles:{
+      canvas:'#C8906D',
+      panel:'#DCAA89',
+      elevated:'#E6C4A8',
+      inset:'#BB6C43',
+      accent:'#30525C'
+    },
+    accents:{primary:'#30525C', warning:'#C35627', danger:'#C35627', info:'#30525C', success:'#2F6B4F'}
+  },
+  {id:'15', group:'Figma', name:'15 · Cocoa (bg #5A84AC)', note:'Canvas azul acero',
+    source:['#742F14','#5A84AC','#C7AC9F','#FC9C44','#5C3C2C'],
+    roles:{
+      canvas:'#5A84AC',
+      panel:'#C7AC9F',
+      elevated:'#E2D0C5',
+      inset:'#4E7396',
+      accent:'#FC9C44'
+    },
+    accents:{primary:'#FC9C44', info:'#5A84AC', warning:'#FC9C44', danger:'#742F14', success:'#2F6B4F'}
+  },
+  {id:'18', group:'Figma', name:'18 · Seashell (bg #5484A4)', note:'Canvas blue-gray',
+    source:['#F6C992','#30525C','#ACC0D3','#D396A6','#09A1A1','#5484A4'],
+    roles:{
+      canvas:'#5484A4',
+      panel:'#ACC0D3',
+      elevated:'#D5E1EC',
+      inset:'#3F6B88',
+      accent:'#09A1A1'
+    },
+    accents:{primary:'#09A1A1', info:'#30525C', warning:'#F6C992', danger:'#D396A6', success:'#1F9D63'}
+  },
+  {id:'46', group:'Figma', name:'46 · Clockwork (bg #919599)', note:'Canvas gris medio',
+    source:['#CDCDCB','#2B6CFE','#EC4025','#919599','#F8F8F8','#FBA45C','#E56515'],
+    roles:{
+      canvas:'#919599',
+      panel:'#CDCDCB',
+      elevated:'#F0F0EE',
+      inset:'#7E8388',
+      accent:'#2B6CFE'
+    },
+    accents:{primary:'#2B6CFE', danger:'#EC4025', warning:'#E56515', success:'#1F9D63', info:'#2B6CFE'}
+  },
+  {id:'48', group:'Figma', name:'48 · Arctic (bg #ACBBCF)', note:'Canvas steel light',
+    source:['#5289AD','#243C4C','#698696','#ACBBCF','#F4FCFB'],
+    roles:{
+      canvas:'#ACBBCF',
+      panel:'#D5DEE8',
+      elevated:'#F4FCFB',
+      inset:'#8FA3B8',
+      accent:'#243C4C'
+    },
+    accents:{primary:'#243C4C', info:'#5289AD', success:'#1F9D63', warning:'#D97706', danger:'#DC2626'}
+  },
+  // other Figma: light bg preferred
+  {id:'2', group:'Figma', name:'2 · Neutral elegance', note:'Claros al fondo', source:['#FFDBBB','#CCBEB1','#997E67','#664930'], preferLight:true, accents:{primary:'#664930'}},
+  {id:'4', group:'Figma', name:'4 · Woodland', note:'Claros al fondo', source:['#9F7560','#9E9E9E','#525034','#AAD31E','#D4AF9F'], preferLight:true, accents:{primary:'#525034', success:'#AAD31E'}},
+  {id:'5', group:'Figma', name:'5 · Driftwood pearl', note:'Claros al fondo', source:['#BC7B6F','#5A322A','#E4A499','#718A9E','#CCCDC7'], preferLight:true, accents:{primary:'#5A322A', info:'#718A9E'}},
+  {id:'13', group:'Figma', name:'13 · Amber walnut', note:'Claros al fondo', source:['#F2F0EF','#BBBDBC','#2457F3','#733E24','#EBEFEE','#CCB499','#4C484D','#BFB9B5','#D6794D'], preferLight:true, accents:{primary:'#2457F3', warning:'#D6794D'}},
+  {id:'16', group:'Figma', name:'16 · Sandstone aquamarine', note:'Claros al fondo', source:['#BC6C50','#304C53','#DDAD9C','#5A2F25','#AFE0E7'], preferLight:true, accents:{primary:'#304C53', info:'#AFE0E7'}},
+  {id:'17', group:'Figma', name:'17 · Honey opal', note:'Claros al fondo', source:['#ECB914','#F6D579','#4F3D35','#908108','#C8B8A0'], preferLight:true, accents:{primary:'#4F3D35', warning:'#908108'}},
+  {id:'22', group:'Figma', name:'22 · Terrazzo', note:'Claros al fondo', source:['#E7B614','#D8D4BC','#891A10','#DCB236','#B82E10','#714236'], preferLight:true, accents:{primary:'#891A10', warning:'#E7B614'}},
+  {id:'24', group:'Figma', name:'24 · Lapis velvet', note:'Claros al fondo si se puede', source:['#0474C4','#5379AE','#2C444C','#A8C4EC','#06457E','#262B40'], preferLight:true, accents:{primary:'#0474C4', info:'#5379AE'}},
+  {id:'30', group:'Figma', name:'30 · Turquoise amber', note:'Claros al fondo', source:['#304C64','#26788E','#631B08','#A4CCD4','#E24B0C'], preferLight:true, accents:{primary:'#26788E', warning:'#E24B0C'}},
+  {id:'31', group:'Figma', name:'31 · Sapphire ash', note:'Claros al fondo', source:['#35627A','#E5AEA9','#B46258','#A6A9D0','#E5E5E5','#8E949B'], preferLight:true, accents:{primary:'#35627A', danger:'#B46258'}},
+  {id:'50', group:'Figma', name:'50 · Autumn luxe', note:'Claros al fondo', source:['#E2E1EB','#AAAAAE','#322D27','#7F7265','#BF8440'], preferLight:true, accents:{primary:'#BF8440'}},
+
+  // —— New set ——
+  {id:'mb', group:'Extra', name:'Midnight & Brass', note:'Dark bg forzado',
+    source:['#0F1626','#EDE7DA','#B08D57','#4A6FA5'],
+    roles:{canvas:'#0F1626', panel:'#1A2438', elevated:'#243044', inset:'#151D2C', accent:'#B08D57'},
+    accents:{primary:'#B08D57', info:'#4A6FA5', success:'#3A9B6E', warning:'#B08D57', danger:'#D94A3D'}
+  },
+  {id:'mp', group:'Extra', name:'Muted Pastels', note:'Slate dark + pasteles',
+    source:['#2C2C2C','#E4E4E4','#A8DADC','#FFC1CC','#B39CD0'],
+    roles:{canvas:'#2C2C2C', panel:'#3A3A3A', elevated:'#464646', inset:'#333333', accent:'#B39CD0'},
+    accents:{primary:'#B39CD0', info:'#A8DADC', warning:'#FFC1CC', danger:'#E86A7A', success:'#6FBF9A'}
+  },
+  {id:'m9', group:'Extra', name:'Minimalist #9', note:'Claros al fondo', source:['#BAB4B8','#391842','#732F3E','#451938','#200819'], preferLight:true, accents:{primary:'#732F3E', danger:'#451938'}},
+  {id:'m11', group:'Extra', name:'Minimalist #11', note:'Claros al fondo', source:['#BAB9B4','#8A9C68','#C4BA84','#9C7A68','#2F2D1D'], preferLight:true, accents:{primary:'#2F2D1D', success:'#8A9C68'}},
+  {id:'m15', group:'Extra', name:'Minimalist #15', note:'Claros al fondo', source:['#CAEECF','#9BC8B8','#5D796F','#7CA081','#2A3326'], preferLight:true, accents:{primary:'#2A3326', success:'#5D796F'}},
+  {id:'sf', group:'Extra', name:'Sleek and Futuristic', note:'Claros al fondo si se puede', source:['#2C3531','#116466','#D9B08C','#FFCB9A','#D1E8E2'], preferLight:true, accents:{primary:'#116466', warning:'#D9B08C'}},
+  {id:'ia', group:'Extra', name:'Innovative and Audacious', note:'Dark-ish + neón',
+    source:['#272727','#747474','#FF652F','#FFE400','#14A76C'],
+    roles:{canvas:'#272727', panel:'#333333', elevated:'#3D3D3D', inset:'#2E2E2E', accent:'#FF652F'},
+    accents:{primary:'#FF652F', warning:'#FFE400', success:'#14A76C', danger:'#FF652F', info:'#14A76C'}
+  },
+  {id:'mw', group:'Extra', name:'Minimal Yet Warm', note:'Claros al fondo', source:['#EAE7DC','#D8C3A5','#8E8D8A','#E98074','#E85A4F'], preferLight:true, accents:{primary:'#E85A4F', danger:'#E85A4F', warning:'#E98074'}},
+  {id:'ce', group:'Extra', name:'Clean and Energetic', note:'Claros al fondo', source:['#5680E9','#84CEEB','#5AB9EA','#C1C8E4','#8860D0'], preferLight:true, accents:{primary:'#5680E9', info:'#8860D0'}},
+  {id:'cm', group:'Extra', name:'Clean and Modern', note:'Claros al fondo', source:['#17252A','#2B7A78','#3AAFA9','#DEF2F1','#FEFFFF'], preferLight:true, accents:{primary:'#2B7A78', info:'#3AAFA9'}},
+  {id:'ea', group:'Extra', name:'Effective Accent Colors', note:'Claros al fondo', source:['#FAED26','#46344E','#5A5560','#9D8D8F','#9B786F'], preferLight:true, accents:{primary:'#46344E', warning:'#FAED26'}},
+  {id:'rr', group:'Extra', name:'Rose Red and Blueberry', note:'Claros al fondo', source:['#4285F4','#5C2018','#BC4639','#D4A59A','#F3E0DC'], preferLight:true, accents:{primary:'#4285F4', danger:'#BC4639'}},
+  {id:'ep', group:'Extra', name:'Eclectic and Peaceful', note:'Claros al fondo', source:['#844D36','#474853','#86B3D1','#AAA0A0','#8E8268'], preferLight:true, accents:{primary:'#474853', info:'#86B3D1'}},
+  {id:'cs', group:'Extra', name:'Corporate and Serious', note:'Dark bg (corporate)',
+    source:['#265077','#022140','#494B68','#1E4258','#2D5F5D'],
+    roles:{canvas:'#022140', panel:'#1E4258', elevated:'#265077', inset:'#16364A', accent:'#2D5F5D'},
+    accents:{primary:'#3AA8A0', info:'#494B68', success:'#2D5F5D', warning:'#D97706', danger:'#E85A4F'}
+  },
+];
+
+const list=document.getElementById('themeList');
+const preview=document.getElementById('preview');
+const activeName=document.getElementById('activeName');
+const srcHex=document.getElementById('srcHex');
+const roleMap=document.getElementById('roleMap');
+const accentRow=document.getElementById('accentRow');
+const rawStrip=document.getElementById('rawStrip');
+
+function resolve(theme){
+  if(theme.roles){
+    return buildFromRoles(theme.roles, theme.accents||{});
+  }
+  const built=autoRoles(theme.source, {
+    darkBg:!!theme.darkBg,
+    canvas:theme.canvas,
+    accents:theme.accents,
+    preferLight:theme.preferLight!==false
+  });
+  // if preferLight, force auto light path
+  if(theme.preferLight){
+    const b=autoRoles(theme.source,{darkBg:false, accents:theme.accents});
+    return buildFromRoles(b.roles, b.accents);
+  }
+  return buildFromRoles(built.roles, built.accents);
+}
+
+function applyTheme(theme){
+  const tokens=resolve(theme);
+  Object.entries(tokens).forEach(([k,v])=>preview.style.setProperty(k,v));
+  activeName.textContent=theme.name;
+  document.querySelectorAll('.theme-btn').forEach(b=>b.classList.toggle('active',b.dataset.id===theme.id));
+  srcHex.innerHTML=theme.source.map(h=>`<div class="row"><i style="background:${h}"></i>${h}</div>`).join('');
+  roleMap.innerHTML=
+    `canvas ${tokens['--canvas']}<br>panel ${tokens['--panel']}<br>elevated ${tokens['--elevated']}<br>inset ${tokens['--inset']}<br>accent ${tokens['--accent']}`;
+  const accents=[['Primary',tokens['--accent']],['Success',tokens['--success']],['Warning',tokens['--warning']],['Danger',tokens['--danger']],['Info',tokens['--info']]];
+  accentRow.innerHTML=accents.map(([label,color])=>`<span class="accent-pill" style="color:${color};border-color:${color};background:color-mix(in srgb, ${color} 18%, transparent)">${label}</span>`).join('');
+  rawStrip.innerHTML=theme.source.map(h=>`<div class="chip" style="background:${h}" title="${h}"></div>`).join('');
+}
+
+let lastGroup='';
+themes.forEach((theme,idx)=>{
+  if(theme.group!==lastGroup){
+    const lab=document.createElement('div');
+    lab.style.cssText='font-size:10px;text-transform:uppercase;letter-spacing:.06em;color:#666;margin:10px 0 4px';
+    lab.textContent=theme.group;
+    list.appendChild(lab);
+    lastGroup=theme.group;
+  }
+  const btn=document.createElement('button');
+  btn.type='button';
+  btn.className='theme-btn'+(idx===0?' active':'');
+  btn.dataset.id=theme.id;
+  btn.innerHTML=`<span class="t-name">${theme.name}</span><span class="t-note">${theme.note||''}</span><span class="t-dots">${theme.source.map(c=>`<span style="background:${c}"></span>`).join('')}</span>`;
+  btn.addEventListener('click',()=>applyTheme(theme));
+  list.appendChild(btn);
+});
+applyTheme(themes[0]);
+</script>
+</body>
+</html>
