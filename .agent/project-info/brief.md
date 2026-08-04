@@ -114,8 +114,8 @@ All tokens live under the `--cba-` prefix.
 
   /* Text — near-black for strong contrast on light gray */
   --cba-text-primary: #0f1115;
-  --cba-text-secondary: #1e2329;
-  --cba-text-muted: #2a2e35;
+  --cba-text-secondary: #15181c;
+  --cba-text-muted: #212429;
   --cba-text-inverse: #e8eaed;
 
   /* Borders */
@@ -160,7 +160,7 @@ All tokens live under the `--cba-` prefix.
 }
 ```
 
-**`--cba-text-muted` usage restriction:** Must NOT be used on `--cba-bg-primary` (contrast ~3.6:1, fails AA). Approved for `--cba-bg-secondary` (~4.5:1), `--cba-bg-tertiary` (~5.5:1), and `--cba-bg-elevated` (~6.7:1). Prefer `--cba-text-secondary` on `--cba-bg-primary` for lower-emphasis text.
+**`--cba-text-muted` usage restriction:** Must NOT be used on `--cba-bg-primary` (contrast ~4.0:1, fails AA). Approved for `--cba-bg-secondary` (~5.1:1), `--cba-bg-tertiary` (~6.3:1), and `--cba-bg-elevated` (~7.6:1). Prefer `--cba-text-secondary` on `--cba-bg-primary` for lower-emphasis text.
 
 **Typography**
 

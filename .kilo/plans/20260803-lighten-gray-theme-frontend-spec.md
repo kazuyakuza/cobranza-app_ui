@@ -20,8 +20,8 @@ Shift the `@cobranza-apps/ui` theme from a near-dark gray palette to a lighter, 
 | `--cba-bg-elevated` | `#454a52` | `#aeb6bf` | Elevated/popover surfaces; lightest gray, not white. |
 | `--cba-bg-overlay` | `rgba(0, 0, 0, 0.55)` | `rgba(0, 0, 0, 0.32)` | Lighter overlay because the underlying surfaces are already lighter. |
 | `--cba-text-primary` | `#e8eaed` | `#0f1115` | Near-black text for strong contrast on light gray backgrounds. |
-| `--cba-text-secondary` | `#b0b4ba` | `#1e2329` | Dark gray text; passes AA on all proposed backgrounds. |
-| `--cba-text-muted` | `#8b9098` | `#2a2e35` | Lower-emphasis text; passes AA on secondary, tertiary, and elevated surfaces. |
+| `--cba-text-secondary` | `#b0b4ba` | `#15181c` | Dark gray text; passes AA on all proposed backgrounds. |
+| `--cba-text-muted` | `#8b9098` | `#212429` | Lower-emphasis text; passes AA on secondary, tertiary, and elevated surfaces. |
 | `--cba-text-inverse` | `#1a1d21` | `#e8eaed` | Light text for dark surfaces / overlays (logical inverse of new primary text). |
 | `--cba-border-subtle` | `#4a4f57` | `#aeb6bf` | Subtle border; light gray visible on primary/secondary. |
 | `--cba-border-default` | `#5a606a` | `#707880` | Default border; mid-gray visible on lighter surfaces. |
@@ -42,14 +42,14 @@ Relative luminance and contrast ratios are approximated against the sRGB WCAG fo
 | `--cba-text-primary` (#0f1115) | `--cba-bg-secondary` (#8c95a0, L~0.296) | `#0f1115` on `#8c95a0` | ~6.3:1 | Yes |
 | `--cba-text-primary` (#0f1115) | `--cba-bg-tertiary` (#9da6b0, L~0.375) | `#0f1115` on `#9da6b0` | ~7.7:1 | Yes |
 | `--cba-text-primary` (#0f1115) | `--cba-bg-elevated` (#aeb6bf, L~0.463) | `#0f1115` on `#aeb6bf` | ~9.3:1 | Yes |
-| `--cba-text-secondary` (#1e2329, L~0.010) | `--cba-bg-primary` (#7a838d, L~0.224) | `#1e2329` on `#7a838d` | ~4.5:1 | Yes |
-| `--cba-text-secondary` (#1e2329) | `--cba-bg-secondary` (#8c95a0) | `#1e2329` on `#8c95a0` | ~5.7:1 | Yes |
-| `--cba-text-secondary` (#1e2329) | `--cba-bg-tertiary` (#9da6b0) | `#1e2329` on `#9da6b0` | ~7.0:1 | Yes |
-| `--cba-text-secondary` (#1e2329) | `--cba-bg-elevated` (#aeb6bf) | `#1e2329` on `#aeb6bf` | ~8.5:1 | Yes |
-| `--cba-text-muted` (#2a2e35, L~0.027) | `--cba-bg-primary` (#7a838d) | `#2a2e35` on `#7a838d` | ~3.6:1 | **No** |
-| `--cba-text-muted` (#2a2e35) | `--cba-bg-secondary` (#8c95a0) | `#2a2e35` on `#8c95a0` | ~4.5:1 | Yes (marginal) |
-| `--cba-text-muted` (#2a2e35) | `--cba-bg-tertiary` (#9da6b0) | `#2a2e35` on `#9da6b0` | ~5.5:1 | Yes |
-| `--cba-text-muted` (#2a2e35) | `--cba-bg-elevated` (#aeb6bf) | `#2a2e35` on `#aeb6bf` | ~6.7:1 | Yes |
+| `--cba-text-secondary` (#15181c, L~0.009) | `--cba-bg-primary` (#7a838d, L~0.224) | `#15181c` on `#7a838d` | ~4.6:1 | Yes |
+| `--cba-text-secondary` (#15181c) | `--cba-bg-secondary` (#8c95a0) | `#15181c` on `#8c95a0` | ~5.9:1 | Yes |
+| `--cba-text-secondary` (#15181c) | `--cba-bg-tertiary` (#9da6b0) | `#15181c` on `#9da6b0` | ~7.2:1 | Yes |
+| `--cba-text-secondary` (#15181c) | `--cba-bg-elevated` (#aeb6bf) | `#15181c` on `#aeb6bf` | ~8.7:1 | Yes |
+| `--cba-text-muted` (#212429, L~0.017) | `--cba-bg-primary` (#7a838d) | `#212429` on `#7a838d` | ~4.0:1 | **No** |
+| `--cba-text-muted` (#212429) | `--cba-bg-secondary` (#8c95a0) | `#212429` on `#8c95a0` | ~5.1:1 | Yes |
+| `--cba-text-muted` (#212429) | `--cba-bg-tertiary` (#9da6b0) | `#212429` on `#9da6b0` | ~6.3:1 | Yes |
+| `--cba-text-muted` (#212429) | `--cba-bg-elevated` (#aeb6bf) | `#212429` on `#aeb6bf` | ~7.6:1 | Yes |
 | `--cba-text-inverse` (#e8eaed) | `--cba-bg-overlay` (blended) | light text on dark overlay | >7:1 | Yes |
 
 ### Usage guidance for `--cba-text-muted`

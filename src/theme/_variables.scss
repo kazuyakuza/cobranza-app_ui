@@ -13,8 +13,8 @@
  *   Backgrounds  — Surface colors from darkest (primary) to lightest (elevated).
  *                  Use primary for main chrome, secondary/tertiary for nested
  *                  surfaces, elevated for popovers/modals.
- *   Text         — primary (#0f1115) for body text, secondary (#1e2329) for
- *                  lower emphasis, muted (#2a2e35) for de-emphasized content
+ *   Text         — primary (#0f1115) for body text, secondary (#15181c) for
+ *                  lower emphasis, muted (#212429) for de-emphasized content
  *                  (NOT on bg-primary — use secondary there), inverse (#e8eaed)
  *                  for text on dark overlays.
  *   Borders      — subtle (aliases --cba-bg-elevated), default (#707880),
@@ -43,8 +43,8 @@
 
   /* Text */
   --cba-text-primary: #0f1115;
-  --cba-text-secondary: #1e2329;
-  --cba-text-muted: #2a2e35;
+  --cba-text-secondary: #15181c;
+  --cba-text-muted: #212429;
   --cba-text-inverse: #e8eaed;
 
   /* Borders */
