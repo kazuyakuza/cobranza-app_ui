@@ -2,83 +2,98 @@
  * Design tokens — `:root` / `--cba-` prefix.
  *
  * SOURCE OF TRUTH: .agent/project-info/brief.md §5
- * FRONT-END SPEC:  .kilo/plans/20260803-lighten-gray-theme-frontend-spec.md
+ * FRONT-END SPEC:  .kilo/plans/20260804-phase8-frontend-spec.md
  *
- * This file defines the intermediate-gray theme for @cobranza-apps/ui.
- * The palette is a LIGHTER medium-gray (shifted from the original near-dark
- * gray). Text tokens use near-black values for strong contrast on the light
- * gray backgrounds. All pairs meet WCAG AA 4.5:1 except where documented.
+ * Theme name: Minimal Yet Warm — warm sand / cream / taupe + controlled coral.
+ * Canvas is a light warm gray (EAE7DC); panels step lighter (F3F1E9), elevated
+ * surfaces are a near-white cream (FCFBF6), insets use warm sand (D8C3A5) for
+ * table headers / input wells / module footers. Four distinguishable surfaces.
+ *
+ * Text tokens are warm near-black/taupe; primary/secondary pass WCAG AA on every
+ * surface; muted passes AA on canvas, panel, elevated and is RESTRICTED on
+ * `--cba-bg-tertiary` (inset sand: ~3.86:1) — use `--cba-text-secondary` on inset.
  *
  * TOKEN GROUPS:
- *   Backgrounds  — Surface colors from darkest (primary) to lightest (elevated).
- *                  Use primary for main chrome, secondary/tertiary for nested
- *                  surfaces, elevated for popovers/modals.
- *   Text         — primary (#0f1115) for body text, secondary (#15181c) for
- *                  lower emphasis, muted (#212429) for de-emphasized content
- *                  (NOT on bg-primary — use secondary there), inverse (#e8eaed)
- *                  for text on dark overlays.
- *   Borders      — subtle (aliases --cba-bg-elevated), default (#707880),
- *                  strong (#4a5059). Use subtle for separators, default for
- *                  input borders, strong for focus or emphasis.
- *   Accents      — Semantic colors (primary/success/warning/danger/info).
- *                  Unchanged from original palette.
- *   Interactive  — hover/active use dark overlays (rgba(0,0,0,...)) suitable
- *                  for light gray surfaces. focus-ring unchanged.
- *   Layout       — Fixed dimensions for Shell header, footer, module header.
+ *   Backgrounds  — canvas (primary), panel (secondary), inset (tertiary),
+ *                  elevated (cream, highest). Use primary for workspace, secondary
+ *                  for module body / cards, tertiary for recessed regions (table
+ *                  headers / wells / module footer), elevated for module header,
+ *                  dropdowns, popovers.
+ *   Text         — primary (#2B2620) body, secondary (#4A4640) lower emphasis,
+ *                  muted (#625C55) de-emphasized (NOT on bg-tertiary), inverse
+ *                  (#FDFCF8) on dark accents/overlays.
+ *   Borders      — subtle (#E7E5DE) thin separators, default (#A7A6A2) input
+ *                  borders / chrome, strong (#8E8D8A) focus / footer pills / header
+ *                  icon-button outlines so they do not disappear on cream/sand.
+ *   Accents      — primary warm taupe (#6B5B4F, NOT coral); success calm green
+ *                  (#3E6B4F); warning soft coral (#E98074); danger deeper coral-red
+ *                  (#B93E36); info muted steel (#56717E). See accent-discipline note.
+ *   Interactive  — hover/active use warm taupe overlays (rgba(43,38,32,...)) so they
+ *                  read on cream/sand. focus-ring is a warm coral ring so it is visible
+ *                  on light warm surfaces.
+ *   Layout       — Fixed dimensions for Shell header / footer / module header.
  *   Radius       — sm (6px), md (10px), lg (14px).
- *   Shadows      — Reduced opacity vs. original (0.18 / 0.25) because lighter
- *                  surfaces make the same shadow appear heavier.
- *   Spacing      — 4px-based scale from 4px (--cba-space-1) to 32px (--cba-space-8).
+ *   Shadows      — Warm-tinted (rgba(43,34,28,...)) so modules lift off canvas
+ *                  without harsh black bloom.
+ *   Spacing      — 4px-based scale 4px…32px.
+ *
+ * ACCENT DISCIPLINE — coral (#E98074 soft / #E85A4F strong) is RESERVED for:
+ *   - warning states and badges/borders,
+ *   - danger / error states and badges,
+ *   - focus-ring emphasis,
+ *   - small emphasis accents (icons, links, dots).
+ * Coral MUST NOT be used as a large background fill for panels, modules, or primary
+ * CTAs. Primary CTAs use the warm taupe `--cba-accent-primary`.
  *
  * Do NOT rename tokens. Do NOT hard-code color values in components — always
  * reference var(--cba-*). When adding new tokens, update brief.md §5 first.
  */
 :root {
-  /* Backgrounds */
-  --cba-bg-primary: #7a838d;
-  --cba-bg-secondary: #8c95a0;
-  --cba-bg-tertiary: #9da6b0;
-  --cba-bg-elevated: #aeb6bf;
-  --cba-bg-overlay: rgba(0, 0, 0, 0.32);
+  /* Backgrounds — warm Minimal-Yet-Warm surface scale (canvas → panel → elevated → inset) */
+  --cba-bg-primary: #EAE7DC;
+  --cba-bg-secondary: #F3F1E9;
+  --cba-bg-tertiary: #D8C3A5;
+  --cba-bg-elevated: #FCFBF6;
+  --cba-bg-overlay: rgba(43, 38, 32, 0.45);
 
-  /* Text */
-  --cba-text-primary: #0f1115;
-  --cba-text-secondary: #15181c;
-  --cba-text-muted: #212429;
-  --cba-text-inverse: #e8eaed;
+  /* Text — warm near-black/taupe; muted restricted on bg-tertiary (see header) */
+  --cba-text-primary: #2B2620;
+  --cba-text-secondary: #4A4640;
+  --cba-text-muted: #625C55;
+  --cba-text-inverse: #FDFCF8;
 
-  /* Borders */
-  --cba-border-subtle: var(--cba-bg-elevated);
-  --cba-border-default: #707880;
-  --cba-border-strong: #4a5059;
+  /* Borders — visible on cream/sand */
+  --cba-border-subtle: #E7E5DE;
+  --cba-border-default: #A7A6A2;
+  --cba-border-strong: #8E8D8A;
 
-  /* Accents */
-  --cba-accent-primary: #3b82f6;
-  --cba-accent-success: #22c55e;
-  --cba-accent-warning: #f59e0b;
-  --cba-accent-danger: #ef4444;
-  --cba-accent-info: #06b6d4;
+  /* Accents — primary is warm taupe (NOT coral); coral reserved for status/focus */
+  --cba-accent-primary: #6B5B4F;
+  --cba-accent-success: #3E6B4F;
+  --cba-accent-warning: #E98074;
+  --cba-accent-danger: #B93E36;
+  --cba-accent-info: #56717E;
 
-  /* Interactive states */
-  --cba-hover: rgba(0, 0, 0, 0.06);
-  --cba-active: rgba(0, 0, 0, 0.1);
-  --cba-focus-ring: 0 0 0 3px rgba(59, 130, 246, 0.45);
+  /* Interactive states — warm taupe overlays + warm coral focus ring */
+  --cba-hover: rgba(43, 38, 32, 0.06);
+  --cba-active: rgba(43, 38, 32, 0.10);
+  --cba-focus-ring: 0 0 0 3px rgba(232, 90, 79, 0.45);
 
-  /* Layout */
+  /* Layout (unchanged) */
   --cba-header-height: 56px;
   --cba-footer-height: 64px;
   --cba-module-header-min-height: 40px;
 
-  /* Radius */
+  /* Radius (unchanged) */
   --cba-radius-sm: 6px;
   --cba-radius-md: 10px;
   --cba-radius-lg: 14px;
 
-  /* Shadows */
-  --cba-shadow-module: 0 4px 16px rgba(0, 0, 0, 0.18);
-  --cba-shadow-elevated: 0 8px 24px rgba(0, 0, 0, 0.25);
+  /* Shadows — warm-tinted, softer than black */
+  --cba-shadow-module: 0 4px 16px rgba(43, 34, 28, 0.12);
+  --cba-shadow-elevated: 0 8px 24px rgba(43, 34, 28, 0.18);
 
-  /* Spacing */
+  /* Spacing (unchanged) */
   --cba-space-1: 4px;
   --cba-space-2: 8px;
   --cba-space-3: 12px;
