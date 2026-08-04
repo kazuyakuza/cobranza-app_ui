@@ -241,6 +241,7 @@ For a quick reference, see [`./docs/THEME.md`](./docs/THEME.md).
 - [Architecture](.agent/project-info/architecture.md) — Build strategy, folder layout, integration patterns.
 - [Tech stack](.agent/project-info/tech.md) — Exact versions, dependencies, tooling constraints.
 - JSDoc on every public `@Input()`, `@Output()`, and component class.
+- [`./CHANGELOG.md`](./CHANGELOG.md) — Notable changes per release (Keep a Changelog format).
 
 <!-- AI Agent Note: Before contributing, read AGENTS.md and .agent/project-info/ files.
      Follow workflows in .agent/WORKFLOWS.md and rules in .kilo/rules/. -->
