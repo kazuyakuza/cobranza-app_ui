@@ -3,42 +3,51 @@
  * Do NOT rename tokens. Values are authoritative (see brief §5).
  */
 :root {
+  /* Backgrounds */
   --cba-bg-primary: #7a838d;
   --cba-bg-secondary: #8c95a0;
   --cba-bg-tertiary: #9da6b0;
   --cba-bg-elevated: #aeb6bf;
   --cba-bg-overlay: rgba(0, 0, 0, 0.32);
 
+  /* Text */
   --cba-text-primary: #0f1115;
   --cba-text-secondary: #1e2329;
   --cba-text-muted: #2a2e35;
   --cba-text-inverse: #e8eaed;
 
-  --cba-border-subtle: #aeb6bf;
+  /* Borders */
+  --cba-border-subtle: var(--cba-bg-elevated);
   --cba-border-default: #707880;
   --cba-border-strong: #4a5059;
 
+  /* Accents */
   --cba-accent-primary: #3b82f6;
   --cba-accent-success: #22c55e;
   --cba-accent-warning: #f59e0b;
   --cba-accent-danger: #ef4444;
   --cba-accent-info: #06b6d4;
 
+  /* Interactive states */
   --cba-hover: rgba(0, 0, 0, 0.06);
   --cba-active: rgba(0, 0, 0, 0.1);
   --cba-focus-ring: 0 0 0 3px rgba(59, 130, 246, 0.45);
 
+  /* Layout */
   --cba-header-height: 56px;
   --cba-footer-height: 64px;
   --cba-module-header-min-height: 40px;
 
+  /* Radius */
   --cba-radius-sm: 6px;
   --cba-radius-md: 10px;
   --cba-radius-lg: 14px;
 
+  /* Shadows */
   --cba-shadow-module: 0 4px 16px rgba(0, 0, 0, 0.18);
   --cba-shadow-elevated: 0 8px 24px rgba(0, 0, 0, 0.25);
 
+  /* Spacing */
   --cba-space-1: 4px;
   --cba-space-2: 8px;
   --cba-space-3: 12px;
