@@ -59,7 +59,7 @@
     }
 
     &[disabled] {
-      color: var(--cba-text-muted);
+      color: var(--cba-text-secondary);
       cursor: not-allowed;
       opacity: 0.65;
       background-color: var(--cba-bg-tertiary);

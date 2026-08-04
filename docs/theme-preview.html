@@ -21,7 +21,7 @@
     .theme-list{display:flex;flex-direction:column;gap:4px}
     .theme-btn{text-align:left;border:1px solid #333;background:#222;border-radius:9px;padding:7px 9px;cursor:pointer;font:inherit;color:#ddd}
     .theme-btn:hover{border-color:#555}
-    .theme-btn.active{border-color:#7aa2ff;background:#1e2430}
+    .theme-btn.active{border-color:#B93E36;background:#2A211D}
     .t-name{font-weight:700;font-size:12px;display:block}
     .t-note{font-size:10.5px;color:#8a9099;display:block;margin-top:1px}
     .t-dots{display:flex;gap:3px;margin-top:6px;flex-wrap:wrap}
@@ -44,7 +44,7 @@
     .logo{width:28px;height:28px;border-radius:8px;background:var(--inset);border:1px solid var(--border-2)}
     .brand{font-weight:700}
     .spacer{flex:1}
-    .search{display:flex;align-items:center;gap:8px;padding:6px 12px;border-radius:999px;border:1px solid var(--border-2);background:var(--inset);color:var(--text-3);font-size:12px;min-width:140px}
+    .search{display:flex;align-items:center;gap:8px;padding:6px 12px;border-radius:999px;border:1px solid var(--border-2);background:var(--inset);color:var(--text-2);font-size:12px;min-width:140px}
     .icon-btn{width:32px;height:32px;border-radius:999px;border:1px solid var(--border-2);background:var(--panel);color:var(--text-2);display:inline-flex;align-items:center;justify-content:center}
     .workspace{flex:1;padding:16px}
     .module{max-width:900px;background:var(--panel);border:1px solid var(--border);border-radius:12px;box-shadow:var(--shadow);overflow:hidden}
@@ -156,136 +156,6 @@
     </div>
   </div>
 <script>
-function hexToRgb(hex){hex=String(hex).replace('#','').trim();if(hex.length===3)hex=hex.split('').map(c=>c+c).join('');if(hex.length!==6)return{r:128,g:128,b:128};return{r:parseInt(hex.slice(0,2),16),g:parseInt(hex.slice(2,4),16),b:parseInt(hex.slice(4,6),16)};}
-function rgbToHex(r,g,b){const c=n=>Math.max(0,Math.min(255,Math.round(n))).toString(16).padStart(2,'0');return`#${c(r)}${c(g)}${c(b)}`.toUpperCase();}
-function mix(a,b,t){const A=hexToRgb(a),B=hexToRgb(b);return rgbToHex(A.r+(B.r-A.r)*t,A.g+(B.g-A.g)*t,A.b+(B.b-A.b)*t);}
-function luminance(hex){const{r,g,b}=hexToRgb(hex);const s=[r,g,b].map(v=>{v/=255;return v<=0.03928?v/12.92:Math.pow((v+0.055)/1.055,2.4);});return 0.2126*s[0]+0.7152*s[1]+0.0722*s[2];}
-function isLight(hex){return luminance(hex)>0.42;}
-function contrastText(bg, preferDark){
-  // stronger contrast than before
-  if(isLight(bg)) return mix('#0E0C0A', bg, 0.04);
-  return mix('#F7F5F1', bg, 0.06);
-}
-function contrastText2(bg){
-  const t=contrastText(bg);
-  return isLight(bg)?mix(t,bg,0.22):mix(t,bg,0.28);
-}
-function contrastText3(bg){
-  const t=contrastText(bg);
-  return isLight(bg)?mix(t,bg,0.38):mix(t,bg,0.42);
-}
-function onAccent(a){return isLight(a)?'#14110E':'#FFFFFF';}
-function sortByLum(h){return[...h].sort((a,b)=>luminance(a)-luminance(b));}
-function chroma(hex){const{r,g,b}=hexToRgb(hex);return Math.max(r,g,b)-Math.min(r,g,b);}
-function borderOn(a,b){
-  // visible border between two surfaces
-  if(isLight(a)&&isLight(b)) return mix('#2A2622', mix(a,b,0.5), 0.72);
-  if(!isLight(a)&&!isLight(b)) return mix('#E8E4DC', mix(a,b,0.5), 0.78);
-  return mix(a,b,0.5);
-}
-
-function buildFromRoles(roles, accents={}){
-  const canvas=roles.canvas;
-  const panel=roles.panel;
-  const elevated=roles.elevated;
-  const inset=roles.inset;
-  const accent=accents.primary||roles.accent||'#3B6FD9';
-  const success=accents.success||'#1F9D63';
-  const warning=accents.warning||'#D97706';
-  const danger=accents.danger||'#DC2626';
-  const info=accents.info||accent;
-  const border=borderOn(panel, elevated);
-  const border2=borderOn(canvas, panel);
-  return{
-    '--canvas':canvas,'--panel':panel,'--elevated':elevated,'--inset':inset,
-    '--text':contrastText(panel),'--text-2':contrastText2(panel),'--text-3':contrastText3(panel),
-    '--border':border,'--border-2':border2,
-    '--accent':accent,'--success':success,'--warning':warning,'--danger':danger,'--info':info,
-    '--shadow':isLight(canvas)?'0 4px 20px rgba(20,16,12,0.12)':'0 6px 24px rgba(0,0,0,0.45)',
-    '--hover':isLight(panel)?'rgba(15,12,10,0.06)':'rgba(255,255,255,0.08)',
-    '--on-accent':onAccent(accent)
-  };
-}
-
-/** Prefer light colors as canvas; dark as text/accents. Explicit canvasHex wins. */
-function autoRoles(source, opts={}){
-  const src=source.map(h=>h.toUpperCase());
-  const byLum=sortByLum(src);
-  const darkFirst=!!opts.darkBg;
-  const forcedCanvas=opts.canvas?opts.canvas.toUpperCase():null;
-
-  let canvas, panel, elevated, inset;
-  if(forcedCanvas){
-    canvas=forcedCanvas;
-    const rest=byLum.filter(h=>h!==canvas);
-    if(isLight(canvas)){
-      // light canvas: panel slightly different light, elevated lightest remaining / mix
-      const lights=rest.filter(isLight);
-      const darks=rest.filter(h=>!isLight(h));
-      elevated=lights[lights.length-1]||mix(canvas,'#F4F1EA',0.35);
-      panel=lights[Math.floor(lights.length/2)]||mix(canvas,elevated,0.35);
-      inset=darks[0]?mix(canvas,darks[0],0.18):mix(canvas,panel,0.4);
-      // if panel too close to canvas, separate
-      if(Math.abs(luminance(panel)-luminance(canvas))<0.03) panel=mix(canvas, elevated, 0.4);
-    } else {
-      // dark canvas: mid panel, lighter elevated from remaining
-      const lights=rest.filter(isLight);
-      const mids=rest.filter(h=>!isLight(h));
-      panel=mids[Math.floor(mids.length/2)]||mix(canvas, lights[0]||'#C8C0B4', 0.35);
-      elevated=lights[lights.length-1]||mix(panel,'#E8E2D8',0.45);
-      inset=mix(canvas,panel,0.45);
-    }
-  } else if(darkFirst){
-    canvas=byLum[0];
-    panel=byLum[Math.min(1,byLum.length-1)];
-    elevated=byLum[byLum.length-1];
-    inset=mix(canvas,panel,0.4);
-    if(chroma(elevated)>90 && byLum.length>2){
-      elevated=mix(panel, byLum[byLum.length-1], 0.35);
-    }
-  } else {
-    // prefer light bg
-    canvas=byLum[byLum.length-1];
-    // if lightest is super chromatic accent, use next quieter light
-    if(chroma(canvas)>85 && byLum.length>2){
-      const quieter=[...byLum].reverse().find(h=>chroma(h)<70);
-      if(quieter) canvas=quieter;
-    }
-    const darker=byLum.filter(h=>h!==canvas);
-    panel=darker.length?mix(canvas, darker[darker.length-1]||darker[0], 0.12):mix(canvas,'#2A2622',0.08);
-    // better: panel as second lightest or soft step from canvas
-    const lights=byLum.filter(isLight);
-    if(lights.length>=2){
-      panel=lights[lights.length-2];
-      if(panel===canvas && lights.length>=3) panel=lights[lights.length-3];
-    } else {
-      panel=mix(canvas, byLum[0], 0.12);
-    }
-    elevated=mix(canvas,'#FFFEFB',0.25);
-    elevated=mix(elevated, canvas, 0.15);
-    inset=mix(canvas, byLum[0], 0.14);
-    if(Math.abs(luminance(panel)-luminance(canvas))<0.025){
-      panel=mix(canvas, byLum[0], 0.16);
-    }
-  }
-
-  // accent: most chromatic that's not canvas
-  const byChroma=[...src].sort((a,b)=>chroma(b)-chroma(a));
-  let accent=opts.accent||byChroma.find(h=>h!==canvas&&h!==panel)||byChroma[0];
-  if(opts.accents&&opts.accents.primary) accent=opts.accents.primary;
-
-  return {
-    roles:{canvas,panel,elevated,inset,accent},
-    accents:Object.assign({
-      primary:accent,
-      success:opts.accents&&opts.accents.success||'#1F9D63',
-      warning:opts.accents&&opts.accents.warning||'#D97706',
-      danger:opts.accents&&opts.accents.danger||'#DC2626',
-      info:opts.accents&&opts.accents.info||accent
-    }, opts.accents||{})
-  };
-}
-
 const themes=[
   {
     id:'mw',
@@ -293,19 +163,24 @@ const themes=[
     name:'Minimal Yet Warm',
     note:'Canvas cálido + coral reservado a acentos',
     source:['#EAE7DC','#D8C3A5','#8E8D8A','#E98074','#E85A4F'],
-    roles:{
-      canvas:'#EAE7DC',
-      panel:'#F3F1E9',
-      elevated:'#FCFBF6',
-      inset:'#D8C3A5',
-      accent:'#6B5B4F'
-    },
-    accents:{
-      primary:'#6B5B4F',
-      success:'#3E6B4F',
-      warning:'#E98074',
-      danger:'#B93E36',
-      info:'#56717E'
+    tokens:{
+      '--canvas':'#EAE7DC',
+      '--panel':'#F3F1E9',
+      '--elevated':'#FCFBF6',
+      '--inset':'#D8C3A5',
+      '--text':'#2B2620',
+      '--text-2':'#4A4640',
+      '--text-3':'#625C55',
+      '--border':'#A7A6A2',
+      '--border-2':'#8E8D8A',
+      '--accent':'#6B5B4F',
+      '--success':'#3E6B4F',
+      '--warning':'#E98074',
+      '--danger':'#B93E36',
+      '--info':'#56717E',
+      '--shadow':'0 4px 16px rgba(43,34,28,.12)',
+      '--hover':'rgba(43,38,32,.06)',
+      '--on-accent':'#FDFCF8'
     }
   }
 ];
@@ -318,23 +193,7 @@ const roleMap=document.getElementById('roleMap');
 const accentRow=document.getElementById('accentRow');
 const rawStrip=document.getElementById('rawStrip');
 
-function resolve(theme){
-  if(theme.roles){
-    return buildFromRoles(theme.roles, theme.accents||{});
-  }
-  const built=autoRoles(theme.source, {
-    darkBg:!!theme.darkBg,
-    canvas:theme.canvas,
-    accents:theme.accents,
-    preferLight:theme.preferLight!==false
-  });
-  // if preferLight, force auto light path
-  if(theme.preferLight){
-    const b=autoRoles(theme.source,{darkBg:false, accents:theme.accents});
-    return buildFromRoles(b.roles, b.accents);
-  }
-  return buildFromRoles(built.roles, built.accents);
-}
+const resolve=theme=>theme.tokens;
 
 function applyTheme(theme){
   const tokens=resolve(theme);
