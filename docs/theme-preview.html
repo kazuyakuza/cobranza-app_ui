@@ -1,9 +1,16 @@
 <!DOCTYPE html>
+<!--
+  docs/theme-preview.html
+  Single-theme preview for @cobranza-apps/ui (Phase 8 — Minimal Yet Warm).
+  Other themes were removed; the theme-list UI is kept so future themes can be
+  appended to the `themes` array below. Preview CSS custom properties mirror the
+  `--cba-*` tokens defined in src/theme/_variables.scss (see brief.md §5).
+-->
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Cobranza UI — Theme picker v3</title>
+  <title>Cobranza UI — Minimal Yet Warm preview</title>
   <style>
     *{box-sizing:border-box}
     body{margin:0;font-family:Inter,system-ui,sans-serif;font-size:14px;line-height:1.45;background:#111;color:#eee}
@@ -25,10 +32,10 @@
     .src-hex .row i{width:20px;height:12px;border-radius:3px;border:1px solid rgba(255,255,255,.12);display:block}
     .map{margin-top:8px;font-size:10.5px;color:#9ab;font-family:ui-monospace,monospace;line-height:1.5}
     .preview{
-      --canvas:#333;--panel:#444;--elevated:#555;--inset:#3a3a3a;
-      --text:#fff;--text-2:#ccc;--text-3:#999;--border:#666;--border-2:#777;
-      --accent:#4af;--success:#2F9D63;--warning:#D97706;--danger:#DC2626;--info:#3cf;
-      --shadow:0 6px 24px rgba(0,0,0,.35);--hover:rgba(255,255,255,.06);--on-accent:#fff;
+      --canvas:#EAE7DC;--panel:#F3F1E9;--elevated:#FCFBF6;--inset:#D8C3A5;
+      --text:#2B2620;--text-2:#4A4640;--text-3:#625C55;--border:#A7A6A2;--border-2:#8E8D8A;
+      --accent:#6B5B4F;--success:#3E6B4F;--warning:#E98074;--danger:#B93E36;--info:#56717E;
+      --shadow:0 4px 16px rgba(43,34,28,.12);--hover:rgba(43,38,32,.06);--on-accent:#FDFCF8;
       display:flex;flex-direction:column;min-height:100vh;background:var(--canvas);color:var(--text)
     }
     .preview-bar{padding:8px 14px;font-size:12px;color:var(--text-3);border-bottom:1px solid var(--border);background:var(--elevated)}
@@ -80,8 +87,8 @@
 <body>
   <div class="app">
     <aside class="controls">
-      <h1>Theme picker v3</h1>
-      <p class="hint">Fondos forzados donde pediste; resto con claros al canvas. Textos y bordes recalculados por superficie.</p>
+      <h1>Minimal Yet Warm preview</h1>
+      <p class="hint">Palette preview for @cobranza-apps/ui — Minimal Yet Warm (Phase 8). Canvas ≠ panel ≠ elevated ≠ inset, coral reserved for accents.</p>
       <div class="theme-list" id="themeList"></div>
       <div class="src-hex">
         <h2>HEX fuente</h2>
@@ -280,118 +287,27 @@ function autoRoles(source, opts={}){
 }
 
 const themes=[
-  // —— Figma set with your instructions ——
-  {id:'11', group:'Figma', name:'11 · Frozen mist', note:'Crema + canela · texto/bordes reforzados',
-    source:['#FCFBD8','#D9DADF','#DD700B','#7C7D75','#ADACA7'],
-    // explicit roles for readability
+  {
+    id:'mw',
+    group:'Extra',
+    name:'Minimal Yet Warm',
+    note:'Canvas cálido + coral reservado a acentos',
+    source:['#EAE7DC','#D8C3A5','#8E8D8A','#E98074','#E85A4F'],
     roles:{
-      canvas:'#F5F3E4',
-      panel:'#FFFEF6',
-      elevated:'#FFFEF6',
-      inset:'#E8E6D8',
-      accent:'#DD700B'
+      canvas:'#EAE7DC',
+      panel:'#F3F1E9',
+      elevated:'#FCFBF6',
+      inset:'#D8C3A5',
+      accent:'#6B5B4F'
     },
-    accents:{primary:'#DD700B', warning:'#DD700B', success:'#5A7A3A', danger:'#A33B2A', info:'#6B7280'}
-  },
-  {id:'14', group:'Figma', name:'14 · Copper (bg #C8906D)', note:'Canvas cobre',
-    source:['#C8906D','#BB6C43','#4A413C','#DCAA89','#30525C','#C35627'],
-    roles:{
-      canvas:'#C8906D',
-      panel:'#DCAA89',
-      elevated:'#E6C4A8',
-      inset:'#BB6C43',
-      accent:'#30525C'
-    },
-    accents:{primary:'#30525C', warning:'#C35627', danger:'#C35627', info:'#30525C', success:'#2F6B4F'}
-  },
-  {id:'15', group:'Figma', name:'15 · Cocoa (bg #5A84AC)', note:'Canvas azul acero',
-    source:['#742F14','#5A84AC','#C7AC9F','#FC9C44','#5C3C2C'],
-    roles:{
-      canvas:'#5A84AC',
-      panel:'#C7AC9F',
-      elevated:'#E2D0C5',
-      inset:'#4E7396',
-      accent:'#FC9C44'
-    },
-    accents:{primary:'#FC9C44', info:'#5A84AC', warning:'#FC9C44', danger:'#742F14', success:'#2F6B4F'}
-  },
-  {id:'18', group:'Figma', name:'18 · Seashell (bg #5484A4)', note:'Canvas blue-gray',
-    source:['#F6C992','#30525C','#ACC0D3','#D396A6','#09A1A1','#5484A4'],
-    roles:{
-      canvas:'#5484A4',
-      panel:'#ACC0D3',
-      elevated:'#D5E1EC',
-      inset:'#3F6B88',
-      accent:'#09A1A1'
-    },
-    accents:{primary:'#09A1A1', info:'#30525C', warning:'#F6C992', danger:'#D396A6', success:'#1F9D63'}
-  },
-  {id:'46', group:'Figma', name:'46 · Clockwork (bg #919599)', note:'Canvas gris medio',
-    source:['#CDCDCB','#2B6CFE','#EC4025','#919599','#F8F8F8','#FBA45C','#E56515'],
-    roles:{
-      canvas:'#919599',
-      panel:'#CDCDCB',
-      elevated:'#F0F0EE',
-      inset:'#7E8388',
-      accent:'#2B6CFE'
-    },
-    accents:{primary:'#2B6CFE', danger:'#EC4025', warning:'#E56515', success:'#1F9D63', info:'#2B6CFE'}
-  },
-  {id:'48', group:'Figma', name:'48 · Arctic (bg #ACBBCF)', note:'Canvas steel light',
-    source:['#5289AD','#243C4C','#698696','#ACBBCF','#F4FCFB'],
-    roles:{
-      canvas:'#ACBBCF',
-      panel:'#D5DEE8',
-      elevated:'#F4FCFB',
-      inset:'#8FA3B8',
-      accent:'#243C4C'
-    },
-    accents:{primary:'#243C4C', info:'#5289AD', success:'#1F9D63', warning:'#D97706', danger:'#DC2626'}
-  },
-  // other Figma: light bg preferred
-  {id:'2', group:'Figma', name:'2 · Neutral elegance', note:'Claros al fondo', source:['#FFDBBB','#CCBEB1','#997E67','#664930'], preferLight:true, accents:{primary:'#664930'}},
-  {id:'4', group:'Figma', name:'4 · Woodland', note:'Claros al fondo', source:['#9F7560','#9E9E9E','#525034','#AAD31E','#D4AF9F'], preferLight:true, accents:{primary:'#525034', success:'#AAD31E'}},
-  {id:'5', group:'Figma', name:'5 · Driftwood pearl', note:'Claros al fondo', source:['#BC7B6F','#5A322A','#E4A499','#718A9E','#CCCDC7'], preferLight:true, accents:{primary:'#5A322A', info:'#718A9E'}},
-  {id:'13', group:'Figma', name:'13 · Amber walnut', note:'Claros al fondo', source:['#F2F0EF','#BBBDBC','#2457F3','#733E24','#EBEFEE','#CCB499','#4C484D','#BFB9B5','#D6794D'], preferLight:true, accents:{primary:'#2457F3', warning:'#D6794D'}},
-  {id:'16', group:'Figma', name:'16 · Sandstone aquamarine', note:'Claros al fondo', source:['#BC6C50','#304C53','#DDAD9C','#5A2F25','#AFE0E7'], preferLight:true, accents:{primary:'#304C53', info:'#AFE0E7'}},
-  {id:'17', group:'Figma', name:'17 · Honey opal', note:'Claros al fondo', source:['#ECB914','#F6D579','#4F3D35','#908108','#C8B8A0'], preferLight:true, accents:{primary:'#4F3D35', warning:'#908108'}},
-  {id:'22', group:'Figma', name:'22 · Terrazzo', note:'Claros al fondo', source:['#E7B614','#D8D4BC','#891A10','#DCB236','#B82E10','#714236'], preferLight:true, accents:{primary:'#891A10', warning:'#E7B614'}},
-  {id:'24', group:'Figma', name:'24 · Lapis velvet', note:'Claros al fondo si se puede', source:['#0474C4','#5379AE','#2C444C','#A8C4EC','#06457E','#262B40'], preferLight:true, accents:{primary:'#0474C4', info:'#5379AE'}},
-  {id:'30', group:'Figma', name:'30 · Turquoise amber', note:'Claros al fondo', source:['#304C64','#26788E','#631B08','#A4CCD4','#E24B0C'], preferLight:true, accents:{primary:'#26788E', warning:'#E24B0C'}},
-  {id:'31', group:'Figma', name:'31 · Sapphire ash', note:'Claros al fondo', source:['#35627A','#E5AEA9','#B46258','#A6A9D0','#E5E5E5','#8E949B'], preferLight:true, accents:{primary:'#35627A', danger:'#B46258'}},
-  {id:'50', group:'Figma', name:'50 · Autumn luxe', note:'Claros al fondo', source:['#E2E1EB','#AAAAAE','#322D27','#7F7265','#BF8440'], preferLight:true, accents:{primary:'#BF8440'}},
-
-  // —— New set ——
-  {id:'mb', group:'Extra', name:'Midnight & Brass', note:'Dark bg forzado',
-    source:['#0F1626','#EDE7DA','#B08D57','#4A6FA5'],
-    roles:{canvas:'#0F1626', panel:'#1A2438', elevated:'#243044', inset:'#151D2C', accent:'#B08D57'},
-    accents:{primary:'#B08D57', info:'#4A6FA5', success:'#3A9B6E', warning:'#B08D57', danger:'#D94A3D'}
-  },
-  {id:'mp', group:'Extra', name:'Muted Pastels', note:'Slate dark + pasteles',
-    source:['#2C2C2C','#E4E4E4','#A8DADC','#FFC1CC','#B39CD0'],
-    roles:{canvas:'#2C2C2C', panel:'#3A3A3A', elevated:'#464646', inset:'#333333', accent:'#B39CD0'},
-    accents:{primary:'#B39CD0', info:'#A8DADC', warning:'#FFC1CC', danger:'#E86A7A', success:'#6FBF9A'}
-  },
-  {id:'m9', group:'Extra', name:'Minimalist #9', note:'Claros al fondo', source:['#BAB4B8','#391842','#732F3E','#451938','#200819'], preferLight:true, accents:{primary:'#732F3E', danger:'#451938'}},
-  {id:'m11', group:'Extra', name:'Minimalist #11', note:'Claros al fondo', source:['#BAB9B4','#8A9C68','#C4BA84','#9C7A68','#2F2D1D'], preferLight:true, accents:{primary:'#2F2D1D', success:'#8A9C68'}},
-  {id:'m15', group:'Extra', name:'Minimalist #15', note:'Claros al fondo', source:['#CAEECF','#9BC8B8','#5D796F','#7CA081','#2A3326'], preferLight:true, accents:{primary:'#2A3326', success:'#5D796F'}},
-  {id:'sf', group:'Extra', name:'Sleek and Futuristic', note:'Claros al fondo si se puede', source:['#2C3531','#116466','#D9B08C','#FFCB9A','#D1E8E2'], preferLight:true, accents:{primary:'#116466', warning:'#D9B08C'}},
-  {id:'ia', group:'Extra', name:'Innovative and Audacious', note:'Dark-ish + neón',
-    source:['#272727','#747474','#FF652F','#FFE400','#14A76C'],
-    roles:{canvas:'#272727', panel:'#333333', elevated:'#3D3D3D', inset:'#2E2E2E', accent:'#FF652F'},
-    accents:{primary:'#FF652F', warning:'#FFE400', success:'#14A76C', danger:'#FF652F', info:'#14A76C'}
-  },
-  {id:'mw', group:'Extra', name:'Minimal Yet Warm', note:'Claros al fondo', source:['#EAE7DC','#D8C3A5','#8E8D8A','#E98074','#E85A4F'], preferLight:true, accents:{primary:'#E85A4F', danger:'#E85A4F', warning:'#E98074'}},
-  {id:'ce', group:'Extra', name:'Clean and Energetic', note:'Claros al fondo', source:['#5680E9','#84CEEB','#5AB9EA','#C1C8E4','#8860D0'], preferLight:true, accents:{primary:'#5680E9', info:'#8860D0'}},
-  {id:'cm', group:'Extra', name:'Clean and Modern', note:'Claros al fondo', source:['#17252A','#2B7A78','#3AAFA9','#DEF2F1','#FEFFFF'], preferLight:true, accents:{primary:'#2B7A78', info:'#3AAFA9'}},
-  {id:'ea', group:'Extra', name:'Effective Accent Colors', note:'Claros al fondo', source:['#FAED26','#46344E','#5A5560','#9D8D8F','#9B786F'], preferLight:true, accents:{primary:'#46344E', warning:'#FAED26'}},
-  {id:'rr', group:'Extra', name:'Rose Red and Blueberry', note:'Claros al fondo', source:['#4285F4','#5C2018','#BC4639','#D4A59A','#F3E0DC'], preferLight:true, accents:{primary:'#4285F4', danger:'#BC4639'}},
-  {id:'ep', group:'Extra', name:'Eclectic and Peaceful', note:'Claros al fondo', source:['#844D36','#474853','#86B3D1','#AAA0A0','#8E8268'], preferLight:true, accents:{primary:'#474853', info:'#86B3D1'}},
-  {id:'cs', group:'Extra', name:'Corporate and Serious', note:'Dark bg (corporate)',
-    source:['#265077','#022140','#494B68','#1E4258','#2D5F5D'],
-    roles:{canvas:'#022140', panel:'#1E4258', elevated:'#265077', inset:'#16364A', accent:'#2D5F5D'},
-    accents:{primary:'#3AA8A0', info:'#494B68', success:'#2D5F5D', warning:'#D97706', danger:'#E85A4F'}
-  },
+    accents:{
+      primary:'#6B5B4F',
+      success:'#3E6B4F',
+      warning:'#E98074',
+      danger:'#B93E36',
+      info:'#56717E'
+    }
+  }
 ];
 
 const list=document.getElementById('themeList');
@@ -427,7 +343,15 @@ function applyTheme(theme){
   document.querySelectorAll('.theme-btn').forEach(b=>b.classList.toggle('active',b.dataset.id===theme.id));
   srcHex.innerHTML=theme.source.map(h=>`<div class="row"><i style="background:${h}"></i>${h}</div>`).join('');
   roleMap.innerHTML=
-    `canvas ${tokens['--canvas']}<br>panel ${tokens['--panel']}<br>elevated ${tokens['--elevated']}<br>inset ${tokens['--inset']}<br>accent ${tokens['--accent']}`;
+    'canvas   ' + tokens['--canvas'] + '   (--cba-bg-primary)<br>' +
+    'panel    ' + tokens['--panel'] + '    (--cba-bg-secondary)<br>' +
+    'elevated ' + tokens['--elevated'] + ' (--cba-bg-elevated)<br>' +
+    'inset    ' + tokens['--inset'] + '    (--cba-bg-tertiary)<br>' +
+    'text     ' + tokens['--text'] + '     (--cba-text-primary)<br>' +
+    'border   ' + tokens['--border'] + '   (--cba-border-default)<br>' +
+    'accent   ' + tokens['--accent'] + '   (--cba-accent-primary)<br>' +
+    'warning  ' + tokens['--warning'] + '  (--cba-accent-warning)<br>' +
+    'danger   ' + tokens['--danger'] + '   (--cba-accent-danger)';
   const accents=[['Primary',tokens['--accent']],['Success',tokens['--success']],['Warning',tokens['--warning']],['Danger',tokens['--danger']],['Info',tokens['--info']]];
   accentRow.innerHTML=accents.map(([label,color])=>`<span class="accent-pill" style="color:${color};border-color:${color};background:color-mix(in srgb, ${color} 18%, transparent)">${label}</span>`).join('');
   rawStrip.innerHTML=theme.source.map(h=>`<div class="chip" style="background:${h}" title="${h}"></div>`).join('');
