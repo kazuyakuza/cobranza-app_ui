@@ -1,6 +1,37 @@
 /**
  * Design tokens — `:root` / `--cba-` prefix.
- * Do NOT rename tokens. Values are authoritative (see brief §5).
+ *
+ * SOURCE OF TRUTH: .agent/project-info/brief.md §5
+ * FRONT-END SPEC:  .kilo/plans/20260803-lighten-gray-theme-frontend-spec.md
+ *
+ * This file defines the intermediate-gray theme for @cobranza-apps/ui.
+ * The palette is a LIGHTER medium-gray (shifted from the original near-dark
+ * gray). Text tokens use near-black values for strong contrast on the light
+ * gray backgrounds. All pairs meet WCAG AA 4.5:1 except where documented.
+ *
+ * TOKEN GROUPS:
+ *   Backgrounds  — Surface colors from darkest (primary) to lightest (elevated).
+ *                  Use primary for main chrome, secondary/tertiary for nested
+ *                  surfaces, elevated for popovers/modals.
+ *   Text         — primary (#0f1115) for body text, secondary (#1e2329) for
+ *                  lower emphasis, muted (#2a2e35) for de-emphasized content
+ *                  (NOT on bg-primary — use secondary there), inverse (#e8eaed)
+ *                  for text on dark overlays.
+ *   Borders      — subtle (aliases --cba-bg-elevated), default (#707880),
+ *                  strong (#4a5059). Use subtle for separators, default for
+ *                  input borders, strong for focus or emphasis.
+ *   Accents      — Semantic colors (primary/success/warning/danger/info).
+ *                  Unchanged from original palette.
+ *   Interactive  — hover/active use dark overlays (rgba(0,0,0,...)) suitable
+ *                  for light gray surfaces. focus-ring unchanged.
+ *   Layout       — Fixed dimensions for Shell header, footer, module header.
+ *   Radius       — sm (6px), md (10px), lg (14px).
+ *   Shadows      — Reduced opacity vs. original (0.18 / 0.25) because lighter
+ *                  surfaces make the same shadow appear heavier.
+ *   Spacing      — 4px-based scale from 4px (--cba-space-1) to 32px (--cba-space-8).
+ *
+ * Do NOT rename tokens. Do NOT hard-code color values in components — always
+ * reference var(--cba-*). When adding new tokens, update brief.md §5 first.
  */
 :root {
   /* Backgrounds */

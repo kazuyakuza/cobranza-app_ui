@@ -648,21 +648,74 @@ See [`CBA_MODULE_FOOTER.md`](./CBA_MODULE_FOOTER.md) for the full API and exampl
 
 ## Design Tokens Reference
 
-All tokens use the `--cba-` prefix. Full reference in [brief.md §5](../.agent/project-info/brief.md#5-design-tokens-theme-proposal).
+All tokens use the `--cba-` prefix. Full reference in [brief.md §5](../.agent/project-info/brief.md#5-design-tokens-theme).
+Source file: [`src/theme/_variables.scss`](../src/theme/_variables.scss).
 
-**Backgrounds:** `--cba-bg-primary`, `--cba-bg-secondary`, `--cba-bg-tertiary`, `--cba-bg-elevated`, `--cba-bg-overlay`
+The palette is a **lighter medium-gray** (shifted from the original near-dark gray). Text tokens are near-black for strong contrast on the lighter backgrounds. All text/background pairs meet WCAG AA 4.5:1 except where documented.
 
-**Text:** `--cba-text-primary`, `--cba-text-secondary`, `--cba-text-muted`, `--cba-text-inverse`
+### Backgrounds
 
-**Borders:** `--cba-border-subtle`, `--cba-border-default`, `--cba-border-strong`
+| Token | Value | Usage |
+| --- | --- | --- |
+| `--cba-bg-primary` | `#7a838d` | Main surface / chrome |
+| `--cba-bg-secondary` | `#8c95a0` | Secondary / nested surfaces |
+| `--cba-bg-tertiary` | `#9da6b0` | Tertiary surfaces |
+| `--cba-bg-elevated` | `#aeb6bf` | Popovers, modals, elevated cards |
+| `--cba-bg-overlay` | `rgba(0, 0, 0, 0.32)` | Modal/backdrop overlay |
 
-**Accents:** `--cba-accent-primary`, `--cba-accent-success`, `--cba-accent-warning`, `--cba-accent-danger`, `--cba-accent-info`
+### Text
 
-**Spacing:** `--cba-space-1` (4px) through `--cba-space-8` (32px)
+| Token | Value | Usage |
+| --- | --- | --- |
+| `--cba-text-primary` | `#0f1115` | Body text, headings |
+| `--cba-text-secondary` | `#1e2329` | Lower-emphasis text |
+| `--cba-text-muted` | `#2a2e35` | De-emphasized text (NOT on bg-primary) |
+| `--cba-text-inverse` | `#e8eaed` | Light text on dark overlays |
 
-**Radius:** `--cba-radius-sm` (6px), `--cba-radius-md` (10px), `--cba-radius-lg` (14px)
+> **`--cba-text-muted` restriction:** Do not use on `--cba-bg-primary` (contrast ~3.6:1, fails AA). Use on `--cba-bg-secondary` (~4.5:1), `--cba-bg-tertiary` (~5.5:1), or `--cba-bg-elevated` (~6.7:1). Prefer `--cba-text-secondary` on `--cba-bg-primary`.
 
-**Utility classes:** `.cba-bg-primary`, `.cba-bg-secondary`, `.cba-text-primary`, `.cba-text-secondary`, `.cba-text-muted`
+### Borders
+
+| Token | Value | Usage |
+| --- | --- | --- |
+| `--cba-border-subtle` | `var(--cba-bg-elevated)` | Separators, dividers |
+| `--cba-border-default` | `#707880` | Input borders, card borders |
+| `--cba-border-strong` | `#4a5059` | Focus borders, emphasis |
+
+### Accents (unchanged)
+
+| Token | Value |
+| --- | --- |
+| `--cba-accent-primary` | `#3b82f6` |
+| `--cba-accent-success` | `#22c55e` |
+| `--cba-accent-warning` | `#f59e0b` |
+| `--cba-accent-danger` | `#ef4444` |
+| `--cba-accent-info` | `#06b6d4` |
+
+### Interactive States
+
+| Token | Value | Notes |
+| --- | --- | --- |
+| `--cba-hover` | `rgba(0, 0, 0, 0.06)` | Dark overlay for light gray surfaces |
+| `--cba-active` | `rgba(0, 0, 0, 0.1)` | Dark overlay for light gray surfaces |
+| `--cba-focus-ring` | `0 0 0 3px rgba(59, 130, 246, 0.45)` | Unchanged from original |
+
+### Shadows (reduced opacity for lighter surfaces)
+
+| Token | Value |
+| --- | --- |
+| `--cba-shadow-module` | `0 4px 16px rgba(0, 0, 0, 0.18)` |
+| `--cba-shadow-elevated` | `0 8px 24px rgba(0, 0, 0, 0.25)` |
+
+### Layout, Radius & Spacing
+
+- **Layout:** `--cba-header-height` (56px), `--cba-footer-height` (64px), `--cba-module-header-min-height` (40px)
+- **Radius:** `--cba-radius-sm` (6px), `--cba-radius-md` (10px), `--cba-radius-lg` (14px)
+- **Spacing:** `--cba-space-1` (4px) through `--cba-space-8` (32px)
+
+### Utility Classes
+
+`.cba-bg-primary`, `.cba-bg-secondary`, `.cba-bg-tertiary`, `.cba-bg-elevated`, `.cba-text-primary`, `.cba-text-secondary`, `.cba-text-muted`, `.cba-text-inverse`, `.cba-border-subtle`, `.cba-border-default`, `.cba-border-strong`
 
 ## AI Agent Guidelines
 

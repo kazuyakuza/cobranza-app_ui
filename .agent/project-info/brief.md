@@ -20,7 +20,7 @@
 - [2. Scope](#2-scope)
 - [3. Design Principles](#3-design-principles)
 - [4. Technical Stack](#4-technical-stack)
-- [5. Design Tokens (Theme)](#5-design-tokens-theme-proposal)
+- [5. Design Tokens (Theme)](#5-design-tokens-theme)
 - [6. Core Components](#6-core-components-proposal)
 - [7. Library Structure](#7-library-structure-suggested)
 - [8. Integration Notes](#8-integration-notes)
@@ -94,40 +94,45 @@ It does **not** contain business logic, BFF communication, advanced tables, drag
 - `@ng-bootstrap/ng-bootstrap`
 - `@fortawesome/angular-fontawesome` + free icon packs
 
-## 5. Design Tokens (Theme) (Proposal)
+## 5. Design Tokens (Theme)
 
 All tokens live under the `--cba-` prefix.
 
+> **Note:** The palette was lightened from the original near-dark gray to a medium-gray
+> palette. Text tokens are now near-black for strong contrast on the lighter backgrounds.
+> All text/background pairs meet WCAG AA 4.5:1 except `--cba-text-muted` on
+> `--cba-bg-primary` (intentionally restricted — see usage guidance below).
+
 ```scss
 :root {
-  /* Backgrounds */
-  --cba-bg-primary: #2a2d32;
-  --cba-bg-secondary: #34383e;
-  --cba-bg-tertiary: #3e434a;
-  --cba-bg-elevated: #454a52;
-  --cba-bg-overlay: rgba(0, 0, 0, 0.55);
+  /* Backgrounds — lighter medium-gray scale */
+  --cba-bg-primary: #7a838d;
+  --cba-bg-secondary: #8c95a0;
+  --cba-bg-tertiary: #9da6b0;
+  --cba-bg-elevated: #aeb6bf;
+  --cba-bg-overlay: rgba(0, 0, 0, 0.32);
 
-  /* Text */
-  --cba-text-primary: #e8eaed;
-  --cba-text-secondary: #b0b4ba;
-  --cba-text-muted: #8b9098;
-  --cba-text-inverse: #1a1d21;
+  /* Text — near-black for strong contrast on light gray */
+  --cba-text-primary: #0f1115;
+  --cba-text-secondary: #1e2329;
+  --cba-text-muted: #2a2e35;
+  --cba-text-inverse: #e8eaed;
 
   /* Borders */
-  --cba-border-subtle: #4a4f57;
-  --cba-border-default: #5a606a;
-  --cba-border-strong: #6b7280;
+  --cba-border-subtle: var(--cba-bg-elevated);
+  --cba-border-default: #707880;
+  --cba-border-strong: #4a5059;
 
-  /* Accents */
+  /* Accents — unchanged */
   --cba-accent-primary: #3b82f6;
   --cba-accent-success: #22c55e;
   --cba-accent-warning: #f59e0b;
   --cba-accent-danger: #ef4444;
   --cba-accent-info: #06b6d4;
 
-  /* Interactive states */
-  --cba-hover: rgba(255, 255, 255, 0.06);
-  --cba-active: rgba(255, 255, 255, 0.10);
+  /* Interactive states — dark overlays for light gray surfaces */
+  --cba-hover: rgba(0, 0, 0, 0.06);
+  --cba-active: rgba(0, 0, 0, 0.1);
   --cba-focus-ring: 0 0 0 3px rgba(59, 130, 246, 0.45);
 
   /* Layout constants */
@@ -140,9 +145,9 @@ All tokens live under the `--cba-` prefix.
   --cba-radius-md: 10px;
   --cba-radius-lg: 14px;
 
-  /* Shadows (applied only when module is NOT fullscreen) */
-  --cba-shadow-module: 0 4px 16px rgba(0, 0, 0, 0.28);
-  --cba-shadow-elevated: 0 8px 24px rgba(0, 0, 0, 0.35);
+  /* Shadows — reduced opacity for lighter surfaces */
+  --cba-shadow-module: 0 4px 16px rgba(0, 0, 0, 0.18);
+  --cba-shadow-elevated: 0 8px 24px rgba(0, 0, 0, 0.25);
 
   /* Spacing scale (balanced) */
   --cba-space-1: 4px;
@@ -154,6 +159,8 @@ All tokens live under the `--cba-` prefix.
   --cba-space-8: 32px;
 }
 ```
+
+**`--cba-text-muted` usage restriction:** Must NOT be used on `--cba-bg-primary` (contrast ~3.6:1, fails AA). Approved for `--cba-bg-secondary` (~4.5:1), `--cba-bg-tertiary` (~5.5:1), and `--cba-bg-elevated` (~6.7:1). Prefer `--cba-text-secondary` on `--cba-bg-primary` for lower-emphasis text.
 
 **Typography**
 

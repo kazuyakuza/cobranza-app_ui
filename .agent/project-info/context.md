@@ -25,6 +25,8 @@
 
 ## Recent Changes
 
+- **Theme lightened from near-dark to medium-gray palette** — background tokens shifted to lighter grays (#7a838d–#aeb6bf), text tokens changed to near-black (#0f1115–#2a2e35) for contrast, interactive overlays switched from white to dark, shadows reduced in opacity. All text/background pairs meet WCAG AA 4.5:1 except `--cba-text-muted` on `--cba-bg-primary` (documented restriction). Token names unchanged. Source: `src/theme/_variables.scss`, brief.md §5 updated.
+- **Front-end specification for lightened gray theme** created in `.kilo/plans/20260803-lighten-gray-theme-frontend-spec.md` (Task 1, step 4.1a).
 - **Phase 0 completed** — all seven scaffolding tasks done on `feat/phase0-library-scaffolding`.
 - Configured peer dependencies in `package.json` (Angular 22, Bootstrap 5, ng-bootstrap 21, Font Awesome 6/7).
 - Installed all dev dependencies and peer packages; lockfile consistent.

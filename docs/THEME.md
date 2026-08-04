@@ -49,7 +49,7 @@ All theme CSS custom properties use the `--cba-` prefix.
 
 Example: `--cba-bg-primary`, `--cba-text-secondary`, `--cba-accent-primary`.
 
-Do not rename tokens. Authoritative values live in [brief.md §5](../.agent/project-info/brief.md#5-design-tokens-theme-proposal) and [`src/theme/_variables.scss`](../src/theme/_variables.scss).
+Do not rename tokens. Authoritative values live in [brief.md §5](../.agent/project-info/brief.md#5-design-tokens-theme) and [`src/theme/_variables.scss`](../src/theme/_variables.scss).
 
 ## Main Token Groups
 
@@ -101,5 +101,5 @@ Usage example:
 
 - [README.md](../README.md) — library overview, component inventory, integration notes.
 - [docs/USAGE.md](USAGE.md) — usage patterns and component examples.
-- [brief.md §5](../.agent/project-info/brief.md#5-design-tokens-theme-proposal) — authoritative design tokens.
+- [brief.md §5](../.agent/project-info/brief.md#5-design-tokens-theme) — authoritative design tokens.
 - [`src/theme/`](../src/theme/) — SCSS source files (`_variables.scss`, `_base.scss`, `_mixins.scss`, `_utilities.scss`, `theme.scss`).

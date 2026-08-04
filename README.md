@@ -189,7 +189,7 @@ Design tokens are published as SCSS via `@cobranza-apps/ui/theme` and use the `-
 - `.cba-bg-primary`, `.cba-bg-secondary`, `.cba-bg-tertiary`
 - `.cba-text-primary`, `.cba-text-secondary`, `.cba-text-muted`
 
-For the full token reference, see [brief.md §5](.agent/project-info/brief.md#5-design-tokens-theme-proposal) and the SCSS source files under `src/theme/`.
+For the full token reference, see [brief.md §5](.agent/project-info/brief.md#5-design-tokens-theme) and the SCSS source files under `src/theme/`.
 
 For a quick reference, see [`./docs/THEME.md`](./docs/THEME.md).
 
