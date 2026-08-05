@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!--
   docs/theme-preview.html
-  Single-theme preview for @cobranza-apps/ui (Phase 8 — Minimal Yet Warm).
+  Single-theme preview for @cobranza-apps/ui (Phase 9 — Minimal Yet Warm surface hierarchy).
   Other themes were removed; the theme-list UI is kept so future themes can be
   appended to the `themes` array below. Preview CSS custom properties mirror the
   `--cba-*` tokens defined in src/theme/_variables.scss (see brief.md §5).
@@ -32,10 +32,10 @@
     .src-hex .row i{width:20px;height:12px;border-radius:3px;border:1px solid rgba(255,255,255,.12);display:block}
     .map{margin-top:8px;font-size:10.5px;color:#9ab;font-family:ui-monospace,monospace;line-height:1.5}
     .preview{
-      --canvas:#EAE7DC;--panel:#F3F1E9;--elevated:#FCFBF6;--inset:#D8C3A5;
+      --canvas:#D8D4C4;--panel:#EFEDE4;--elevated:#FAF9F4;--inset:#D8C3A5;
       --text:#2B2620;--text-2:#4A4640;--text-3:#625C55;--border:#A7A6A2;--border-2:#8E8D8A;
       --accent:#6B5B4F;--success:#3E6B4F;--warning:#E98074;--danger:#B93E36;--info:#56717E;
-      --shadow:0 4px 16px rgba(43,34,28,.12);--hover:rgba(43,38,32,.06);--on-accent:#FDFCF8;
+      --shadow:0 4px 20px rgba(43,34,28,.14);--hover:rgba(43,38,32,.06);--on-accent:#FDFCF8;
       display:flex;flex-direction:column;min-height:100vh;background:var(--canvas);color:var(--text)
     }
     .preview-bar{padding:8px 14px;font-size:12px;color:var(--text-3);border-bottom:1px solid var(--border);background:var(--elevated)}
@@ -87,8 +87,8 @@
 <body>
   <div class="app">
     <aside class="controls">
-      <h1>Minimal Yet Warm preview</h1>
-      <p class="hint">Palette preview for @cobranza-apps/ui — Minimal Yet Warm (Phase 8). Canvas ≠ panel ≠ elevated ≠ inset, coral reserved for accents.</p>
+      <h1>Minimal Yet Warm — Phase 9 preview</h1>
+      <p class="hint">Palette preview for @cobranza-apps/ui — Minimal Yet Warm (Phase 9 surface hierarchy). Canvas ≠ panel ≠ elevated ≠ inset, coral reserved for accents.</p>
       <div class="theme-list" id="themeList"></div>
       <div class="src-hex">
         <h2>HEX fuente</h2>
@@ -161,12 +161,12 @@ const themes=[
     id:'mw',
     group:'Extra',
     name:'Minimal Yet Warm',
-    note:'Canvas cálido + coral reservado a acentos',
-    source:['#EAE7DC','#D8C3A5','#8E8D8A','#E98074','#E85A4F'],
+    note:'Canvas cálido más arena + panel crema más limpio, coral reservado a acentos',
+    source:['#D8D4C4','#D8C3A5','#8E8D8A','#E98074','#E85A4F'],
     tokens:{
-      '--canvas':'#EAE7DC',
-      '--panel':'#F3F1E9',
-      '--elevated':'#FCFBF6',
+      '--canvas':'#D8D4C4',
+      '--panel':'#EFEDE4',
+      '--elevated':'#FAF9F4',
       '--inset':'#D8C3A5',
       '--text':'#2B2620',
       '--text-2':'#4A4640',
@@ -178,7 +178,7 @@ const themes=[
       '--warning':'#E98074',
       '--danger':'#B93E36',
       '--info':'#56717E',
-      '--shadow':'0 4px 16px rgba(43,34,28,.12)',
+      '--shadow':'0 4px 20px rgba(43,34,28,.14)',
       '--hover':'rgba(43,38,32,.06)',
       '--on-accent':'#FDFCF8'
     }
