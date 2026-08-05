@@ -5,8 +5,8 @@
  * FRONT-END SPEC:  .kilo/plans/20260804-phase8-frontend-spec.md
  *
  * Theme name: Minimal Yet Warm — warm sand / cream / taupe + controlled coral.
- * Canvas is a light warm gray (EAE7DC); panels step lighter (F3F1E9), elevated
- * surfaces are a near-white cream (FCFBF6), insets use warm sand (D8C3A5) for
+ * Canvas is a warm sand (D8D4C4); panels are a clean cream (EFEDE4), elevated
+ * surfaces are a warm near-white (FAF9F4), insets use warm sand (D8C3A5) for
  * table headers / input wells / module footers. Four distinguishable surfaces.
  *
  * Text tokens are warm near-black/taupe; primary/secondary pass WCAG AA on every
@@ -22,7 +22,7 @@
  *   Text         — primary (#2B2620) body, secondary (#4A4640) lower emphasis,
  *                  muted (#625C55) de-emphasized (NOT on bg-tertiary), inverse
  *                  (#FDFCF8) on dark accents/overlays.
- *   Borders      — subtle (#E7E5DE) thin separators, default (#A7A6A2) input
+ *   Borders      — subtle (#DAD7CA) thin separators, default (#A7A6A2) input
  *                  borders / chrome, strong (#8E8D8A) focus / footer pills / header
  *                  icon-button outlines so they do not disappear on cream/sand.
  *   Accents      — primary warm taupe (#6B5B4F, NOT coral); success calm green
@@ -50,10 +50,10 @@
  */
 :root {
   /* Backgrounds — warm Minimal-Yet-Warm surface scale (canvas → panel → elevated → inset) */
-  --cba-bg-primary: #EAE7DC;
-  --cba-bg-secondary: #F3F1E9;
+  --cba-bg-primary: #D8D4C4;
+  --cba-bg-secondary: #EFEDE4;
   --cba-bg-tertiary: #D8C3A5;
-  --cba-bg-elevated: #FCFBF6;
+  --cba-bg-elevated: #FAF9F4;
   --cba-bg-overlay: rgba(43, 38, 32, 0.45);
 
   /* Text — warm near-black/taupe; muted restricted on bg-tertiary (see header) */
@@ -63,7 +63,7 @@
   --cba-text-inverse: #FDFCF8;
 
   /* Borders — visible on cream/sand */
-  --cba-border-subtle: #E7E5DE;
+  --cba-border-subtle: #DAD7CA;
   --cba-border-default: #A7A6A2;
   --cba-border-strong: #8E8D8A;
 
@@ -90,8 +90,8 @@
   --cba-radius-lg: 14px;
 
   /* Shadows — warm-tinted, softer than black */
-  --cba-shadow-module: 0 4px 16px rgba(43, 34, 28, 0.12);
-  --cba-shadow-elevated: 0 8px 24px rgba(43, 34, 28, 0.18);
+  --cba-shadow-module: 0 4px 20px rgba(43, 34, 28, 0.14);
+  --cba-shadow-elevated: 0 8px 28px rgba(43, 34, 28, 0.20);
 
   /* Spacing (unchanged) */
   --cba-space-1: 4px;
