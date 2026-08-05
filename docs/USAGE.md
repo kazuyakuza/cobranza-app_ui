@@ -742,6 +742,7 @@ The palette is **Minimal Yet Warm** (warm sand / cream / taupe + controlled cora
 **Cross-references:**
 
 - [README.md](../README.md) — Library overview and component inventory.
+- [CONSUMER_GUIDE.md](./CONSUMER_GUIDE.md) — Shell & MFE integration rules: surface ownership map, checklists, anti-patterns.
 - [brief.md](../.agent/project-info/brief.md) — Source of truth for scope, tokens, and component specs.
 - [architecture.md](../.agent/project-info/architecture.md) — Build strategy and folder layout.
 - [tech.md](../.agent/project-info/tech.md) — Exact versions and dependencies.

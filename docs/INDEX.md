@@ -1,3 +1,11 @@
+<!--
+  AI Agent Note: This is the DOCUMENTATION INDEX for @cobranza-apps/ui.
+  AUDIENCE: Consumers and AI agents navigating the library docs.
+  PURPOSE: Single entry point — links to every doc page grouped by category.
+  MAINTENANCE: When adding a new doc page, add it here AND in README.md §Documentation.
+               Keep entries alphabetical within each section.
+-->
+
 # @cobranza-apps/ui — Documentation Index
 
 > Single entry point for consumers and AI agents. Keep alphabetical within each section.
