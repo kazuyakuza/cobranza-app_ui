@@ -127,7 +127,7 @@ npm install @angular/core@^22 @angular/common@^22 @angular/forms@^22 \
 
 ## Theme Import
 
-Import the theme in your global styles file to apply the intermediate-gray design tokens.
+Import the theme in your global styles file to apply the Minimal Yet Warm design tokens.
 
 **SCSS import (recommended):**
 
@@ -651,61 +651,63 @@ See [`CBA_MODULE_FOOTER.md`](./CBA_MODULE_FOOTER.md) for the full API and exampl
 All tokens use the `--cba-` prefix. Full reference in [brief.md §5](../.agent/project-info/brief.md#5-design-tokens-theme).
 Source file: [`src/theme/_variables.scss`](../src/theme/_variables.scss).
 
-The palette is a **lighter medium-gray** (shifted from the original near-dark gray). Text tokens are near-black for strong contrast on the lighter backgrounds. All text/background pairs meet WCAG AA 4.5:1 except where documented.
+The palette is **Minimal Yet Warm** (warm sand / cream / taupe + controlled coral): canvas `#C5BFAE` (warm sand floor), panel `#F2F0E8` (clean cream), elevated `#FDFCF8` (warm near-white), inset `#D8C3A5` (warm sand). Coral is reserved for accent/status/focus — not for primary CTAs or large fills.
+
+> **Note:** The tables below are a summary. [brief.md §5](../.agent/project-info/brief.md#5-design-tokens-theme) and [`src/theme/_variables.scss`](../src/theme/_variables.scss) are the authoritative sources for token values.
 
 ### Backgrounds
 
 | Token | Value | Usage |
 | --- | --- | --- |
-| `--cba-bg-primary` | `#7a838d` | Main surface / chrome |
-| `--cba-bg-secondary` | `#8c95a0` | Secondary / nested surfaces |
-| `--cba-bg-tertiary` | `#9da6b0` | Tertiary surfaces |
-| `--cba-bg-elevated` | `#aeb6bf` | Popovers, modals, elevated cards |
-| `--cba-bg-overlay` | `rgba(0, 0, 0, 0.32)` | Modal/backdrop overlay |
+| `--cba-bg-primary` | `#C5BFAE` | Canvas / workspace floor |
+| `--cba-bg-secondary` | `#F2F0E8` | Panel / module body / cards |
+| `--cba-bg-tertiary` | `#D8C3A5` | Inset — table headers, wells, module footer |
+| `--cba-bg-elevated` | `#FDFCF8` | Module header, dropdowns, popovers |
+| `--cba-bg-overlay` | `rgba(43, 38, 32, 0.45)` | Modal / backdrop overlay |
 
 ### Text
 
 | Token | Value | Usage |
 | --- | --- | --- |
-| `--cba-text-primary` | `#0f1115` | Body text, headings |
-| `--cba-text-secondary` | `#1e2329` | Lower-emphasis text |
-| `--cba-text-muted` | `#2a2e35` | De-emphasized text (NOT on bg-primary) |
-| `--cba-text-inverse` | `#e8eaed` | Light text on dark overlays |
+| `--cba-text-primary` | `#2B2620` | Body text, headings |
+| `--cba-text-secondary` | `#4A4640` | Lower-emphasis text |
+| `--cba-text-muted` | `#625C55` | De-emphasized text (NOT on canvas or inset) |
+| `--cba-text-inverse` | `#FDFCF8` | Light text on dark accents / overlays |
 
-> **`--cba-text-muted` restriction:** Do not use on `--cba-bg-primary` (contrast ~3.6:1, fails AA). Use on `--cba-bg-secondary` (~4.5:1), `--cba-bg-tertiary` (~5.5:1), or `--cba-bg-elevated` (~6.7:1). Prefer `--cba-text-secondary` on `--cba-bg-primary`.
+> **`--cba-text-muted` restriction:** Do not use on the darker canvas `--cba-bg-primary` (`#C5BFAE`, ~3.6:1) or on inset `--cba-bg-tertiary` (`#D8C3A5`, ~3.86:1) — both fail WCAG AA. Prefer `--cba-text-secondary` on those surfaces.
 
 ### Borders
 
 | Token | Value | Usage |
 | --- | --- | --- |
-| `--cba-border-subtle` | `var(--cba-bg-elevated)` | Separators, dividers |
-| `--cba-border-default` | `#707880` | Input borders, card borders |
-| `--cba-border-strong` | `#4a5059` | Focus borders, emphasis |
+| `--cba-border-subtle` | `#DAD7CA` | Separators, dividers |
+| `--cba-border-default` | `#A7A6A2` | Input borders, card borders |
+| `--cba-border-strong` | `#8E8D8A` | Focus borders, footer pills, emphasis |
 
-### Accents (unchanged)
+### Accents
 
-| Token | Value |
-| --- | --- |
-| `--cba-accent-primary` | `#3b82f6` |
-| `--cba-accent-success` | `#22c55e` |
-| `--cba-accent-warning` | `#f59e0b` |
-| `--cba-accent-danger` | `#ef4444` |
-| `--cba-accent-info` | `#06b6d4` |
+| Token | Value | Usage |
+| --- | --- | --- |
+| `--cba-accent-primary` | `#6B5B4F` | Primary CTA (warm taupe, NOT coral) |
+| `--cba-accent-success` | `#3E6B4F` | Success states |
+| `--cba-accent-warning` | `#E98074` | Warning states |
+| `--cba-accent-danger` | `#B93E36` | Danger / error states |
+| `--cba-accent-info` | `#56717E` | Info states |
 
 ### Interactive States
 
 | Token | Value | Notes |
 | --- | --- | --- |
-| `--cba-hover` | `rgba(0, 0, 0, 0.06)` | Dark overlay for light gray surfaces |
-| `--cba-active` | `rgba(0, 0, 0, 0.1)` | Dark overlay for light gray surfaces |
-| `--cba-focus-ring` | `0 0 0 3px rgba(59, 130, 246, 0.45)` | Unchanged from original |
+| `--cba-hover` | `rgba(43, 38, 32, 0.06)` | Warm taupe overlay for cream/sand surfaces |
+| `--cba-active` | `rgba(43, 38, 32, 0.10)` | Warm taupe overlay for cream/sand surfaces |
+| `--cba-focus-ring` | `0 0 0 3px rgba(232, 90, 79, 0.45)` | Warm coral ring, visible on light surfaces |
 
-### Shadows (reduced opacity for lighter surfaces)
+### Shadows (warm-tinted)
 
 | Token | Value |
 | --- | --- |
-| `--cba-shadow-module` | `0 4px 16px rgba(0, 0, 0, 0.18)` |
-| `--cba-shadow-elevated` | `0 8px 24px rgba(0, 0, 0, 0.25)` |
+| `--cba-shadow-module` | `0 6px 24px rgba(43, 34, 28, 0.18)` |
+| `--cba-shadow-elevated` | `0 10px 32px rgba(43, 34, 28, 0.26)` |
 
 ### Layout, Radius & Spacing
 
