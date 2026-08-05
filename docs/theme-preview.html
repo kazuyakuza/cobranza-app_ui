@@ -5,6 +5,16 @@
   Other themes were removed; the theme-list UI is kept so future themes can be
   appended to the `themes` array below. Preview CSS custom properties mirror the
   `--cba-*` tokens defined in src/theme/_variables.scss (see brief.md §5).
+
+  AI-AGENT GUIDE — How to update this preview when tokens change:
+  1. Open src/theme/_variables.scss and read the new --cba-* values.
+  2. Update the `.preview` CSS block: sync --canvas, --panel, --elevated, --inset,
+     --text, --text-2, --text-3, --border, --border-2, --accent, --success,
+     --warning, --danger, --info, --shadow, --hover, --on-accent with the new values.
+  3. Update the `themes` array (JS): set `tokens` keys to match the new values,
+     and update `source` hex array to the key palette swatches.
+  4. Verify visually: canvas ≠ panel ≠ elevated ≠ inset; borders visible on cream;
+     coral only on accents/status. Open in browser to confirm.
 -->
 <html lang="es">
 <head>
