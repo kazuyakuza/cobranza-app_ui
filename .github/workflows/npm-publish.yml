@@ -38,6 +38,7 @@ jobs:
       - name: Copy docs into dist for publishing
         run: |
           cp -r docs dist/
+          cp CHANGELOG.md dist/
           rm -f dist/docs/how-to-set-up-git.md dist/docs/how-to-write-todo-files.md
       - name: Check published version
         id: check_version
