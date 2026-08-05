@@ -193,24 +193,26 @@ const roleMap=document.getElementById('roleMap');
 const accentRow=document.getElementById('accentRow');
 const rawStrip=document.getElementById('rawStrip');
 
-const resolve=theme=>theme.tokens;
-
 function applyTheme(theme){
-  const tokens=resolve(theme);
+  const tokens=theme.tokens;
   Object.entries(tokens).forEach(([k,v])=>preview.style.setProperty(k,v));
   activeName.textContent=theme.name;
   document.querySelectorAll('.theme-btn').forEach(b=>b.classList.toggle('active',b.dataset.id===theme.id));
   srcHex.innerHTML=theme.source.map(h=>`<div class="row"><i style="background:${h}"></i>${h}</div>`).join('');
-  roleMap.innerHTML=
-    'canvas   ' + tokens['--canvas'] + '   (--cba-bg-primary)<br>' +
-    'panel    ' + tokens['--panel'] + '    (--cba-bg-secondary)<br>' +
-    'elevated ' + tokens['--elevated'] + ' (--cba-bg-elevated)<br>' +
-    'inset    ' + tokens['--inset'] + '    (--cba-bg-tertiary)<br>' +
-    'text     ' + tokens['--text'] + '     (--cba-text-primary)<br>' +
-    'border   ' + tokens['--border'] + '   (--cba-border-default)<br>' +
-    'accent   ' + tokens['--accent'] + '   (--cba-accent-primary)<br>' +
-    'warning  ' + tokens['--warning'] + '  (--cba-accent-warning)<br>' +
-    'danger   ' + tokens['--danger'] + '   (--cba-accent-danger)';
+  const roles=[
+    ['canvas',  '--canvas',  '--cba-bg-primary'],
+    ['panel',   '--panel',   '--cba-bg-secondary'],
+    ['elevated','--elevated','--cba-bg-elevated'],
+    ['inset',   '--inset',   '--cba-bg-tertiary'],
+    ['text',    '--text',    '--cba-text-primary'],
+    ['border',  '--border',  '--cba-border-default'],
+    ['accent',  '--accent',  '--cba-accent-primary'],
+    ['warning', '--warning', '--cba-accent-warning'],
+    ['danger',  '--danger',  '--cba-accent-danger']
+  ];
+  roleMap.innerHTML=roles
+    .map(([name,token,cba])=>`${name.padEnd(9)} ${tokens[token].padEnd(7)} (${cba})`)
+    .join('<br>');
   const accents=[['Primary',tokens['--accent']],['Success',tokens['--success']],['Warning',tokens['--warning']],['Danger',tokens['--danger']],['Info',tokens['--info']]];
   accentRow.innerHTML=accents.map(([label,color])=>`<span class="accent-pill" style="color:${color};border-color:${color};background:color-mix(in srgb, ${color} 18%, transparent)">${label}</span>`).join('');
   rawStrip.innerHTML=theme.source.map(h=>`<div class="chip" style="background:${h}" title="${h}"></div>`).join('');
