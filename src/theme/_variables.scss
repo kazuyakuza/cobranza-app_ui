@@ -5,13 +5,17 @@
  * FRONT-END SPEC:  .kilo/plans/20260805-phase9-frontend-spec.md
  *
  * Theme name: Minimal Yet Warm — warm sand / cream / taupe + controlled coral.
- * Canvas is a warm sand (D8D4C4); panels are a clean cream (EFEDE4), elevated
- * surfaces are a warm near-white (FAF9F4), insets use warm sand (D8C3A5) for
- * table headers / input wells / module footers. Four distinguishable surfaces.
+ * Canvas is a darker warm sand (C5BFAE) that reads as the "floor"; panels are a
+ * clean cream (F2F0E8) so modules read as cards; elevated surfaces are a warm
+ * near-white (FDFCF8) for module headers / dropdowns; insets use warm sand
+ * (D8C3A5) for table headers / input wells / module footers. Four obviously
+ * distinct surfaces: canvas → panel step ≈ 17 L*, panel → elevated ≈ 4 L*,
+ * inset sits ≈ 15 L* below panel.
  *
  * Text tokens are warm near-black/taupe; primary/secondary pass WCAG AA on every
- * surface; muted passes AA on canvas, panel, elevated and is RESTRICTED on
- * `--cba-bg-tertiary` (inset sand: ~3.86:1) — use `--cba-text-secondary` on inset.
+ * surface; muted passes AA on panel and elevated, and is RESTRICTED on the darker
+ * canvas (C5BFAE: ~3.6:1) and on `--cba-bg-tertiary` (inset sand: ~3.86:1) —
+ * use `--cba-text-secondary` on those surfaces.
  *
  * TOKEN GROUPS:
  *   Backgrounds  — canvas (primary), panel (secondary), inset (tertiary),
@@ -20,7 +24,7 @@
  *                  headers / wells / module footer), elevated for module header,
  *                  dropdowns, popovers.
  *   Text         — primary (#2B2620) body, secondary (#4A4640) lower emphasis,
- *                  muted (#625C55) de-emphasized (NOT on bg-tertiary), inverse
+ *                  muted (#625C55) de-emphasized (NOT on bg-tertiary or darker canvas), inverse
  *                  (#FDFCF8) on dark accents/overlays.
  *   Borders      — subtle (#DAD7CA) thin separators, default (#A7A6A2) input
  *                  borders / chrome, strong (#8E8D8A) focus / footer pills / header
@@ -50,10 +54,10 @@
  */
 :root {
   /* Backgrounds — warm Minimal-Yet-Warm surface scale (canvas → panel → elevated → inset) */
-  --cba-bg-primary: #D8D4C4;
-  --cba-bg-secondary: #EFEDE4;
+  --cba-bg-primary: #C5BFAE;
+  --cba-bg-secondary: #F2F0E8;
   --cba-bg-tertiary: #D8C3A5;
-  --cba-bg-elevated: #FAF9F4;
+  --cba-bg-elevated: #FDFCF8;
   --cba-bg-overlay: rgba(43, 38, 32, 0.45);
 
   /* Text — warm near-black/taupe; muted restricted on bg-tertiary (see header) */
@@ -90,8 +94,8 @@
   --cba-radius-lg: 14px;
 
   /* Shadows — warm-tinted, softer than black */
-  --cba-shadow-module: 0 4px 20px rgba(43, 34, 28, 0.14);
-  --cba-shadow-elevated: 0 8px 28px rgba(43, 34, 28, 0.20);
+  --cba-shadow-module: 0 6px 24px rgba(43, 34, 28, 0.18);
+  --cba-shadow-elevated: 0 10px 32px rgba(43, 34, 28, 0.26);
 
   /* Spacing (unchanged) */
   --cba-space-1: 4px;
