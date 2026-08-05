@@ -5,7 +5,7 @@
 
 # @cobranza-apps/ui
 
-Shared Angular component library & intermediate-gray design system for the Cobranza App Company Back-office.
+Shared Angular component library & Minimal Yet Warm design system for the Cobranza App Company Back-office.
 
 ## Table of Contents
 
@@ -24,12 +24,12 @@ Shared Angular component library & intermediate-gray design system for the Cobra
 
 ## Overview
 
-`@cobranza-apps/ui` is the shared visual foundation for the Company Back-office Shell and every MFE. It provides a single source of truth for the intermediate-gray design system and removes duplicated UI effort.
+`@cobranza-apps/ui` is the shared visual foundation for the Company Back-office Shell and every MFE. It provides a single source of truth for the Minimal Yet Warm design system and removes duplicated UI effort.
 
 **What this library provides:**
 
 - **Layout primitives** — `ModuleHeader` and `ModuleContainer` for the floating workspace.
-- **Theme** — Full intermediate-gray design tokens (CSS variables + utility classes + optional SCSS mixins).
+- **Theme** — Full Minimal Yet Warm design tokens (CSS variables + utility classes + optional SCSS mixins).
 - **Basic components** — `CbaButton`, `CbaCard`, `CbaBadge`, `CbaEmptyState`, `CbaSkeleton`, `CbaModal`.
 - **Form controls** — Thin wrappers around Bootstrap / ng-bootstrap inputs, selects, and datepickers.
 - **Icons** — Font Awesome Free (solid + regular) via `@fortawesome/angular-fontawesome`.
@@ -210,6 +210,10 @@ For a quick reference, see [`./docs/THEME.md`](./docs/THEME.md).
   - MFE → Shell via custom events defined in `@cobranza-apps/mfe-events`.
 - This library emits **only pure UI events** from `ModuleHeader` (`collapseToggle`, `sizeToggle`, `remove`, `fullscreenToggle`). It never dispatches workspace or routing events.
 - **Drag-and-drop is not part of this library** — it is owned by the Shell and `mfe-events`.
+- **Surface hierarchy is a shared contract** — Shell, Lib, and MFE each own specific
+  surfaces (canvas / panel / elevated / inset). Follow the
+  [Consumer Guide](./docs/CONSUMER_GUIDE.md) so the four-level hierarchy reads in the
+  running Shell.
 
 <!-- AI Agent Note: Keep this section updated when adding new documentation files.
      All docs should be linked from both README and brief.md §10. -->
@@ -219,6 +223,7 @@ For a quick reference, see [`./docs/THEME.md`](./docs/THEME.md).
 - [`./docs/INDEX.md`](./docs/INDEX.md) — Index of all library documentation pages.
 - [`./docs/USAGE.md`](./docs/USAGE.md) — Patterns and examples for consuming the library.
 - [`./docs/THEME.md`](./docs/THEME.md) — Theme import, tokens, and utility classes.
+- [`./docs/CONSUMER_GUIDE.md`](./docs/CONSUMER_GUIDE.md) — Shell & MFE integration rules: theme load (once), surface ownership map, Shell/MFE checklists, anti-patterns, quick verify.
 - [`./docs/MODULE_HEADER.md`](./docs/MODULE_HEADER.md) — `ModuleHeader` selector, API, status values, fullscreen & drag notes.
 - [`./docs/MODULE_CONTAINER.md`](./docs/MODULE_CONTAINER.md) — `ModuleContainer` selector, API, size/collapse/fullscreen/padding behaviour, scroll & chrome notes.
 - [`./docs/CBA_BUTTON.md`](./docs/CBA_BUTTON.md) — `CbaButton` selector, API, variant mapping, size options, loading/disabled behaviour.

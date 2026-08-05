@@ -28,6 +28,50 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > Releases prior to 0.8.1 predate this changelog and are not reconstructed retroactively.
 
+## [0.10.0] - 2026-08-05
+
+### Changed
+
+- Widened the **Minimal Yet Warm** surface hierarchy in `src/theme/_variables.scss` so
+  all four surfaces are obviously distinct: canvas darkened to `#C5BFAE` (warm sand
+  floor), panel refined to `#F2F0E8` (clean cream), elevated to `#FDFCF8` (warm
+  near-white), inset kept at `#D8C3A5` (warm sand). Canvas → panel step ≈ 17 L*,
+  panel → elevated ≈ 4 L*, inset sits ≈ 15 L* below panel.
+- Strengthened borders on cream/sand: `--cba-border-subtle` now `#DAD7CA` (was
+  `#E7E5DE`); `--cba-border-default` `#A7A6A2` and `--cba-border-strong` `#8E8D8A`
+  confirmed for inputs, footer pills, and header icon-button outlines.
+- Increased warm-tinted module shadows: `--cba-shadow-module` now
+  `0 6px 24px rgba(43, 34, 28, 0.18)` (was `0 4px 16px ... 0.12`);
+  `--cba-shadow-elevated` now `0 10px 32px rgba(43, 34, 28, 0.26)` (was
+  `0 8px 24px ... 0.18`). Modules visibly lift off the warm canvas without harsh black
+  bloom.
+- README now refers to the design system as **Minimal Yet Warm** (was
+  "intermediate-gray"); no behavioral change.
+
+### Added
+
+- `docs/CONSUMER_GUIDE.md` — normative Shell & MFE integration guide: theme load
+  (once), surface ownership map (Shell / Lib / MFE), Shell checklist (6 items), MFE
+  checklist (4 items), anti-patterns (5), quick visual verify (5 steps).
+- `docs/THEME.md` surface-hierarchy note pointing to the Consumer Guide.
+- Cross-links from `docs/INDEX.md`, `README.md` (Integration Notes + Documentation), and
+  `docs/THEME.md` to the new Consumer Guide.
+
+### Notes
+
+- **No token names renamed, added, or removed** — only values and docs changed.
+  Build/lint pass; consumers of `--cba-*` tokens get the new hierarchy by upgrading.
+- **Potential visual breaking change for Shell layouts** that depended on near-identical
+  surfaces (canvas vs panel both ~#EAE7DC/#F3F1E9). After upgrade the canvas is clearly
+  sand and modules lift as cards; Shell authors should review the Consumer Guide and
+  confirm the workspace uses `--cba-bg-primary`. See
+  [docs/CONSUMER_GUIDE.md](docs/CONSUMER_GUIDE.md).
+- Authoritative token values: [brief.md §5](.agent/project-info/brief.md#5-design-tokens-theme)
+  and [`src/theme/_variables.scss`](src/theme/_variables.scss).
+- `--cba-text-muted` is now RESTRICTED on the darker canvas (`#C5BFAE`, ~3.6:1) in
+  addition to `--cba-bg-tertiary` (~3.86:1); use `--cba-text-secondary` on those
+  surfaces.
+
 ## [0.9.0] - 2026-08-04
 
 ### Changed

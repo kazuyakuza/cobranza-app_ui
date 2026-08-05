@@ -43,6 +43,16 @@ Notes:
 - CSS variables are global once the theme is loaded (`:root`); utility classes remain opt-in (apply only where added).
 - Exact import paths are tentative until the library build is finalized; the canonical form is `@cobranza-apps/ui/theme`.
 
+### Surface hierarchy
+
+Minimal Yet Warm is a **four-level surface system**: canvas (`--cba-bg-primary`,
+darker warm sand; workspace floor) → panel (`--cba-bg-secondary`, clean cream; module
+body) → elevated (`--cba-bg-elevated`, warm near-white; module header / dropdowns) →
+inset (`--cba-bg-tertiary`, warm sand; table headers / wells). The hierarchy only
+survives in the running Shell if **each surface is painted by its owner** (Shell / Lib /
+MFE). See the [Consumer Guide](CONSUMER_GUIDE.md) for the surface ownership map and the
+Shell/MFE checklists.
+
 ## Token Prefix
 
 All theme CSS custom properties use the `--cba-` prefix.

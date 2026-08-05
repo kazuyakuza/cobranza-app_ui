@@ -98,25 +98,25 @@ It does **not** contain business logic, BFF communication, advanced tables, drag
 
 All tokens live under the `--cba-` prefix.
 
-> **Note:** The palette is **Minimal Yet Warm** (warm sand/cream/taupe + controlled coral). Canvas `#EAE7DC`, panel `#F3F1E9`, elevated `#FCFBF6`, inset `#D8C3A5`. Coral (`#E98074` soft, `#E85A4F` strong) is reserved for accent/status/focus — NOT for primary CTAs or large fills. Primary text on panel/elevated and primary/secondary text on every intended surface meet WCAG AA 4.5:1. Muted text on `--cba-bg-tertiary` (inset sand) is ~3.86:1 — use `--cba-text-secondary` on inset.
+> **Note:** The palette is **Minimal Yet Warm** (warm sand/cream/taupe + controlled coral). Canvas `#C5BFAE` (warm sand floor), panel `#F2F0E8` (clean cream), elevated `#FDFCF8` (warm near-white), inset `#D8C3A5` (warm sand). Canvas → panel step ≈ 17 L\*, panel → elevated ≈ 4 L\*, inset sits ≈ 15 L\* below panel. Coral (`#E98074` soft, `#E85A4F` strong) is reserved for accent/status/focus — NOT for primary CTAs or large fills. Primary/secondary text pass WCAG AA on every intended surface. Muted text is RESTRICTED on the darker canvas (`#C5BFAE`, ~3.6:1) AND on `--cba-bg-tertiary` (inset sand, ~3.86:1) — use `--cba-text-secondary` on those surfaces.
 
 ```scss
 :root {
   /* Backgrounds — warm Minimal-Yet-Warm surface scale (canvas → panel → elevated → inset) */
-  --cba-bg-primary: #EAE7DC;
-  --cba-bg-secondary: #F3F1E9;
+  --cba-bg-primary: #C5BFAE;
+  --cba-bg-secondary: #F2F0E8;
   --cba-bg-tertiary: #D8C3A5;
-  --cba-bg-elevated: #FCFBF6;
+  --cba-bg-elevated: #FDFCF8;
   --cba-bg-overlay: rgba(43, 38, 32, 0.45);
 
-  /* Text — warm near-black/taupe; muted restricted on bg-tertiary (see header) */
+  /* Text — warm near-black/taupe; muted restricted on darker canvas and bg-tertiary (see header) */
   --cba-text-primary: #2B2620;
   --cba-text-secondary: #4A4640;
   --cba-text-muted: #625C55;
   --cba-text-inverse: #FDFCF8;
 
   /* Borders — visible on cream/sand */
-  --cba-border-subtle: #E7E5DE;
+  --cba-border-subtle: #DAD7CA;
   --cba-border-default: #A7A6A2;
   --cba-border-strong: #8E8D8A;
 
@@ -143,8 +143,8 @@ All tokens live under the `--cba-` prefix.
   --cba-radius-lg: 14px;
 
   /* Shadows — warm-tinted, softer than black */
-  --cba-shadow-module: 0 4px 16px rgba(43, 34, 28, 0.12);
-  --cba-shadow-elevated: 0 8px 24px rgba(43, 34, 28, 0.18);
+  --cba-shadow-module: 0 6px 24px rgba(43, 34, 28, 0.18);
+  --cba-shadow-elevated: 0 10px 32px rgba(43, 34, 28, 0.26);
 
   /* Spacing (unchanged) */
   --cba-space-1: 4px;
@@ -157,7 +157,7 @@ All tokens live under the `--cba-` prefix.
 }
 ```
 
-**`--cba-text-muted` usage restriction:** `#625C55` ≈ passes WCAG AA 4.5:1 on `--cba-bg-primary` (canvas, ~5.33:1), `--cba-bg-secondary` (panel, ~5.84:1) and `--cba-bg-elevated` (cream, ~6.37:1). It is RESTRICTED on `--cba-bg-tertiary` (inset sand, ~3.86:1 — fails AA). Prefer `--cba-text-secondary` on `--cba-bg-tertiary` for lower-emphasis text.
+**`--cba-text-muted` usage restriction:** `#625C55` passes WCAG AA 4.5:1 on `--cba-bg-secondary` (panel) and `--cba-bg-elevated` (cream). It is RESTRICTED on the darker canvas `--cba-bg-primary` (`#C5BFAE`, ~3.6:1 — fails AA) AND on `--cba-bg-tertiary` (inset sand, ~3.86:1 — fails AA). Prefer `--cba-text-secondary` on canvas and inset sand for lower-emphasis text.
 
 **Typography**
 
