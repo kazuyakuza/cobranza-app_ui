@@ -210,10 +210,10 @@ For a quick reference, see [`./docs/THEME.md`](./docs/THEME.md).
   - MFE → Shell via custom events defined in `@cobranza-apps/mfe-events`.
 - This library emits **only pure UI events** from `ModuleHeader` (`collapseToggle`, `sizeToggle`, `remove`, `fullscreenToggle`). It never dispatches workspace or routing events.
 - **Drag-and-drop is not part of this library** — it is owned by the Shell and `mfe-events`.
-- **Surface hierarchy is a shared contract** — Shell, Lib, and MFE each own specific
+- **Surface hierarchy and token usage are shared contracts** — Shell, Lib, and MFE each own specific
   surfaces (canvas / panel / elevated / inset). Follow the
-  [Consumer Guide](./docs/CONSUMER_GUIDE.md) so the four-level hierarchy reads in the
-  running Shell.
+  [Consumer Guide](./docs/CONSUMER_GUIDE.md) for the token compliance mandate, exact token mappings
+  for buttons, surfaces, text, and chrome.
 
 <!-- AI Agent Note: Keep this section updated when adding new documentation files.
      All docs should be linked from both README and brief.md §10. -->
@@ -223,7 +223,7 @@ For a quick reference, see [`./docs/THEME.md`](./docs/THEME.md).
 - [`./docs/INDEX.md`](./docs/INDEX.md) — Index of all library documentation pages.
 - [`./docs/USAGE.md`](./docs/USAGE.md) — Patterns and examples for consuming the library.
 - [`./docs/THEME.md`](./docs/THEME.md) — Theme import, tokens, and utility classes.
-- [`./docs/CONSUMER_GUIDE.md`](./docs/CONSUMER_GUIDE.md) — Shell & MFE integration rules: theme load (once), surface ownership map, Shell/MFE checklists, anti-patterns, quick verify.
+- [`./docs/CONSUMER_GUIDE.md`](./docs/CONSUMER_GUIDE.md) — Shell & MFE integration rules: token compliance mandate, theme load (once), surface ownership map, button color guide, surface decision tree, text color rules, bar/chrome guide, checklists, anti-patterns, quick verify.
 - [`./docs/MODULE_HEADER.md`](./docs/MODULE_HEADER.md) — `ModuleHeader` selector, API, status values, fullscreen & drag notes.
 - [`./docs/MODULE_CONTAINER.md`](./docs/MODULE_CONTAINER.md) — `ModuleContainer` selector, API, size/collapse/fullscreen/padding behaviour, scroll & chrome notes.
 - [`./docs/CBA_BUTTON.md`](./docs/CBA_BUTTON.md) — `CbaButton` selector, API, variant mapping, size options, loading/disabled behaviour.

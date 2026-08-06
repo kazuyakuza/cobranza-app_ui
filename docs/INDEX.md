@@ -14,7 +14,7 @@
 
 - [USAGE.md](./USAGE.md) — Install, peer deps, theme import, quick start, per-component usage patterns.
 - [THEME.md](./THEME.md) — Theme import, design tokens, utility classes.
-- [CONSUMER_GUIDE.md](./CONSUMER_GUIDE.md) — Shell & MFE integration rules: theme load (once), surface ownership map, checklists, anti-patterns, quick verify.
+- [CONSUMER_GUIDE.md](./CONSUMER_GUIDE.md) — Shell & MFE integration rules: token compliance mandate, theme load (once), surface ownership map, button color guide, surface decision tree, text color rules, bar/chrome guide, checklists, anti-patterns, quick verify.
 
 ## Workspace chrome
 

@@ -50,7 +50,9 @@ darker warm sand; workspace floor) → panel (`--cba-bg-secondary`, warm cream; 
 body) → elevated (`--cba-bg-elevated`, warm cream, lightest surface; module header /
 dropdowns) → inset (`--cba-bg-tertiary`, warm sand; table headers / wells). The hierarchy
 survives only if **each surface is painted by its owner** (Shell / Lib / MFE). See the
-[Consumer Guide](CONSUMER_GUIDE.md) for the ownership map and checklists.
+[Consumer Guide](CONSUMER_GUIDE.md) for the token compliance mandate,
+surface ownership map, button color guide, surface decision tree, text color rules,
+and bar/chrome guide.
 
 ## Token Prefix
 
