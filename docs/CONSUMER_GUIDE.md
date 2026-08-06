@@ -101,6 +101,9 @@ Shell does not need to add those.
 - Using only `--cba-border-subtle` for important chrome on cream/sand.
 - Large coral backgrounds.
 - Hard-coded colors that fight tokens.
+- Secondary buttons (`--cba-bg-elevated`) that collapse visually into their panel container
+  or into their own active/pressed state — the elevated/panel L* separation must stay
+  visible and the active state must use a distinct token/overlay.
 - Expecting ModuleContainer to style the Shell workspace (it only styles the module card).
 
 ## Quick verify
@@ -112,6 +115,8 @@ After integration, confirm:
 3. Header band ≠ body.
 4. Table header sand inset.
 5. Footer pills readable.
+6. Secondary buttons are visibly distinct from the panel they sit on AND from their own
+   active/pressed state.
 
 ## Cross-References
 
