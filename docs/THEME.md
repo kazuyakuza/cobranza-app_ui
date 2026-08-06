@@ -48,10 +48,9 @@ Notes:
 Minimal Yet Warm is a **four-level surface system**: canvas (`--cba-bg-primary`,
 darker warm sand; workspace floor) → panel (`--cba-bg-secondary`, warm cream; module
 body) → elevated (`--cba-bg-elevated`, warm cream, lightest surface; module header /
-dropdowns) → inset (`--cba-bg-tertiary`, warm sand; table headers / wells). Panel→elevated
-is now the clearest step in the stack. The hierarchy only survives in the running Shell if
-**each surface is painted by its owner** (Shell / Lib / MFE). See the [Consumer Guide](CONSUMER_GUIDE.md)
-for the surface ownership map and the Shell/MFE checklists.
+dropdowns) → inset (`--cba-bg-tertiary`, warm sand; table headers / wells). The hierarchy
+survives only if **each surface is painted by its owner** (Shell / Lib / MFE). See the
+[Consumer Guide](CONSUMER_GUIDE.md) for the ownership map and checklists.
 
 ## Token Prefix
 

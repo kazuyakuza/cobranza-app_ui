@@ -15,13 +15,12 @@
 
 # @cobranza-apps/ui — Consumer Guide (Shell & MFE)
 
-How to integrate the **Minimal Yet Warm** theme so the four-level surface hierarchy
-(canvas → panel → elevated → inset) reads correctly in the running Shell. This guide is
-normative for **Shell** and **MFE** authors (and AI agents generating those apps).
+Integration rules for **Shell** and **MFE** authors so the four-level surface hierarchy
+(canvas → panel → elevated → inset) reads correctly.
 
-Authoritative token values live in [`brief.md §5`](../.agent/project-info/brief.md#5-design-tokens-theme)
-and [`src/theme/_variables.scss`](../src/theme/_variables.scss). This guide only states
-*who applies which token where*; it never re-declares hex values.
+Token values live in [`brief.md §5`](../.agent/project-info/brief.md#5-design-tokens-theme)
+and [`src/theme/_variables.scss`](../src/theme/_variables.scss). This guide states *who
+applies which token where*.
 
 ## Table of Contents
 
@@ -101,9 +100,8 @@ Shell does not need to add those.
 - Using only `--cba-border-subtle` for important chrome on cream/sand.
 - Large coral backgrounds.
 - Hard-coded colors that fight tokens.
-- Secondary buttons (`--cba-bg-elevated`) that collapse visually into their panel container
-  or into their own active/pressed state — the elevated/panel L* separation must stay
-  visible and the active state must use a distinct token/overlay.
+- Secondary buttons that collapse into their panel or active state. Keep the elevated/panel
+  separation visible and use a distinct token/overlay for active.
 - Expecting ModuleContainer to style the Shell workspace (it only styles the module card).
 
 ## Quick verify
@@ -115,8 +113,7 @@ After integration, confirm:
 3. Header band ≠ body.
 4. Table header sand inset.
 5. Footer pills readable.
-6. Secondary buttons are visibly distinct from the panel they sit on AND from their own
-   active/pressed state.
+6. Secondary buttons differ from their panel and from their active/pressed state.
 
 ## Cross-References
 

@@ -98,7 +98,7 @@ It does **not** contain business logic, BFF communication, advanced tables, drag
 
 All tokens live under the `--cba-` prefix.
 
-> **Note:** The palette is **Minimal Yet Warm** (warm sand/cream/taupe + controlled coral). Canvas `#C5BFAE` (warm sand floor), panel `#E6DDC6` (warm cream), elevated `#FBF7ED` (warm cream, lightest surface), inset `#D8C3A5` (warm sand). Canvas → panel step ≈ 11 L\*, panel → elevated ≈ 9 L\*, inset sits ≈ 8 L\* below panel. Coral (`#E98074` soft, `#E85A4F` strong) is reserved for accent/status/focus — NOT for primary CTAs or large fills. Primary/secondary text pass WCAG AA on every intended surface. Muted text is RESTRICTED on the darker canvas (`#C5BFAE`, ~3.6:1) AND on `--cba-bg-tertiary` (inset sand, ~3.86:1) — use `--cba-text-secondary` on those surfaces.
+> **Note:** The palette is **Minimal Yet Warm** (warm sand/cream/taupe + controlled coral). Canvas `#C5BFAE` (warm sand floor), panel `#E6DDC6` (warm cream), elevated `#FBF7ED` (warm cream, lightest surface), inset `#D8C3A5` (warm sand). Canvas → panel ≈ 11 L\*, panel → elevated ≈ 9 L\*, panel → inset ≈ 8 L\*. Coral (`#E98074` soft, `#E85A4F` strong) is reserved for accent/status/focus — NOT for primary CTAs or large fills. Primary/secondary text pass WCAG AA on every intended surface. Muted text is RESTRICTED on the darker canvas (`#C5BFAE`, ~3.6:1) AND on `--cba-bg-tertiary` (inset sand, ~3.86:1) — use `--cba-text-secondary` on those surfaces.
 
 ```scss
 :root {

@@ -4,53 +4,22 @@
  * SOURCE OF TRUTH: .agent/project-info/brief.md §5
  * FRONT-END SPEC:  .kilo/plans/20260806-task1-token-adjustments-frontend-spec.md
  *
- * Theme name: Minimal Yet Warm — warm sand / cream / taupe + controlled coral.
- * Canvas is a darker warm sand (C5BFAE) that reads as the "floor"; panels are a
- * warm cream (E6DDC6) so modules read as cards; elevated surfaces are a warm
- * cream (FBF7ED), the lightest intentional surface, for module headers /
- * dropdowns; insets use warm sand (D8C3A5) for table headers / input wells /
- * module footers. Four obviously distinct surfaces: canvas → panel step ≈ 11 L*,
- * panel → elevated ≈ 9 L*, inset sits ≈ 8 L* below panel; elevated → inset ≈ 17 L*.
- *
- * Text tokens are warm near-black/taupe; primary/secondary pass WCAG AA on every
- * surface; muted passes AA on panel and elevated, and is RESTRICTED on the darker
- * canvas (C5BFAE: ~3.6:1) and on `--cba-bg-tertiary` (inset sand: ~3.86:1) —
- * use `--cba-text-secondary` on those surfaces.
+ * Minimal Yet Warm: canvas → panel → elevated → inset, with coral reserved for
+ * accents/status/focus. See brief.md §5 for the full palette, L* gaps, WCAG
+ * notes, and accent-discipline rules.
  *
  * TOKEN GROUPS:
- *   Backgrounds  — canvas (primary), panel (secondary), inset (tertiary),
- *                  elevated (cream, highest). Use primary for workspace, secondary
- *                  for module body / cards, tertiary for recessed regions (table
- *                  headers / wells / module footer), elevated for module header,
- *                  dropdowns, popovers.
- *   Text         — primary (#2B2620) body, secondary (#4A4640) lower emphasis,
- *                  muted (#625C55) de-emphasized (NOT on bg-tertiary or darker canvas), inverse
- *                  (#FDFCF8) on dark accents/overlays.
- *   Borders      — subtle (#DAD7CA) thin separators, default (#A7A6A2) input
- *                  borders / chrome, strong (#8E8D8A) focus / footer pills / header
- *                  icon-button outlines so they do not disappear on cream/sand.
- *   Accents      — primary warm taupe (#6B5B4F, NOT coral); success calm green
- *                  (#3E6B4F); warning soft coral (#E98074); danger deeper coral-red
- *                  (#B93E36); info muted steel (#56717E). See accent-discipline note.
- *   Interactive  — hover/active use warm taupe overlays (rgba(43,38,32,...)) so they
- *                  read on cream/sand. focus-ring is a warm coral ring so it is visible
- *                  on light warm surfaces.
- *   Layout       — Fixed dimensions for Shell header / footer / module header.
- *   Radius       — sm (6px), md (10px), lg (14px).
- *   Shadows      — Warm-tinted (rgba(43,34,28,...)) so modules lift off canvas
- *                  without harsh black bloom.
- *   Spacing      — 4px-based scale 4px…32px.
+ *   Backgrounds  — canvas, panel, inset, elevated (lightest).
+ *   Text         — primary, secondary, muted (restricted on canvas/inset), inverse.
+ *   Borders      — subtle, default, strong.
+ *   Accents      — primary (taupe), success, warning, danger, info.
+ *   Interactive  — hover/active overlays, warm-coral focus-ring.
+ *   Layout       — header/footer/module-header dimensions.
+ *   Radius       — sm, md, lg.
+ *   Shadows      — warm-tinted.
+ *   Spacing      — 4px-based scale.
  *
- * ACCENT DISCIPLINE — coral (#E98074 soft / #E85A4F strong) is RESERVED for:
- *   - warning states and badges/borders,
- *   - danger / error states and badges,
- *   - focus-ring emphasis,
- *   - small emphasis accents (icons, links, dots).
- * Coral MUST NOT be used as a large background fill for panels, modules, or primary
- * CTAs. Primary CTAs use the warm taupe `--cba-accent-primary`.
- *
- * Do NOT rename tokens. Do NOT hard-code color values in components — always
- * reference var(--cba-*). When adding new tokens, update brief.md §5 first.
+ * Do NOT hard-code color values in components; reference var(--cba-*).
  */
 :root {
   /* Backgrounds — warm Minimal-Yet-Warm surface scale (canvas → panel → elevated → inset) */
