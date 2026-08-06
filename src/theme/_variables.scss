@@ -2,15 +2,15 @@
  * Design tokens — `:root` / `--cba-` prefix.
  *
  * SOURCE OF TRUTH: .agent/project-info/brief.md §5
- * FRONT-END SPEC:  .kilo/plans/20260805-phase9-frontend-spec.md
+ * FRONT-END SPEC:  .kilo/plans/20260806-task1-token-adjustments-frontend-spec.md
  *
  * Theme name: Minimal Yet Warm — warm sand / cream / taupe + controlled coral.
  * Canvas is a darker warm sand (C5BFAE) that reads as the "floor"; panels are a
- * clean cream (F2F0E8) so modules read as cards; elevated surfaces are a warm
- * near-white (FDFCF8) for module headers / dropdowns; insets use warm sand
- * (D8C3A5) for table headers / input wells / module footers. Four obviously
- * distinct surfaces: canvas → panel step ≈ 17 L*, panel → elevated ≈ 4 L*,
- * inset sits ≈ 15 L* below panel.
+ * warm cream (E6DDC6) so modules read as cards; elevated surfaces are a warm
+ * cream (FBF7ED), the lightest intentional surface, for module headers /
+ * dropdowns; insets use warm sand (D8C3A5) for table headers / input wells /
+ * module footers. Four obviously distinct surfaces: canvas → panel step ≈ 11 L*,
+ * panel → elevated ≈ 9 L*, inset sits ≈ 8 L* below panel; elevated → inset ≈ 17 L*.
  *
  * Text tokens are warm near-black/taupe; primary/secondary pass WCAG AA on every
  * surface; muted passes AA on panel and elevated, and is RESTRICTED on the darker
@@ -55,9 +55,9 @@
 :root {
   /* Backgrounds — warm Minimal-Yet-Warm surface scale (canvas → panel → elevated → inset) */
   --cba-bg-primary: #C5BFAE;
-  --cba-bg-secondary: #F2F0E8;
+  --cba-bg-secondary: #E6DDC6;
   --cba-bg-tertiary: #D8C3A5;
-  --cba-bg-elevated: #FDFCF8;
+  --cba-bg-elevated: #FBF7ED;
   --cba-bg-overlay: rgba(43, 38, 32, 0.45);
 
   /* Text — warm near-black/taupe; muted restricted on bg-tertiary (see header) */
