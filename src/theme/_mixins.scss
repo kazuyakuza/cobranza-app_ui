@@ -1,7 +1,14 @@
 /**
  * Theme mixins — reusable SCSS mixins consuming `--cba-*` tokens.
+ *
+ * SOURCE OF TRUTH: .agent/project-info/brief.md §5
+ * TOKEN DEFINITIONS: src/theme/_variables.scss (:root / --cba-* prefix)
+ *
  * Mixins emit no CSS until invoked by a component or utility via @include.
- * Tokens are defined in `_variables.scss`.
+ * Use these to apply consistent theme patterns (focus rings, elevated surfaces,
+ * hover states) without duplicating token references.
+ *
+ * See docs/THEME.md for mixin usage examples.
  */
 
 /// Placeholder for native form control reset rules shared by input, select, and

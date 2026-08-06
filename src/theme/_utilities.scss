@@ -1,9 +1,16 @@
 /**
- * Utility classes for @cobranza-apps/ui (Phase 1).
- * All values reference --cba-* tokens defined in _variables.scss (:root).
- * No hard-coded colors or pixel values live here.
+ * Utility classes for @cobranza-apps/ui.
+ *
+ * SOURCE OF TRUTH: .agent/project-info/brief.md §5
+ * TOKEN DEFINITIONS: src/theme/_variables.scss (:root / --cba-* prefix)
+ *
+ * All values reference --cba-* tokens. No hard-coded colors or pixel values.
  * Border utilities are color-only; pair with Bootstrap's .border / .border-1
  * to render the line (Bootstrap 5 is an expected peer dependency).
+ *
+ * USAGE: Apply via class names like .cba-bg-primary, .cba-text-secondary, etc.
+ * See docs/THEME.md for the full utility reference and docs/CONSUMER_GUIDE.md
+ * for integration patterns.
  */
 
 $utility-groups: (

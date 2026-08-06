@@ -1,5 +1,10 @@
 // Main theme entry point for @cobranza-apps/ui.
+//
+// SOURCE OF TRUTH: .agent/project-info/brief.md §5
+// TOKEN DEFINITIONS: src/theme/_variables.scss
+//
 // Imports variables, base typography, mixins, and utility classes in the correct order.
+// Import this file once in your application (see docs/CONSUMER_GUIDE.md).
 @use 'variables';
 @use 'base';
 @use 'modal';

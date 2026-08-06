@@ -30,12 +30,37 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-Placeholder entries for the upcoming **0.11.0** release (feature work):
+## [0.11.0] — 2026-08-06
 
-- **Token Adjustments** — pending: description of design-token value changes.
-- **Preview HTML** — pending: description of `docs/theme-preview.html` updates.
-- **Consumer Guide** — pending: description of `docs/CONSUMER_GUIDE.md` updates.
-- **Regression Tests** — pending: description of regression tests added.
+### Changed
+
+- Adjusted two **Minimal Yet Warm** surface tokens in `src/theme/_variables.scss` to widen
+  the panel→elevated L* gap from ~4.2 to ~9.0: `--cba-bg-secondary` (panel) darkened from
+  `#F2F0E8` to `#E6DDC6` (warm cream, L* 88.26); `--cba-bg-elevated` tinted from `#FDFCF8`
+  to `#FBF7ED` (warm cream, lightest surface, L* 97.29). Canvas (`#C5BFAE`), inset
+  (`#D8C3A5`), text, accent, and border tokens unchanged.
+- Synced `docs/theme-preview.html`, `docs/THEME.md`, `docs/CONSUMER_GUIDE.md`, and
+  `.agent/project-info/brief.md` §5 to the adjusted token values and updated L* gap
+  descriptors (canvas→panel ≈11, panel→elevated ≈9, panel→inset ≈8, elevated→inset ≈17).
+
+### Fixed
+
+- Surface distinguishability: panel→elevated step is now the clearest in the stack (~9 L*),
+  resolving the issue where `--cba-bg-elevated` (used by active/pressed secondary buttons)
+  was visually indistinguishable from the panel surface it sits on.
+
+### Added
+
+- Cross-reference comments in `src/theme/_utilities.scss`, `src/theme/_mixins.scss`, and
+  `src/theme/theme.scss` pointing to brief.md §5 and docs/THEME.md for AI-agent navigation.
+
+### Notes
+
+- **No token names renamed, added, or removed** — only two values changed. Build/lint pass;
+  consumers of `--cba-*` tokens get the refined hierarchy by upgrading.
+- Authoritative token values: [brief.md §5](.agent/project-info/brief.md#5-design-tokens-theme)
+  and [`src/theme/_variables.scss`](src/theme/_variables.scss).
+- Front-end spec: [20260806-task1-token-adjustments-frontend-spec.md](.kilo/plans/20260806-task1-token-adjustments-frontend-spec.md).
 
 ## [0.10.0] - 2026-08-05
 
