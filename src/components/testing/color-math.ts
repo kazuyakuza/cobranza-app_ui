@@ -53,7 +53,7 @@ function srgbToXyz(hex: string): { x: number; y: number; z: number } {
   };
 }
 
-/** CIELAB (D65) conversion. Used for lightness-gap and ΔE assertions. */
+/** CIELAB (D65) conversion. Used for lightness-gap assertions. */
 export function srgbToLab(hex: string): Lab {
   const whitePointX = 0.95047;
   const whitePointY = 1.0;
@@ -70,11 +70,4 @@ export function srgbToLab(hex: string): Lab {
 /** Absolute CIELAB L* difference between two hex colours. */
 export function lightnessGap(hexA: string, hexB: string): number {
   return Math.abs(srgbToLab(hexA).L - srgbToLab(hexB).L);
-}
-
-/** CIELAB ΔE (76) distance between two hex colours. */
-export function deltaE(hexA: string, hexB: string): number {
-  const labA = srgbToLab(hexA);
-  const labB = srgbToLab(hexB);
-  return Math.sqrt((labA.L - labB.L) ** 2 + (labA.a - labB.a) ** 2 + (labA.b - labB.b) ** 2);
 }

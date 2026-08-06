@@ -41,6 +41,17 @@ export const PREVIEW_HTML_PATH = 'docs/theme-preview.html';
 export const PREVIEW_CSS_PATH = 'docs/theme-preview.css';
 export const CONSUMER_GUIDE_PATH = 'docs/CONSUMER_GUIDE.md';
 
+// Derive every duplicated colour from EXPECTED_TOKENS so a token change needs a single edit.
+const BG_PRIMARY = EXPECTED_TOKENS['--cba-bg-primary'];
+const BG_SECONDARY = EXPECTED_TOKENS['--cba-bg-secondary'];
+const BG_TERTIARY = EXPECTED_TOKENS['--cba-bg-tertiary'];
+const BG_ELEVATED = EXPECTED_TOKENS['--cba-bg-elevated'];
+const TEXT_PRIMARY = EXPECTED_TOKENS['--cba-text-primary'];
+const TEXT_SECONDARY = EXPECTED_TOKENS['--cba-text-secondary'];
+const TEXT_MUTED = EXPECTED_TOKENS['--cba-text-muted'];
+const TEXT_INVERSE = EXPECTED_TOKENS['--cba-text-inverse'];
+const ACCENT_PRIMARY = EXPECTED_TOKENS['--cba-accent-primary'];
+
 export interface ContrastPair {
   name: string;
   text: string;
@@ -49,19 +60,19 @@ export interface ContrastPair {
 }
 
 export const CONTRAST_PAIRS: ContrastPair[] = [
-  { name: 'text-primary on panel', text: '#2B2620', background: '#E6DDC6', mustPass: true },
-  { name: 'text-primary on elevated', text: '#2B2620', background: '#FBF7ED', mustPass: true },
-  { name: 'text-primary on canvas', text: '#2B2620', background: '#C5BFAE', mustPass: true },
-  { name: 'text-primary on inset', text: '#2B2620', background: '#D8C3A5', mustPass: true },
-  { name: 'text-secondary on panel', text: '#4A4640', background: '#E6DDC6', mustPass: true },
-  { name: 'text-secondary on elevated', text: '#4A4640', background: '#FBF7ED', mustPass: true },
-  { name: 'text-secondary on canvas', text: '#4A4640', background: '#C5BFAE', mustPass: true },
-  { name: 'text-secondary on inset', text: '#4A4640', background: '#D8C3A5', mustPass: true },
-  { name: 'text-muted on panel', text: '#625C55', background: '#E6DDC6', mustPass: true },
-  { name: 'text-muted on elevated', text: '#625C55', background: '#FBF7ED', mustPass: true },
-  { name: 'text-inverse on accent-primary', text: '#FDFCF8', background: '#6B5B4F', mustPass: true },
-  { name: 'text-muted on canvas (restricted)', text: '#625C55', background: '#C5BFAE', mustPass: false },
-  { name: 'text-muted on inset (restricted)', text: '#625C55', background: '#D8C3A5', mustPass: false },
+  { name: 'text-primary on panel', text: TEXT_PRIMARY, background: BG_SECONDARY, mustPass: true },
+  { name: 'text-primary on elevated', text: TEXT_PRIMARY, background: BG_ELEVATED, mustPass: true },
+  { name: 'text-primary on canvas', text: TEXT_PRIMARY, background: BG_PRIMARY, mustPass: true },
+  { name: 'text-primary on inset', text: TEXT_PRIMARY, background: BG_TERTIARY, mustPass: true },
+  { name: 'text-secondary on panel', text: TEXT_SECONDARY, background: BG_SECONDARY, mustPass: true },
+  { name: 'text-secondary on elevated', text: TEXT_SECONDARY, background: BG_ELEVATED, mustPass: true },
+  { name: 'text-secondary on canvas', text: TEXT_SECONDARY, background: BG_PRIMARY, mustPass: true },
+  { name: 'text-secondary on inset', text: TEXT_SECONDARY, background: BG_TERTIARY, mustPass: true },
+  { name: 'text-muted on panel', text: TEXT_MUTED, background: BG_SECONDARY, mustPass: true },
+  { name: 'text-muted on elevated', text: TEXT_MUTED, background: BG_ELEVATED, mustPass: true },
+  { name: 'text-inverse on accent-primary', text: TEXT_INVERSE, background: ACCENT_PRIMARY, mustPass: true },
+  { name: 'text-muted on canvas (restricted)', text: TEXT_MUTED, background: BG_PRIMARY, mustPass: false },
+  { name: 'text-muted on inset (restricted)', text: TEXT_MUTED, background: BG_TERTIARY, mustPass: false },
 ];
 
 export interface SurfaceGap {
@@ -72,15 +83,15 @@ export interface SurfaceGap {
 }
 
 export const SURFACE_GAPS: SurfaceGap[] = [
-  { name: 'canvas to panel', lower: '#C5BFAE', higher: '#E6DDC6', minGap: 8 },
-  { name: 'panel to elevated', lower: '#E6DDC6', higher: '#FBF7ED', minGap: 8 },
-  { name: 'panel to inset', lower: '#D8C3A5', higher: '#E6DDC6', minGap: 6 },
-  { name: 'elevated to inset', lower: '#D8C3A5', higher: '#FBF7ED', minGap: 8 },
+  { name: 'canvas to panel', lower: BG_PRIMARY, higher: BG_SECONDARY, minGap: 8 },
+  { name: 'panel to elevated', lower: BG_SECONDARY, higher: BG_ELEVATED, minGap: 8 },
+  { name: 'panel to inset', lower: BG_TERTIARY, higher: BG_SECONDARY, minGap: 6 },
+  { name: 'elevated to inset', lower: BG_TERTIARY, higher: BG_ELEVATED, minGap: 8 },
 ];
 
 export const SURFACE_LIGHTNESS_ORDER = [
-  { token: 'canvas', hex: '#C5BFAE' },
-  { token: 'inset', hex: '#D8C3A5' },
-  { token: 'panel', hex: '#E6DDC6' },
-  { token: 'elevated', hex: '#FBF7ED' },
+  { token: 'canvas', hex: BG_PRIMARY },
+  { token: 'inset', hex: BG_TERTIARY },
+  { token: 'panel', hex: BG_SECONDARY },
+  { token: 'elevated', hex: BG_ELEVATED },
 ];

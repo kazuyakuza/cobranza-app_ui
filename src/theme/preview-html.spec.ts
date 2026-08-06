@@ -1,5 +1,5 @@
 import { readProjectText } from '../components/testing/project-files';
-import { parseHtmlDocument } from '../components/testing/html-loader';
+import { extractTokenRoles, parseHtmlDocument } from '../components/testing/html-loader';
 import { parseScssVariables } from '../components/testing/scss-tokens';
 import {
   EXPECTED_TOKENS,
@@ -49,12 +49,12 @@ describe('docs/theme-preview.html structure', () => {
     }
   });
 
-  it('TOKEN_ROLES hex values match canonical token values', () => {
-    const cssVars = parseScssVariables(readProjectText(PREVIEW_CSS_PATH));
-    for (const token of Object.values(SWATCH_ROLE_TOKEN)) {
-      const canonical = EXPECTED_TOKENS[token];
-      expect(cssVars.get(token)).toBe(canonical);
-      expect(html).toContain(canonical);
+  it('TOKEN_ROLES array maps every role to the correct token and canonical hex', () => {
+    const roles = extractTokenRoles(html);
+    expect(roles.length).toBe(Object.keys(SWATCH_ROLE_TOKEN).length);
+    for (const [role, token, hex] of roles) {
+      expect(SWATCH_ROLE_TOKEN[role]).toBe(token);
+      expect(EXPECTED_TOKENS[token]).toBe(hex);
     }
   });
 

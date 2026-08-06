@@ -9,22 +9,13 @@ describe('theme tokens (src/theme/_variables.scss)', () => {
     expect(tokens.size).toBeGreaterThan(0);
   });
 
-  it('contains every expected token', () => {
-    for (const name of Object.keys(EXPECTED_TOKENS)) {
-      expect(tokens.has(name)).toBe(true);
-    }
+  it('has exactly the expected --cba-* tokens', () => {
+    expect(new Set(tokens.keys())).toEqual(new Set(Object.keys(EXPECTED_TOKENS)));
   });
 
   it('matches the canonical value for every expected token', () => {
     for (const [name, value] of Object.entries(EXPECTED_TOKENS)) {
       expect(tokens.get(name)).toBe(value);
-    }
-  });
-
-  it('introduces no unexpected --cba-* token', () => {
-    const expectedNames = new Set(Object.keys(EXPECTED_TOKENS));
-    for (const name of tokens.keys()) {
-      expect(expectedNames.has(name)).toBe(true);
     }
   });
 
