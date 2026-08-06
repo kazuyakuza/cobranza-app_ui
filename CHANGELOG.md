@@ -65,6 +65,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   mockup showing canvas → panel → elevated → inset hierarchy).
 - `build:preview` npm script (`sass src/theme/theme.scss docs/theme-preview.css`) and `sass`
   devDependency for regenerating the preview stylesheet after token changes.
+- `docs/CONSUMER_GUIDE.md` — five new prescriptive sections for Shell and MFE authors:
+  **Token Compliance Mandate** (≥90 % `--cba-*` usage, no hard-coded hex without a `TODO`),
+  **Button Color Guide** (variant × surface base mapping, state overlays, focus ring),
+  **Surface Decision Tree** (canvas / panel / elevated / inset / overlay decision rule),
+  **Text Color Rules** (allowed text tokens per surface, muted restriction on canvas and
+  inset), and **Bar and Chrome Guide** (header, footer, module header/footer, footer pills
+  with border and height tokens). Cross-references updated in `docs/INDEX.md`, `README.md`,
+  and `docs/THEME.md`.
 
 ### Notes
 
@@ -74,6 +82,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   and [`src/theme/_variables.scss`](src/theme/_variables.scss).
 - Task 1 front-end spec: [20260806-task1-token-adjustments-frontend-spec.md](.kilo/plans/20260806-task1-token-adjustments-frontend-spec.md).
 - Task 2 front-end spec: [20260806-task2-preview-html-frontend-spec.md](.kilo/plans/20260806-task2-preview-html-frontend-spec.md).
+- Task 3 front-end spec: [20260806-task3-consumer-guide-frontend-spec.md](.kilo/plans/20260806-task3-consumer-guide-frontend-spec.md).
 
 ## [0.10.0] - 2026-08-05
 
