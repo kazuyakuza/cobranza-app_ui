@@ -2,15 +2,17 @@
 <!--
   docs/theme-preview.html
   Single-theme preview for @cobranza-apps/ui — Minimal Yet Warm (refined 2026-08-06).
-  Preview CSS custom properties mirror `--cba-*` tokens from src/theme/_variables.scss.
-  Update both the `.preview` CSS block and the JS `themes` array when tokens change.
-  Verify: canvas ≠ panel ≠ elevated ≠ inset; borders visible; coral only on accents.
+  Theme tokens are linked from docs/theme-preview.css, compiled from src/theme/theme.scss
+  via `npm run build:preview`. Do NOT mirror token values inline; regenerate the CSS after
+  any token change. Verify: canvas ≠ panel ≠ elevated ≠ inset; borders visible; coral only
+  on accents. See docs/CONSUMER_GUIDE.md for surface ownership rules demonstrated below.
 -->
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Cobranza UI — Minimal Yet Warm preview</title>
+  <link rel="stylesheet" href="theme-preview.css" />
   <style>
     *{box-sizing:border-box}
     body{margin:0;font-family:Inter,system-ui,sans-serif;font-size:14px;line-height:1.45;background:#111;color:#eee}
@@ -21,7 +23,7 @@
     .theme-list{display:flex;flex-direction:column;gap:4px}
     .theme-btn{text-align:left;border:1px solid #333;background:#222;border-radius:9px;padding:7px 9px;cursor:pointer;font:inherit;color:#ddd}
     .theme-btn:hover{border-color:#555}
-    .theme-btn.active{border-color:#B93E36;background:#2A211D}
+    .theme-btn.active{border-color:var(--cba-accent-danger);background:color-mix(in srgb,var(--cba-accent-danger) 22%,#1a1a1a)}
     .t-name{font-weight:700;font-size:12px;display:block}
     .t-note{font-size:10.5px;color:#8a9099;display:block;margin-top:1px}
     .t-dots{display:flex;gap:3px;margin-top:6px;flex-wrap:wrap}
@@ -31,55 +33,93 @@
     .src-hex .row{display:flex;align-items:center;gap:7px;margin-bottom:4px;font-size:10.5px;color:#bbb;font-family:ui-monospace,monospace}
     .src-hex .row i{width:20px;height:12px;border-radius:3px;border:1px solid rgba(255,255,255,.12);display:block}
     .map{margin-top:8px;font-size:10.5px;color:#9ab;font-family:ui-monospace,monospace;line-height:1.5}
-    .preview{
-      --canvas:#C5BFAE;--panel:#E6DDC6;--elevated:#FBF7ED;--inset:#D8C3A5;
-      --text:#2B2620;--text-2:#4A4640;--text-3:#625C55;--border:#A7A6A2;--border-2:#8E8D8A;
-      --accent:#6B5B4F;--success:#3E6B4F;--warning:#E98074;--danger:#B93E36;--info:#56717E;
-      --shadow:0 6px 24px rgba(43,34,28,.18);--hover:rgba(43,38,32,.06);--on-accent:#FDFCF8;
-      display:flex;flex-direction:column;min-height:100vh;background:var(--canvas);color:var(--text)
-    }
-    .preview-bar{padding:8px 14px;font-size:12px;color:var(--text-3);border-bottom:1px solid var(--border);background:var(--elevated)}
-    .preview-bar strong{color:var(--text-2)}
-    .shell-header{height:56px;display:flex;align-items:center;gap:12px;padding:0 14px;background:var(--elevated);border-bottom:1px solid var(--border)}
-    .logo{width:28px;height:28px;border-radius:8px;background:var(--inset);border:1px solid var(--border-2)}
+
+    /* Preview surface — tokens resolve from linked theme-preview.css (:root --cba-*) */
+    .preview{display:flex;flex-direction:column;min-height:100vh;background:var(--cba-bg-primary);color:var(--cba-text-primary)}
+    .preview-bar{padding:8px 14px;font-size:12px;color:var(--cba-text-muted);border-bottom:1px solid var(--cba-border-default);background:var(--cba-bg-elevated)}
+    .preview-bar strong{color:var(--cba-text-secondary)}
+    .shell-header{height:var(--cba-header-height);display:flex;align-items:center;gap:12px;padding:0 14px;background:var(--cba-bg-elevated);border-bottom:1px solid var(--cba-border-default)}
+    .logo{width:28px;height:28px;border-radius:8px;background:var(--cba-bg-tertiary);border:1px solid var(--cba-border-strong)}
     .brand{font-weight:700}
     .spacer{flex:1}
-    .search{display:flex;align-items:center;gap:8px;padding:6px 12px;border-radius:999px;border:1px solid var(--border-2);background:var(--inset);color:var(--text-2);font-size:12px;min-width:140px}
-    .icon-btn{width:32px;height:32px;border-radius:999px;border:1px solid var(--border-2);background:var(--panel);color:var(--text-2);display:inline-flex;align-items:center;justify-content:center}
-    .workspace{flex:1;padding:16px}
-    .module{max-width:900px;background:var(--panel);border:1px solid var(--border);border-radius:12px;box-shadow:var(--shadow);overflow:hidden}
-    .module-header{display:flex;align-items:flex-start;gap:10px;padding:10px 12px;background:var(--elevated);border-bottom:1px solid var(--border);min-height:42px}
-    .status{color:var(--success);font-weight:700;width:18px;text-align:center}
+    .search{display:flex;align-items:center;gap:8px;padding:6px 12px;border-radius:999px;border:1px solid var(--cba-border-strong);background:var(--cba-bg-tertiary);color:var(--cba-text-secondary);font-size:12px;min-width:140px}
+    .icon-btn{width:32px;height:32px;border-radius:999px;border:1px solid var(--cba-border-strong);background:var(--cba-bg-secondary);color:var(--cba-text-secondary);display:inline-flex;align-items:center;justify-content:center}
+    .workspace{flex:1;padding:16px;overflow-y:auto}
+    .module{max-width:900px;background:var(--cba-bg-secondary);border:1px solid var(--cba-border-default);border-radius:12px;box-shadow:var(--cba-shadow-module);overflow:hidden}
+    .module-header{display:flex;align-items:flex-start;gap:10px;padding:10px 12px;background:var(--cba-bg-elevated);border-bottom:1px solid var(--cba-border-default);min-height:42px}
+    .status{color:var(--cba-accent-success);font-weight:700;width:18px;text-align:center}
     .module-title{flex:1;font-weight:700}
     .module-actions{display:flex;gap:4px}
-    .module-actions button{width:28px;height:28px;border:none;border-radius:6px;background:transparent;color:var(--text-2)}
-    .module-actions button:hover{background:var(--hover);color:var(--text)}
+    .module-actions button{width:28px;height:28px;border:none;border-radius:6px;background:transparent;color:var(--cba-text-secondary)}
+    .module-actions button:hover{background:var(--cba-hover);color:var(--cba-text-primary)}
     .module-body{padding:14px}
     .panel-title-row{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px}
     .panel-title{font-weight:700;font-size:15px}
-    .panel-meta{font-size:12px;color:var(--text-3);font-weight:600}
+    .panel-meta{font-size:12px;color:var(--cba-text-muted);font-weight:600}
     table{width:100%;border-collapse:collapse;font-size:13.5px}
-    thead th{text-align:left;padding:11px 12px;background:var(--inset);color:var(--text-2);font-weight:700;border-bottom:1px solid var(--border)}
-    tbody td{padding:11px 12px;border-bottom:1px solid var(--border);font-weight:500}
-    tbody tr:hover td{background:var(--hover)}
+    thead th{text-align:left;padding:11px 12px;background:var(--cba-bg-tertiary);color:var(--cba-text-secondary);font-weight:700;border-bottom:1px solid var(--cba-border-default)}
+    tbody td{padding:11px 12px;border-bottom:1px solid var(--cba-border-default);font-weight:500}
+    tbody tr:hover td{background:var(--cba-hover)}
     tbody tr:last-child td{border-bottom:none}
-    .module-footer{padding:9px 12px;background:var(--inset);border-top:1px solid var(--border);font-size:12.5px;font-weight:700;color:var(--success)}
-    .shell-footer{height:64px;display:flex;align-items:center;justify-content:center;gap:10px;border-top:1px solid var(--border);background:var(--canvas)}
-    .section-pill{padding:8px 16px;border-radius:999px;border:1px solid var(--border-2);background:var(--panel);color:var(--text-2);font-size:13px;font-weight:700}
-    .section-pill.active{border-color:var(--accent);color:var(--text)}
+    .module-footer{padding:9px 12px;background:var(--cba-bg-tertiary);border-top:1px solid var(--cba-border-default);font-size:12.5px;font-weight:700;color:var(--cba-accent-success)}
+    .shell-footer{height:var(--cba-footer-height);display:flex;align-items:center;justify-content:center;gap:10px;border-top:1px solid var(--cba-border-default);background:var(--cba-bg-primary)}
+    .section-pill{padding:8px 16px;border-radius:999px;border:1px solid var(--cba-border-strong);background:var(--cba-bg-secondary);color:var(--cba-text-secondary);font-size:13px;font-weight:700}
+    .section-pill.active{border-color:var(--cba-accent-primary);color:var(--cba-text-primary)}
+
+    /* Extras: swatches, button matrix, text-on-surfaces */
     .extras{max-width:900px;margin-top:14px}
-    .text-samples{padding:12px 14px;border-radius:10px;border:1px solid var(--border);background:var(--panel);margin-bottom:10px}
-    .text-samples .p{color:var(--text);font-weight:700;margin-bottom:4px}
-    .text-samples .s{color:var(--text-2);font-weight:600;margin-bottom:4px}
-    .text-samples .m{color:var(--text-3);font-weight:500}
+    .extras h2{font-size:14px;margin:14px 0 6px}
+    .extras h2:first-child{margin-top:0}
+
+    /* Token swatches (spec §5) */
+    .swatch-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:8px}
+    .swatch{display:flex;align-items:center;gap:8px;padding:6px;border:1px solid var(--cba-border-default);border-radius:var(--cba-radius-md);background:var(--cba-bg-secondary)}
+    .swatch-chip{width:48px;height:36px;border-radius:var(--cba-radius-sm);border:1px solid var(--cba-border-default);flex:0 0 auto}
+    .swatch-meta{font-size:11px;line-height:1.3;font-family:ui-monospace,monospace}
+    .swatch-meta b{display:block;font-family:Inter,system-ui,sans-serif;font-size:12px;font-weight:700}
+
+    /* Button states matrix (spec §6) — mirrors src/components/button/cba-button.component.scss */
+    .btn-matrix{display:flex;flex-direction:column;gap:12px}
+    .btn-surface{padding:12px;border:1px solid var(--cba-border-default);border-radius:var(--cba-radius-md)}
+    .btn-surface--panel{background:var(--cba-bg-secondary)}
+    .btn-surface--elevated{background:var(--cba-bg-elevated)}
+    .btn-surface--canvas{background:var(--cba-bg-primary)}
+    .btn-surface h3{margin:0 0 8px;font-size:12px;font-weight:700;font-family:ui-monospace,monospace;color:var(--cba-text-secondary)}
+    .btn-variant{display:flex;align-items:center;gap:8px;margin-bottom:6px;flex-wrap:wrap}
+    .btn-variant__label{width:90px;flex:0 0 auto;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--cba-text-secondary)}
+    .btn-states{display:flex;gap:6px;flex-wrap:wrap}
+    .pv-btn{display:inline-flex;align-items:center;justify-content:center;padding:8px 14px;border-radius:var(--cba-radius-sm);border:1px solid transparent;font-size:13px;font-weight:600;font-family:inherit;cursor:pointer}
+    .pv-btn:focus-visible{outline:none;box-shadow:var(--cba-focus-ring)}
+    .pv-btn--primary{background:var(--cba-accent-primary);color:var(--cba-text-inverse)}
+    .pv-btn--secondary{background:var(--cba-bg-elevated);border-color:var(--cba-border-subtle);color:var(--cba-text-primary)}
+    .pv-btn--ghost{background:transparent;color:var(--cba-text-primary)}
+    .pv-btn--danger{background:var(--cba-accent-danger);color:var(--cba-text-inverse)}
+    .pv-btn--success{background:var(--cba-accent-success);color:var(--cba-text-inverse)}
+    .pv-btn--primary.is-hover,.pv-btn--secondary.is-hover,.pv-btn--danger.is-hover,.pv-btn--success.is-hover{background-image:linear-gradient(var(--cba-hover),var(--cba-hover))}
+    .pv-btn--ghost.is-hover{background:var(--cba-hover)}
+    .pv-btn--primary.is-active,.pv-btn--secondary.is-active,.pv-btn--danger.is-active,.pv-btn--success.is-active{background-image:linear-gradient(var(--cba-active),var(--cba-active))}
+    .pv-btn--ghost.is-active{background:var(--cba-active)}
+    .pv-btn.is-disabled,.pv-btn:disabled{cursor:not-allowed;opacity:.6}
+
+    /* Text on surfaces (spec §7) */
+    .text-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px}
+    .text-sample{padding:12px;border:1px solid var(--cba-border-default);border-radius:var(--cba-radius-md)}
+    .text-sample--canvas{background:var(--cba-bg-primary)}
+    .text-sample--panel{background:var(--cba-bg-secondary)}
+    .text-sample--elevated{background:var(--cba-bg-elevated)}
+    .text-sample--inset{background:var(--cba-bg-tertiary)}
+    .text-sample h3{margin:0 0 6px;font-size:12px;font-family:ui-monospace,monospace;color:var(--cba-text-secondary);font-weight:700}
+    .t-row{font-size:12.5px;margin-bottom:4px}
+    .t-row .tok{font-family:ui-monospace,monospace;font-size:10.5px;color:var(--cba-text-muted)}
+    .t-primary{color:var(--cba-text-primary)}
+    .t-secondary{color:var(--cba-text-secondary)}
+    .t-muted{color:var(--cba-text-muted)}
+    .t-inverse{color:var(--cba-text-inverse);background:var(--cba-accent-primary);padding:2px 6px;border-radius:var(--cba-radius-sm)}
+    .t-callout{margin-top:6px;padding:6px 8px;border-radius:var(--cba-radius-sm);border:1px solid var(--cba-accent-warning);color:var(--cba-accent-warning);font-size:11px;font-weight:600}
+
+    /* Preserved informational rows */
     .accent-row,.btn-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
     .accent-pill{padding:6px 12px;border-radius:999px;font-size:12px;font-weight:700;border:1px solid transparent}
-    .btn{padding:8px 14px;border-radius:8px;border:1px solid transparent;font-size:13px;font-weight:700}
-    .btn-primary{background:var(--accent);color:var(--on-accent)}
-    .btn-secondary{background:var(--elevated);color:var(--text);border-color:var(--border-2)}
-    .btn-ghost{background:transparent;color:var(--text-2);border-color:var(--border)}
-    .btn-success{background:var(--success);color:var(--on-accent)}
-    .btn-danger{background:var(--danger);color:var(--on-accent)}
     .raw-strip{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px;max-width:900px}
     .raw-strip .chip{width:48px;height:36px;border-radius:8px;border:1px solid rgba(0,0,0,.2);box-shadow:inset 0 0 0 1px rgba(255,255,255,.12)}
   </style>
@@ -87,8 +127,8 @@
 <body>
   <div class="app">
     <aside class="controls">
-      <h1>Minimal Yet Warm — Phase 9 preview</h1>
-      <p class="hint">Minimal Yet Warm preview (refined 2026-08-06). Panel and elevated are now clearly separated; coral is reserved for accents.</p>
+      <h1>Minimal Yet Warm — preview</h1>
+      <p class="hint">Preview enlazado a docs/theme-preview.css (compilado de src/theme/theme.scss). Regenera con `npm run build:preview` tras cambiar tokens. Coral reservado a acentos.</p>
       <div class="theme-list" id="themeList"></div>
       <div class="src-hex">
         <h2>HEX fuente</h2>
@@ -109,8 +149,8 @@
             <div class="status">✓</div>
             <div class="module-title">Clientes List</div>
             <div class="module-actions">
-              <button type="button">⌃</button><button type="button">⛶</button>
-              <button type="button">✕</button><button type="button">⧉</button>
+              <button type="button" aria-label="Expandir">⌃</button><button type="button" aria-label="Pantalla completa">⛶</button>
+              <button type="button" aria-label="Cerrar">✕</button><button type="button" aria-label="Desacoplar">⧉</button>
             </div>
           </div>
           <div class="module-body">
@@ -131,19 +171,53 @@
           <div class="module-footer">Listo</div>
         </section>
         <div class="extras">
-          <div class="text-samples">
-            <div class="p">Texto primary — debe leerse nítido</div>
-            <div class="s">Texto secondary — labels / meta</div>
-            <div class="m">Texto muted — hints</div>
+          <h2>Token swatches</h2>
+          <div class="swatch-grid">
+            <div class="swatch"><div class="swatch-chip cba-bg-primary"></div><div class="swatch-meta"><b>canvas</b>#C5BFAE<br>--cba-bg-primary</div></div>
+            <div class="swatch"><div class="swatch-chip cba-bg-secondary"></div><div class="swatch-meta"><b>panel</b>#E6DDC6<br>--cba-bg-secondary</div></div>
+            <div class="swatch"><div class="swatch-chip cba-bg-elevated"></div><div class="swatch-meta"><b>elevated</b>#FBF7ED<br>--cba-bg-elevated</div></div>
+            <div class="swatch"><div class="swatch-chip cba-bg-tertiary"></div><div class="swatch-meta"><b>inset</b>#D8C3A5<br>--cba-bg-tertiary</div></div>
+            <div class="swatch"><div class="swatch-chip" style="background:var(--cba-text-primary)"></div><div class="swatch-meta"><b>text</b>#2B2620<br>--cba-text-primary</div></div>
+            <div class="swatch"><div class="swatch-chip" style="background:var(--cba-border-default)"></div><div class="swatch-meta"><b>border</b>#A7A6A2<br>--cba-border-default</div></div>
+            <div class="swatch"><div class="swatch-chip" style="background:var(--cba-accent-primary)"></div><div class="swatch-meta"><b>accent</b>#6B5B4F<br>--cba-accent-primary</div></div>
+            <div class="swatch"><div class="swatch-chip" style="background:var(--cba-accent-warning)"></div><div class="swatch-meta"><b>warning</b>#E98074<br>--cba-accent-warning</div></div>
+            <div class="swatch"><div class="swatch-chip" style="background:var(--cba-accent-danger)"></div><div class="swatch-meta"><b>danger</b>#B93E36<br>--cba-accent-danger</div></div>
           </div>
+
+          <h2>Button states</h2>
+          <div class="btn-matrix" id="buttonMatrix"></div>
+
+          <h2>Text on surfaces</h2>
+          <div class="text-grid">
+            <div class="text-sample text-sample--canvas">
+              <h3>canvas · --cba-bg-primary</h3>
+              <div class="t-row t-primary">Primary text <span class="tok">--cba-text-primary</span></div>
+              <div class="t-row t-secondary">Secondary text <span class="tok">--cba-text-secondary</span></div>
+              <div class="t-callout">--cba-text-muted restringido aquí (WCAG AA). Usar --cba-text-secondary.</div>
+              <div class="t-row" style="margin-top:6px"><span class="t-inverse">Inverse on accent · --cba-text-inverse</span></div>
+            </div>
+            <div class="text-sample text-sample--panel">
+              <h3>panel · --cba-bg-secondary</h3>
+              <div class="t-row t-primary">Primary text <span class="tok">--cba-text-primary</span></div>
+              <div class="t-row t-secondary">Secondary text <span class="tok">--cba-text-secondary</span></div>
+              <div class="t-row t-muted">Muted text <span class="tok">--cba-text-muted</span></div>
+            </div>
+            <div class="text-sample text-sample--elevated">
+              <h3>elevated · --cba-bg-elevated</h3>
+              <div class="t-row t-primary">Primary text <span class="tok">--cba-text-primary</span></div>
+              <div class="t-row t-secondary">Secondary text <span class="tok">--cba-text-secondary</span></div>
+              <div class="t-row t-muted">Muted text <span class="tok">--cba-text-muted</span></div>
+            </div>
+            <div class="text-sample text-sample--inset">
+              <h3>inset · --cba-bg-tertiary</h3>
+              <div class="t-row t-primary">Primary text <span class="tok">--cba-text-primary</span></div>
+              <div class="t-row t-secondary">Secondary text <span class="tok">--cba-text-secondary</span></div>
+              <div class="t-callout">--cba-text-muted restringido aquí (WCAG AA). Usar --cba-text-secondary.</div>
+            </div>
+          </div>
+
+          <h2>Accent pills</h2>
           <div class="accent-row" id="accentRow"></div>
-          <div class="btn-row">
-            <button class="btn btn-primary" type="button">Primario</button>
-            <button class="btn btn-secondary" type="button">Secundario</button>
-            <button class="btn btn-ghost" type="button">Ghost</button>
-            <button class="btn btn-success" type="button">Éxito</button>
-            <button class="btn btn-danger" type="button">Peligro</button>
-          </div>
           <div class="raw-strip" id="rawStrip"></div>
         </div>
       </main>
@@ -156,86 +230,104 @@
     </div>
   </div>
 <script>
-const themes=[
-  {
-    id:'mw',
-    group:'Extra',
-    name:'Minimal Yet Warm',
-    note:'Canvas arena oscuro + panel crema limpio, coral reservado a acentos',
-    source:['#C5BFAE','#D8C3A5','#8E8D8A','#E98074','#E85A4F'],
-    tokens:{
-      '--canvas':'#C5BFAE',
-      '--panel':'#E6DDC6',
-      '--elevated':'#FBF7ED',
-      '--inset':'#D8C3A5',
-      '--text':'#2B2620',
-      '--text-2':'#4A4640',
-      '--text-3':'#625C55',
-      '--border':'#A7A6A2',
-      '--border-2':'#8E8D8A',
-      '--accent':'#6B5B4F',
-      '--success':'#3E6B4F',
-      '--warning':'#E98074',
-      '--danger':'#B93E36',
-      '--info':'#56717E',
-      '--shadow':'0 6px 24px rgba(43,34,28,.18)',
-      '--hover':'rgba(43,38,32,.06)',
-      '--on-accent':'#FDFCF8'
-    }
-  }
+const theme={
+  id:'mw',
+  group:'Extra',
+  name:'Minimal Yet Warm',
+  note:'Canvas arena + panel crema, coral reservado a acentos',
+  source:['#C5BFAE','#D8C3A5','#8E8D8A','#E98074','#B93E36']
+};
+
+const TOKEN_ROLES=[
+  ['canvas','--cba-bg-primary','#C5BFAE'],
+  ['panel','--cba-bg-secondary','#E6DDC6'],
+  ['elevated','--cba-bg-elevated','#FBF7ED'],
+  ['inset','--cba-bg-tertiary','#D8C3A5'],
+  ['text','--cba-text-primary','#2B2620'],
+  ['border','--cba-border-default','#A7A6A2'],
+  ['accent','--cba-accent-primary','#6B5B4F'],
+  ['warning','--cba-accent-warning','#E98074'],
+  ['danger','--cba-accent-danger','#B93E36']
 ];
 
-const list=document.getElementById('themeList');
-const preview=document.getElementById('preview');
-const activeName=document.getElementById('activeName');
-const srcHex=document.getElementById('srcHex');
-const roleMap=document.getElementById('roleMap');
-const accentRow=document.getElementById('accentRow');
-const rawStrip=document.getElementById('rawStrip');
+const ACCENTS=[
+  ['Primary','--cba-accent-primary'],
+  ['Success','--cba-accent-success'],
+  ['Warning','--cba-accent-warning'],
+  ['Danger','--cba-accent-danger'],
+  ['Info','--cba-accent-info']
+];
 
-function applyTheme(theme){
-  const tokens=theme.tokens;
-  Object.entries(tokens).forEach(([k,v])=>preview.style.setProperty(k,v));
-  activeName.textContent=theme.name;
-  document.querySelectorAll('.theme-btn').forEach(b=>b.classList.toggle('active',b.dataset.id===theme.id));
-  srcHex.innerHTML=theme.source.map(h=>`<div class="row"><i style="background:${h}"></i>${h}</div>`).join('');
-  const roles=[
-    ['canvas',  '--canvas',  '--cba-bg-primary'],
-    ['panel',   '--panel',   '--cba-bg-secondary'],
-    ['elevated','--elevated','--cba-bg-elevated'],
-    ['inset',   '--inset',   '--cba-bg-tertiary'],
-    ['text',    '--text',    '--cba-text-primary'],
-    ['border',  '--border',  '--cba-border-default'],
-    ['accent',  '--accent',  '--cba-accent-primary'],
-    ['warning', '--warning', '--cba-accent-warning'],
-    ['danger',  '--danger',  '--cba-accent-danger']
-  ];
-  roleMap.innerHTML=roles
-    .map(([name,token,cba])=>`${name.padEnd(9)} ${tokens[token].padEnd(7)} (${cba})`)
-    .join('<br>');
-  const accents=[['Primary',tokens['--accent']],['Success',tokens['--success']],['Warning',tokens['--warning']],['Danger',tokens['--danger']],['Info',tokens['--info']]];
-  accentRow.innerHTML=accents.map(([label,color])=>`<span class="accent-pill" style="color:${color};border-color:${color};background:color-mix(in srgb, ${color} 18%, transparent)">${label}</span>`).join('');
-  rawStrip.innerHTML=theme.source.map(h=>`<div class="chip" style="background:${h}" title="${h}"></div>`).join('');
+const BUTTON_VARIANTS=['primary','secondary','ghost','danger','success'];
+const BUTTON_STATES=[['Normal',''],['Hover','is-hover'],['Active','is-active'],['Disabled','is-disabled']];
+const BUTTON_SURFACES=[
+  ['Panel','btn-surface--panel','--cba-bg-secondary'],
+  ['Elevated','btn-surface--elevated','--cba-bg-elevated'],
+  ['Canvas','btn-surface--canvas','--cba-bg-primary']
+];
+
+function renderSourceHex(sourceColors, host){
+  host.innerHTML=sourceColors.map(h=>'<div class="row"><i style="background:'+h+'"></i>'+h+'</div>').join('');
 }
 
-let lastGroup='';
-themes.forEach((theme,idx)=>{
-  if(theme.group!==lastGroup){
-    const lab=document.createElement('div');
-    lab.style.cssText='font-size:10px;text-transform:uppercase;letter-spacing:.06em;color:#666;margin:10px 0 4px';
-    lab.textContent=theme.group;
-    list.appendChild(lab);
-    lastGroup=theme.group;
-  }
-  const btn=document.createElement('button');
-  btn.type='button';
-  btn.className='theme-btn'+(idx===0?' active':'');
-  btn.dataset.id=theme.id;
-  btn.innerHTML=`<span class="t-name">${theme.name}</span><span class="t-note">${theme.note||''}</span><span class="t-dots">${theme.source.map(c=>`<span style="background:${c}"></span>`).join('')}</span>`;
-  btn.addEventListener('click',()=>applyTheme(theme));
-  list.appendChild(btn);
-});
-applyTheme(themes[0]);
+function renderRoleMap(host){
+  host.innerHTML=TOKEN_ROLES.map(r=>r[0].padEnd(9)+' '+r[2].padEnd(7)+' ('+r[1]+')').join('<br>');
+}
+
+function renderAccents(host){
+  host.innerHTML=ACCENTS.map(a=>{
+    const color='var('+a[1]+')';
+    return '<span class="accent-pill" style="color:'+color+';border-color:'+color+';background:color-mix(in srgb,'+color+' 18%,transparent)">'+a[0]+'</span>';
+  }).join('');
+}
+
+function renderRawStrip(sourceColors, host){
+  host.innerHTML=sourceColors.map(h=>'<div class="chip" style="background:'+h+'" title="'+h+'"></div>').join('');
+}
+
+function setActiveButton(id){
+  document.querySelectorAll('.theme-btn').forEach(b=>b.classList.toggle('active',b.dataset.id===id));
+}
+
+function selectTheme(themeData){
+  setActiveButton(themeData.id);
+  document.getElementById('activeName').textContent=themeData.name;
+  renderSourceHex(themeData.source, document.getElementById('srcHex'));
+  renderRoleMap(document.getElementById('roleMap'));
+  renderAccents(document.getElementById('accentRow'));
+  renderRawStrip(themeData.source, document.getElementById('rawStrip'));
+}
+
+function buildStateButtons(variant){
+  return BUTTON_STATES.map(state=>{
+    const isDisabled=state[1]==='is-disabled';
+    const disabledAttr=isDisabled?'disabled':'';
+    return '<button type="button" class="pv-btn pv-btn--'+variant+' '+state[1]+'" '+disabledAttr+'>'+state[0]+'</button>';
+  }).join('');
+}
+
+function buildButtonMatrix(host){
+  const surfaces=BUTTON_SURFACES.map(surface=>{
+    const variants=BUTTON_VARIANTS.map(variant=>{
+      const states=buildStateButtons(variant);
+      return '<div class="btn-variant"><span class="btn-variant__label">'+variant+'</span><div class="btn-states">'+states+'</div></div>';
+    }).join('');
+    return '<div class="btn-surface '+surface[1]+'"><h3>'+surface[0]+' · '+surface[2]+'</h3>'+variants+'</div>';
+  }).join('');
+  host.innerHTML=surfaces;
+}
+
+const themeList=document.getElementById('themeList');
+const themeButton=document.createElement('button');
+themeButton.type='button';
+themeButton.className='theme-btn active';
+themeButton.dataset.id=theme.id;
+themeButton.innerHTML='<span class="t-name">'+theme.name+'</span><span class="t-note">'+theme.note+'</span><span class="t-dots">'+theme.source.map(c=>'<span style="background:'+c+'"></span>').join('')+'</span>';
+themeButton.addEventListener('click',()=>selectTheme(theme));
+themeList.appendChild(themeButton);
+
+selectTheme(theme);
+buildButtonMatrix(document.getElementById('buttonMatrix'));
 </script>
 </body>
 </html>
