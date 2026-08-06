@@ -28,6 +28,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > Releases prior to 0.8.1 predate this changelog and are not reconstructed retroactively.
 
+## [Unreleased]
+
+Placeholder entries for the upcoming **0.11.0** release (feature work):
+
+- **Token Adjustments** — pending: description of design-token value changes.
+- **Preview HTML** — pending: description of `docs/theme-preview.html` updates.
+- **Consumer Guide** — pending: description of `docs/CONSUMER_GUIDE.md` updates.
+- **Regression Tests** — pending: description of regression tests added.
+
 ## [0.10.0] - 2026-08-05
 
 ### Changed
