@@ -1,3 +1,21 @@
+/**
+ * @file preview-html.spec.ts — Regression tests for the theme preview HTML and CSS.
+ *
+ * Verifies that `docs/theme-preview.html` links the compiled CSS, contains all required
+ * structural sections (swatch grid, button matrix, text grid, accent row, raw strip),
+ * renders 9 token swatch labels, maps TOKEN_ROLES to canonical hex values, declares the
+ * muted-text restriction, and uses `var(--cba-*)` tokens instead of hard-coded hex.
+ * Also verifies that `docs/theme-preview.css` `:root` matches canonical token values.
+ *
+ * Run: `npm test -- src/theme/preview-html.spec.ts`
+ *
+ * Authoritative sources:
+ * - Preview HTML: {@link file:///docs/theme-preview.html}
+ * - Preview CSS: {@link file:///docs/theme-preview.css}
+ * - Token values: {@link file:///src/theme/_variables.scss}
+ * - Expected tokens fixture: {@link file:///src/components/testing/theme-fixtures.ts}
+ */
+
 import { readProjectText } from '../components/testing/project-files';
 import { extractTokenRoles, parseHtmlDocument } from '../components/testing/html-loader';
 import { parseScssVariables } from '../components/testing/scss-tokens';

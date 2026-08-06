@@ -1,3 +1,18 @@
+/**
+ * @file tokens.spec.ts — Regression tests for theme token values.
+ *
+ * Verifies that every `--cba-*` token in `src/theme/_variables.scss` matches the
+ * canonical name set and hex values defined in `src/components/testing/theme-fixtures.ts`.
+ * Also guards the `:root` block structure of the variables file.
+ *
+ * Run: `npm test -- src/theme/tokens.spec.ts`
+ *
+ * Authoritative sources:
+ * - Token values: {@link file:///src/theme/_variables.scss}
+ * - Expected tokens fixture: {@link file:///src/components/testing/theme-fixtures.ts}
+ * - Design tokens spec: {@link file:///.agent/project-info/brief.md} §5
+ */
+
 import { loadScssVariables } from '../components/testing/scss-tokens';
 import { EXPECTED_TOKENS, SCSS_VARIABLES_PATH } from '../components/testing/theme-fixtures';
 import { readProjectText } from '../components/testing/project-files';

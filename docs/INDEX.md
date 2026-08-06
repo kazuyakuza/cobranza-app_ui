@@ -55,6 +55,15 @@
 
 - [theme-preview.html](./theme-preview.html) — Live Minimal Yet Warm theme preview: linked to compiled library CSS, token swatches, button state matrix (5 variants × 4 states × 3 surfaces), text-on-surfaces legibility cards, and Shell mockup demonstrating surface ownership (canvas → panel → elevated → inset). Regenerate with `npm run build:preview` after token changes.
 
+## Regression tests
+
+- `src/theme/tokens.spec.ts` — canonical `--cba-*` token names and values.
+- `src/theme/contrast.spec.ts` — WCAG AA contrast ratios for text/background pairs.
+- `src/theme/surfaces.spec.ts` — surface lightness ordering and minimum L* gaps.
+- `src/theme/preview-html.spec.ts` — `docs/theme-preview.html` structure and `docs/theme-preview.css` canonical values.
+- `src/theme/consumer-guide.spec.ts` — mandated sections in `docs/CONSUMER_GUIDE.md`.
+- Run all: `npm test`. Run one: `npm test -- src/theme/<name>.spec.ts`.
+
 ## Project & AI-agent context
 
 - [Project brief](../.agent/project-info/brief.md)

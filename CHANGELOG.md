@@ -54,6 +54,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **Regression test suite** (11 files: 6 helpers + 5 specs) under `src/theme/` and
+  `src/components/testing/` guarding theme integrity:
+  - `tokens.spec.ts` — canonical `--cba-*` token names and values in `_variables.scss`.
+  - `contrast.spec.ts` — WCAG AA contrast ratios for all intended text/background pairs.
+  - `surfaces.spec.ts` — surface lightness ordering and minimum L* gaps between canvas,
+    panel, elevated, and inset.
+  - `preview-html.spec.ts` — `docs/theme-preview.html` structure (compiled CSS link,
+    required sections, 9 token swatches, TOKEN_ROLES mapping, muted-text restriction) and
+    `docs/theme-preview.css` `:root` canonical values.
+  - `consumer-guide.spec.ts` — mandated sections in `docs/CONSUMER_GUIDE.md` (token
+    compliance, button guide, surface tree, text rules, bar/chrome guide, checklists,
+    anti-patterns, quick verify).
+  - Shared test helpers: `color-math`, `scss-tokens`, `html-loader`, `markdown-headings`,
+    `project-files`, `theme-fixtures`.
 - Cross-reference comments in `src/theme/_utilities.scss`, `src/theme/_mixins.scss`, and
   `src/theme/theme.scss` pointing to brief.md §5 and docs/THEME.md for AI-agent navigation.
 - `docs/theme-preview.html` overhaul: now links compiled `docs/theme-preview.css` (generated

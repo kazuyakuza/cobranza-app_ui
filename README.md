@@ -134,6 +134,8 @@ switcher.
 | `npm run lint` | Lint `src/**/*.ts` with ESLint (angular-eslint) |
 | `npm run format` | Format source files with Prettier (TS, SCSS, CSS, JSON, MD) |
 
+**Regression test suite** — `src/theme/*.spec.ts` guards theme integrity: token values, WCAG AA contrast, surface lightness gaps, preview HTML/CSS structure, and Consumer Guide section presence. Shared helpers live in `src/components/testing/`. Run all with `npm test`; run one with `npm test -- src/theme/<name>.spec.ts`.
+
 **Config files reference:**
 
 | File | Purpose |
