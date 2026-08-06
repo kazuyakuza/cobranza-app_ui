@@ -18,6 +18,7 @@
   },
   "scripts": {
     "build": "ng-packagr -p ng-package.json -c tsconfig.lib.json",
+    "build:preview": "sass src/theme/theme.scss docs/theme-preview.css --no-source-map --style=compressed",
     "test": "jest --passWithNoTests",
     "lint": "eslint \"src/**/*.ts\"",
     "format": "prettier --write \"src/**/*.{ts,scss,css,json,md}\""
@@ -59,6 +60,7 @@
     "ng-packagr": "^22.1.0",
     "prettier": "^3.0.0",
     "rxjs": "^7.8.1",
+    "sass": "^1.83.0",
     "tslib": "^2.3.0",
     "typescript-eslint": "^8.0.0",
     "typescript": "~6.0.3",
