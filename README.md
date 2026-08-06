@@ -246,6 +246,7 @@ For a quick reference, see [`./docs/THEME.md`](./docs/THEME.md).
 - [Architecture](.agent/project-info/architecture.md) — Build strategy, folder layout, integration patterns.
 - [Tech stack](.agent/project-info/tech.md) — Exact versions, dependencies, tooling constraints.
 - JSDoc on every public `@Input()`, `@Output()`, and component class.
+- [`./docs/theme-preview.html`](./docs/theme-preview.html) — Live theme preview: compiled library CSS, token swatches, button state matrix, text-on-surfaces cards, Shell mockup. Regenerate with `npm run build:preview`.
 - [`./CHANGELOG.md`](./CHANGELOG.md) — Notable changes per release (Keep a Changelog format).
 
 <!-- AI Agent Note: Before contributing, read AGENTS.md and .agent/project-info/ files.

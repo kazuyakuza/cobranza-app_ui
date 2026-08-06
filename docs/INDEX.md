@@ -51,6 +51,10 @@
 
 - [CBA_FORM_FIELD.md](./CBA_FORM_FIELD.md) — shared field layout + ControlValueAccessor base used by Input/Select/Datepicker. Do not import directly.
 
+## Visual preview
+
+- [theme-preview.html](./theme-preview.html) — Live Minimal Yet Warm theme preview: linked to compiled library CSS, token swatches, button state matrix (5 variants × 4 states × 3 surfaces), text-on-surfaces legibility cards, and Shell mockup demonstrating surface ownership (canvas → panel → elevated → inset). Regenerate with `npm run build:preview` after token changes.
+
 ## Project & AI-agent context
 
 - [Project brief](../.agent/project-info/brief.md)

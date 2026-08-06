@@ -42,6 +42,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Synced `docs/theme-preview.html`, `docs/THEME.md`, `docs/CONSUMER_GUIDE.md`, and
   `.agent/project-info/brief.md` §5 to the adjusted token values and updated L* gap
   descriptors (canvas→panel ≈11, panel→elevated ≈9, panel→inset ≈8, elevated→inset ≈17).
+- `docs/theme-preview.html` now uses compiled library CSS (`docs/theme-preview.css` from
+  `src/theme/theme.scss`) instead of mirrored inline custom properties. The preview resolves
+  `--cba-*` tokens from `:root` exactly as the Shell does, eliminating token drift.
 
 ### Fixed
 
@@ -53,6 +56,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Cross-reference comments in `src/theme/_utilities.scss`, `src/theme/_mixins.scss`, and
   `src/theme/theme.scss` pointing to brief.md §5 and docs/THEME.md for AI-agent navigation.
+- `docs/theme-preview.html` overhaul: now links compiled `docs/theme-preview.css` (generated
+  from `src/theme/theme.scss` via `npm run build:preview`) so the preview resolves real
+  `--cba-*` tokens — zero drift from the library. Added 9 token swatches (canvas, panel,
+  elevated, inset, text, border, accent, warning, danger) with hex + token labels, a button
+  state matrix (5 variants × 4 states × 3 surfaces = 60 buttons), text-on-surfaces samples
+  with muted-restriction callouts on canvas/inset, and a surface ownership demo (Shell
+  mockup showing canvas → panel → elevated → inset hierarchy).
+- `build:preview` npm script (`sass src/theme/theme.scss docs/theme-preview.css`) and `sass`
+  devDependency for regenerating the preview stylesheet after token changes.
 
 ### Notes
 
@@ -60,7 +72,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   consumers of `--cba-*` tokens get the refined hierarchy by upgrading.
 - Authoritative token values: [brief.md §5](.agent/project-info/brief.md#5-design-tokens-theme)
   and [`src/theme/_variables.scss`](src/theme/_variables.scss).
-- Front-end spec: [20260806-task1-token-adjustments-frontend-spec.md](.kilo/plans/20260806-task1-token-adjustments-frontend-spec.md).
+- Task 1 front-end spec: [20260806-task1-token-adjustments-frontend-spec.md](.kilo/plans/20260806-task1-token-adjustments-frontend-spec.md).
+- Task 2 front-end spec: [20260806-task2-preview-html-frontend-spec.md](.kilo/plans/20260806-task2-preview-html-frontend-spec.md).
 
 ## [0.10.0] - 2026-08-05
 
