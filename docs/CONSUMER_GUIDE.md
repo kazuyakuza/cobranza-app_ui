@@ -43,14 +43,14 @@ AI agents generating Shell or MFE code MUST use `--cba-*` tokens for at least 90
 color and style declarations.
 
 - Prefer `var(--cba-*)` or the opt-in `.cba-*` utility classes.
-- Hard-coded hex values, RGB/RGBA literals, or Bootstrap default colors are not allowed
-  except for one-off edge cases.
+- Do not use hard-coded hex values, RGB/RGBA literals, or Bootstrap default colors except
+  for one-off edge cases.
 - Every edge-case hard-coded value MUST be documented with a `TODO` comment explaining why
   the token cannot be used and linking to this guide.
 - If a needed color does not exist as a token, do not invent a new hex value — open a task
   to extend the theme.
 
-Token values are authoritative in
+Token values live in
 [`src/theme/_variables.scss`](../src/theme/_variables.scss) and
 [`.agent/project-info/brief.md §5`](../.agent/project-info/brief.md#5-design-tokens-theme).
 This guide references tokens only; it never re-declares hex values.
@@ -107,37 +107,31 @@ states share one treatment: `opacity: 0.6` and `cursor: not-allowed`.
 
 ### Variant × surface base mapping
 
+`primary`, `danger`, `success`, and `ghost` are surface-independent — use the same tokens
+on panel, elevated, and canvas. Only `secondary` changes by surface.
+
 | Variant | Surface | Background | Border | Text |
 |---------|---------|------------|--------|------|
-| `primary` | panel | `--cba-accent-primary` | transparent | `--cba-text-inverse` |
-| `primary` | elevated | `--cba-accent-primary` | transparent | `--cba-text-inverse` |
-| `primary` | canvas | `--cba-accent-primary` | transparent | `--cba-text-inverse` |
+| `primary` | any | `--cba-accent-primary` | transparent | `--cba-text-inverse` |
+| `danger` | any | `--cba-accent-danger` | transparent | `--cba-text-inverse` |
+| `success` | any | `--cba-accent-success` | transparent | `--cba-text-inverse` |
 | `secondary` | panel | `--cba-bg-elevated` | `--cba-border-subtle` | `--cba-text-primary` |
 | `secondary` | elevated | `--cba-bg-secondary` | `--cba-border-default` | `--cba-text-primary` |
 | `secondary` | canvas | `--cba-bg-elevated` | `--cba-border-subtle` | `--cba-text-primary` |
-| `ghost` | panel | transparent | transparent | `--cba-text-primary` |
-| `ghost` | elevated | transparent | transparent | `--cba-text-primary` |
-| `ghost` | canvas | transparent | transparent | `--cba-text-primary` |
-| `danger` | panel | `--cba-accent-danger` | transparent | `--cba-text-inverse` |
-| `danger` | elevated | `--cba-accent-danger` | transparent | `--cba-text-inverse` |
-| `danger` | canvas | `--cba-accent-danger` | transparent | `--cba-text-inverse` |
-| `success` | panel | `--cba-accent-success` | transparent | `--cba-text-inverse` |
-| `success` | elevated | `--cba-accent-success` | transparent | `--cba-text-inverse` |
-| `success` | canvas | `--cba-accent-success` | transparent | `--cba-text-inverse` |
+| `ghost` | any | transparent | transparent | `--cba-text-primary` |
 
-**Rationale for `secondary` on elevated:** the component's default secondary fill is
-`--cba-bg-elevated`. When the button sits on an already-elevated surface, swap the fill
-to `--cba-bg-secondary` and strengthen the border to `--cba-border-default` so the button
-remains visible.
+**Rationale for `secondary` on elevated:** the default secondary fill is `--cba-bg-elevated`.
+On an already-elevated surface, swap the fill to `--cba-bg-secondary` and the border to
+`--cba-border-default` so the button remains visible.
 
 ### State overlays
 
-| State | Solid variants (`primary`, `danger`, `success`) | `secondary` | `ghost` |
-|-------|--------------------------------------------------|-------------|---------|
-| normal | base tokens only | base tokens only | transparent bg, `--cba-text-primary` |
-| hover | `background-image: linear-gradient(var(--cba-hover), var(--cba-hover))` over base bg | same as solid variants | `background-color: var(--cba-hover)` |
-| active | `background-image: linear-gradient(var(--cba-active), var(--cba-active))` over base bg | same as solid variants | `background-color: var(--cba-active)` |
-| disabled / loading | `opacity: 0.6`, `cursor: not-allowed`, preserve base tokens | same as solid variants | same as solid variants |
+| State | Solid variants & `secondary` | `ghost` |
+|-------|------------------------------|---------|
+| normal | base tokens only | transparent bg, `--cba-text-primary` |
+| hover | `linear-gradient(var(--cba-hover), var(--cba-hover))` over base bg | `background-color: var(--cba-hover)` |
+| active | `linear-gradient(var(--cba-active), var(--cba-active))` over base bg | `background-color: var(--cba-active)` |
+| disabled / loading | `opacity: 0.6`, `cursor: not-allowed`, preserve base tokens | same |
 
 ### Focus ring
 
@@ -150,16 +144,15 @@ All button variants MUST use
 |--------------------|---------------------------|---------------|
 | Shell workspace / workbench floor / page body behind modules | `--cba-bg-primary` | canvas |
 | Module card body / floating panel / dialog body | `--cba-bg-secondary` | panel |
-| Module header / Shell header / dropdown menu / popover / modal surface / active/selected control fill | `--cba-bg-elevated` | elevated |
+| Module or Shell header / dropdown / popover / modal / active or selected control fill | `--cba-bg-elevated` | elevated |
 | Table header (`thead th`) / recessed well / module footer / status band | `--cba-bg-tertiary` | inset |
-| Modal/dropdown backdrop | `--cba-bg-overlay` | overlay |
+| Modal or dropdown backdrop | `--cba-bg-overlay` | overlay |
 
 **Decision rule:**
 
 1. Is the element the lowest visible layer behind modules? → **canvas**.
 2. Is it a module card, floating panel, or dialog body? → **panel**.
-3. Is it a header band, dropdown, popover, modal, or selected/active fill that must read
-   lighter than its container? → **elevated**.
+3. Is it a header band, dropdown, popover, modal, or selected/active fill? → **elevated**.
 4. Is it recessed, a table header, or a footer/status bar inside a module? → **inset**.
 5. Never use the same background token for two adjacent hierarchical layers (e.g. do not
    make the workspace canvas the same color as the module panel).
@@ -184,18 +177,27 @@ All button variants MUST use
   elevated**.
 - Text on top of `--cba-accent-primary`, `--cba-accent-danger`, or `--cba-accent-success`:
   `--cba-text-inverse`.
-- On canvas and inset, do not use `--cba-text-muted`. Use `--cba-text-secondary` for
-  lower-emphasis text instead.
 
 ## Bar and Chrome Guide
 
-| Chrome element | Background | Border | Text | Height / min-height | Notes |
-|----------------|------------|--------|------|---------------------|-------|
-| Shell header | `--cba-bg-elevated` | `border-bottom: 1px solid var(--cba-border-default)` | `--cba-text-primary` for brand, `--cba-text-secondary` for muted items | `--cba-header-height` (56px) | Use `--cba-focus-ring` for focusable items. |
-| Shell footer | `--cba-bg-primary` (recommended) OR `--cba-bg-elevated` (documented Shell choice) | `border-top: 1px solid var(--cba-border-default)` | `--cba-text-primary` / `--cba-text-secondary` | `--cba-footer-height` (64px) | Footer section pills: bg `--cba-bg-secondary`, border `--cba-border-strong`, active pill border `--cba-accent-primary`. |
-| Module header | `--cba-bg-elevated` | `border-bottom: 1px solid var(--cba-border-default)` | `--cba-text-primary` for title, `--cba-text-secondary` for actions | `--cba-module-header-min-height` (40px) | Implemented by `cba-module-header`; do not recreate with custom CSS. |
-| Module footer | `--cba-bg-tertiary` | `border-top: 1px solid var(--cba-border-default)` | `--cba-text-secondary` or status accent | auto | Implemented by `cba-module-footer` if used; otherwise apply same tokens. |
-| Footer section pill | `--cba-bg-secondary` | `border: 1px solid var(--cba-border-strong)` | `--cba-text-secondary` | auto | Active pill: `border-color: var(--cba-accent-primary)`, `color: var(--cba-text-primary)`. |
+| Chrome element | Background | Border | Text | Height / min-height |
+|----------------|------------|--------|------|---------------------|
+| Shell header | `--cba-bg-elevated` | `border-bottom: 1px solid var(--cba-border-default)` | `--cba-text-primary` / `--cba-text-secondary` | `--cba-header-height` |
+| Shell footer | `--cba-bg-primary` or `--cba-bg-elevated` | `border-top: 1px solid var(--cba-border-default)` | `--cba-text-primary` / `--cba-text-secondary` | `--cba-footer-height` |
+| Module header | `--cba-bg-elevated` | `border-bottom: 1px solid var(--cba-border-default)` | `--cba-text-primary` / `--cba-text-secondary` | `--cba-module-header-min-height` |
+| Module footer | `--cba-bg-tertiary` | `border-top: 1px solid var(--cba-border-default)` | `--cba-text-secondary` or status accent | auto |
+| Footer section pill | `--cba-bg-secondary` | `border: 1px solid var(--cba-border-strong)` | `--cba-text-secondary` | auto |
+
+Notes:
+
+- Shell header: use `--cba-focus-ring` for focusable items.
+- Shell footer: prefer `--cba-bg-primary`; `--cba-bg-elevated` is the documented Shell choice.
+  Footer section pills use bg `--cba-bg-secondary`, border `--cba-border-strong`, and active
+  border `--cba-accent-primary`.
+- Module header: implemented by `cba-module-header`; do not recreate with custom CSS.
+- Module footer: implemented by `cba-module-footer` if used; otherwise apply the same tokens.
+- Footer section pill: active state uses `border-color: var(--cba-accent-primary)` and
+  `color: var(--cba-text-primary)`.
 
 ## Shell checklist
 
