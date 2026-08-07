@@ -21,6 +21,19 @@
   }
 }
 
+@mixin cba-solid-button($accent-color) {
+  background-color: $accent-color;
+  color: var(--cba-text-inverse);
+
+  &:hover {
+    background-image: linear-gradient(var(--cba-hover-inverse), var(--cba-hover-inverse));
+  }
+
+  &:active {
+    background-image: linear-gradient(var(--cba-active-inverse), var(--cba-active-inverse));
+  }
+}
+
 // Size modifiers
 .cba-button--sm .cba-button__control {
   padding: var(--cba-space-1) var(--cba-space-3);
@@ -34,16 +47,7 @@
 
 // Variants
 .cba-button--primary .cba-button__control {
-  background-color: var(--cba-accent-primary);
-  color: var(--cba-text-inverse);
-
-  &:hover {
-    background-image: linear-gradient(var(--cba-hover-inverse), var(--cba-hover-inverse));
-  }
-
-  &:active {
-    background-image: linear-gradient(var(--cba-active-inverse), var(--cba-active-inverse));
-  }
+  @include cba-solid-button(var(--cba-accent-primary));
 }
 
 .cba-button--secondary .cba-button__control {
@@ -74,29 +78,11 @@
 }
 
 .cba-button--danger .cba-button__control {
-  background-color: var(--cba-accent-danger);
-  color: var(--cba-text-inverse);
-
-  &:hover {
-    background-image: linear-gradient(var(--cba-hover-inverse), var(--cba-hover-inverse));
-  }
-
-  &:active {
-    background-image: linear-gradient(var(--cba-active-inverse), var(--cba-active-inverse));
-  }
+  @include cba-solid-button(var(--cba-accent-danger));
 }
 
 .cba-button--success .cba-button__control {
-  background-color: var(--cba-accent-success);
-  color: var(--cba-text-inverse);
-
-  &:hover {
-    background-image: linear-gradient(var(--cba-hover-inverse), var(--cba-hover-inverse));
-  }
-
-  &:active {
-    background-image: linear-gradient(var(--cba-active-inverse), var(--cba-active-inverse));
-  }
+  @include cba-solid-button(var(--cba-accent-success));
 }
 
 // Disabled / loading state
