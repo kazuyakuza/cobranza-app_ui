@@ -28,14 +28,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > Releases prior to 0.8.1 predate this changelog and are not reconstructed retroactively.
 
-## [Unreleased]
-
 ## [0.11.0] — 2026-08-06
 
 ### Changed
 
 - Adjusted two **Minimal Yet Warm** surface tokens in `src/theme/_variables.scss` to widen
-  the panel→elevated L* gap from ~4.2 to ~9.0: `--cba-bg-secondary` (panel) darkened from
+  the panel→elevated L*gap from ~4.2 to ~9.0: `--cba-bg-secondary` (panel) darkened from
   `#F2F0E8` to `#E6DDC6` (warm cream, L* 88.26); `--cba-bg-elevated` tinted from `#FDFCF8`
   to `#FBF7ED` (warm cream, lightest surface, L* 97.29). Canvas (`#C5BFAE`), inset
   (`#D8C3A5`), text, accent, and border tokens unchanged.
