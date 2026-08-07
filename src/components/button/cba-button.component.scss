@@ -38,11 +38,11 @@
   color: var(--cba-text-inverse);
 
   &:hover {
-    background-image: linear-gradient(var(--cba-hover), var(--cba-hover));
+    background-image: linear-gradient(var(--cba-hover-inverse), var(--cba-hover-inverse));
   }
 
   &:active {
-    background-image: linear-gradient(var(--cba-active), var(--cba-active));
+    background-image: linear-gradient(var(--cba-active-inverse), var(--cba-active-inverse));
   }
 }
 
@@ -78,11 +78,11 @@
   color: var(--cba-text-inverse);
 
   &:hover {
-    background-image: linear-gradient(var(--cba-hover), var(--cba-hover));
+    background-image: linear-gradient(var(--cba-hover-inverse), var(--cba-hover-inverse));
   }
 
   &:active {
-    background-image: linear-gradient(var(--cba-active), var(--cba-active));
+    background-image: linear-gradient(var(--cba-active-inverse), var(--cba-active-inverse));
   }
 }
 
@@ -91,11 +91,11 @@
   color: var(--cba-text-inverse);
 
   &:hover {
-    background-image: linear-gradient(var(--cba-hover), var(--cba-hover));
+    background-image: linear-gradient(var(--cba-hover-inverse), var(--cba-hover-inverse));
   }
 
   &:active {
-    background-image: linear-gradient(var(--cba-active), var(--cba-active));
+    background-image: linear-gradient(var(--cba-active-inverse), var(--cba-active-inverse));
   }
 }
 
