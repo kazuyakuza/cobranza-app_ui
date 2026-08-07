@@ -143,4 +143,39 @@ describe('docs/theme-preview.css interactive state overlay values', () => {
     expect(buttonScss).toContain('var(--cba-hover)');
     expect(buttonScss).toContain('var(--cba-active)');
   });
+
+  it('inverse hover and active alphas differ by at least 0.05', () => {
+    const hoverAlpha = parseAlpha(EXPECTED_TOKENS['--cba-hover-inverse']);
+    const activeAlpha = parseAlpha(EXPECTED_TOKENS['--cba-active-inverse']);
+    expect(activeAlpha - hoverAlpha).toBeGreaterThanOrEqual(0.05);
+  });
+
+  it('button component scss references inverse tokens for solid variants', () => {
+    const buttonScss = readProjectText('src/components/button/cba-button.component.scss');
+    expect(buttonScss).toContain('var(--cba-hover-inverse)');
+    expect(buttonScss).toContain('var(--cba-active-inverse)');
+  });
+
+  it('preview button CSS uses inverse overlay for solid variant hover/active', () => {
+    const solidHoverRule =
+      '.pv-btn--primary.is-hover,.pv-btn--danger.is-hover,.pv-btn--success.is-hover{background-image:linear-gradient(var(--cba-hover-inverse),var(--cba-hover-inverse))}';
+    const solidActiveRule =
+      '.pv-btn--primary.is-active,.pv-btn--danger.is-active,.pv-btn--success.is-active{background-image:linear-gradient(var(--cba-active-inverse),var(--cba-active-inverse))}';
+    expect(html).toContain(solidHoverRule);
+    expect(html).toContain(solidActiveRule);
+  });
+
+  it('preview button CSS keeps dark overlay for secondary hover/active', () => {
+    const secondaryHoverRule =
+      '.pv-btn--secondary.is-hover{background-image:linear-gradient(var(--cba-hover),var(--cba-hover))}';
+    const secondaryActiveRule =
+      '.pv-btn--secondary.is-active{background-image:linear-gradient(var(--cba-active),var(--cba-active))}';
+    expect(html).toContain(secondaryHoverRule);
+    expect(html).toContain(secondaryActiveRule);
+  });
+
+  it('compiled preview CSS declares the inverse tokens', () => {
+    expect(css).toContain('--cba-hover-inverse');
+    expect(css).toContain('--cba-active-inverse');
+  });
 });

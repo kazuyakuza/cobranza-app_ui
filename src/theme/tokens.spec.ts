@@ -38,4 +38,9 @@ describe('theme tokens (src/theme/_variables.scss)', () => {
     const raw = readProjectText(SCSS_VARIABLES_PATH);
     expect(raw).toContain(':root');
   });
+
+  it('declares inverse overlay tokens for solid accent buttons', () => {
+    expect(tokens.get('--cba-hover-inverse')).toBe(EXPECTED_TOKENS['--cba-hover-inverse']);
+    expect(tokens.get('--cba-active-inverse')).toBe(EXPECTED_TOKENS['--cba-active-inverse']);
+  });
 });
