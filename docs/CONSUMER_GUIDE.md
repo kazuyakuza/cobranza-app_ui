@@ -102,7 +102,9 @@ Shell does not need to add those.
 
 Use `CbaButton` from `@cobranza-apps/ui` whenever possible. When custom buttons are
 unavoidable, map every state to the tokens below. Hover and active states use the same
-base tokens plus an overlay (`--cba-hover` or `--cba-active`). Disabled and loading
+base tokens plus an overlay; solid variants (`primary`/`danger`/`success`) use the light
+inverse overlays (`--cba-hover-inverse` / `--cba-active-inverse`), while `secondary` and
+`ghost` use the dark overlays (`--cba-hover` / `--cba-active`). Disabled and loading
 states share one treatment: `opacity: 0.6` and `cursor: not-allowed`.
 
 ### Variant × surface base mapping
@@ -126,12 +128,18 @@ On an already-elevated surface, swap the fill to `--cba-bg-secondary` and the bo
 
 ### State overlays
 
-| State | Solid variants & `secondary` | `ghost` |
-|-------|------------------------------|---------|
-| normal | base tokens only | transparent bg, `--cba-text-primary` |
-| hover | `linear-gradient(var(--cba-hover), var(--cba-hover))` over base bg | `background-color: var(--cba-hover)` |
-| active | `linear-gradient(var(--cba-active), var(--cba-active))` over base bg | `background-color: var(--cba-active)` |
-| disabled / loading | `opacity: 0.6`, `cursor: not-allowed`, preserve base tokens | same |
+Solid variants (`primary`, `danger`, `success`) sit on dark accent backgrounds and use
+**light inverse overlays** (`--cba-hover-inverse`, `--cba-active-inverse`) so the state
+shift is perceptible. `secondary` sits on a light surface and keeps the dark overlays
+(`--cba-hover`, `--cba-active`). `ghost` is transparent in normal state and sets the
+overlay directly as its `background-color`.
+
+| State | Solid variants (`primary` / `danger` / `success`) | `secondary` | `ghost` |
+|-------|---------------------------------------------------|-------------|---------|
+| normal | base tokens only | base tokens only | transparent bg, `--cba-text-primary` |
+| hover | `linear-gradient(var(--cba-hover-inverse), var(--cba-hover-inverse))` over base bg | `linear-gradient(var(--cba-hover), var(--cba-hover))` over base bg | `background-color: var(--cba-hover)` |
+| active | `linear-gradient(var(--cba-active-inverse), var(--cba-active-inverse))` over base bg | `linear-gradient(var(--cba-active), var(--cba-active))` over base bg | `background-color: var(--cba-active)` |
+| disabled / loading | `opacity: 0.6`, `cursor: not-allowed`, preserve base tokens | same | same |
 
 ### Focus ring
 
