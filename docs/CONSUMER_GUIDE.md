@@ -183,7 +183,7 @@ All button variants MUST use
 | Chrome element | Background | Border | Text | Height / min-height |
 |----------------|------------|--------|------|---------------------|
 | Shell header | `--cba-bg-elevated` | `border-bottom: 1px solid var(--cba-border-default)` | `--cba-text-primary` / `--cba-text-secondary` | `--cba-header-height` |
-| Shell footer | `--cba-bg-primary` or `--cba-bg-elevated` | `border-top: 1px solid var(--cba-border-default)` | `--cba-text-primary` / `--cba-text-secondary` | `--cba-footer-height` |
+| Shell footer | `--cba-bg-elevated` | `border-top: 1px solid var(--cba-border-default)` | `--cba-text-primary` / `--cba-text-secondary` | `--cba-footer-height` |
 | Module header | `--cba-bg-elevated` | `border-bottom: 1px solid var(--cba-border-default)` | `--cba-text-primary` / `--cba-text-secondary` | `--cba-module-header-min-height` |
 | Module footer | `--cba-bg-tertiary` | `border-top: 1px solid var(--cba-border-default)` | `--cba-text-secondary` or status accent | auto |
 | Footer section pill | `--cba-bg-secondary` | `border: 1px solid var(--cba-border-strong)` | `--cba-text-secondary` | auto |
@@ -191,7 +191,7 @@ All button variants MUST use
 Notes:
 
 - Shell header: use `--cba-focus-ring` for focusable items.
-- Shell footer: prefer `--cba-bg-primary`; `--cba-bg-elevated` is the documented Shell choice.
+- Shell footer: use `--cba-bg-elevated` so the chrome differs from the workspace canvas (`--cba-bg-primary`). This is the documented Shell choice and is required for visual hierarchy.
   Footer section pills use bg `--cba-bg-secondary`, border `--cba-border-strong`, and active
   border `--cba-accent-primary`.
 - Module header: implemented by `cba-module-header`; do not recreate with custom CSS.
