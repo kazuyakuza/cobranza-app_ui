@@ -30,6 +30,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > Releases prior to 0.8.1 predate this changelog and are not reconstructed retroactively.
 
+## [0.11.2] — 2026-08-07
+
+### Added
+
+- New interactive-state tokens in `src/theme/_variables.scss` for solid accent buttons: `--cba-hover-inverse` (`rgba(253, 252, 248, 0.12)`) and `--cba-active-inverse` (`rgba(253, 252, 248, 0.22)`). Hue matches `--cba-text-inverse`; applied via `background-image: linear-gradient(token, token)` so the overlay composites over the base accent fill without replacing it. See `.agent/project-info/brief.md` §5 and `docs/CONSUMER_GUIDE.md` §Button Color Guide.
+
+### Fixed
+
+- Solid button variants (`primary`, `danger`, `success`) were nearly indistinguishable across normal/hover/active states because dark overlays (`--cba-hover`, `--cba-active`) on already-dark accent backgrounds produced imperceptible shifts. Solid variants now use the new light inverse overlays; `secondary` and `ghost` continue using the dark overlays (light surfaces). Mirrors the split in `docs/theme-preview.html` and regenerates `docs/theme-preview.css` via `npm run build:preview`. Token-key parity asserted by `src/theme/tokens.spec.ts` and `src/theme/preview-html.spec.ts`.
+
 ## [0.11.1] — 2026-08-06
 
 ### Changed

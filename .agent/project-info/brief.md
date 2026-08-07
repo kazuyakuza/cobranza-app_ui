@@ -130,6 +130,8 @@ All tokens live under the `--cba-` prefix.
   /* Interactive states — warm taupe overlays + warm coral focus ring */
   --cba-hover: rgba(43, 38, 32, 0.10);
   --cba-active: rgba(43, 38, 32, 0.18);
+  --cba-hover-inverse: rgba(253, 252, 248, 0.12);
+  --cba-active-inverse: rgba(253, 252, 248, 0.22);
   --cba-focus-ring: 0 0 0 3px rgba(232, 90, 79, 0.45);
 
   /* Layout (unchanged) */
@@ -158,6 +160,8 @@ All tokens live under the `--cba-` prefix.
 ```
 
 **`--cba-text-muted` usage restriction:** `#625C55` passes WCAG AA 4.5:1 on `--cba-bg-secondary` (panel) and `--cba-bg-elevated` (cream). It is RESTRICTED on the darker canvas `--cba-bg-primary` (`#C5BFAE`, ~3.6:1 — fails AA) AND on `--cba-bg-tertiary` (inset sand, ~3.86:1 — fails AA). Prefer `--cba-text-secondary` on canvas and inset sand for lower-emphasis text.
+
+**`--cba-hover-inverse` / `--cba-active-inverse` usage:** light overlays (`rgba(253, 252, 248, 0.12)` and `0.22`, hue matching `--cba-text-inverse`) applied via `background-image: linear-gradient(token, token)` over solid accent fills (`--cba-accent-primary`, `--cba-accent-danger`, `--cba-accent-success`) to make hover/active perceptible on dark backgrounds. The dark overlays (`--cba-hover`, `--cba-active`) remain for `secondary`/`ghost` which sit on light surfaces.
 
 **Typography**
 
