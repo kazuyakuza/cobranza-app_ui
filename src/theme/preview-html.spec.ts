@@ -132,9 +132,12 @@ describe('docs/theme-preview.html readability fixes', () => {
 });
 
 describe('docs/theme-preview.css interactive state overlay values', () => {
-  it('hover and active alphas differ by at least 0.05', () => {
-    const hoverAlpha = parseAlpha(EXPECTED_TOKENS['--cba-hover']);
-    const activeAlpha = parseAlpha(EXPECTED_TOKENS['--cba-active']);
+  it.each([
+    ['--cba-hover', '--cba-active'],
+    ['--cba-hover-inverse', '--cba-active-inverse'],
+  ])('%s and %s alphas differ by at least 0.05', (hoverToken, activeToken) => {
+    const hoverAlpha = parseAlpha(EXPECTED_TOKENS[hoverToken]);
+    const activeAlpha = parseAlpha(EXPECTED_TOKENS[activeToken]);
     expect(activeAlpha - hoverAlpha).toBeGreaterThanOrEqual(0.05);
   });
 
@@ -142,12 +145,6 @@ describe('docs/theme-preview.css interactive state overlay values', () => {
     const buttonScss = readProjectText('src/components/button/cba-button.component.scss');
     expect(buttonScss).toContain('var(--cba-hover)');
     expect(buttonScss).toContain('var(--cba-active)');
-  });
-
-  it('inverse hover and active alphas differ by at least 0.05', () => {
-    const hoverAlpha = parseAlpha(EXPECTED_TOKENS['--cba-hover-inverse']);
-    const activeAlpha = parseAlpha(EXPECTED_TOKENS['--cba-active-inverse']);
-    expect(activeAlpha - hoverAlpha).toBeGreaterThanOrEqual(0.05);
   });
 
   it('button component scss references inverse tokens for solid variants', () => {
