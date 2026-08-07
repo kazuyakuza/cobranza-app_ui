@@ -1,11 +1,10 @@
 # Changelog Versioning Rule
 
-- `CHANGELOG.md` MUST NOT contain an `[Unreleased]` section.
-- Every push to remote `origin` publishes the library, so every change MUST be
-  documented under a dated `[x.y.z] — YYYY-MM-DD` header before it lands on `main`.
+- `CHANGELOG.md` MUST NOT contain an `[Unreleased]` section. Every push to remote
+  `origin` publishes the library, so every change MUST be documented under a dated
+  `[x.y.z] — YYYY-MM-DD` header before it lands on `main`.
 - Bump `package.json` version and create the dated `CHANGELOG.md` header in the
-  SAME commit/PR that introduces the change. Do not keep an empty
-  `[Unreleased]` section above the latest release.
+  same commit/PR that introduces the change.
 - New entries go directly under the current in-progress version header (e.g.
   `## [0.11.1] — 2026-08-06`).
 - Use [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) categories

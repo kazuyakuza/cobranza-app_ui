@@ -67,4 +67,4 @@
 - [Phase 9 global plan](../../.kilo/plans/20260805-phase9-surface-hierarchy-fix.md) — overall workflow.
 - [Consumer Guide](../../docs/CONSUMER_GUIDE.md) — Shell & MFE integration rules (surface ownership, checklists, anti-patterns).
 - [Theme Reference](../../docs/THEME.md) — token quick reference.
-- [CHANGELOG](../../CHANGELOG.md) — release changelog (Keep a Changelog format), latest 0.10.0.
+- [CHANGELOG](../../CHANGELOG.md) — release changelog (Keep a Changelog format), latest 0.11.0.
