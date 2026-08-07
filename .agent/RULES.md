@@ -17,6 +17,7 @@ List of rules all AI agents must follow.
 - [Prefer Private Members Rule](../.kilo/rules/prefer-private-members.md)
 - [Workflow Review Rule](../.kilo/rules/workflow-review-rule.md)
 - [Markdown Generation Rule](../.kilo/rules/markdown-generation-rule.md)
+- [Changelog Versioning](../.kilo/rules/changelog-versioning.md)
 - [Important Paths Rule](../.kilo/rules/important-paths.md)
 - [Newline Prevention Rule](../.kilo/rules/newline-prevention.md)
 - [Code Guidelines](../.kilo/rules/code-guidelines.md)

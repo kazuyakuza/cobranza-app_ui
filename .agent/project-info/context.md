@@ -18,10 +18,11 @@
 
 - **Phase 9 — Surface hierarchy fix + consumer guide**: widened the four-level Minimal Yet Warm surface scale in `src/theme/_variables.scss`, strengthened borders and module shadows, refreshed `docs/theme-preview.html` for visual verification, and published `docs/CONSUMER_GUIDE.md` for Shell/MFE authors.
 - **Phase 0 — Library scaffolding complete**: all seven TODO tasks finished. Peer deps configured (Angular 22, Bootstrap 5, ng-bootstrap 21, Font Awesome); TypeScript path mapping for `@cobranza-apps/ui`; theme SCSS folder at `src/theme/`; build, Jest, ESLint all pass.
-- Active branch: `feat/phase9-surface-hierarchy` (Tasks A + B).
+- Active branch: `feat/preview-readability-changelog-rule` (Preview readability + changelog rule).
 
 ## Recent Changes
 
+- **Changelog versioning rule established (Task A, 2026-08-06)** — new rule `.kilo/rules/changelog-versioning.md` prohibits `[Unreleased]` sections in `CHANGELOG.md` (every push to `origin` publishes the lib). Index reference added to `.agent/RULES.md`; `CHANGELOG.md` header comment rewritten to drop `[Unreleased]` instructions and point to the rule file.
 - **Phase 9 token tuning (Task A)** — widened Minimal Yet Warm surface hierarchy in `src/theme/_variables.scss`: canvas `#C5BFAE`, panel `#F2F0E8`, elevated `#FDFCF8`, inset `#D8C3A5`; `--cba-border-subtle` `#DAD7CA`; `--cba-shadow-module` `0 6px 24px rgba(43,34,28,0.18)`; `--cba-shadow-elevated` `0 10px 32px rgba(43,34,28,0.26)`. `docs/theme-preview.html` refreshed; four surfaces visibly distinct. Token names unchanged.
 - **Phase 9 consumer guide + docs sync (Task B)** — created `docs/CONSUMER_GUIDE.md` (theme load, surface ownership map, Shell checklist, MFE checklist, anti-patterns, quick verify). Linked from `docs/INDEX.md`, `README.md` (Integration Notes + Documentation), and `docs/THEME.md` (new `### Surface hierarchy` note). README "intermediate-gray" → "Minimal Yet Warm". `CHANGELOG.md` 0.10.0 entry added (dated 2026-08-05). `brief.md` §5 token values + muted-restriction prose updated; `context.md` status updated.
 - **Theme lightened from near-dark to medium-gray palette** — background tokens shifted to lighter grays (#7a838d–#aeb6bf), text tokens changed to near-black (#0f1115–#2a2e35) for contrast, interactive overlays switched from white to dark, shadows reduced in opacity. All intended text/background pairs meet WCAG AA 4.5:1 except `--cba-text-muted` on `--cba-bg-primary` (documented restriction). Token names unchanged. Source: `src/theme/_variables.scss`, brief.md §5 updated.

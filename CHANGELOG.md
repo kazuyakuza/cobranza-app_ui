@@ -4,12 +4,14 @@
   VERSIONING: Semantic Versioning (https://semver.org/spec/v2.0.0.html)
 
   HOW TO UPDATE:
-    1. Add entries under [Unreleased] as work lands on main.
-    2. Before a release, rename [Unreleased] to [x.y.z] with the release date.
-    3. Create a new empty [Unreleased] section above it.
-    4. Use categories: Added, Changed, Fixed, Deprecated, Removed, Security.
-    5. Reference related docs (brief.md §5, docs/THEME.md, etc.) when entries
+    1. NEVER use an Unreleased section — every push to origin publishes the lib.
+       Add entries directly under the current dated [x.y.z] — YYYY-MM-DD header.
+    2. Bump package.json version and create the dated header in the same change.
+    3. Use categories: Added, Changed, Fixed, Deprecated, Removed, Security.
+    4. Reference related docs (brief.md §5, docs/THEME.md, etc.) when entries
        touch design tokens, components, or integration patterns.
+
+  RULE: See .kilo/rules/changelog-versioning.md (no Unreleased sections).
 
   AUDIENCE: Consumers, maintainers, and AI agents tracking release history.
   RELATIONSHIPS:
