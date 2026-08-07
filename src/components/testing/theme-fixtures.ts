@@ -18,6 +18,8 @@ export const EXPECTED_TOKENS: Record<string, string> = {
   '--cba-accent-info': '#56717E',
   '--cba-hover': 'rgba(43, 38, 32, 0.10)',
   '--cba-active': 'rgba(43, 38, 32, 0.18)',
+  '--cba-hover-inverse': 'rgba(253, 252, 248, 0.12)',
+  '--cba-active-inverse': 'rgba(253, 252, 248, 0.22)',
   '--cba-focus-ring': '0 0 0 3px rgba(232, 90, 79, 0.45)',
   '--cba-header-height': '56px',
   '--cba-footer-height': '64px',
