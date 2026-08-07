@@ -128,8 +128,8 @@ All tokens live under the `--cba-` prefix.
   --cba-accent-info: #56717E;
 
   /* Interactive states — warm taupe overlays + warm coral focus ring */
-  --cba-hover: rgba(43, 38, 32, 0.06);
-  --cba-active: rgba(43, 38, 32, 0.10);
+  --cba-hover: rgba(43, 38, 32, 0.10);
+  --cba-active: rgba(43, 38, 32, 0.18);
   --cba-focus-ring: 0 0 0 3px rgba(232, 90, 79, 0.45);
 
   /* Layout (unchanged) */
