@@ -30,6 +30,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > Releases prior to 0.8.1 predate this changelog and are not reconstructed retroactively.
 
+## [0.11.1] — 2026-08-06
+
+### Changed
+
+- Increased interactive overlay opacity in `src/theme/_variables.scss` to make hover and active states distinguishable on warm light surfaces: `--cba-hover` is now `rgba(43, 38, 32, 0.10)` (was `0.06`) and `--cba-active` is now `rgba(43, 38, 32, 0.18)` (was `0.10`).
+
+### Fixed
+
+- Fixed unreadable token labels in `docs/theme-preview.html`: `.t-row .tok` now uses `--cba-text-secondary` at 11 px/500 weight, passing WCAG AA on every preview surface.
+- Fixed unreadable warning callout and warning accent pill by switching to a solid `--cba-accent-warning` background with `--cba-text-inverse` text.
+- Fixed Shell footer blending into the workspace by setting `.shell-footer` to `--cba-bg-elevated` and updating `docs/CONSUMER_GUIDE.md` to recommend the same.
+
+### Added
+
+- Regression tests in `src/theme/preview-html.spec.ts` (token labels, callout, accent pills, footer/workspace background difference, button state overlay values) and new `src/theme/docs-compliance.spec.ts` (no `[Unreleased]` section, dated `[0.11.1]` header, changelog-versioning rule reference).
+
+### Notes
+
+- No `--cba-*` token names were renamed, added, or removed; only `--cba-hover` and `--cba-active` alpha values changed.
+- Authoritative token values: [brief.md §5](.agent/project-info/brief.md#5-design-tokens-theme) and [`src/theme/_variables.scss`](src/theme/_variables.scss).
+- Compliance enforced by [.kilo/rules/changelog-versioning.md](.kilo/rules/changelog-versioning.md) (no `[Unreleased]` sections).
+
 ## [0.11.0] — 2026-08-06
 
 ### Changed
