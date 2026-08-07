@@ -131,6 +131,8 @@ describe('docs/theme-preview.html readability fixes', () => {
   });
 });
 
+// Guards the solid-vs-secondary overlay split: solid variants (primary/danger/success)
+// must use --cba-hover-inverse/--cba-active-inverse; secondary/ghost use --cba-hover/--cba-active.
 describe('docs/theme-preview.css interactive state overlay values', () => {
   it.each([
     ['--cba-hover', '--cba-active'],

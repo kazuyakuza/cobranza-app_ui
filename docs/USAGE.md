@@ -698,9 +698,11 @@ The palette is **Minimal Yet Warm** (warm sand / cream / taupe + controlled cora
 
 | Token | Value | Notes |
 | --- | --- | --- |
-| `--cba-hover` | `rgba(43, 38, 32, 0.06)` | Warm taupe overlay for cream/sand surfaces |
-| `--cba-active` | `rgba(43, 38, 32, 0.10)` | Warm taupe overlay for cream/sand surfaces |
-| `--cba-focus-ring` | `0 0 0 3px rgba(232, 90, 79, 0.45)` | Warm coral ring, visible on light surfaces |
+| `--cba-hover` | `rgba(43, 38, 32, 0.10)` | Dark overlay for light surfaces (secondary/ghost) |
+| `--cba-active` | `rgba(43, 38, 32, 0.18)` | Dark overlay for light surfaces (secondary/ghost) |
+| `--cba-hover-inverse` | `rgba(253, 252, 248, 0.12)` | Light overlay for dark accent fills (solid variants) |
+| `--cba-active-inverse` | `rgba(253, 252, 248, 0.22)` | Light overlay for dark accent fills (solid variants) |
+| `--cba-focus-ring` | `0 0 0 3px rgba(232, 90, 79, 0.45)` | Warm coral ring, visible on all surfaces |
 
 ### Shadows (warm-tinted)
 

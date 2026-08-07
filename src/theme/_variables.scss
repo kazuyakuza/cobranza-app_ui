@@ -13,7 +13,7 @@
  *   Text         — primary, secondary, muted (restricted on canvas/inset), inverse.
  *   Borders      — subtle, default, strong.
  *   Accents      — primary (taupe), success, warning, danger, info.
- *   Interactive  — hover/active overlays, warm-coral focus-ring.
+ *   Interactive  — hover/active overlays (dark for light surfaces, inverse for solid accents), warm-coral focus-ring.
  *   Layout       — header/footer/module-header dimensions.
  *   Radius       — sm, md, lg.
  *   Shadows      — warm-tinted.
@@ -47,7 +47,8 @@
   --cba-accent-danger: #B93E36;
   --cba-accent-info: #56717E;
 
-  /* Interactive states — warm taupe overlays + warm coral focus ring */
+  /* Interactive states — dark overlays for light surfaces (secondary/ghost),
+     light inverse overlays for dark accent fills (solid variants), focus ring */
   --cba-hover: rgba(43, 38, 32, 0.10);
   --cba-active: rgba(43, 38, 32, 0.18);
   --cba-hover-inverse: rgba(253, 252, 248, 0.12);

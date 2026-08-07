@@ -141,6 +141,8 @@ overlay directly as its `background-color`.
 | active | `linear-gradient(var(--cba-active-inverse), var(--cba-active-inverse))` over base bg | `linear-gradient(var(--cba-active), var(--cba-active))` over base bg | `background-color: var(--cba-active)` |
 | disabled / loading | `opacity: 0.6`, `cursor: not-allowed`, preserve base tokens | same | same |
 
+> **AI agent note:** the solid-variant styling (primary/danger/success) is consolidated in the `cba-solid-button($accent-color)` SCSS mixin in `src/components/button/cba-button.component.scss`. When adding a new solid variant, always use this mixin rather than inlining overlay tokens.
+
 ### Focus ring
 
 All button variants MUST use

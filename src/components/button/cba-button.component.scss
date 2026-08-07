@@ -21,6 +21,12 @@
   }
 }
 
+// Shared styling for solid accent button variants (primary, danger, success).
+// Sets the accent fill + inverse text, then applies light inverse overlays on
+// hover/active so state shifts are perceptible on dark backgrounds.
+// AI agents: when adding a new solid variant, use this mixin — do not inline the
+// overlay tokens. Secondary/ghost use dark overlays (--cba-hover/--cba-active)
+// because they sit on light surfaces; solid variants must use the inverse tokens.
 @mixin cba-solid-button($accent-color) {
   background-color: $accent-color;
   color: var(--cba-text-inverse);

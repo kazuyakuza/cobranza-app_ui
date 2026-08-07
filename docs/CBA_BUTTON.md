@@ -12,6 +12,7 @@ Primary action button for the Cobranza App design system. Renders a native `<but
 - [Variant mapping](#variant-mapping)
 - [Size options](#size-options)
 - [Icon support](#icon-support)
+- [State overlays (hover / active)](#state-overlays-hover--active)
 - [Loading & disabled behaviour](#loading--disabled-behaviour)
 - [Accessibility](#accessibility)
 - [Related docs](#related-docs)
@@ -93,6 +94,12 @@ export class MyComponent {
 ```
 
 When `loading` is `true`, the icon is replaced by a spinner regardless of `iconPosition`.
+
+## State overlays (hover / active)
+
+Solid variants (`primary`, `danger`, `success`) use **light inverse overlays** (`--cba-hover-inverse`, `--cba-active-inverse`) because they sit on dark accent backgrounds. `secondary` uses the **dark overlays** (`--cba-hover`, `--cba-active`) because it sits on light surfaces. `ghost` applies the overlay directly as `background-color`.
+
+AI agents: the solid-variant styling is consolidated in the `cba-solid-button($accent-color)` SCSS mixin in `src/components/button/cba-button.component.scss`. When adding a new solid variant, always use this mixin — do not inline the overlay tokens. See [CONSUMER_GUIDE.md §Button Color Guide](CONSUMER_GUIDE.md#button-color-guide) for the full state-overlay matrix.
 
 ## Loading & disabled behaviour
 

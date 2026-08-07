@@ -70,7 +70,7 @@ Example variables per group (not an exhaustive list of values — see `_variable
 - **Text** — `--cba-text-primary`, `--cba-text-secondary`, `--cba-text-muted`, `--cba-text-inverse`
 - **Borders** — `--cba-border-subtle`, `--cba-border-default`, `--cba-border-strong`
 - **Accents** — `--cba-accent-primary`, `--cba-accent-success`, `--cba-accent-warning`, `--cba-accent-danger`, `--cba-accent-info`
-- **Interactive states** — `--cba-hover`, `--cba-active`, `--cba-focus-ring`
+- **Interactive states** — `--cba-hover`, `--cba-active`, `--cba-hover-inverse`, `--cba-active-inverse`, `--cba-focus-ring`
 - **Layout constants** — `--cba-header-height`, `--cba-footer-height`, `--cba-module-header-min-height`
 - **Radius** — `--cba-radius-sm` (6px), `--cba-radius-md` (10px), `--cba-radius-lg` (14px)
 - **Shadows** — `--cba-shadow-module`, `--cba-shadow-elevated` (applied only when not fullscreen)
