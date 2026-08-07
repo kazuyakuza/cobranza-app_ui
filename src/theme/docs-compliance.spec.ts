@@ -22,6 +22,7 @@ function readPackageVersion(): string {
 describe('CHANGELOG versioning compliance', () => {
   const changelog = readProjectText(CHANGELOG_PATH);
   const version = readPackageVersion();
+  const rulesIndex = readProjectText(RULES_PATH);
 
   it('contains no [Unreleased] section header (case-insensitive)', () => {
     const hasUnreleasedSection = /##\s*\[unreleased\]/i.test(changelog);
@@ -29,29 +30,16 @@ describe('CHANGELOG versioning compliance', () => {
   });
 
   it('has a dated header for the current package version', () => {
-    const header = `## [${version}] —`;
-    expect(changelog).toContain(header);
-  });
-
-  it('current version header uses a YYYY-MM-DD date', () => {
     const headerPattern = new RegExp(`## \\[${version}\\] — \\d{4}-\\d{2}-\\d{2}`);
-    expect(headerPattern.test(changelog)).toBe(true);
+    expect(changelog).toMatch(headerPattern);
   });
 
   it('.kilo/rules/changelog-versioning.md is referenced in .agent/RULES.md', () => {
-    const rulesIndex = readProjectText(RULES_PATH);
     expect(rulesIndex).toContain('Changelog Versioning');
     expect(rulesIndex).toContain('changelog-versioning.md');
   });
 
   it('.kilo/rules/changelog-versioning.md file exists (importable path)', () => {
-    let exists = false;
-    try {
-      readProjectText(RULE_FILE_PATH);
-      exists = true;
-    } catch {
-      exists = false;
-    }
-    expect(exists).toBe(true);
+    expect(() => readProjectText(RULE_FILE_PATH)).not.toThrow();
   });
 });

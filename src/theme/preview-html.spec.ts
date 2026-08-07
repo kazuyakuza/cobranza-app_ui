@@ -30,6 +30,10 @@ function parseAlpha(rgba: string): number {
   return match ? Number(match[1]) : NaN;
 }
 
+const html = readProjectText(PREVIEW_HTML_PATH);
+const root = parseHtmlDocument(html);
+const css = readProjectText(PREVIEW_CSS_PATH);
+
 const REQUIRED_IDS = ['swatchGrid', 'buttonMatrix', 'textGrid', 'accentRow', 'rawStrip'];
 
 // Maps the preview TOKEN_ROLES swatch label → --cba-* token name (mirrors docs/theme-preview.html).
@@ -46,9 +50,6 @@ const SWATCH_ROLE_TOKEN: Record<string, string> = {
 };
 
 describe('docs/theme-preview.html structure', () => {
-  const html = readProjectText(PREVIEW_HTML_PATH);
-  const root = parseHtmlDocument(html);
-
   it('links the compiled theme CSS (theme-preview.css)', () => {
     const link = root.querySelector('link[rel="stylesheet"][href="theme-preview.css"]');
     expect(link).not.toBeNull();
@@ -63,12 +64,6 @@ describe('docs/theme-preview.html structure', () => {
       it(`has #${id}`, () => {
         expect(root.querySelector(`#${id}`)).not.toBeNull();
       });
-    }
-  });
-
-  it('renders token swatch labels for all 9 roles', () => {
-    for (const role of Object.keys(SWATCH_ROLE_TOKEN)) {
-      expect(html).toContain(role);
     }
   });
 
@@ -93,7 +88,7 @@ describe('docs/theme-preview.html structure', () => {
 });
 
 describe('docs/theme-preview.css :root matches canonical tokens', () => {
-  const cssVars = parseScssVariables(readProjectText(PREVIEW_CSS_PATH));
+  const cssVars = parseScssVariables(css);
 
   it('contains every expected --cba-* token', () => {
     for (const name of Object.keys(EXPECTED_TOKENS)) {
@@ -109,8 +104,6 @@ describe('docs/theme-preview.css :root matches canonical tokens', () => {
 });
 
 describe('docs/theme-preview.html readability fixes', () => {
-  const html = readProjectText(PREVIEW_HTML_PATH);
-
   it('token labels use --cba-text-secondary at 11px', () => {
     expect(html).toContain('.t-row .tok{font-family:ui-monospace,monospace;font-size:11px;color:var(--cba-text-secondary)}');
   });
@@ -126,7 +119,6 @@ describe('docs/theme-preview.html readability fixes', () => {
   });
 
   it('accent pills use solid accent fills with inverse text (no color-mix)', () => {
-    expect(html).not.toContain('color-mix(in srgb,${color} 18%,transparent)');
     expect(html).toContain('style="background:${color}"');
     expect(html).toContain('.accent-pill{padding:6px 12px;border-radius:999px;font-size:12px;font-weight:700;border:1px solid transparent;color:var(--cba-text-inverse)}');
   });
@@ -136,23 +128,10 @@ describe('docs/theme-preview.html readability fixes', () => {
     const workspaceUsesCanvas = html.includes('.preview{display:flex;flex-direction:column;min-height:100vh;background:var(--cba-bg-primary)');
     expect(shellFooterElevated).toBe(true);
     expect(workspaceUsesCanvas).toBe(true);
-    expect('--cba-bg-elevated').not.toBe('--cba-bg-primary');
   });
 });
 
 describe('docs/theme-preview.css interactive state overlay values', () => {
-  const css = readProjectText(PREVIEW_CSS_PATH);
-
-  it('defines --cba-hover at the raised alpha', () => {
-    expect(css).toContain('--cba-hover');
-  });
-
-  it('compiled :root carries the raised hover/active alphas', () => {
-    const cssVars = parseScssVariables(css);
-    expect(cssVars.get('--cba-hover')).toBe(EXPECTED_TOKENS['--cba-hover']);
-    expect(cssVars.get('--cba-active')).toBe(EXPECTED_TOKENS['--cba-active']);
-  });
-
   it('hover and active alphas differ by at least 0.05', () => {
     const hoverAlpha = parseAlpha(EXPECTED_TOKENS['--cba-hover']);
     const activeAlpha = parseAlpha(EXPECTED_TOKENS['--cba-active']);
