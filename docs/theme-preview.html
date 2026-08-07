@@ -95,7 +95,7 @@
     tbody tr:hover td{background:var(--cba-hover)}
     tbody tr:last-child td{border-bottom:none}
     .module-footer{padding:9px 12px;background:var(--cba-bg-tertiary);border-top:1px solid var(--cba-border-default);font-size:12.5px;font-weight:700;color:var(--cba-accent-success)}
-    .shell-footer{height:var(--cba-footer-height);display:flex;align-items:center;justify-content:center;gap:10px;border-top:1px solid var(--cba-border-default);background:var(--cba-bg-primary)}
+    .shell-footer{height:var(--cba-footer-height);display:flex;align-items:center;justify-content:center;gap:10px;border-top:1px solid var(--cba-border-default);background:var(--cba-bg-elevated)}
     .section-pill{padding:8px 16px;border-radius:999px;border:1px solid var(--cba-border-strong);background:var(--cba-bg-secondary);color:var(--cba-text-secondary);font-size:13px;font-weight:700}
     .section-pill.active{border-color:var(--cba-accent-primary);color:var(--cba-text-primary)}
 
@@ -142,17 +142,17 @@
     .text-sample--elevated{background:var(--cba-bg-elevated)}
     .text-sample--inset{background:var(--cba-bg-tertiary)}
     .text-sample h3{margin:0 0 6px;font-size:12px;font-family:ui-monospace,monospace;color:var(--cba-text-secondary);font-weight:700}
-    .t-row{font-size:12.5px;margin-bottom:4px}
-    .t-row .tok{font-family:ui-monospace,monospace;font-size:10.5px;color:var(--cba-text-muted)}
+    .t-row{font-size:13px;font-weight:500;margin-bottom:4px}
+    .t-row .tok{font-family:ui-monospace,monospace;font-size:11px;color:var(--cba-text-secondary)}
     .t-primary{color:var(--cba-text-primary)}
     .t-secondary{color:var(--cba-text-secondary)}
     .t-muted{color:var(--cba-text-muted)}
     .t-inverse{color:var(--cba-text-inverse);background:var(--cba-accent-primary);padding:2px 6px;border-radius:var(--cba-radius-sm)}
-    .t-callout{margin-top:6px;padding:6px 8px;border-radius:var(--cba-radius-sm);border:1px solid var(--cba-accent-warning);color:var(--cba-accent-warning);font-size:11px;font-weight:600}
+    .t-callout{margin-top:6px;padding:6px 8px;border-radius:var(--cba-radius-sm);border:1px solid transparent;background:var(--cba-accent-warning);color:var(--cba-text-inverse);font-size:11px;font-weight:600}
 
     /* Preserved informational rows */
     .accent-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
-    .accent-pill{padding:6px 12px;border-radius:999px;font-size:12px;font-weight:700;border:1px solid transparent}
+    .accent-pill{padding:6px 12px;border-radius:999px;font-size:12px;font-weight:700;border:1px solid transparent;color:var(--cba-text-inverse)}
     .raw-strip{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px;max-width:900px}
     .raw-strip .chip{width:48px;height:36px;border-radius:8px;border:1px solid rgba(0,0,0,.2);box-shadow:inset 0 0 0 1px rgba(255,255,255,.12)}
   </style>
@@ -317,7 +317,7 @@ function renderRoleMap(host){
 function renderAccents(host){
   host.innerHTML=ACCENTS.map(a=>{
     const color=`var(${a[1]})`;
-    return `<span class="accent-pill" style="color:${color};border-color:${color};background:color-mix(in srgb,${color} 18%,transparent)">${a[0]}</span>`;
+    return `<span class="accent-pill" style="background:${color}">${a[0]}</span>`;
   }).join('');
 }
 
