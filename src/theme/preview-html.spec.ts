@@ -25,6 +25,11 @@ import {
   PREVIEW_CSS_PATH,
 } from '../components/testing/theme-fixtures';
 
+function parseAlpha(rgba: string): number {
+  const match = rgba.match(/rgba\([^,]+,[^,]+,[^,]+,\s*([\d.]+)\)/);
+  return match ? Number(match[1]) : NaN;
+}
+
 const REQUIRED_IDS = ['swatchGrid', 'buttonMatrix', 'textGrid', 'accentRow', 'rawStrip'];
 
 // Maps the preview TOKEN_ROLES swatch label → --cba-* token name (mirrors docs/theme-preview.html).
@@ -100,5 +105,63 @@ describe('docs/theme-preview.css :root matches canonical tokens', () => {
     for (const [name, value] of Object.entries(EXPECTED_TOKENS)) {
       expect(cssVars.get(name)).toBe(value);
     }
+  });
+});
+
+describe('docs/theme-preview.html readability fixes', () => {
+  const html = readProjectText(PREVIEW_HTML_PATH);
+
+  it('token labels use --cba-text-secondary at 11px', () => {
+    expect(html).toContain('.t-row .tok{font-family:ui-monospace,monospace;font-size:11px;color:var(--cba-text-secondary)}');
+  });
+
+  it('token rows use 13px and weight 500', () => {
+    expect(html).toContain('.t-row{font-size:13px;font-weight:500;margin-bottom:4px}');
+  });
+
+  it('warning callout uses solid accent bg with inverse text', () => {
+    expect(html).toContain('background:var(--cba-accent-warning)');
+    expect(html).toContain('color:var(--cba-text-inverse)');
+    expect(html).toContain('.t-callout{');
+  });
+
+  it('accent pills use solid accent fills with inverse text (no color-mix)', () => {
+    expect(html).not.toContain('color-mix(in srgb,${color} 18%,transparent)');
+    expect(html).toContain('style="background:${color}"');
+    expect(html).toContain('.accent-pill{padding:6px 12px;border-radius:999px;font-size:12px;font-weight:700;border:1px solid transparent;color:var(--cba-text-inverse)}');
+  });
+
+  it('shell footer background differs from workspace background', () => {
+    const shellFooterElevated = html.includes('.shell-footer{height:var(--cba-footer-height);display:flex;align-items:center;justify-content:center;gap:10px;border-top:1px solid var(--cba-border-default);background:var(--cba-bg-elevated)}');
+    const workspaceUsesCanvas = html.includes('.preview{display:flex;flex-direction:column;min-height:100vh;background:var(--cba-bg-primary)');
+    expect(shellFooterElevated).toBe(true);
+    expect(workspaceUsesCanvas).toBe(true);
+    expect('--cba-bg-elevated').not.toBe('--cba-bg-primary');
+  });
+});
+
+describe('docs/theme-preview.css interactive state overlay values', () => {
+  const css = readProjectText(PREVIEW_CSS_PATH);
+
+  it('defines --cba-hover at the raised alpha', () => {
+    expect(css).toContain('--cba-hover');
+  });
+
+  it('compiled :root carries the raised hover/active alphas', () => {
+    const cssVars = parseScssVariables(css);
+    expect(cssVars.get('--cba-hover')).toBe(EXPECTED_TOKENS['--cba-hover']);
+    expect(cssVars.get('--cba-active')).toBe(EXPECTED_TOKENS['--cba-active']);
+  });
+
+  it('hover and active alphas differ by at least 0.05', () => {
+    const hoverAlpha = parseAlpha(EXPECTED_TOKENS['--cba-hover']);
+    const activeAlpha = parseAlpha(EXPECTED_TOKENS['--cba-active']);
+    expect(activeAlpha - hoverAlpha).toBeGreaterThanOrEqual(0.05);
+  });
+
+  it('button component scss references both interaction tokens', () => {
+    const buttonScss = readProjectText('src/components/button/cba-button.component.scss');
+    expect(buttonScss).toContain('var(--cba-hover)');
+    expect(buttonScss).toContain('var(--cba-active)');
   });
 });
