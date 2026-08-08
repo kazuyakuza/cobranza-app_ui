@@ -279,7 +279,7 @@ Tables use the surface hierarchy plus selected/hover tokens for row states.
 |-----------|-----------|--------|------|
 | default (body row) | `--cba-bg-secondary` (panel) | none | `--cba-text-primary` |
 | hover | `--cba-hover` overlay on panel bg | none | `--cba-text-primary` |
-| selected | `--cba-selected-bg` | none (or `--cba-selected-border` left accent) | `--cba-text-primary` |
+| selected | `--cba-selected-bg` | none (or `--cba-selected-border` left accent) | `--cba-selected-text` |
 | header (`thead th`) | `--cba-bg-tertiary` (inset) | bottom: `--cba-border-subtle` | `--cba-text-secondary` + semibold |
 
 - `thead` = inset surface; body rows = panel surface.
