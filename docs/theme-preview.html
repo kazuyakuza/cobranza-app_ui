@@ -18,6 +18,23 @@
       2. npm run build:preview (regenerate compiled CSS)
       3. TOKEN_ROLES array in the <script> below (swatch labels + sidebar role map)
 
+  FONT AWESOME CDN:
+    The preview loads Font Awesome 6.7.2 via CDN (<link> in <head>) to render the same
+    icons the Angular module-header component uses (drag, collapse, size toggle, fullscreen,
+    remove, status indicators). This requires network access — the preview is a dev/CI
+    artifact, not an offline-capable deliverable. If the CDN is unreachable, icons will
+    not render but the layout remains intact.
+
+  COPIED COMPONENT SCSS:
+    Two component stylesheets are copied verbatim into the inline <style> so the static
+    file:// preview renders the emulated Angular component styles without the Angular runtime:
+      - .cba-module-header rules from src/components/module-header/module-header.component.scss
+      - .cba-module-container rules from src/components/module-container/module-container.component.scss
+    Each copied block is marked with a "keep in sync" comment. When the source SCSS changes,
+    update the corresponding block in this file to maintain visual parity. Known divergence:
+    the container border-radius uses --cba-radius-lg (design-token intent) instead of the
+    component's current --cba-radius-md; flagged as a follow-up.
+
   STRUCTURE:
     Left sidebar (.controls) — dark tool chrome: theme selector, source hex chips, role map.
     Right panel (.preview) — live Shell mockup using real --cba-* tokens:
