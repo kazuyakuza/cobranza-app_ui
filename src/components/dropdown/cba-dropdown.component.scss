@@ -40,6 +40,17 @@
   background-color: var(--cba-active);
 }
 
+/* Selected item — applied by consumers via [class.cba-dropdown__item--selected]
+   on a NgbDropdownItem to mark the chosen option. selected ≠ active(pressed) ≠ focus. */
+.cba-dropdown__menu [ngbDropdownItem].cba-dropdown__item--selected {
+  background-color: var(--cba-selected-bg);
+  color: var(--cba-selected-text);
+}
+
+.cba-dropdown__menu [ngbDropdownItem].cba-dropdown__item--selected:hover {
+  background-color: var(--cba-selected-hover);
+}
+
 .cba-dropdown__menu [ngbDropdownItem]:focus-visible {
   outline: none;
   box-shadow: inset var(--cba-focus-ring);
