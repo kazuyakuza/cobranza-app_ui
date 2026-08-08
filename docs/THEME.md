@@ -20,6 +20,9 @@ Quick reference for the Minimal Yet Warm design system: how to import the theme,
 - [Selected State](#selected-state)
 - [Form State Matrix](#form-state-matrix)
 - [Typography Scale](#typography-scale)
+- [Table State Patterns](#table-state-patterns)
+- [Navigation / Footer Pill State Patterns](#navigation--footer-pill-state-patterns)
+- [Semantic Status Patterns](#semantic-status-patterns)
 - [Radius Rules](#radius-rules)
 - [Shadow Rules](#shadow-rules)
 - [Utility Class Prefix](#utility-class-prefix)
@@ -152,6 +155,52 @@ Six-step scale exposed as `--cba-font-size-*` + `--cba-line-height-*` tokens. Ba
 | caption | `--cba-font-size-caption` (0.75rem / 12px) | `--cba-line-height-caption` (1.333) | 400 | Hints, tertiary metadata |
 
 Utility classes: `.cba-text-display`, `.cba-text-heading-lg`, `.cba-text-heading-md`, `.cba-text-body`, `.cba-text-small`, `.cba-text-caption`. Generated in [`src/theme/_utilities.scss`](../src/theme/_utilities.scss).
+
+## Table State Patterns
+
+Tables reuse the surface hierarchy plus selected/hover tokens. Full table component is out of scope; these are token-level patterns for Shell/MFE authors.
+
+| Row state | Background | Border | Text |
+|-----------|-----------|--------|------|
+| default (body row) | `--cba-bg-secondary` (panel) | none | `--cba-text-primary` |
+| hover | `--cba-hover` overlay on panel bg | none | `--cba-text-primary` |
+| selected | `--cba-selected-bg` | none (or `--cba-selected-border` left accent) | `--cba-selected-text` |
+| header (`thead th`) | `--cba-bg-tertiary` (inset) | bottom: `--cba-border-subtle` | `--cba-text-secondary` + semibold |
+| disabled (optional) | `--cba-state-disabled-bg` | none | `--cba-state-disabled-text` |
+
+- `thead` = inset surface; body rows = panel surface.
+- Selected row uses `--cba-selected-bg`; do not substitute `--cba-hover` for selected.
+- See the [Consumer Guide §Table State Patterns](CONSUMER_GUIDE.md#table-state-patterns) for Shell/MFE wiring.
+
+## Navigation / Footer Pill State Patterns
+
+Footer section pills and similar nav chips follow a four-state pattern.
+
+| State | Background | Border | Text |
+|-------|-----------|--------|------|
+| normal | `--cba-bg-secondary` | `--cba-border-strong` | `--cba-text-secondary` |
+| hover | `--cba-bg-secondary` + `--cba-hover` overlay | `--cba-border-strong` | `--cba-text-primary` |
+| selected | `--cba-selected-bg` | `--cba-selected-border` | `--cba-selected-text` |
+| disabled | `--cba-state-disabled-bg` | `--cba-border-subtle` | `--cba-state-disabled-text` |
+
+- Selected is visually stronger than hover: border shifts to `--cba-selected-border` (warm taupe) and fill shifts to `--cba-selected-bg`.
+- Do not use `--cba-accent-primary` fill for selected pills; the selected token set provides sufficient distinction.
+- See the [Consumer Guide §Navigation / Footer Pill State Patterns](CONSUMER_GUIDE.md#navigation--footer-pill-state-patterns).
+
+## Semantic Status Patterns
+
+Badge and inline status recipes for success / warning / danger / info / neutral.
+
+| Status | Accent token | Solid badge | Outline badge | Inline text |
+|--------|-------------|-------------|---------------|-------------|
+| success | `--cba-accent-success` | bg `--cba-accent-success`, text `--cba-text-inverse` | border + text `--cba-accent-success`, bg transparent | `--cba-state-valid-text` |
+| warning | `--cba-accent-warning` | bg `--cba-accent-warning`, text `--cba-text-inverse` | border + text `--cba-accent-warning`, bg transparent | `--cba-accent-warning` (panel/elevated only) |
+| danger | `--cba-accent-danger` | bg `--cba-accent-danger`, text `--cba-text-inverse` | border + text `--cba-accent-danger`, bg transparent | `--cba-state-invalid-text` |
+| info | `--cba-accent-info` | bg `--cba-accent-info`, text `--cba-text-inverse` | border + text `--cba-accent-info`, bg transparent | `--cba-accent-info` |
+| neutral | `--cba-accent-primary` (taupe) | bg `--cba-accent-primary`, text `--cba-text-inverse` | border + text `--cba-accent-primary`, bg transparent | `--cba-text-secondary` |
+
+- **Warning vs danger:** warning is soft coral (`--cba-accent-warning`); danger is deeper red (`--cba-accent-danger`). Always pair color with an icon or label — do not rely on color alone.
+- See the [Consumer Guide §Semantic Status Patterns](CONSUMER_GUIDE.md#semantic-status-patterns).
 
 ## Radius Rules
 

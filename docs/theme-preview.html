@@ -157,6 +157,62 @@
     .accent-pill{padding:6px 12px;border-radius:999px;font-size:12px;font-weight:700;border:1px solid transparent;color:var(--cba-text-inverse)}
     .raw-strip{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px;max-width:900px}
     .raw-strip .chip{width:48px;height:36px;border-radius:8px;border:1px solid rgba(0,0,0,.2);box-shadow:inset 0 0 0 1px rgba(255,255,255,.12)}
+
+    /* Cluster 3 — pattern preview sections (selected, table, nav, form states, type scale, status) */
+    .pattern-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px}
+    .pattern-card{padding:12px;border:1px solid var(--cba-border-default);border-radius:var(--cba-radius-md);background:var(--cba-bg-secondary)}
+    .pattern-card h3{margin:0 0 8px;font-size:12px;font-family:ui-monospace,monospace;color:var(--cba-text-secondary);font-weight:700}
+
+    /* Border scale swatches */
+    .border-scale{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+    .border-swatch{padding:16px;border-radius:var(--cba-radius-md);background:var(--cba-bg-secondary)}
+    .border-swatch--subtle{border:1px solid var(--cba-border-subtle)}
+    .border-swatch--default{border:1px solid var(--cba-border-default)}
+    .border-swatch--strong{border:1px solid var(--cba-border-strong)}
+    .border-swatch b{display:block;font-size:13px;font-weight:700;color:var(--cba-text-primary);margin-bottom:2px}
+    .border-swatch span{font-size:11px;font-family:ui-monospace,monospace;color:var(--cba-text-secondary)}
+
+    /* Selected / nav / footer pill samples */
+    .demo-pills{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+    .demo-pill{padding:8px 16px;border-radius:999px;border:1px solid var(--cba-border-strong);background:var(--cba-bg-secondary);color:var(--cba-text-secondary);font-size:13px;font-weight:700}
+    .demo-pill.is-hover{background-image:linear-gradient(var(--cba-hover),var(--cba-hover));color:var(--cba-text-primary)}
+    .demo-pill.is-selected{border-color:var(--cba-selected-border);background:var(--cba-selected-bg);color:var(--cba-selected-text)}
+    .demo-pill.is-disabled{background:var(--cba-state-disabled-bg);border-color:var(--cba-border-subtle);color:var(--cba-state-disabled-text);cursor:not-allowed}
+    .demo-nav{display:flex;flex-direction:column;gap:4px}
+    .demo-nav__item{padding:7px 12px;border-radius:var(--cba-radius-sm);font-size:13px;font-weight:600;color:var(--cba-text-secondary)}
+    .demo-nav__item.is-hover{background:var(--cba-hover);color:var(--cba-text-primary)}
+    .demo-nav__item.is-selected{background:var(--cba-selected-bg);color:var(--cba-selected-text);border-left:3px solid var(--cba-selected-border)}
+    .demo-nav__item.is-disabled{color:var(--cba-state-disabled-text);cursor:not-allowed}
+
+    /* Mini table for row-state demo */
+    .demo-table{width:100%;border-collapse:collapse;font-size:13px}
+    .demo-table thead th{text-align:left;padding:9px 10px;background:var(--cba-bg-tertiary);color:var(--cba-text-secondary);font-weight:600;border-bottom:1px solid var(--cba-border-subtle)}
+    .demo-table tbody td{padding:9px 10px;border-bottom:1px solid var(--cba-border-subtle);color:var(--cba-text-primary)}
+    .demo-table tbody tr.is-hover td{background:var(--cba-hover)}
+    .demo-table tbody tr.is-selected td{background:var(--cba-selected-bg);color:var(--cba-selected-text)}
+    .demo-table tbody tr.is-disabled td{background:var(--cba-state-disabled-bg);color:var(--cba-state-disabled-text)}
+
+    /* Form-state field samples (static boxes, no Angular) */
+    .form-states{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px}
+    .form-field{padding:8px 10px;border-radius:var(--cba-radius-sm);font-size:13px;font-weight:500}
+    .form-field b{display:block;font-size:10.5px;font-family:ui-monospace,monospace;color:var(--cba-text-secondary);font-weight:700;margin-bottom:3px;text-transform:uppercase;letter-spacing:.04em}
+    .form-field--default{background:var(--cba-bg-secondary);border:1px solid var(--cba-border-default);color:var(--cba-text-primary)}
+    .form-field--focus{background:var(--cba-bg-secondary);border:1px solid var(--cba-accent-primary);color:var(--cba-text-primary);box-shadow:var(--cba-focus-ring)}
+    .form-field--disabled{background:var(--cba-state-disabled-bg);border:1px solid var(--cba-border-subtle);color:var(--cba-state-disabled-text);cursor:not-allowed}
+    .form-field--readonly{background:var(--cba-bg-tertiary);border:1px solid var(--cba-border-subtle);color:var(--cba-text-secondary)}
+    .form-field--invalid{background:var(--cba-bg-secondary);border:1px solid var(--cba-state-invalid-border);color:var(--cba-state-invalid-text)}
+
+    /* Type scale sample */
+    .type-scale{display:flex;flex-direction:column;gap:6px}
+    .type-row{display:flex;align-items:baseline;gap:10px}
+    .type-row .label{font-family:ui-monospace,monospace;font-size:11px;color:var(--cba-text-secondary);min-width:170px;flex:0 0 auto}
+    .type-row .sample{color:var(--cba-text-primary)}
+
+    /* Semantic status badges */
+    .status-row{display:flex;flex-wrap:wrap;gap:8px}
+    .status-badge{padding:5px 12px;border-radius:999px;font-size:12px;font-weight:700;color:var(--cba-text-inverse)}
+    .status-badge--outline{background:transparent;border:1px solid currentColor}
+    .status-badge--neutral{background:var(--cba-bg-tertiary);border:1px solid var(--cba-border-default);color:var(--cba-text-secondary)}
   </style>
 </head>
 <body>
@@ -245,6 +301,53 @@
           <h2>Accent pills</h2>
           <div class="accent-row" id="accentRow"></div>
           <div class="raw-strip" id="rawStrip"></div>
+
+          <!--
+            CLUSTER 3 — Multi-module density strip.
+            Two module cards side by side to show canvas→panel→elevated→inset under density.
+            Reuses the existing .module chrome classes; no new tokens.
+          -->
+          <h2>Multi-module density</h2>
+          <div class="pattern-grid" id="densityStrip"></div>
+
+          <!--
+            CLUSTER 3 — Border scale swatches.
+            Three swatches showing subtle / default / strong on panel surface, labelled by role.
+          -->
+          <h2>Border scale</h2>
+          <div class="border-scale" id="borderScale"></div>
+
+          <!--
+            CLUSTER 3 — Selected samples (footer pill + fake nav item + fake table row).
+            Static .is-hover / .is-selected / .is-disabled classes demo the selected token set
+            distinctly from hover. See docs/CONSUMER_GUIDE.md §Selected State Usage.
+          -->
+          <h2>Selected states</h2>
+          <div class="pattern-grid" id="selectedSamples"></div>
+
+          <!--
+            CLUSTER 3 — Form state samples.
+            Five static field boxes: default / focus / disabled / readonly / invalid.
+            Uses --cba-state-* and --cba-focus-ring. No Angular components in preview.
+          -->
+          <h2>Form states</h2>
+          <div class="form-states" id="formStates"></div>
+
+          <!--
+            CLUSTER 3 — Type scale sample.
+            Each step rendered at its --cba-font-size-* / --cba-line-height-* so the scale
+            is visually verifiable. Labels show the token pair.
+          -->
+          <h2>Type scale</h2>
+          <div class="type-scale" id="typeScale"></div>
+
+          <!--
+            CLUSTER 3 — Semantic status badges (solid + outline + neutral).
+            success / warning / danger / info / neutral. Warning vs danger distinction is
+            reinforced by label, not color alone.
+          -->
+          <h2>Semantic status</h2>
+          <div class="status-row" id="statusBadges"></div>
         </div>
       </main>
       <footer class="shell-footer">
@@ -308,6 +411,64 @@ const TEXT_SAMPLES=[
   {name:'inset',token:'--cba-bg-tertiary',mutedNote:true}
 ];
 
+const DENSITY_MODULES=[
+  {title:'Clientes List',status:'loaded',meta:'50%'},
+  {title:'Deudas List',status:'loaded',meta:'50%'}
+];
+const DENSITY_ROWS=[
+  ['12.345.678-9','Acme S.A.','1,200,000'],
+  ['9.876.543-2','Comercial del Norte','540,000']
+];
+
+const BORDER_LEVELS=[
+  ['subtle','--cba-border-subtle','Internal separators'],
+  ['default','--cba-border-default','Structural edges'],
+  ['strong','--cba-border-strong','Important chrome']
+];
+
+const SELECTED_PILLS=[
+  ['Normal','',''],
+  ['Hover','is-hover',''],
+  ['Selected','is-selected',''],
+  ['Disabled','is-disabled','']
+];
+const SELECTED_NAV=[
+  ['Clientes',''],
+  ['Deudas','is-hover'],
+  ['Pagos','is-selected'],
+  ['Reportes','is-disabled']
+];
+const TABLE_ROWS=[
+  ['12.345.678-9','Acme S.A.','1,200,000',''],
+  ['9.876.543-2','Comercial del Norte','540,000','is-hover'],
+  ['11.223.344-5','Distribuidora Sur','0','is-selected'],
+  ['45.678.901-3','Ferretería El Tornillo','87,500','is-disabled']
+];
+
+const FORM_STATES=[
+  ['default','form-field--default','Texto por defecto'],
+  ['focus','form-field--focus','Texto enfocado'],
+  ['disabled','form-field--disabled','No editable'],
+  ['readonly','form-field--readonly','Solo lectura'],
+  ['invalid','form-field--invalid','Campo inválido']
+];
+
+const TYPE_SCALE=[
+  ['display','--cba-font-size-display','--cba-line-height-display','Clientes'],
+  ['heading-lg','--cba-font-size-heading-lg','--cba-line-height-heading-lg','Lista de clientes'],
+  ['heading-md','--cba-font-size-heading-md','--cba-line-height-heading-md','Sección de pagos'],
+  ['body','--cba-font-size-body','--cba-line-height-body','Ferretería El Tornillo — deuda 87.500'],
+  ['small','--cba-font-size-small','--cba-line-height-small','Header de tabla / metadata'],
+  ['caption','--cba-font-size-caption','--cba-line-height-caption','Pista terciaria o nota corta']
+];
+
+const STATUS_BADGES=[
+  ['success','--cba-accent-success','success'],
+  ['warning','--cba-accent-warning','warning'],
+  ['danger','--cba-accent-danger','danger'],
+  ['info','--cba-accent-info','info']
+];
+
 function renderSourceHex(sourceColors, host){
   host.innerHTML=sourceColors.map(h=>`<div class="row"><i style="background:${h}"></i>${h}</div>`).join('');
 }
@@ -345,6 +506,46 @@ function renderTextSamples(host){
       :'';
     return `<div class="text-sample text-sample--${s.name}"><h3>${s.name} · ${s.token}</h3><div class="t-row t-primary">Primary text <span class="tok">--cba-text-primary</span></div><div class="t-row t-secondary">Secondary text <span class="tok">--cba-text-secondary</span></div>${mutedRow}${inverseRow}</div>`;
   }).join('');
+}
+
+function renderDensityStrip(host){
+  const modules=DENSITY_MODULES.map(m=>{
+    const rows=DENSITY_ROWS.map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td></tr>`).join('');
+    return `<div class="module"><div class="module-header"><div class="status">✓</div><div class="module-title">${m.title}</div><div class="module-meta" style="font-size:12px;color:var(--cba-text-muted);font-weight:600">${m.meta}</div></div><div class="module-body"><table class="demo-table"><thead><tr><th>Documento</th><th>Nombre</th><th>Deuda</th></tr></thead><tbody>${rows}</tbody></table></div><div class="module-footer">Listo</div></div>`;
+  }).join('');
+  host.innerHTML=modules;
+}
+
+function renderBorderScale(host){
+  host.innerHTML=BORDER_LEVELS.map(([id,token,role])=>{
+    return `<div class="border-swatch border-swatch--${id}"><b>${role}</b><span>${token}</span></div>`;
+  }).join('');
+}
+
+function renderSelectedSamples(host){
+  const pills=SELECTED_PILLS.map(([label,cls])=>`<span class="demo-pill ${cls}">${label}</span>`).join('');
+  const nav=SELECTED_NAV.map(([label,cls])=>`<span class="demo-nav__item ${cls}">${label}</span>`).join('');
+  const rows=TABLE_ROWS.map(([a,b,c,cls])=>`<tr class="${cls}"><td>${a}</td><td>${b}</td><td>${c}</td></tr>`).join('');
+  host.innerHTML=`<div class="pattern-card"><h3>Footer pills</h3><div class="demo-pills">${pills}</div></div><div class="pattern-card"><h3>Nav items</h3><div class="demo-nav">${nav}</div></div><div class="pattern-card"><h3>Table rows</h3><table class="demo-table"><thead><tr><th>Documento</th><th>Nombre</th><th>Deuda</th></tr></thead><tbody>${rows}</tbody></table></div>`;
+}
+
+function renderFormStates(host){
+  host.innerHTML=FORM_STATES.map(([label,cls,value])=>{
+    return `<div class="form-field ${cls}"><b>${label}</b>${value}</div>`;
+  }).join('');
+}
+
+function renderTypeScale(host){
+  host.innerHTML=TYPE_SCALE.map(([step,sizeTok,lhTok,sample])=>{
+    return `<div class="type-row"><span class="label">${step} · ${sizeTok}</span><span class="sample" style="font-size:var(${sizeTok});line-height:var(${lhTok})">${sample}</span></div>`;
+  }).join('');
+}
+
+function renderStatusBadges(host){
+  const solid=STATUS_BADGES.map(([name,token,label])=>`<span class="status-badge" style="background:var(${token})">${label}</span>`).join('');
+  const outline=STATUS_BADGES.map(([name,token,label])=>`<span class="status-badge status-badge--outline" style="color:var(${token})">${label}</span>`).join('');
+  const neutral=`<span class="status-badge status-badge--neutral">neutral</span>`;
+  host.innerHTML=`${solid}${outline}${neutral}`;
 }
 
 function setActiveButton(id){
@@ -391,6 +592,12 @@ selectTheme(theme);
 buildButtonMatrix(document.getElementById('buttonMatrix'));
 renderSwatches(document.getElementById('swatchGrid'));
 renderTextSamples(document.getElementById('textGrid'));
+renderDensityStrip(document.getElementById('densityStrip'));
+renderBorderScale(document.getElementById('borderScale'));
+renderSelectedSamples(document.getElementById('selectedSamples'));
+renderFormStates(document.getElementById('formStates'));
+renderTypeScale(document.getElementById('typeScale'));
+renderStatusBadges(document.getElementById('statusBadges'));
 </script>
 </body>
 </html>
