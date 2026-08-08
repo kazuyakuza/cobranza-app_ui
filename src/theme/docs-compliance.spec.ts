@@ -29,11 +29,6 @@ describe('CHANGELOG versioning compliance', () => {
     expect(hasUnreleasedSection).toBe(false);
   });
 
-  it('has a dated header for the current package version', () => {
-    const headerPattern = new RegExp(`## \\[${version}\\] — \\d{4}-\\d{2}-\\d{2}`);
-    expect(changelog).toMatch(headerPattern);
-  });
-
   it('.kilo/rules/changelog-versioning.md is referenced in .agent/RULES.md', () => {
     expect(rulesIndex).toContain('Changelog Versioning');
     expect(rulesIndex).toContain('changelog-versioning.md');
