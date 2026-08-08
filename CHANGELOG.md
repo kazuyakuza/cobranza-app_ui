@@ -30,6 +30,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > Releases prior to 0.8.1 predate this changelog and are not reconstructed retroactively.
 
+## [0.12.1] — 2026-08-08
+
+### Fixed
+
+- **Preview module header accuracy** — `docs/theme-preview.html` module header mockup now uses the actual component CSS classes (`cba-module-header`, `cba-module-header__action`, etc.) instead of ad-hoc inline styles, matching `module-header.component.scss` 100%.
+- Added Font Awesome CDN to `docs/theme-preview.html` so the preview renders the library's Font Awesome icons accurately, mirroring the Angular component's icon set and order.
+- Replaced hardcoded px values in the preview mockup with `--cba-*` CSS variables. See [brief.md §5](.agent/project-info/brief.md#5-design-tokens-theme) and `docs/THEME.md`.
+- Aligned the module container mockup with `module-container.component.scss`. See `docs/THEME.md` §Border Roles and §Surface Hierarchy.
+
 ## [0.12.0] — 2026-08-07
 
 ### Added
