@@ -46,6 +46,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Cobranza UI — Minimal Yet Warm preview</title>
   <link rel="stylesheet" href="theme-preview.css" />
+  <!-- Preview renders the library's Font Awesome icons. Requires network access (dev/CI artifact only). -->
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous"
+        referrerpolicy="no-referrer" />
   <style>
     *{box-sizing:border-box}
     body{margin:0;font-family:Inter,system-ui,sans-serif;font-size:14px;line-height:1.45;background:#111;color:#eee}
@@ -78,13 +84,8 @@
     .search{display:flex;align-items:center;gap:8px;padding:6px 12px;border-radius:999px;border:1px solid var(--cba-border-strong);background:var(--cba-bg-tertiary);color:var(--cba-text-secondary);font-size:12px;min-width:140px}
     .icon-btn{width:32px;height:32px;border-radius:999px;border:1px solid var(--cba-border-strong);background:var(--cba-bg-secondary);color:var(--cba-text-secondary);display:inline-flex;align-items:center;justify-content:center}
     .workspace{flex:1;padding:16px;overflow-y:auto}
-    .module{max-width:900px;background:var(--cba-bg-secondary);border:1px solid var(--cba-border-default);border-radius:12px;box-shadow:var(--cba-shadow-module);overflow:hidden}
-    .module-header{display:flex;align-items:flex-start;gap:10px;padding:10px 12px;background:var(--cba-bg-elevated);border-bottom:1px solid var(--cba-border-default);min-height:42px}
-    .status{color:var(--cba-accent-success);font-weight:700;width:18px;text-align:center}
-    .module-title{flex:1;font-weight:700}
-    .module-actions{display:flex;gap:4px}
-    .module-actions button{width:28px;height:28px;border:none;border-radius:6px;background:transparent;color:var(--cba-text-secondary)}
-    .module-actions button:hover{background:var(--cba-hover);color:var(--cba-text-primary)}
+    /* .module kept as a layout wrapper only (used by JS renderers). All visuals owned by .cba-module-container. */
+    .module{max-width:900px}
     .module-body{padding:14px}
     .panel-title-row{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px}
     .panel-title{font-weight:700;font-size:15px}
@@ -213,6 +214,205 @@
     .status-badge{padding:5px 12px;border-radius:999px;font-size:12px;font-weight:700;color:var(--cba-text-inverse)}
     .status-badge--outline{background:transparent;border:1px solid currentColor}
     .status-badge--neutral{background:var(--cba-bg-tertiary);border:1px solid var(--cba-border-default);color:var(--cba-text-secondary)}
+
+    /* Copied from src/components/module-header/module-header.component.scss — keep in sync */
+    .cba-module-header {
+      display: flex;
+      align-items: flex-start;
+      min-height: var(--cba-module-header-min-height, 40px);
+      padding: var(--cba-space-2) var(--cba-space-3);
+      gap: var(--cba-space-2);
+      background-color: var(--cba-bg-elevated);
+      color: var(--cba-text-primary);
+      border-bottom: 1px solid var(--cba-border-default);
+      box-sizing: border-box;
+    }
+
+    .cba-module-header__section {
+      display: flex;
+      align-items: center;
+      min-height: var(--cba-module-header-min-height, 40px);
+    }
+
+    .cba-module-header__section--status {
+      flex: 0 0 auto;
+      justify-content: center;
+      width: var(--cba-space-8);
+    }
+
+    .cba-module-header__section--title {
+      flex: 1 1 auto;
+      justify-content: center;
+      text-align: center;
+      min-width: 0;
+      word-break: break-word;
+      overflow-wrap: anywhere;
+      font-weight: 600;
+    }
+
+    .cba-module-header__section--actions {
+      flex: 0 0 auto;
+      justify-content: flex-end;
+      gap: var(--cba-space-1);
+    }
+
+    .cba-module-header__action {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: var(--cba-space-8);
+      height: var(--cba-space-8);
+      padding: 0;
+      color: var(--cba-text-secondary);
+      background-color: transparent;
+      border: 1px solid transparent;
+      border-radius: var(--cba-radius-sm);
+      cursor: pointer;
+      transition: background-color 120ms ease, color 120ms ease, border-color 120ms ease;
+    }
+
+    .cba-module-header__action:hover {
+      background-color: var(--cba-hover);
+      color: var(--cba-text-primary);
+    }
+
+    .cba-module-header__action:active {
+      background-color: var(--cba-active);
+    }
+
+    .cba-module-header__action--drag {
+      cursor: grab;
+    }
+
+    .cba-module-header__action--drag:active {
+      cursor: grabbing;
+      background-color: transparent;
+    }
+
+    .cba-module-header__action:focus-visible {
+      outline: none;
+      box-shadow: var(--cba-focus-ring);
+    }
+
+    .cba-module-header--fullscreen {
+      background-color: transparent;
+      border-bottom: none;
+      justify-content: center;
+    }
+
+    .cba-module-header--fullscreen .cba-module-header__section--title {
+      flex: 0 1 auto;
+    }
+
+    .cba-module-header__status--loading {
+      color: var(--cba-accent-info);
+    }
+
+    .cba-module-header__status--loaded,
+    .cba-module-header__status--success {
+      color: var(--cba-accent-success);
+    }
+
+    .cba-module-header__status--warning {
+      color: var(--cba-accent-warning);
+    }
+
+    .cba-module-header__status--error {
+      color: var(--cba-accent-danger);
+    }
+
+    .cba-module-header__status--dirty {
+      color: var(--cba-text-muted);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .cba-module-header__action {
+        transition: none;
+      }
+    }
+
+    /* Copied from src/components/module-container/module-container.component.scss — keep in sync.
+       NOTE: :host rules mapped to .cba-module-container (preview has no Shadow DOM).
+       NOTE: radius uses --cba-radius-lg per design-token intent (see .kilo/plans/20260808-fix-preview-accuracy-frontend-spec.md §5),
+       diverging from the component's current --cba-radius-md; flagged as follow-up. */
+    .cba-module-container {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      box-sizing: border-box;
+    }
+
+    .cba-module-container--size-50 {
+      width: 50%;
+    }
+
+    .cba-module-container--size-100 {
+      width: 100%;
+    }
+
+    .cba-module-container:not(.cba-module-container--fullscreen) {
+      background-color: var(--cba-bg-secondary);
+      border: 1px solid var(--cba-border-default);
+      border-radius: var(--cba-radius-lg);
+      box-shadow: var(--cba-shadow-module);
+      overflow: hidden;
+    }
+
+    .cba-module-container__header {
+      flex: 0 0 auto;
+      min-width: 0;
+    }
+
+    .cba-module-container__body {
+      flex: 1 1 auto;
+      min-height: 0;
+      overflow-y: auto;
+      overscroll-behavior: contain;
+      scrollbar-width: thin;
+      scrollbar-color: var(--cba-border-default) transparent;
+    }
+
+    .cba-module-container__body::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+
+    .cba-module-container__body:hover::-webkit-scrollbar {
+      width: 9px;
+      height: 9px;
+    }
+
+    .cba-module-container__body::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    .cba-module-container__body::-webkit-scrollbar-thumb {
+      background-color: var(--cba-border-default);
+      border-radius: var(--cba-radius-sm);
+    }
+
+    .cba-module-container__body:hover::-webkit-scrollbar-thumb {
+      background-color: var(--cba-border-strong);
+    }
+
+    .cba-module-container--padding-none .cba-module-container__body {
+      padding: 0;
+    }
+
+    .cba-module-container--padding-sm .cba-module-container__body {
+      padding: var(--cba-space-2);
+    }
+
+    .cba-module-container--padding-md .cba-module-container__body {
+      padding: var(--cba-space-4);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .cba-module-container__body:hover::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+      }
+    }
   </style>
 </head>
 <body>
