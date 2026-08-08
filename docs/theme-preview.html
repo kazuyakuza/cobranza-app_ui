@@ -435,15 +435,47 @@
         <div class="icon-btn">🔔</div><div class="icon-btn">U</div>
       </header>
       <main class="workspace">
-        <section class="module">
-          <div class="module-header">
-            <div class="status">✓</div>
-            <div class="module-title">Clientes List</div>
-            <div class="module-actions">
-              <button type="button" aria-label="Expandir">⌃</button><button type="button" aria-label="Pantalla completa">⛶</button>
-              <button type="button" aria-label="Cerrar">✕</button><button type="button" aria-label="Desacoplar">⧉</button>
+        <section class="module cba-module-container">
+          <header class="cba-module-header">
+            <div class="cba-module-header__section cba-module-header__section--status cba-module-header__status--loaded">
+              <i class="fa-solid fa-check" aria-hidden="true"></i>
             </div>
-          </div>
+            <div class="cba-module-header__section cba-module-header__section--title cba-text-heading-md">
+              Clientes List
+            </div>
+            <nav class="cba-module-header__section cba-module-header__section--actions">
+              <button type="button"
+                      class="cba-module-header__action cba-module-header__action--drag"
+                      aria-label="Arrastrar módulo"
+                      title="Arrastrar módulo">
+                <i class="fa-solid fa-up-down-left-right" aria-hidden="true"></i>
+              </button>
+              <button type="button"
+                      class="cba-module-header__action"
+                      aria-label="Colapsar módulo"
+                      title="Colapsar módulo">
+                <i class="fa-solid fa-chevron-up" aria-hidden="true"></i>
+              </button>
+              <button type="button"
+                      class="cba-module-header__action"
+                      aria-label="Reducir módulo a 50%"
+                      title="Reducir módulo a 50%">
+                <i class="fa-solid fa-arrows-left-right-to-line" aria-hidden="true"></i>
+              </button>
+              <button type="button"
+                      class="cba-module-header__action"
+                      aria-label="Pantalla completa"
+                      title="Pantalla completa">
+                <i class="fa-solid fa-window-maximize" aria-hidden="true"></i>
+              </button>
+              <button type="button"
+                      class="cba-module-header__action"
+                      aria-label="Quitar módulo"
+                      title="Quitar módulo">
+                <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+              </button>
+            </nav>
+          </header>
           <div class="module-body">
             <div class="panel-title-row">
               <div class="panel-title">Lista de clientes</div>
@@ -767,7 +799,21 @@ function renderTextSamples(host){
 function renderDensityStrip(host){
   const modules=DENSITY_MODULES.map(m=>{
     const rows=DENSITY_ROWS.map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td></tr>`).join('');
-    return `<div class="module"><div class="module-header"><div class="status">✓</div><div class="module-title">${m.title}</div><div class="module-meta" style="font-size:12px;color:var(--cba-text-muted);font-weight:600">${m.meta}</div></div><div class="module-body"><table class="demo-table"><thead><tr><th>Documento</th><th>Nombre</th><th>Deuda</th></tr></thead><tbody>${rows}</tbody></table></div><div class="module-footer">Listo</div></div>`;
+    return `<div class="module cba-module-container">
+  <header class="cba-module-header">
+    <div class="cba-module-header__section cba-module-header__section--status cba-module-header__status--loaded"><i class="fa-solid fa-check" aria-hidden="true"></i></div>
+    <div class="cba-module-header__section cba-module-header__section--title cba-text-heading-md">${m.title} <span class="cba-text-small" style="color:var(--cba-text-muted)">${m.meta}</span></div>
+    <nav class="cba-module-header__section cba-module-header__section--actions">
+      <button type="button" class="cba-module-header__action cba-module-header__action--drag" aria-label="Arrastrar módulo" title="Arrastrar módulo"><i class="fa-solid fa-up-down-left-right" aria-hidden="true"></i></button>
+      <button type="button" class="cba-module-header__action" aria-label="Colapsar módulo" title="Colapsar módulo"><i class="fa-solid fa-chevron-up" aria-hidden="true"></i></button>
+      <button type="button" class="cba-module-header__action" aria-label="Reducir módulo a 50%" title="Reducir módulo a 50%"><i class="fa-solid fa-arrows-left-right-to-line" aria-hidden="true"></i></button>
+      <button type="button" class="cba-module-header__action" aria-label="Pantalla completa" title="Pantalla completa"><i class="fa-solid fa-window-maximize" aria-hidden="true"></i></button>
+      <button type="button" class="cba-module-header__action" aria-label="Quitar módulo" title="Quitar módulo"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+    </nav>
+  </header>
+  <div class="module-body"><table class="demo-table"><thead><tr><th>Documento</th><th>Nombre</th><th>Deuda</th></tr></thead><tbody>${rows}</tbody></table></div>
+  <div class="module-footer">Listo</div>
+</div>`;
   }).join('');
   host.innerHTML=modules;
 }
