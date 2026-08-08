@@ -1,5 +1,5 @@
-<header class="cba-module-header" [class.cba-module-header--fullscreen]="isFullscreen()"> @if (isFullscreen()) { <div class="cba-module-header__section cba-module-header__section--title"> {{ title() }} </div> } @else { <div class="cba-module-header__section cba-module-header__section--status" [class]="statusClass() ?? ''"> @if (statusVisual(); as visual) { <fa-icon [icon]="visual.icon" [animation]="visual.animation" aria-hidden="true" /> } </div>
-  <div class="cba-module-header__section cba-module-header__section--title"> {{ title() }} </div>
+<header class="cba-module-header" [class.cba-module-header--fullscreen]="isFullscreen()"> @if (isFullscreen()) { <div class="cba-module-header__section cba-module-header__section--title cba-text-heading-md"> {{ title() }} </div> } @else { <div class="cba-module-header__section cba-module-header__section--status" [class]="statusClass() ?? ''"> @if (statusVisual(); as visual) { <fa-icon [icon]="visual.icon" [animation]="visual.animation" aria-hidden="true" /> } </div>
+  <div class="cba-module-header__section cba-module-header__section--title cba-text-heading-md"> {{ title() }} </div>
   <nav class="cba-module-header__section cba-module-header__section--actions">
     <button type="button" class="cba-module-header__action cba-module-header__action--drag" [attr.aria-label]="aria.drag" [title]="aria.drag">
       <fa-icon [icon]="faDrag" aria-hidden="true" />
