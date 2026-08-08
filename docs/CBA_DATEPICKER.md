@@ -48,13 +48,19 @@ import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 | --- | --- | --- | --- |
 | `label` | `string \| undefined` | `undefined` | Visible label text above the datepicker. |
 | `hint` | `string \| undefined` | `undefined` | Helper text below the datepicker. |
-| `error` | `string \| undefined` | `undefined` | Error message below the datepicker. Presentational only — no validation logic. |
+| `error` | `string \| undefined` | `undefined` | Error message below the datepicker. **Visual only** — no validation logic. |
+| `valid` | `boolean` | `false` | When `true`, applies the valid visual state (green border). **Visual only** — no validation logic. |
 | `disabled` | `boolean` | `false` | Disabled state. Combined with Angular forms' disabled state. |
+| `readonly` | `boolean` | `false` | Readonly state. Applies the readonly visual state and sets the native `readonly` attribute. |
 | `placeholder` | `string \| undefined` | `undefined` | Native input placeholder text. |
 
-`label`, `hint`, `error`, and `disabled` are inherited from
+`label`, `hint`, `error`, `valid`, `disabled`, and `readonly` are inherited from
 `CbaFieldControlValueAccessor`. See [CBA_FORM_FIELD](./CBA_FORM_FIELD.md) for
 the shared conventions.
+
+> **Note:** `error` and `valid` are **visual inputs only**. The component does not
+> run any validation engine — consumers drive these from their own `FormGroup` /
+> `FormControl` state.
 
 ## Outputs
 
@@ -151,6 +157,23 @@ To customise ng-bootstrap datepicker behaviour (min/max dates, first day of
 week, navigation, etc.), you would need to extend the wrapper or use ng-bootstrap's
 configuration APIs directly. The current wrapper does not expose these as inputs.
 
+## Visual state matrix
+
+The datepicker renders one of seven visual states. The state is determined by the
+combination of inputs and pseudo-classes:
+
+| State | Trigger | Border | Background | Text |
+| --- | --- | --- | --- | --- |
+| default | No interaction | `--cba-border-default` | `--cba-bg-secondary` | `--cba-text-primary` |
+| hover | `:hover` | `--cba-border-default` | `--cba-bg-secondary` | `--cba-text-primary` |
+| focus-visible | `:focus-visible` | `--cba-accent-primary` + `--cba-focus-ring` | `--cba-bg-secondary` | `--cba-text-primary` |
+| disabled | `disabled` input or `setDisabledState` | `--cba-border-default` | `--cba-state-disabled-bg` | `--cba-state-disabled-text` |
+| readonly | `readonly` input | `--cba-border-default` | `--cba-bg-tertiary` | `--cba-text-primary` |
+| invalid | `error` input truthy | `--cba-state-invalid-border` | `--cba-bg-secondary` | `--cba-text-primary` |
+| valid | `valid` input `true` (and no `error`) | `--cba-state-valid-border` | `--cba-bg-secondary` | `--cba-text-primary` |
+
+Priority order (highest first): disabled > invalid > valid > readonly > focus-visible > hover > default.
+
 ## Accessibility
 
 - `<label for>` is automatically wired to the native input via the shared
@@ -164,6 +187,8 @@ configuration APIs directly. The current wrapper does not expose these as inputs
 - `prefers-reduced-motion: reduce` disables the focus transition.
 - Disabled state sets `cursor: not-allowed` and reduces opacity on both the
   input and the toggle button.
+- Readonly state sets `cursor: default` and uses the inset background; the
+  calendar toggle button is also disabled in readonly mode.
 
 ## Theming
 
@@ -177,8 +202,13 @@ focus ring come from the parent `CbaFieldComponent` wrapper.
 | Control border | `--cba-border-default` |
 | Focus border | `--cba-accent-primary` |
 | Focus ring | `--cba-focus-ring` |
-| Error border | `--cba-accent-danger` |
-| Disabled background | `--cba-bg-tertiary` |
+| Invalid border | `--cba-state-invalid-border` |
+| Invalid text | `--cba-state-invalid-text` |
+| Valid border | `--cba-state-valid-border` |
+| Valid text | `--cba-state-valid-text` |
+| Disabled background | `--cba-state-disabled-bg` |
+| Disabled text | `--cba-state-disabled-text` |
+| Readonly background | `--cba-bg-tertiary` |
 | Label colour | `--cba-text-secondary` |
 | Hint colour | `--cba-text-muted` |
 | Error colour | `--cba-accent-danger` |
@@ -191,13 +221,13 @@ focus ring come from the parent `CbaFieldComponent` wrapper.
 The calendar popup uses the `cba-datepicker-popup` CSS class (set via
 `datepickerClass`) for ng-bootstrap theme integration.
 
-Host classes: `cba-datepicker`, `cba-datepicker--disabled`, `cba-datepicker--error`.
+Host classes: `cba-datepicker`, `cba-datepicker--disabled`, `cba-datepicker--readonly`, `cba-datepicker--error`, `cba-datepicker--valid`.
 
 ## Non-goals
 
 - **No calendar logic** — popup rendering, keyboard navigation, and date parsing are owned by ng-bootstrap (`NgbInputDatepicker`).
 - **No date-range / min / max inputs** — the wrapper does not expose ng-bootstrap's date configuration; extend the wrapper or use ng-bootstrap APIs directly.
-- **No validation logic** — `error` is presentational only.
+- **No validation logic** — `error` and `valid` are presentational only.
 
 ## Related docs
 

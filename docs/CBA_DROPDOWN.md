@@ -142,11 +142,60 @@ Placement accepts:
 - A single string: `'top'`, `'bottom'`, `'start'`, `'end'`, `'top-start'`, etc.
 - An array of fallbacks: `['bottom-start', 'top-start']` (ng-bootstrap tries each in order).
 
+## Selected option pattern
+
+`CbaDropdown` does not track which item is selected — ng-bootstrap's dropdown is
+a generic menu, not a single-select control. To mark an item as selected, the
+consumer adds the `.cba-dropdown__item--selected` CSS class to the active
+`ngbDropdownItem`:
+
+```html
+<cba-dropdown>
+  <cba-button cbaDropdownToggle ngbDropdownToggle variant="secondary">
+    {{ selectedLabel }}
+  </cba-button>
+  @for (opt of options; track opt.value) {
+    <button ngbDropdownItem
+            (click)="select(opt.value)"
+            [class.cba-dropdown__item--selected]="opt.value === currentValue">
+      {{ opt.label }}
+    </button>
+  }
+</cba-dropdown>
+```
+
+The selected state uses dedicated tokens so it is visually distinct from hover
+and active:
+
+```css
+/* tokens used by .cba-dropdown__item--selected */
+--cba-selected-bg      /* background fill */
+--cba-selected-text    /* text colour */
+--cba-selected-hover   /* background on :hover while selected */
+```
+
+Example consumer override (rarely needed — the library defaults are
+theme-compliant):
+
+```css
+.my-dropdown .cba-dropdown__item--selected {
+  background: var(--cba-selected-bg);
+  color: var(--cba-selected-text);
+}
+.my-dropdown .cba-dropdown__item--selected:hover {
+  background: var(--cba-selected-hover);
+}
+```
+
+> **Note:** Selected ≠ active (pressed) ≠ focus. See `docs/THEME.md` §Selected
+> State for the full semantic distinction.
+
 ## Theming notes
 
 - Menu surface: `--cba-bg-elevated`, `--cba-border-subtle`, `--cba-radius-md`, `--cba-shadow-elevated`.
 - Item text: `--cba-text-primary`; disabled item text: `--cba-text-muted`.
 - Item hover: `--cba-hover`; item active: `--cba-active`.
+- Item selected: `--cba-selected-bg`, `--cba-selected-text`, `--cba-selected-hover`.
 - Item focus: `--cba-focus-ring` (inset box-shadow).
 - Divider: `--cba-border-subtle`.
 - Disabled host: `opacity: 0.6`, `pointer-events: none` (no token needed for v1).

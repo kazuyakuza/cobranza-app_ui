@@ -57,8 +57,14 @@ template.
 | --- | --- | --- | --- |
 | `label` | `string \| undefined` | `undefined` | Visible label text. When set, a `<label for="controlId">` is rendered. |
 | `hint` | `string \| undefined` | `undefined` | Helper text rendered below the control. |
-| `error` | `string \| undefined` | `undefined` | Visual error message rendered below the control. No validation logic — purely presentational. |
+| `error` | `string \| undefined` | `undefined` | Visual error message rendered below the control. **Visual only** — no validation logic. |
+| `valid` | `boolean` | `false` | When `true`, applies the valid visual state (green border). **Visual only** — no validation logic. |
 | `disabled` | `boolean` | `false` | Disabled state. Combined with Angular forms' `setDisabledState` via `isDisabled()` computed. |
+| `readonly` | `boolean` | `false` | Readonly state. Applies the readonly visual state. |
+
+> **Note:** `error` and `valid` are **visual inputs only**. The field
+> infrastructure does not run any validation engine — consumers drive these
+> from their own `FormGroup` / `FormControl` state.
 
 ## Content projection
 
@@ -149,6 +155,26 @@ CbaControlValueAccessor<T>              <- abstract; holds value signal, disable
   hint/error ids for `aria-describedby`.
 - `protected controlId: string` — assigned by each concrete control.
 
+## Shared field state classes
+
+`<cba-field>` applies host classes based on the current state. These classes are
+shared by all concrete controls (`CbaInput`, `CbaSelect`, `CbaDatepicker`) and
+can be targeted by consumer CSS when needed:
+
+| Class | Applied when | Border token | Background token | Text token |
+| --- | --- | --- | --- | --- |
+| `.cba-field--disabled` | `disabled` input `true` or `setDisabledState(true)` | `--cba-border-default` | `--cba-state-disabled-bg` | `--cba-state-disabled-text` |
+| `.cba-field--readonly` | `readonly` input `true` | `--cba-border-default` | `--cba-bg-tertiary` | `--cba-text-primary` |
+| `.cba-field--invalid` | `error` input truthy | `--cba-state-invalid-border` | `--cba-bg-secondary` | `--cba-text-primary` |
+| `.cba-field--valid` | `valid` input `true` (and no `error`) | `--cba-state-valid-border` | `--cba-bg-secondary` | `--cba-text-primary` |
+| `.cba-field--error` | `error` input truthy (legacy alias) | `--cba-state-invalid-border` | `--cba-bg-secondary` | `--cba-text-primary` |
+
+Priority order (highest first): disabled > invalid > valid > readonly > default.
+
+The `:hover` and `:focus-visible` pseudo-classes layer on top of the base state
+using the standard interaction tokens (`--cba-hover`, `--cba-accent-primary`,
+`--cba-focus-ring`).
+
 ## Theming
 
 The field layout uses these tokens:
@@ -160,10 +186,15 @@ The field layout uses these tokens:
 | Control border | `--cba-border-default`, `--cba-radius-sm` |
 | Control background | `--cba-bg-secondary` |
 | Focus ring | `--cba-accent-primary` border, `--cba-focus-ring` shadow |
-| Error border | `--cba-accent-danger` |
-| Disabled opacity | `0.6`; background `--cba-bg-tertiary`; `cursor: not-allowed` |
+| Invalid border | `--cba-state-invalid-border` |
+| Invalid text | `--cba-state-invalid-text` |
+| Valid border | `--cba-state-valid-border` |
+| Valid text | `--cba-state-valid-text` |
+| Disabled background | `--cba-state-disabled-bg` |
+| Disabled text | `--cba-state-disabled-text` |
+| Readonly background | `--cba-bg-tertiary` |
 | Hint text | `--cba-text-muted`, `0.8125rem` |
-| Error text | `--cba-accent-danger`, `0.8125rem` |
+| Error text | `--cba-state-invalid-text`, `0.8125rem` |
 
 The native control inside `<cba-field>` uses the `%cba-native-control` SCSS
 placeholder (defined in `src/theme/_mixins.scss`) which resets background,

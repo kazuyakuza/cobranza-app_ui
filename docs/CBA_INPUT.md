@@ -40,14 +40,20 @@ import { CbaInputComponent } from '@cobranza-apps/ui';
 | --- | --- | --- | --- |
 | `label` | `string \| undefined` | `undefined` | Visible label text above the input. |
 | `hint` | `string \| undefined` | `undefined` | Helper text below the input. |
-| `error` | `string \| undefined` | `undefined` | Error message below the input. Presentational only — no validation logic. |
+| `error` | `string \| undefined` | `undefined` | Error message below the input. **Visual only** — no validation logic. |
+| `valid` | `boolean` | `false` | When `true`, applies the valid visual state (green border). **Visual only** — no validation logic. |
 | `disabled` | `boolean` | `false` | Disabled state. Combined with Angular forms' disabled state. |
+| `readonly` | `boolean` | `false` | Readonly state. Applies the readonly visual state and sets the native `readonly` attribute. |
 | `placeholder` | `string \| undefined` | `undefined` | Native input placeholder text. |
 | `type` | `CbaInputType` | `'text'` | Native input type. See [Input types](#input-types). |
 
-`label`, `hint`, `error`, and `disabled` are inherited from
+`label`, `hint`, `error`, `valid`, `disabled`, and `readonly` are inherited from
 `CbaFieldControlValueAccessor`. See [CBA_FORM_FIELD](./CBA_FORM_FIELD.md) for
 the shared conventions.
+
+> **Note:** `error` and `valid` are **visual inputs only**. The component does not
+> run any validation engine — consumers drive these from their own `FormGroup` /
+> `FormControl` state.
 
 ## Outputs
 
@@ -115,6 +121,23 @@ source disables the control:
 export type CbaInputType = 'text' | 'email' | 'password' | 'number' | 'url' | 'tel';
 ```
 
+## Visual state matrix
+
+The input renders one of seven visual states. The state is determined by the
+combination of inputs and pseudo-classes:
+
+| State | Trigger | Border | Background | Text |
+| --- | --- | --- | --- | --- |
+| default | No interaction | `--cba-border-default` | `--cba-bg-secondary` | `--cba-text-primary` |
+| hover | `:hover` | `--cba-border-default` | `--cba-bg-secondary` | `--cba-text-primary` |
+| focus-visible | `:focus-visible` | `--cba-accent-primary` + `--cba-focus-ring` | `--cba-bg-secondary` | `--cba-text-primary` |
+| disabled | `disabled` input or `setDisabledState` | `--cba-border-default` | `--cba-state-disabled-bg` | `--cba-state-disabled-text` |
+| readonly | `readonly` input | `--cba-border-default` | `--cba-bg-tertiary` | `--cba-text-primary` |
+| invalid | `error` input truthy | `--cba-state-invalid-border` | `--cba-bg-secondary` | `--cba-text-primary` |
+| valid | `valid` input `true` (and no `error`) | `--cba-state-valid-border` | `--cba-bg-secondary` | `--cba-text-primary` |
+
+Priority order (highest first): disabled > invalid > valid > readonly > focus-visible > hover > default.
+
 ## Accessibility
 
 - `<label for>` is automatically wired to the native input via the shared
@@ -124,6 +147,7 @@ export type CbaInputType = 'text' | 'email' | 'password' | 'number' | 'url' | 't
 - `:focus-visible` uses the `--cba-focus-ring` token.
 - `prefers-reduced-motion: reduce` disables the focus transition.
 - Disabled state sets `cursor: not-allowed` and reduces opacity.
+- Readonly state sets `cursor: default` and uses the inset background.
 
 ## Theming
 
@@ -137,19 +161,24 @@ focus ring come from the parent `CbaFieldComponent` wrapper.
 | Control border | `--cba-border-default` |
 | Focus border | `--cba-accent-primary` |
 | Focus ring | `--cba-focus-ring` |
-| Error border | `--cba-accent-danger` |
-| Disabled background | `--cba-bg-tertiary` |
+| Invalid border | `--cba-state-invalid-border` |
+| Invalid text | `--cba-state-invalid-text` |
+| Valid border | `--cba-state-valid-border` |
+| Valid text | `--cba-state-valid-text` |
+| Disabled background | `--cba-state-disabled-bg` |
+| Disabled text | `--cba-state-disabled-text` |
+| Readonly background | `--cba-bg-tertiary` |
 | Label colour | `--cba-text-secondary` |
 | Hint colour | `--cba-text-muted` |
 | Error colour | `--cba-accent-danger` |
 | Border radius | `--cba-radius-sm` |
 | Padding | `--cba-space-2` (vertical), `--cba-space-3` (horizontal) |
 
-Host classes: `cba-input`, `cba-input--disabled`, `cba-input--error`.
+Host classes: `cba-input`, `cba-input--disabled`, `cba-input--readonly`, `cba-input--error`, `cba-input--valid`.
 
 ## Non-goals
 
-- **No validation logic** — `error` is presentational only; validation lives in the consumer's form model.
+- **No validation logic** — `error` and `valid` are presentational only; validation lives in the consumer's form model.
 - **No masking or formatting** — the component renders a plain native `<input>`.
 
 ## Related docs
