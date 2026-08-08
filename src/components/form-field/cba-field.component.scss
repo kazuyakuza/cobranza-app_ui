@@ -27,9 +27,10 @@
   }
 }
 
-.cba-field--error .cba-field__control,
-.cba-field--invalid .cba-field__control {
-  border-color: var(--cba-state-invalid-border);
+.cba-field--readonly .cba-field__control {
+  background-color: var(--cba-bg-tertiary);
+  border-color: var(--cba-border-subtle);
+  color: var(--cba-text-secondary);
 }
 
 .cba-field--disabled {
@@ -45,14 +46,13 @@
   }
 }
 
-.cba-field--readonly .cba-field__control {
-  background-color: var(--cba-bg-tertiary);
-  border-color: var(--cba-border-subtle);
-  color: var(--cba-text-secondary);
-}
-
 .cba-field--valid .cba-field__control {
   border-color: var(--cba-state-valid-border);
+}
+
+.cba-field--error .cba-field__control,
+.cba-field--invalid .cba-field__control {
+  border-color: var(--cba-state-invalid-border);
 }
 
 .cba-field__hint {

@@ -1,3 +1,5 @@
+@use '../../theme/mixins' as *;
+
 :host {
   display: block;
 }
@@ -79,8 +81,7 @@
 }
 
 .cba-module-header__action:focus-visible {
-  outline: none;
-  box-shadow: var(--cba-focus-ring);
+  @include cba-focus-ring;
 }
 
 .cba-module-header--fullscreen {

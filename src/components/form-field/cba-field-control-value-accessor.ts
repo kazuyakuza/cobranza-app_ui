@@ -33,6 +33,9 @@ export abstract class CbaFieldControlValueAccessor<T> extends CbaControlValueAcc
   /** Combined disabled state from the `disabled` input and Angular forms. */
   protected readonly isDisabled = computed(() => this.disabled() || this.disabledFromCva());
 
+  /** Combined readonly state: readonly wins only when not disabled. */
+  protected readonly isReadonly = computed(() => this.readonly() || this.isDisabled());
+
   /**
    * Space-separated `aria-describedby` listing hint and/or error element ids,
    * or `null` when neither is present.
