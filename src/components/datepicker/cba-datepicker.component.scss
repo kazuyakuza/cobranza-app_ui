@@ -44,3 +44,11 @@
 .cba-datepicker--disabled .cba-datepicker__control {
   cursor: not-allowed;
 }
+
+.cba-datepicker--readonly .cba-datepicker__control {
+  cursor: default;
+}
+
+.cba-datepicker--readonly .cba-datepicker__toggle {
+  cursor: pointer;
+}

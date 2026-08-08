@@ -41,7 +41,10 @@ let cbaSelectUid = 0;
   host: {
     class: 'cba-select',
     '[class.cba-select--disabled]': 'isDisabled()',
+    '[class.cba-select--readonly]': 'readonly()',
+    '[class.cba-select--valid]': 'valid()',
     '[class.cba-select--error]': 'error()',
+    '[class.cba-select--invalid]': 'error()',
   },
 })
 export class CbaSelectComponent extends CbaFieldControlValueAccessor<string> {

@@ -11,3 +11,7 @@
 .cba-select--disabled .cba-select__control {
   cursor: not-allowed;
 }
+
+.cba-select--readonly .cba-select__control {
+  cursor: default;
+}

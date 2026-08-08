@@ -1,7 +1,10 @@
 <div
   class="cba-field"
   [class.cba-field--disabled]="disabled()"
-  [class.cba-field--error]="error()">
+  [class.cba-field--readonly]="readonly()"
+  [class.cba-field--valid]="valid()"
+  [class.cba-field--error]="error()"
+  [class.cba-field--invalid]="error()">
   @if (label()) {
     <label class="cba-field__label" [for]="controlId()">{{ label() }}</label>
   }

@@ -3,11 +3,14 @@
   [hint]="hint()"
   [error]="error()"
   [disabled]="isDisabled()"
+  [readonly]="readonly()"
+  [valid]="valid()"
   [controlId]="controlId">
   <input
     [id]="controlId"
     [type]="type()"
     [placeholder]="placeholder() ?? ''"
+    [readOnly]="readonly()"
     [disabled]="isDisabled()"
     [value]="value() ?? ''"
     [attr.aria-describedby]="describedBy()"

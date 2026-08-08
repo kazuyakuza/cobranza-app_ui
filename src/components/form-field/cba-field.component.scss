@@ -10,7 +10,7 @@
 
 .cba-field__label {
   color: var(--cba-text-secondary);
-  font-size: 0.875rem;
+  font-size: var(--cba-font-size-body);
   font-weight: 500;
 }
 
@@ -27,27 +27,42 @@
   }
 }
 
-.cba-field--error .cba-field__control {
-  border-color: var(--cba-accent-danger);
+.cba-field--error .cba-field__control,
+.cba-field--invalid .cba-field__control {
+  border-color: var(--cba-state-invalid-border);
 }
 
 .cba-field--disabled {
-  opacity: 0.6;
-
   .cba-field__control {
-    background-color: var(--cba-bg-tertiary);
+    background-color: var(--cba-state-disabled-bg);
+    border-color: var(--cba-border-subtle);
+    color: var(--cba-state-disabled-text);
     cursor: not-allowed;
   }
+
+  .cba-field__label {
+    color: var(--cba-state-disabled-text);
+  }
+}
+
+.cba-field--readonly .cba-field__control {
+  background-color: var(--cba-bg-tertiary);
+  border-color: var(--cba-border-subtle);
+  color: var(--cba-text-secondary);
+}
+
+.cba-field--valid .cba-field__control {
+  border-color: var(--cba-state-valid-border);
 }
 
 .cba-field__hint {
   color: var(--cba-text-muted);
-  font-size: 0.8125rem;
+  font-size: var(--cba-font-size-small);
 }
 
 .cba-field__error {
-  color: var(--cba-accent-danger);
-  font-size: 0.8125rem;
+  color: var(--cba-state-invalid-text);
+  font-size: var(--cba-font-size-small);
 }
 
 @media (prefers-reduced-motion: reduce) {

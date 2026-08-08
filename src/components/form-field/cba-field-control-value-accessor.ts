@@ -24,6 +24,12 @@ export abstract class CbaFieldControlValueAccessor<T> extends CbaControlValueAcc
   /** Visual error message rendered below the control (no validation logic). */
   readonly error = input<string | undefined>(undefined);
 
+  /** Visual readonly state applied to the field wrapper. Distinct from disabled. */
+  readonly readonly = input<boolean>(false);
+
+  /** Visual valid/confirmed state applied to the field wrapper (no validation logic). */
+  readonly valid = input<boolean>(false);
+
   /** Combined disabled state from the `disabled` input and Angular forms. */
   protected readonly isDisabled = computed(() => this.disabled() || this.disabledFromCva());
 

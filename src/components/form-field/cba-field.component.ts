@@ -32,6 +32,12 @@ export class CbaFieldComponent {
   /** Visual disabled state applied to the field wrapper. */
   readonly disabled = input<boolean>(false);
 
+  /** Visual readonly state applied to the field wrapper. Distinct from disabled. */
+  readonly readonly = input<boolean>(false);
+
+  /** Visual valid/confirmed state applied to the field wrapper (no validation logic). */
+  readonly valid = input<boolean>(false);
+
   /** Id shared by the native control and `<label for>`. Defaults to a stable uid. */
   readonly controlId = input<string>(`cba-field-control-${cbaFieldUid++}`);
 

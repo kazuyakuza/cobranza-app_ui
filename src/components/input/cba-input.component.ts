@@ -42,7 +42,10 @@ export type CbaInputType = 'text' | 'email' | 'password' | 'number' | 'url' | 't
   host: {
     class: 'cba-input',
     '[class.cba-input--disabled]': 'isDisabled()',
+    '[class.cba-input--readonly]': 'readonly()',
+    '[class.cba-input--valid]': 'valid()',
     '[class.cba-input--error]': 'error()',
+    '[class.cba-input--invalid]': 'error()',
   },
 })
 export class CbaInputComponent extends CbaFieldControlValueAccessor<string> {

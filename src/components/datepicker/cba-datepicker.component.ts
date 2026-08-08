@@ -50,7 +50,10 @@ let cbaDatepickerUid = 0;
   host: {
     class: 'cba-datepicker',
     '[class.cba-datepicker--disabled]': 'isDisabled()',
+    '[class.cba-datepicker--readonly]': 'readonly()',
+    '[class.cba-datepicker--valid]': 'valid()',
     '[class.cba-datepicker--error]': 'error()',
+    '[class.cba-datepicker--invalid]': 'error()',
   },
 })
 export class CbaDatepickerComponent extends CbaFieldControlValueAccessor<NgbDateStruct | null> {

@@ -3,13 +3,15 @@
   [hint]="hint()"
   [error]="error()"
   [disabled]="isDisabled()"
+  [readonly]="readonly()"
+  [valid]="valid()"
   [controlId]="controlId">
   <div class="cba-datepicker__input-wrapper">
     <input
       [id]="controlId"
       [placeholder]="placeholder() ?? ''"
       [disabled]="isDisabled()"
-      [readOnly]="isDisabled()"
+      [readOnly]="readonly() || isDisabled()"
       [ngModel]="value()"
       (ngModelChange)="onDateChange($event)"
       (blur)="onBlur()"
