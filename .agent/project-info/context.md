@@ -16,12 +16,14 @@
 
 ## Current Work Focus
 
+- **Phase 10 — Theme Hardening complete (v0.12.0)**: theme is hardened and ready as platform foundation for real MFEs. Surfaces and borders retuned for multi-module density, selected/form-state/typography tokens added, ModuleHeader actions reworked, form controls wired to visual states, and consumer docs (THEME.md, CONSUMER_GUIDE.md) updated. Next focus: real product UI on top of tokens + consumer guide.
 - **Phase 9 — Surface hierarchy fix + consumer guide**: widened the four-level Minimal Yet Warm surface scale in `src/theme/_variables.scss`, strengthened borders and module shadows, refreshed `docs/theme-preview.html` for visual verification, and published `docs/CONSUMER_GUIDE.md` for Shell/MFE authors.
 - **Phase 0 — Library scaffolding complete**: all seven TODO tasks finished. Peer deps configured (Angular 22, Bootstrap 5, ng-bootstrap 21, Font Awesome); TypeScript path mapping for `@cobranza-apps/ui`; theme SCSS folder at `src/theme/`; build, Jest, ESLint all pass.
-- Active branch: `feat/preview-readability-changelog-rule` (Preview readability + changelog rule).
+- Active branch: `main` (Phase 10 merged and pushed to origin).
 
 ## Recent Changes
 
+- **Phase 10 — Theme Hardening (2026-08-07, v0.12.0)** — surface retuning (canvas `#BCB5A4`, panel `#F2F0E8`, elevated `#FDFCF8`); border system retuning (subtle `#E8E5DB` / default `#A29D94` / strong `#6B665E`, visibly distinct by role; borders primary separator, shadows secondary); new selected tokens (`--cba-selected-*`), form state tokens (`--cba-state-*`), typography scale tokens (`--cba-font-size-*` / `--cba-line-height-*`); ModuleHeader icon swap and action reorder (drag, collapse, size toggle, fullscreen, remove); form control state wiring (readonly, valid, invalid, disabled); dropdown selected pattern (`.cba-dropdown__item--selected`); theme preview updated with multi-module density, border swatches, selected samples, form states, type scale, status badges; docs updated (THEME.md, CONSUMER_GUIDE.md, README, CHANGELOG, brief.md); version bumped to 0.12.0.
 - **Preview readability token tune (Task B, 2026-08-06)** — increased interactive overlay opacity in `src/theme/_variables.scss`: `--cba-hover` to `rgba(43, 38, 32, 0.10)` and `--cba-active` to `rgba(43, 38, 32, 0.18)`. Updated `docs/theme-preview.html` token labels, warning callout, accent pills, and Shell footer background for readability. Synced `docs/CONSUMER_GUIDE.md`, `.agent/project-info/brief.md` §5, and regenerated `docs/theme-preview.css`.
 - **Changelog versioning rule established (Task A, 2026-08-06)** — new rule `.kilo/rules/changelog-versioning.md` prohibits `[Unreleased]` sections in `CHANGELOG.md` (every push to `origin` publishes the lib). Index reference added to `.agent/RULES.md`; `CHANGELOG.md` header comment rewritten to drop `[Unreleased]` instructions and point to the rule file.
 - **Phase 9 token tuning (Task A)** — widened Minimal Yet Warm surface hierarchy in `src/theme/_variables.scss`: canvas `#C5BFAE`, panel `#F2F0E8`, elevated `#FDFCF8`, inset `#D8C3A5`; `--cba-border-subtle` `#DAD7CA`; `--cba-shadow-module` `0 6px 24px rgba(43,34,28,0.18)`; `--cba-shadow-elevated` `0 10px 32px rgba(43,34,28,0.26)`. `docs/theme-preview.html` refreshed; four surfaces visibly distinct. Token names unchanged.
@@ -45,21 +47,21 @@
 
 ## Immediate Next Steps
 
-1. **Phase 9 user visual confirmation** of `docs/theme-preview.html` (TODO §5 checkpoint); if still flat, iterate tokens once more inside Minimal Yet Warm.
-2. **Shell apply the consumer guide** in the Shell repo (`docs/CONSUMER_GUIDE.md`); this library only publishes the guide — Shell implementation is its own PR.
-3. **Continue component coverage**: remaining basic components and form-control hardening per brief.md §6.
+1. **Theme is ready as platform foundation for real MFEs** — further work is product UI on top of tokens + consumer guide, not another palette reset.
+2. **Continue component coverage**: remaining basic components and form-control hardening per brief.md §6.
+3. **Shell apply the consumer guide** in the Shell repo (`docs/CONSUMER_GUIDE.md`); this library only publishes the guide — Shell implementation is its own PR.
 4. Publish `@cobranza-apps/mfe-events` for Shell ↔ MFE event contracts.
 5. Set up CI/CD pipeline for automated build and publish (version auto-bumps on push to origin).
 
 ## Open Items / Risks
 
+- **Phase 10 visual breaking change** for Shell layouts that depended on the previous surface values (canvas `#C5BFAE`, panel `#E6DDC6`, elevated `#FBF7ED`): canvas is now clearly darker (`#BCB5A4`) and modules lift more distinctly; borders retuned (subtle `#E8E5DB`, default `#A29D94`, strong `#6B665E`). Shell authors should review `docs/CONSUMER_GUIDE.md` and verify in `docs/theme-preview.html`.
+- `--cba-text-muted` (`#625C55`) is restricted on the darker canvas (`--cba-bg-primary` `#BCB5A4`, ~3.2:1) AND on `--cba-bg-tertiary` (`#D8C3A5`, ~3.9:1) — both below WCAG AA; library components and Shell/MFE must use `--cba-text-secondary` on those surfaces.
 - `@cobranza-apps/mfe-events` not yet published — workspace event contracts deferred.
-- `--cba-text-muted` is now restricted on the darker canvas (`#C5BFAE`, ~3.6:1) AND on `--cba-bg-tertiary` (~3.86:1) — both below WCAG AA; library components and Shell/MFE must use `--cba-text-secondary` on those surfaces.
-- Visual breaking change for Shell layouts that depended on near-identical canvas/panel surfaces (previously both ~#EAE7DC/#F3F1E9); Shell authors should review `docs/CONSUMER_GUIDE.md` and confirm workspace uses `--cba-bg-primary`.
-- Phase 9 TODO §5 human visual confirmation checkpoint still pending.
 
 ## Cross-Reference
 
+- [Phase 10 TODO](../todos/20260807/20260807-todo-1-DONE.md) — Theme Hardening (pre–real MFEs).
 - [Project Brief](brief.md) — scope, tokens, component specs, source of truth.
 - [Product Info](product.md) — product goals, target consumers, UX focus.
 - [Architecture](architecture.md) — standalone components, ng-packagr build, theme encapsulation, integration patterns.
@@ -68,4 +70,4 @@
 - [Phase 9 global plan](../../.kilo/plans/20260805-phase9-surface-hierarchy-fix.md) — overall workflow.
 - [Consumer Guide](../../docs/CONSUMER_GUIDE.md) — Shell & MFE integration rules (surface ownership, checklists, anti-patterns).
 - [Theme Reference](../../docs/THEME.md) — token quick reference.
-- [CHANGELOG](../../CHANGELOG.md) — release changelog (Keep a Changelog format), latest 0.11.1.
+- [CHANGELOG](../../CHANGELOG.md) — release changelog (Keep a Changelog format), latest 0.12.0.
