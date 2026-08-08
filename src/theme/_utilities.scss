@@ -13,6 +13,8 @@
  * for integration patterns.
  */
 
+@use 'sass:map';
+
 $utility-groups: (
   bg: (
     property: background-color,
@@ -58,8 +60,8 @@ $utility-groups: (
 );
 
 @each $prefix, $group in $utility-groups {
-  $property: map-get($group, property);
-  @each $name in map-get($group, names) {
+  $property: map.get($group, property);
+  @each $name in map.get($group, names) {
     .cba-#{$prefix}-#{$name} {
       #{$property}: var(--cba-#{$prefix}-#{$name});
     }
@@ -79,23 +81,15 @@ $spacing-scales: 1, 2, 3, 4, 5, 6, 8;
   }
 }
 
-/* Typography scale utilities — two-property classes (font-size + line-height), hence a
-   dedicated single-level @each (NOT the single-property $utility-groups loop above).
+/* Typography scale utilities — one class per step (font-size + line-height pair).
    Mirrors the --cba-font-size-* / --cba-line-height-* token pairs from _variables.scss.
    Use: module title -> .cba-text-heading-md/lg; section title -> .cba-text-heading-md;
    table header -> .cba-text-small (semibold); body -> default (body); meta -> .cba-text-caption. */
-$typography-scale: (
-  display: (fs: --cba-font-size-display, lh: --cba-line-height-display),
-  'heading-lg': (fs: --cba-font-size-heading-lg, lh: --cba-line-height-heading-lg),
-  'heading-md': (fs: --cba-font-size-heading-md, lh: --cba-line-height-heading-md),
-  body: (fs: --cba-font-size-body, lh: --cba-line-height-body),
-  small: (fs: --cba-font-size-small, lh: --cba-line-height-small),
-  caption: (fs: --cba-font-size-caption, lh: --cba-line-height-caption),
-);
+$typography-steps: display, heading-lg, heading-md, body, small, caption;
 
-@each $step, $pair in $typography-scale {
+@each $step in $typography-steps {
   .cba-text-#{$step} {
-    font-size: var(#{map-get($pair, fs)});
-    line-height: var(#{map-get($pair, lh)});
+    font-size: var(--cba-font-size-#{$step});
+    line-height: var(--cba-line-height-#{$step});
   }
 }

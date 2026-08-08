@@ -61,7 +61,8 @@ p {
 }
 
 small {
-  font-size: 0.857rem;
+  font-size: var(--cba-font-size-small);
+  line-height: var(--cba-line-height-small);
   color: var(--cba-text-secondary);
 }
 

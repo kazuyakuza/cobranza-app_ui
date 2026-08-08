@@ -38,8 +38,8 @@ export const EXPECTED_TOKENS: Record<string, string> = {
   '--cba-space-8': '32px',
   // Selected state (Phase 10)
   '--cba-selected-bg': '#E4DDD0',
-  '--cba-selected-border': '#6B5B4F',
-  '--cba-selected-text': '#2B2620',
+  '--cba-selected-border': 'var(--cba-accent-primary)',
+  '--cba-selected-text': 'var(--cba-text-primary)',
   '--cba-selected-hover': '#D8CFC0',
   // Form & control states (Phase 10)
   '--cba-state-invalid-border': '#B93E36',
@@ -79,7 +79,7 @@ const TEXT_MUTED = EXPECTED_TOKENS['--cba-text-muted'];
 const TEXT_INVERSE = EXPECTED_TOKENS['--cba-text-inverse'];
 const ACCENT_PRIMARY = EXPECTED_TOKENS['--cba-accent-primary'];
 const SELECTED_BG = EXPECTED_TOKENS['--cba-selected-bg'];
-const SELECTED_TEXT = EXPECTED_TOKENS['--cba-selected-text'];
+const SELECTED_TEXT = TEXT_PRIMARY;
 const STATE_INVALID_TEXT = EXPECTED_TOKENS['--cba-state-invalid-text'];
 const STATE_VALID_TEXT = EXPECTED_TOKENS['--cba-state-valid-text'];
 

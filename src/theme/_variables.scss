@@ -2,7 +2,7 @@
  * Design tokens — `:root` / `--cba-` prefix.
  *
  * SOURCE OF TRUTH: .agent/project-info/brief.md §5
- * FRONT-END SPEC:  .kilo/plans/20260806-task1-token-adjustments-frontend-spec.md
+ * FRONT-END SPEC:  .kilo/plans/20260807-phase10-cluster1-frontend-spec.md
  *
  * Minimal Yet Warm: canvas → panel → elevated → inset, with coral reserved for
  * accents/status/focus. See brief.md §5 for the full palette, L* gaps, WCAG
@@ -79,8 +79,8 @@
      Consumers: footer section pill, nav/tab, table row, dropdown option, filter chip, module
      "focused" chrome. Selected is a fill+border+text combination, not an outline. */
   --cba-selected-bg: #E4DDD0;
-  --cba-selected-border: #6B5B4F;
-  --cba-selected-text: #2B2620;
+  --cba-selected-border: var(--cba-accent-primary);
+  --cba-selected-text: var(--cba-text-primary);
   --cba-selected-hover: #D8CFC0;
 
   /* Form & control state tokens. invalid/valid reuse warmed danger/success hues (no parallel
