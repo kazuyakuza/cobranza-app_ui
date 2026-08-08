@@ -30,6 +30,7 @@ export const CBA_UI_MESSAGES = {
       },
       remove: 'Quitar módulo',
       fullscreen: 'Pantalla completa',
+      drag: 'Arrastrar módulo',
     },
   },
   modal: {

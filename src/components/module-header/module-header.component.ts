@@ -8,16 +8,18 @@ import {
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 import {
+  faArrowsLeftRight,
+  faArrowsLeftRightToLine,
   faCheck,
   faChevronDown,
   faChevronUp,
   faCircleCheck,
   faCircleXmark,
-  faCompress,
-  faExpand,
   faPen,
   faSpinner,
   faTriangleExclamation,
+  faUpDownLeftRight,
+  faWindowMaximize,
   faXmark,
 } from '@fortawesome/free-solid-svg-icons';
 import { CBA_UI_MESSAGES } from '../../i18n/ui-messages';
@@ -130,11 +132,17 @@ export class ModuleHeaderComponent {
   /** Icon for the expand button (visible when `isCollapsed === true`). Template-referenced. */
   protected readonly faChevronDown = faChevronDown;
 
-  /** Icon for the size-toggle button when current size is `100%` (action: shrink to 50%). Template-referenced. */
-  protected readonly faCompress = faCompress;
+  /** Drag handle icon (visual only; drag is owned by the Shell). Template-referenced. */
+  protected readonly faDrag = faUpDownLeftRight;
 
-  /** Icon for the size-toggle button when current size is `50%` (action: expand to 100%) and for the fullscreen button. Template-referenced. */
-  protected readonly faExpand = faExpand;
+  /** Fullscreen button icon. Template-referenced. */
+  protected readonly faFullscreen = faWindowMaximize;
+
+  /** Icon for the size-toggle button when current size is `100%` (action: shrink to 50%). Template-referenced. */
+  protected readonly faShrink = faArrowsLeftRightToLine;
+
+  /** Icon for the size-toggle button when current size is `50%` (action: expand to 100%). Template-referenced. */
+  protected readonly faGrow = faArrowsLeftRight;
 
   /** Icon for the remove button (`fa-xmark`). Template-referenced. */
   protected readonly faXmark = faXmark;
@@ -163,7 +171,7 @@ export class ModuleHeaderComponent {
 
   /** Icon for the size-toggle button, derived from the current size. */
   protected readonly sizeToggleIcon = computed<IconDefinition>(() =>
-    this.isFullSize() ? faCompress : faExpand,
+    this.isFullSize() ? this.faShrink : this.faGrow,
   );
 
   /** Target size emitted when the size-toggle button is clicked (the opposite of the current size). */

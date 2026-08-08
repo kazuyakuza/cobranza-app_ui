@@ -69,6 +69,15 @@
   background-color: var(--cba-active);
 }
 
+.cba-module-header__action--drag {
+  cursor: grab;
+}
+
+.cba-module-header__action--drag:active {
+  cursor: grabbing;
+  background-color: transparent;
+}
+
 .cba-module-header__action:focus-visible {
   outline: none;
   box-shadow: var(--cba-focus-ring);
