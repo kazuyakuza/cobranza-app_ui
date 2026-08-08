@@ -304,47 +304,103 @@
 
           <!--
             CLUSTER 3 — Multi-module density strip.
-            Two module cards side by side to show canvas→panel→elevated→inset under density.
-            Reuses the existing .module chrome classes; no new tokens.
+            WHAT IT DEMOS: Two module cards side by side on the canvas workspace to verify
+            that canvas→panel→elevated→inset separation holds under multi-module density
+            (2–4 modules visible simultaneously). Reuses the existing .module chrome classes.
+            TOKENS USED: --cba-bg-primary (canvas), --cba-bg-secondary (panel/module body),
+            --cba-bg-elevated (module header), --cba-bg-tertiary (module footer, thead),
+            --cba-border-default (module frame), --cba-shadow-module (depth).
+            HOW TO EXTEND: Add more module cards to the DENSITY_MODULES array in the <script>
+            below. Each entry needs {title, status, meta}. Rows come from DENSITY_ROWS.
+            No new tokens are needed — this section validates existing surface hierarchy.
           -->
           <h2>Multi-module density</h2>
           <div class="pattern-grid" id="densityStrip"></div>
 
           <!--
             CLUSTER 3 — Border scale swatches.
-            Three swatches showing subtle / default / strong on panel surface, labelled by role.
+            WHAT IT DEMOS: Three swatches on a panel background showing the three border
+            levels side by side so the visual difference is immediately verifiable.
+            TOKENS USED: --cba-border-subtle (internal separators / row lines),
+            --cba-border-default (structural edges / module frames / input borders),
+            --cba-border-strong (important chrome / footer pills / icon-button outlines).
+            HOW TO EXTEND: Add a new entry to the BORDER_LEVELS array in the <script>
+            below: [id, --cba-* token name, role description]. Add a matching
+            .border-swatch--<id> CSS rule if a new visual treatment is needed.
+            See docs/THEME.md §Border Roles for the authoritative usage table.
           -->
           <h2>Border scale</h2>
           <div class="border-scale" id="borderScale"></div>
 
           <!--
             CLUSTER 3 — Selected samples (footer pill + fake nav item + fake table row).
-            Static .is-hover / .is-selected / .is-disabled classes demo the selected token set
-            distinctly from hover. See docs/CONSUMER_GUIDE.md §Selected State Usage.
+            WHAT IT DEMOS: Three control types (pill, nav item, table row) each showing
+            normal / hover / selected / disabled states side by side. Selected must be
+            visually stronger than hover — this is the key distinction for AI agents.
+            TOKENS USED: --cba-selected-bg, --cba-selected-border, --cba-selected-text
+            (selected state); --cba-hover (hover overlay); --cba-state-disabled-bg,
+            --cba-state-disabled-text (disabled state); --cba-border-strong (pill border).
+            HOW TO EXTEND: Add entries to SELECTED_PILLS / SELECTED_NAV / TABLE_ROWS arrays
+            in the <script> below. Each array entry is [label, cssClass]. To demo a new
+            control type (e.g. dropdown option, filter chip), add a new pattern-card block
+            in renderSelectedSamples() with the appropriate .is-selected class.
+            See docs/CONSUMER_GUIDE.md §Selected State Usage for wiring recipes.
           -->
           <h2>Selected states</h2>
           <div class="pattern-grid" id="selectedSamples"></div>
 
           <!--
             CLUSTER 3 — Form state samples.
-            Five static field boxes: default / focus / disabled / readonly / invalid.
-            Uses --cba-state-* and --cba-focus-ring. No Angular components in preview.
+            WHAT IT DEMOS: Five static field boxes showing the form-state matrix:
+            default / focus / disabled / readonly / invalid. These are CSS-only
+            approximations (no Angular components) so AI agents can verify token wiring
+            visually. readonly is distinct from disabled (inset bg, no opacity fade).
+            TOKENS USED: --cba-bg-secondary + --cba-border-default (default);
+            --cba-accent-primary + --cba-focus-ring (focus); --cba-state-disabled-bg +
+            --cba-state-disabled-text (disabled); --cba-bg-tertiary + --cba-text-secondary
+            (readonly); --cba-state-invalid-border + --cba-state-invalid-text (invalid).
+            HOW TO EXTEND: Add a new entry to the FORM_STATES array in the <script>
+            below: [label, cssClass, displayText]. Add a matching .form-field--<state>
+            CSS rule above. For a "valid" state, add .form-field--valid using
+            --cba-state-valid-border + --cba-state-valid-text.
+            See docs/THEME.md §Form State Matrix for the full token table.
           -->
           <h2>Form states</h2>
           <div class="form-states" id="formStates"></div>
 
           <!--
             CLUSTER 3 — Type scale sample.
-            Each step rendered at its --cba-font-size-* / --cba-line-height-* so the scale
-            is visually verifiable. Labels show the token pair.
+            WHAT IT DEMOS: All six typography steps rendered at their actual token values
+            so the scale is visually verifiable. Each row shows the step name, the
+            --cba-font-size-* token, and the rendered sample text at that size.
+            TOKENS USED: --cba-font-size-{display,heading-lg,heading-md,body,small,caption}
+            paired with --cba-line-height-{display,heading-lg,heading-md,body,small,caption}.
+            Base stays Inter / 14px / 1.5.
+            HOW TO EXTEND: Add a new entry to the TYPE_SCALE array in the <script>
+            below: [stepName, fontSizeToken, lineHeightToken, sampleText]. The renderer
+            applies the tokens inline via var(). To add a new step, also add matching
+            --cba-font-size-<step> and --cba-line-height-<step> tokens in
+            src/theme/_variables.scss, and a .cba-text-<step> utility in _utilities.scss.
+            See docs/THEME.md §Typography Scale for the full step table and usage guidance.
           -->
           <h2>Type scale</h2>
           <div class="type-scale" id="typeScale"></div>
 
           <!--
             CLUSTER 3 — Semantic status badges (solid + outline + neutral).
-            success / warning / danger / info / neutral. Warning vs danger distinction is
-            reinforced by label, not color alone.
+            WHAT IT DEMOS: Three badge variants (solid, outline, neutral) for each
+            semantic status: success / warning / danger / info / neutral. Solid badges
+            use accent bg + inverse text; outline badges use accent color for border+text
+            on transparent bg; neutral uses inset bg + border-default.
+            TOKENS USED: --cba-accent-success, --cba-accent-warning, --cba-accent-danger,
+            --cba-accent-info (solid/outline badges); --cba-text-inverse (solid badge text);
+            --cba-bg-tertiary + --cba-border-default + --cba-text-secondary (neutral badge).
+            HOW TO EXTEND: Add a new entry to the STATUS_BADGES array in the <script>
+            below: [name, --cba-* token, label]. The renderer produces solid + outline
+            variants automatically. For a new badge shape (e.g. dot indicator), add a
+            new CSS class and extend renderStatusBadges().
+            IMPORTANT: warning vs danger must be distinguishable by label/icon, not color
+            alone. See docs/THEME.md §Semantic Status Patterns for the full recipe table.
           -->
           <h2>Semantic status</h2>
           <div class="status-row" id="statusBadges"></div>

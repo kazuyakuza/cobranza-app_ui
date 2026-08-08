@@ -158,7 +158,11 @@ Utility classes: `.cba-text-display`, `.cba-text-heading-lg`, `.cba-text-heading
 
 ## Table State Patterns
 
-Tables reuse the surface hierarchy plus selected/hover tokens. Full table component is out of scope; these are token-level patterns for Shell/MFE authors.
+<!-- AI agent: Token values for surfaces, borders, selected, hover, and disabled states
+     are defined in src/theme/_variables.scss. This section shows how to compose them
+     for table row states. For Shell/MFE wiring recipes, see CONSUMER_GUIDE.md §Table State Patterns. -->
+
+Tables reuse the surface hierarchy plus selected/hover tokens. Full table component is out of scope; these are token-level patterns for Shell/MFE authors. Authoritative token values live in [`src/theme/_variables.scss`](../src/theme/_variables.scss).
 
 | Row state | Background | Border | Text |
 |-----------|-----------|--------|------|
@@ -174,7 +178,11 @@ Tables reuse the surface hierarchy plus selected/hover tokens. Full table compon
 
 ## Navigation / Footer Pill State Patterns
 
-Footer section pills and similar nav chips follow a four-state pattern.
+<!-- AI agent: Token values for selected, hover, disabled, and border states are defined
+     in src/theme/_variables.scss. This section shows how to compose them for nav/pill
+     states. For Shell/MFE wiring recipes, see CONSUMER_GUIDE.md §Navigation / Footer Pill State Patterns. -->
+
+Footer section pills and similar nav chips follow a four-state pattern. Authoritative token values live in [`src/theme/_variables.scss`](../src/theme/_variables.scss).
 
 | State | Background | Border | Text |
 |-------|-----------|--------|------|
@@ -189,7 +197,12 @@ Footer section pills and similar nav chips follow a four-state pattern.
 
 ## Semantic Status Patterns
 
-Badge and inline status recipes for success / warning / danger / info / neutral.
+<!-- AI agent: Accent tokens (--cba-accent-success/warning/danger/info) and form-state
+     text tokens are defined in src/theme/_variables.scss. This section shows how to
+     compose them for badge/inline status. For Shell/MFE wiring recipes, see
+     CONSUMER_GUIDE.md §Semantic Status Patterns. -->
+
+Badge and inline status recipes for success / warning / danger / info / neutral. Authoritative token values live in [`src/theme/_variables.scss`](../src/theme/_variables.scss).
 
 | Status | Accent token | Solid badge | Outline badge | Inline text |
 |--------|-------------|-------------|---------------|-------------|

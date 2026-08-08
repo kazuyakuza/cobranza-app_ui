@@ -273,7 +273,10 @@ Map UI context to the six-step scale. Token values live in [`src/theme/_variable
 
 ## Table State Patterns
 
-Tables use the surface hierarchy plus selected/hover tokens for row states.
+<!-- AI agent: For token definitions and the full token-level reference table, see
+     THEME.md §Table State Patterns. Token values live in src/theme/_variables.scss. -->
+
+Tables use the surface hierarchy plus selected/hover tokens for row states. For token definitions, see [THEME.md §Table State Patterns](THEME.md#table-state-patterns).
 
 | Row state | Background | Border | Text |
 |-----------|-----------|--------|------|
@@ -288,7 +291,11 @@ Tables use the surface hierarchy plus selected/hover tokens for row states.
 
 ## Navigation / Footer Pill State Patterns
 
-Footer section pills and similar nav chips follow a four-state pattern.
+<!-- AI agent: For token definitions and the full token-level reference table, see
+     THEME.md §Navigation / Footer Pill State Patterns. Token values live in
+     src/theme/_variables.scss. -->
+
+Footer section pills and similar nav chips follow a four-state pattern. For token definitions, see [THEME.md §Navigation / Footer Pill State Patterns](THEME.md#navigation--footer-pill-state-patterns).
 
 | State | Background | Border | Text |
 |-------|-----------|--------|------|
@@ -302,7 +309,10 @@ Footer section pills and similar nav chips follow a four-state pattern.
 
 ## Semantic Status Patterns
 
-Badge and inline status recipes for success / warning / danger / info / neutral.
+<!-- AI agent: For token definitions and the full badge recipe table, see
+     THEME.md §Semantic Status Patterns. Token values live in src/theme/_variables.scss. -->
+
+Badge and inline status recipes for success / warning / danger / info / neutral. For token definitions, see [THEME.md §Semantic Status Patterns](THEME.md#semantic-status-patterns).
 
 | Status | Accent token | Badge (solid) | Badge (outline) | Inline text |
 |--------|-------------|---------------|-----------------|-------------|
