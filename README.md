@@ -176,15 +176,17 @@ Design tokens are published as SCSS via `@cobranza-apps/ui/theme` and use the `-
 
 - **Backgrounds**: primary, secondary, tertiary, elevated, overlay
 - **Text**: primary, secondary, muted, inverse
-- **Borders**: subtle, default, strong
+- **Borders**: subtle, default, strong (three deliberately distinct levels)
 - **Accents**: primary, success, warning, danger, info
 - **Interactive states**: hover, active, focus-ring
+- **Selected state**: selected-bg, selected-border, selected-text, selected-hover (selected ≠ active ≠ focus)
+- **Form states**: invalid border/text, valid border/text, disabled bg/text
 - **Layout constants**: header height, footer height, module header min-height
 - **Radius**: sm (6px), md (10px), lg (14px)
-- **Shadows**: module, elevated (applied only when not fullscreen)
+- **Shadows**: module, elevated (applied only when not fullscreen; border is primary separator)
 - **Spacing scale**: 4px–32px (`--cba-space-1` through `--cba-space-8`)
 
-**Typography**: Inter (system-ui fallback), base 14px, line-height 1.5, headings weight 500–600.
+**Typography**: Inter (system-ui fallback), base 14px, line-height 1.5, headings weight 500–600. Six-step typography scale (`display` / `heading-lg` / `heading-md` / `body` / `small` / `caption`) exposed as `--cba-font-size-*` + `--cba-line-height-*` tokens with `.cba-text-*` utility classes.
 
 **Utility classes** (examples):
 
@@ -193,7 +195,7 @@ Design tokens are published as SCSS via `@cobranza-apps/ui/theme` and use the `-
 
 For the full token reference, see [brief.md §5](.agent/project-info/brief.md#5-design-tokens-theme) and the SCSS source files under `src/theme/`.
 
-For a quick reference, see [`./docs/THEME.md`](./docs/THEME.md).
+For a quick reference, see [`./docs/THEME.md`](./docs/THEME.md) (surface hierarchy, border roles, selected state, form state matrix, typography scale, radius/shadow rules). For Shell/MFE integration patterns (selected state usage, table/nav patterns, semantic status), see [`./docs/CONSUMER_GUIDE.md`](./docs/CONSUMER_GUIDE.md).
 
 ## Related Libraries
 

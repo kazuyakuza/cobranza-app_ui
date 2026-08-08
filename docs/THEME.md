@@ -15,6 +15,13 @@ Quick reference for the Minimal Yet Warm design system: how to import the theme,
 - [Importing the Theme](#importing-the-theme)
 - [Token Prefix](#token-prefix)
 - [Main Token Groups](#main-token-groups)
+- [Surface Hierarchy](#surface-hierarchy)
+- [Border Roles](#border-roles)
+- [Selected State](#selected-state)
+- [Form State Matrix](#form-state-matrix)
+- [Typography Scale](#typography-scale)
+- [Radius Rules](#radius-rules)
+- [Shadow Rules](#shadow-rules)
 - [Utility Class Prefix](#utility-class-prefix)
 - [Mixins](#mixins)
 - [Cross-References](#cross-references)
@@ -43,17 +50,6 @@ Notes:
 - CSS variables are global once the theme is loaded (`:root`); utility classes remain opt-in (apply only where added).
 - Exact import paths are tentative until the library build is finalized; the canonical form is `@cobranza-apps/ui/theme`.
 
-### Surface hierarchy
-
-Minimal Yet Warm is a **four-level surface system**: canvas (`--cba-bg-primary`,
-darker warm sand; workspace floor) → panel (`--cba-bg-secondary`, warm cream; module
-body) → elevated (`--cba-bg-elevated`, warm cream, lightest surface; module header /
-dropdowns) → inset (`--cba-bg-tertiary`, warm sand; table headers / wells). The hierarchy
-survives only if **each surface is painted by its owner** (Shell / Lib / MFE). See the
-[Consumer Guide](CONSUMER_GUIDE.md) for the token compliance mandate,
-surface ownership map, button color guide, surface decision tree, text color rules,
-and bar/chrome guide.
-
 ## Token Prefix
 
 All theme CSS custom properties use the `--cba-` prefix.
@@ -76,6 +72,106 @@ Example variables per group (not an exhaustive list of values — see `_variable
 - **Shadows** — `--cba-shadow-module`, `--cba-shadow-elevated` (applied only when not fullscreen)
 - **Spacing scale** — `--cba-space-1` (4px) … `--cba-space-8` (32px)
 - **Typography** — Inter (system-ui fallback), base `14px`, line-height `1.5`, headings weight 500–600
+- **Selected state** — `--cba-selected-bg`, `--cba-selected-border`, `--cba-selected-text`, `--cba-selected-hover`
+- **Form states** — `--cba-state-invalid-border`, `--cba-state-invalid-text`, `--cba-state-valid-border`, `--cba-state-valid-text`, `--cba-state-disabled-bg`, `--cba-state-disabled-text`
+- **Typography scale** — `--cba-font-size-{display,heading-lg,heading-md,body,small,caption}` + matching `--cba-line-height-*`
+
+## Surface Hierarchy
+
+Minimal Yet Warm is a **four-level surface system** retuned for multi-module density. Values live in [`src/theme/_variables.scss`](../src/theme/_variables.scss); do not hard-code hex in components.
+
+| Token | Role | L* (approx.) |
+|-------|------|--------------|
+| `--cba-bg-primary` | **canvas** — Shell workspace floor (darkest warm sand) | ~74 |
+| `--cba-bg-secondary` | **panel** — module card body (clearer cream) | ~94 |
+| `--cba-bg-elevated` | **elevated** — module header, dropdowns, floating chrome (near-white cream) | ~99 |
+| `--cba-bg-tertiary` | **inset** — table headers, module footer, wells (recessed sand) | ~81 |
+
+**L\* gaps after retuning:**
+
+```text
+canvas→panel  ≈ 20 L*   (modules lift off the workspace)
+panel→elevated ≈  5 L*   (header chrome subtly lighter than body)
+panel→inset   ≈ 13 L*   (table headers clearly recessed)
+inset→canvas  ≈  7 L*   (inset still warmer/darker than canvas)
+```
+
+The hierarchy survives only if **each surface is painted by its owner** (Shell / Lib / MFE). See the [Consumer Guide](CONSUMER_GUIDE.md) for the token compliance mandate, surface ownership map, button color guide, surface decision tree, text color rules, and bar/chrome guide.
+
+## Border Roles
+
+Three border tokens are deliberately distinct on cream/sand. **Border is the primary separator; shadow is secondary depth.**
+
+| Token | Role | Use for | Do NOT use for |
+|-------|------|---------|----------------|
+| `--cba-border-subtle` | Internal separators | Row lines, soft dividers inside a panel | Module frames, input borders, footer pills |
+| `--cba-border-default` | Structural edges | Module frame, card borders, input/select borders | Row dividers (too heavy), footer pills (too light) |
+| `--cba-border-strong` | Important chrome | Footer pills, icon-button outlines, emphasis borders | Row dividers (too heavy), internal separators |
+
+Under multi-module density, prefer clearer borders over heavier shadows. Only escalate to shadow if the canvas↔panel step still fails after the border pass.
+
+## Selected State
+
+`--cba-selected-*` tokens express that an item is **actively chosen in a set**. Selected ≠ active(pressed) ≠ focus:
+
+| State | Visual meaning | Token(s) |
+|-------|---------------|----------|
+| **selected** | Item is actively chosen in a set (footer pill, nav tab, table row, dropdown option, filter chip) | `--cba-selected-bg`, `--cba-selected-border`, `--cba-selected-text`, `--cba-selected-hover` |
+| **active / pressed** | Momentary pointer-down state | `--cba-active` overlay |
+| **focus** | Keyboard focus ring | `--cba-focus-ring` |
+
+Selected is a **fill + border + text** combination, not an outline. Apply all three tokens together for a fully specified selected state.
+
+## Form State Matrix
+
+Form-state tokens reuse warmed accent hues (no parallel reds/greens invented). `readonly` is not a token set — it reuses `--cba-bg-tertiary` + `--cba-text-secondary` (distinct from disabled).
+
+| State | Background | Border | Text | Cursor |
+|-------|-----------|--------|------|--------|
+| default | `--cba-bg-secondary` | `--cba-border-default` | `--cba-text-primary` | default |
+| hover | `--cba-bg-secondary` | `--cba-border-strong` | `--cba-text-primary` | pointer |
+| focus-visible | `--cba-bg-secondary` | `--cba-accent-primary` + `--cba-focus-ring` | `--cba-text-primary` | default |
+| disabled | `--cba-state-disabled-bg` | `--cba-border-subtle` | `--cba-state-disabled-text` | not-allowed |
+| readonly | `--cba-bg-tertiary` | `--cba-border-subtle` | `--cba-text-secondary` | default |
+| invalid | `--cba-bg-secondary` | `--cba-state-invalid-border` | `--cba-state-invalid-text` | default |
+| valid | `--cba-bg-secondary` | `--cba-state-valid-border` | `--cba-state-valid-text` | default |
+
+See the [Consumer Guide §Form State Matrix](CONSUMER_GUIDE.md#form-state-matrix) for Shell/MFE wiring guidance.
+
+## Typography Scale
+
+Six-step scale exposed as `--cba-font-size-*` + `--cba-line-height-*` tokens. Base stays Inter / 14px / 1.5.
+
+| Step | Font size | Line height | Weight | Context |
+|------|-----------|-------------|--------|---------|
+| display | `--cba-font-size-display` (1.25rem / 20px) | `--cba-line-height-display` (1.2) | 600 | Rare — large page titles |
+| heading-lg | `--cba-font-size-heading-lg` (1.125rem / 18px) | `--cba-line-height-heading-lg` (1.222) | 600 | Module title (prominent) |
+| heading-md | `--cba-font-size-heading-md` (1rem / 16px) | `--cba-line-height-heading-md` (1.25) | 600 | Module title, section title |
+| body | `--cba-font-size-body` (0.875rem / 14px) | `--cba-line-height-body` (1.5) | 400 | Default body text |
+| small | `--cba-font-size-small` (0.8125rem / 13px) | `--cba-line-height-small` (1.385) | 400–600 | Table header (semibold), metadata |
+| caption | `--cba-font-size-caption` (0.75rem / 12px) | `--cba-line-height-caption` (1.333) | 400 | Hints, tertiary metadata |
+
+Utility classes: `.cba-text-display`, `.cba-text-heading-lg`, `.cba-text-heading-md`, `.cba-text-body`, `.cba-text-small`, `.cba-text-caption`. Generated in [`src/theme/_utilities.scss`](../src/theme/_utilities.scss).
+
+## Radius Rules
+
+| Token | Use for | Do NOT use for |
+|-------|---------|----------------|
+| `--cba-radius-lg` (14px) | Modules, large containers, dialogs | Small buttons, badges |
+| `--cba-radius-md` (10px) | Cards, form controls, dropdown menus | Modules (too small), badges |
+| `--cba-radius-sm` (6px) | Badges, small controls, pills, input fields | Large containers |
+| `999px` (pill) | Nav pills, tags, section pills only | Anything else |
+
+Avoid arbitrary new radii in components. The four values above cover all cases.
+
+## Shadow Rules
+
+| Token | Use for | Guidance |
+|-------|---------|----------|
+| `--cba-shadow-module` | Module cards when not fullscreen | Secondary depth; primary separation is border |
+| `--cba-shadow-elevated` | Dropdowns, popovers, modals, toasts | Higher elevation; still warm-tinted |
+
+**Rule:** Border is the primary separator; shadow is secondary depth. Under multi-module density, prefer clearer borders over heavier shadows. Only increase shadow if canvas↔panel still fails after the border/surface pass.
 
 ## Utility Class Prefix
 
@@ -88,6 +184,7 @@ All theme utility classes use the `.cba-` prefix and reference `var(--cba-*)` to
 - **Radius** — `.cba-radius-sm`, `.cba-radius-md`, `.cba-radius-lg`
 - **Shadows** — `.cba-shadow-module`, `.cba-shadow-elevated`
 - **Spacing** — `.cba-p-{1,2,3,4,5,6,8}` and `.cba-m-{1,2,3,4,5,6,8}` (numeric scale matching `--cba-space-*`)
+- **Typography** — `.cba-text-display`, `.cba-text-heading-lg`, `.cba-text-heading-md`, `.cba-text-body`, `.cba-text-small`, `.cba-text-caption` (each sets `font-size` + `line-height` from the matching `--cba-font-size-*` / `--cba-line-height-*` token pair)
 
 ## Mixins
 

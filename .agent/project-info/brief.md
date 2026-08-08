@@ -98,27 +98,28 @@ It does **not** contain business logic, BFF communication, advanced tables, drag
 
 All tokens live under the `--cba-` prefix.
 
-> **Note:** The palette is **Minimal Yet Warm** (warm sand/cream/taupe + controlled coral). Canvas `#C5BFAE` (warm sand floor), panel `#E6DDC6` (warm cream), elevated `#FBF7ED` (warm cream, lightest surface), inset `#D8C3A5` (warm sand). Canvas → panel ≈ 11 L\*, panel → elevated ≈ 9 L\*, panel → inset ≈ 8 L\*. Coral (`#E98074` soft, `#E85A4F` strong) is reserved for accent/status/focus — NOT for primary CTAs or large fills. Primary/secondary text pass WCAG AA on every intended surface. Muted text is RESTRICTED on the darker canvas (`#C5BFAE`, ~3.6:1) AND on `--cba-bg-tertiary` (inset sand, ~3.86:1) — use `--cba-text-secondary` on those surfaces.
+> **Note:** The palette is **Minimal Yet Warm** (warm sand/cream/taupe + controlled coral). Canvas `#BCB5A4` (darker warm sand floor, L* ~74), panel `#F2F0E8` (clearer cream, L* ~94), elevated `#FDFCF8` (near-white cream, L* ~99), inset `#D8C3A5` (warm sand, L* ~81). Canvas → panel ≈ 20 L\*, panel → elevated ≈ 5 L\*, panel → inset ≈ 13 L\*. Border is the primary separator; shadow is secondary depth. Three border levels (subtle `#E8E5DB`, default `#A29D94`, strong `#6B665E`) are deliberately distinct on cream/sand. Coral (`#E98074` soft, `#E85A4F` strong) is reserved for accent/status/focus — NOT for primary CTAs or large fills. Primary/secondary text pass WCAG AA on every intended surface. Muted text is RESTRICTED on the darker canvas (`#BCB5A4`, fails AA) AND on `--cba-bg-tertiary` (inset sand, fails AA) — use `--cba-text-secondary` on those surfaces.
 
 ```scss
 :root {
   /* Backgrounds — warm Minimal-Yet-Warm surface scale (canvas → panel → elevated → inset) */
-  --cba-bg-primary: #C5BFAE;
-  --cba-bg-secondary: #E6DDC6;
+  --cba-bg-primary: #BCB5A4;
+  --cba-bg-secondary: #F2F0E8;
   --cba-bg-tertiary: #D8C3A5;
-  --cba-bg-elevated: #FBF7ED;
+  --cba-bg-elevated: #FDFCF8;
   --cba-bg-overlay: rgba(43, 38, 32, 0.45);
 
-  /* Text — warm near-black/taupe; muted restricted on darker canvas and bg-tertiary (see header) */
+  /* Text — warm near-black/taupe; muted restricted on canvas and bg-tertiary (see header) */
   --cba-text-primary: #2B2620;
   --cba-text-secondary: #4A4640;
   --cba-text-muted: #625C55;
   --cba-text-inverse: #FDFCF8;
 
-  /* Borders — visible on cream/sand */
-  --cba-border-subtle: #DAD7CA;
-  --cba-border-default: #A7A6A2;
-  --cba-border-strong: #8E8D8A;
+  /* Borders — three deliberately distinct levels on cream/sand.
+     subtle = internal separators; default = structural edges; strong = chrome/outlines */
+  --cba-border-subtle: #E8E5DB;
+  --cba-border-default: #A29D94;
+  --cba-border-strong: #6B665E;
 
   /* Accents — primary is warm taupe (NOT coral); coral reserved for status/focus */
   --cba-accent-primary: #6B5B4F;
@@ -134,6 +135,20 @@ All tokens live under the `--cba-` prefix.
   --cba-active-inverse: rgba(253, 252, 248, 0.22);
   --cba-focus-ring: 0 0 0 3px rgba(232, 90, 79, 0.45);
 
+  /* Selected — item actively chosen in a set. selected ≠ active(pressed) ≠ focus */
+  --cba-selected-bg: #E4DDD0;
+  --cba-selected-border: var(--cba-accent-primary);
+  --cba-selected-text: var(--cba-text-primary);
+  --cba-selected-hover: #D8CFC0;
+
+  /* Form & control state tokens */
+  --cba-state-invalid-border: #B93E36;
+  --cba-state-invalid-text: #8B3028;
+  --cba-state-valid-border: #3E6B4F;
+  --cba-state-valid-text: #2E523C;
+  --cba-state-disabled-bg: #E0DCD4;
+  --cba-state-disabled-text: #9A958D;
+
   /* Layout (unchanged) */
   --cba-header-height: 56px;          /* Shell header */
   --cba-footer-height: 64px;          /* Shell footer */
@@ -144,7 +159,7 @@ All tokens live under the `--cba-` prefix.
   --cba-radius-md: 10px;
   --cba-radius-lg: 14px;
 
-  /* Shadows — warm-tinted, softer than black */
+  /* Shadows — warm-tinted, softer than black. Border is primary separator; shadow secondary */
   --cba-shadow-module: 0 6px 24px rgba(43, 34, 28, 0.18);
   --cba-shadow-elevated: 0 10px 32px rgba(43, 34, 28, 0.26);
 
@@ -156,10 +171,25 @@ All tokens live under the `--cba-` prefix.
   --cba-space-5: 20px;
   --cba-space-6: 24px;
   --cba-space-8: 32px;
+
+  /* Typography scale — six steps paired with line-heights */
+  --cba-font-size-display: 1.25rem;
+  --cba-font-size-heading-lg: 1.125rem;
+  --cba-font-size-heading-md: 1rem;
+  --cba-font-size-body: 0.875rem;
+  --cba-font-size-small: 0.8125rem;
+  --cba-font-size-caption: 0.75rem;
+
+  --cba-line-height-display: 1.2;
+  --cba-line-height-heading-lg: 1.222;
+  --cba-line-height-heading-md: 1.25;
+  --cba-line-height-body: 1.5;
+  --cba-line-height-small: 1.385;
+  --cba-line-height-caption: 1.333;
 }
 ```
 
-**`--cba-text-muted` usage restriction:** `#625C55` passes WCAG AA 4.5:1 on `--cba-bg-secondary` (panel) and `--cba-bg-elevated` (cream). It is RESTRICTED on the darker canvas `--cba-bg-primary` (`#C5BFAE`, ~3.6:1 — fails AA) AND on `--cba-bg-tertiary` (inset sand, ~3.86:1 — fails AA). Prefer `--cba-text-secondary` on canvas and inset sand for lower-emphasis text.
+**`--cba-text-muted` usage restriction:** `#625C55` passes WCAG AA 4.5:1 on `--cba-bg-secondary` (panel) and `--cba-bg-elevated` (cream). It is RESTRICTED on the darker canvas `--cba-bg-primary` (`#BCB5A4`, fails AA) AND on `--cba-bg-tertiary` (inset sand, fails AA). Prefer `--cba-text-secondary` on canvas and inset sand for lower-emphasis text.
 
 **`--cba-hover-inverse` / `--cba-active-inverse` usage:** light overlays (`rgba(253, 252, 248, 0.12)` and `0.22`, hue matching `--cba-text-inverse`) applied via `background-image: linear-gradient(token, token)` over solid accent fills (`--cba-accent-primary`, `--cba-accent-danger`, `--cba-accent-success`) to make hover/active perceptible on dark backgrounds. The dark overlays (`--cba-hover`, `--cba-active`) remain for `secondary`/`ghost` which sit on light surfaces.
 

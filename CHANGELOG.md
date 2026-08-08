@@ -34,7 +34,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- (entries to be filled during Phase 10 implementation)
+- **Selected state tokens** in `src/theme/_variables.scss`: `--cba-selected-bg` (#E4DDD0), `--cba-selected-border` (aliases `--cba-accent-primary`), `--cba-selected-text` (aliases `--cba-text-primary`), `--cba-selected-hover` (#D8CFC0). Semantics: selected ≠ active(pressed) ≠ focus. Consumers: footer pills, nav tabs, table rows, dropdown options, filter chips. See `docs/THEME.md` §Selected State and `docs/CONSUMER_GUIDE.md` §Selected State Usage.
+- **Form state tokens** in `src/theme/_variables.scss`: `--cba-state-invalid-border` (#B93E36), `--cba-state-invalid-text` (#8B3028), `--cba-state-valid-border` (#3E6B4F), `--cba-state-valid-text` (#2E523C), `--cba-state-disabled-bg` (#E0DCD4), `--cba-state-disabled-text` (#9A958D). Reuse warmed accent hues (no parallel reds/greens invented). See `docs/THEME.md` §Form State Matrix and `docs/CONSUMER_GUIDE.md` §Form State Matrix.
+- **Typography scale tokens** in `src/theme/_variables.scss`: six-step scale as `--cba-font-size-{display,heading-lg,heading-md,body,small,caption}` + matching `--cba-line-height-*` pairs. Utility classes `.cba-text-display` through `.cba-text-caption` generated in `src/theme/_utilities.scss`. See `docs/THEME.md` §Typography Scale and `docs/CONSUMER_GUIDE.md` §Typography Scale Usage.
+- **Radius and shadow rules** documented in `docs/THEME.md` and `docs/CONSUMER_GUIDE.md`: lg/md/sm/pill usage table; border-primary / shadow-secondary rule.
+
+### Changed
+
+- **Surface retuning** in `src/theme/_variables.scss` for multi-module density: canvas (`--cba-bg-primary`) darkened from #C5BFAE to #BCB5A4 (L* ~74); panel (`--cba-bg-secondary`) lightened from #E6DDC6 to #F2F0E8 (L* ~94); elevated (`--cba-bg-elevated`) lightened from #FBF7ED to #FDFCF8 (L* ~99); inset (`--cba-bg-tertiary`) unchanged at #D8C3A5 (L* ~81). New L* gaps: canvas→panel ≈ 20, panel→elevated ≈ 5, panel→inset ≈ 13. Modules now read as cards on a desk. See `docs/THEME.md` §Surface Hierarchy and [brief.md §5](.agent/project-info/brief.md#5-design-tokens-theme).
+- **Border retuning** in `src/theme/_variables.scss`: `--cba-border-subtle` lightened from #DAD7CA to #E8E5DB (recedes on panel); `--cba-border-default` adjusted from #A7A6A2 to #A29D94 (visible structural edge); `--cba-border-strong` darkened from #8E8D8A to #6B665E (defines chrome shape). Three levels now visibly distinct on cream/sand. See `docs/THEME.md` §Border Roles.
+
+### Notes
+
+- **No existing `--cba-*` token names were renamed** — only values changed (surfaces, borders) and new tokens added (selected, form state, typography scale). Additive change.
+- **Potential visual breaking change** for Shell layouts that depended on the previous surface values (canvas #C5BFAE, panel #E6DDC6, elevated #FBF7ED). After upgrade the canvas is clearly darker and modules lift more distinctly; Shell authors should review the updated [Consumer Guide](docs/CONSUMER_GUIDE.md) and verify in `docs/theme-preview.html`.
+- Authoritative token values: [brief.md §5](.agent/project-info/brief.md#5-design-tokens-theme) and [`src/theme/_variables.scss`](src/theme/_variables.scss).
+- Front-end spec: [20260807-phase10-cluster1-frontend-spec.md](.kilo/plans/20260807-phase10-cluster1-frontend-spec.md).
 
 ## [0.11.2] — 2026-08-07
 

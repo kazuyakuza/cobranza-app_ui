@@ -31,6 +31,12 @@ applies which token where*.
 - [Surface Decision Tree](#surface-decision-tree)
 - [Text Color Rules](#text-color-rules)
 - [Bar and Chrome Guide](#bar-and-chrome-guide)
+- [Selected State Usage](#selected-state-usage)
+- [Form State Matrix](#form-state-matrix)
+- [Typography Scale Usage](#typography-scale-usage)
+- [Table State Patterns](#table-state-patterns)
+- [Navigation / Footer Pill State Patterns](#navigation--footer-pill-state-patterns)
+- [Semantic Status Patterns](#semantic-status-patterns)
 - [Shell checklist](#shell-checklist)
 - [MFE checklist](#mfe-checklist)
 - [Anti-patterns](#anti-patterns)
@@ -209,6 +215,106 @@ Notes:
 - Footer section pill: active state uses `border-color: var(--cba-accent-primary)` and
   `color: var(--cba-text-primary)`.
 
+## Selected State Usage
+
+`--cba-selected-*` tokens express that an item is **actively chosen in a set**. Selected ≠ active(pressed) ≠ focus:
+
+| State | Meaning | When to use |
+|-------|---------|-------------|
+| **selected** | Item is actively chosen in a set | Footer pills, nav tabs, table rows, dropdown options, filter chips |
+| **active / pressed** | Momentary pointer-down state | While the pointer is held down on an interactive element |
+| **focus** | Keyboard focus ring | Any focusable element receiving keyboard focus |
+
+### Consumer recipes
+
+- **Footer section pill selected:** `border-color: var(--cba-selected-border); background: var(--cba-selected-bg); color: var(--cba-selected-text);`
+- **Nav / tab selected:** Same as pill, plus `font-weight: 600`.
+- **Table row selected:** `background: var(--cba-selected-bg);` (border usually not applicable on rows).
+- **Dropdown option selected:** `background: var(--cba-selected-bg); color: var(--cba-selected-text);`
+- **Filter chip active:** `border-color: var(--cba-selected-border); background: var(--cba-selected-bg);`
+- **Module "focused" chrome:** `outline: none; box-shadow: var(--cba-focus-ring);` (focus ring is the primary indicator, not selected tokens).
+
+> **Rule:** Do not use `--cba-hover` or `--cba-active` as a substitute for selected. Hover is transient; selected is persistent.
+
+## Form State Matrix
+
+For Shell/MFE authors wiring form controls (`CbaInput`, `CbaSelect`, `CbaDatepicker`, and custom fields). Token values live in [`src/theme/_variables.scss`](../src/theme/_variables.scss); this table states *which token goes where*.
+
+| State | Background | Border | Text | Cursor | Notes |
+|-------|-----------|--------|------|--------|-------|
+| default | `--cba-bg-secondary` | `--cba-border-default` | `--cba-text-primary` | default | Base state |
+| hover | `--cba-bg-secondary` | `--cba-border-strong` | `--cba-text-primary` | pointer | Only where interactive (inputs, selects, datepicker toggles) |
+| focus-visible | `--cba-bg-secondary` | `--cba-accent-primary` + `box-shadow: var(--cba-focus-ring)` | `--cba-text-primary` | default | Border change plus focus ring |
+| disabled | `--cba-state-disabled-bg` | `--cba-border-subtle` | `--cba-state-disabled-text` | not-allowed | `opacity: 1` — use token colors for distinction, do not fade |
+| readonly | `--cba-bg-tertiary` | `--cba-border-subtle` | `--cba-text-secondary` | default | Distinct from disabled: inset background, no opacity change |
+| invalid | `--cba-bg-secondary` | `--cba-state-invalid-border` | `--cba-state-invalid-text` | default | Error message uses same text token |
+| valid | `--cba-bg-secondary` | `--cba-state-valid-border` | `--cba-state-valid-text` | default | Optional visual confirmation |
+
+**Wiring guidance:**
+
+- `CbaFieldComponent` host classes: `.cba-field--disabled` → disabled tokens; `.cba-field--error` → invalid tokens; `.cba-field--readonly` → readonly tokens; `.cba-field--valid` → valid tokens.
+- No validation engine is provided. States are driven by component inputs and/or CSS classes already in the API.
+- Invalid/valid tokens reuse warmed danger/success hues — do not invent parallel reds/greens.
+
+## Typography Scale Usage
+
+Map UI context to the six-step scale. Token values live in [`src/theme/_variables.scss`](../src/theme/_variables.scss); utility classes in [`src/theme/_utilities.scss`](../src/theme/_utilities.scss).
+
+| Context | Font size token | Line height token | Weight | Utility class |
+|---------|----------------|-------------------|--------|---------------|
+| Module title (prominent) | `--cba-font-size-heading-lg` | `--cba-line-height-heading-lg` | 600 | `.cba-text-heading-lg` |
+| Module title / section title | `--cba-font-size-heading-md` | `--cba-line-height-heading-md` | 600 | `.cba-text-heading-md` |
+| Table header | `--cba-font-size-small` | `--cba-line-height-small` | 600 (semibold) | `.cba-text-small` |
+| Body text | `--cba-font-size-body` | `--cba-line-height-body` | 400 | `.cba-text-body` |
+| Metadata / hints | `--cba-font-size-small` or `--cba-font-size-caption` | matching | 400 | `.cba-text-small` or `.cba-text-caption` |
+| Display (rare) | `--cba-font-size-display` | `--cba-line-height-display` | 600 | `.cba-text-display` |
+
+> **Rule:** Do not hard-code `font-size` pixel values. Use the utility classes or the `--cba-font-size-*` tokens. The base body size stays 14px (0.875rem).
+
+## Table State Patterns
+
+Tables use the surface hierarchy plus selected/hover tokens for row states.
+
+| Row state | Background | Border | Text |
+|-----------|-----------|--------|------|
+| default (body row) | `--cba-bg-secondary` (panel) | none | `--cba-text-primary` |
+| hover | `--cba-hover` overlay on panel bg | none | `--cba-text-primary` |
+| selected | `--cba-selected-bg` | none (or `--cba-selected-border` left accent) | `--cba-text-primary` |
+| header (`thead th`) | `--cba-bg-tertiary` (inset) | bottom: `--cba-border-subtle` | `--cba-text-secondary` + semibold |
+
+- `thead` = inset surface; body rows = panel surface.
+- Selected row uses `--cba-selected-bg`; do not use `--cba-hover` as a substitute for selected.
+- Disabled row (optional): `--cba-state-disabled-bg` + `--cba-state-disabled-text` + `cursor: not-allowed`.
+
+## Navigation / Footer Pill State Patterns
+
+Footer section pills and similar nav chips follow a four-state pattern.
+
+| State | Background | Border | Text |
+|-------|-----------|--------|------|
+| normal | `--cba-bg-secondary` | `--cba-border-strong` | `--cba-text-secondary` |
+| hover | `--cba-bg-secondary` + `--cba-hover` overlay | `--cba-border-strong` | `--cba-text-primary` |
+| selected | `--cba-selected-bg` | `--cba-selected-border` | `--cba-selected-text` |
+| disabled | `--cba-state-disabled-bg` | `--cba-border-subtle` | `--cba-state-disabled-text` |
+
+- Selected is visually stronger than hover — the border changes to `--cba-selected-border` (warm taupe) and the fill shifts to `--cba-selected-bg`.
+- Do not use `--cba-accent-primary` fill for selected pills; the selected token set provides sufficient distinction.
+
+## Semantic Status Patterns
+
+Badge and inline status recipes for success / warning / danger / info / neutral.
+
+| Status | Accent token | Badge (solid) | Badge (outline) | Inline text |
+|--------|-------------|---------------|-----------------|-------------|
+| success | `--cba-accent-success` | bg: `--cba-accent-success`, text: `--cba-text-inverse` | border + text: `--cba-accent-success`, bg: transparent | `--cba-state-valid-text` |
+| warning | `--cba-accent-warning` | bg: `--cba-accent-warning`, text: `--cba-text-inverse` | border + text: `--cba-accent-warning`, bg: transparent | `--cba-accent-warning` (on panel/elevated only) |
+| danger | `--cba-accent-danger` | bg: `--cba-accent-danger`, text: `--cba-text-inverse` | border + text: `--cba-accent-danger`, bg: transparent | `--cba-state-invalid-text` |
+| info | `--cba-accent-info` | bg: `--cba-accent-info`, text: `--cba-text-inverse` | border + text: `--cba-accent-info`, bg: transparent | `--cba-accent-info` |
+| neutral | `--cba-accent-primary` (taupe) | bg: `--cba-accent-primary`, text: `--cba-text-inverse` | border + text: `--cba-accent-primary`, bg: transparent | `--cba-text-secondary` |
+
+- **Warning vs danger:** warning is soft coral (`--cba-accent-warning`); danger is deeper red (`--cba-accent-danger`). Always pair with an icon or label to reinforce the distinction — do not rely on color alone.
+- Solid badges use `--cba-text-inverse` on accent backgrounds. Outline badges use the accent token for border and text with transparent background.
+
 ## Shell checklist
 
 - [ ] Workbench/workspace element uses `background: var(--cba-bg-primary)` (not raw
@@ -231,23 +337,31 @@ Notes:
 ## Anti-patterns
 
 - Same background on workspace and module body.
-- Using only `--cba-border-subtle` for important chrome on cream/sand.
+- Using only `--cba-border-subtle` for important chrome on cream/sand. Use `--cba-border-default` for structural edges and `--cba-border-strong` for interactive outlines.
 - Large coral backgrounds.
 - Hard-coded colors that fight tokens.
 - Secondary buttons that collapse into their panel or active state. Keep the elevated/panel
   separation visible and use a distinct token/overlay for active.
 - Expecting ModuleContainer to style the Shell workspace (it only styles the module card).
+- Using `--cba-hover` or `--cba-active` as a substitute for `--cba-selected-*`. Hover is transient; selected is persistent.
+- Using `--cba-text-muted` on canvas (`--cba-bg-primary`) or inset (`--cba-bg-tertiary`). Both fail WCAG AA. Use `--cba-text-secondary` on those surfaces.
+- Inventing parallel reds/greens for form validation. Reuse `--cba-state-invalid-*` and `--cba-state-valid-*` tokens which reuse warmed accent hues.
+- Hard-coding `font-size` pixel values instead of using the typography scale tokens or `.cba-text-*` utility classes.
+- Using `border-radius` values other than `sm`/`md`/`lg`/`pill` (999px). The four values cover all cases.
 
 ## Quick verify
 
 After integration, confirm:
 
-1. Canvas darker/more sand than module body.
-2. Module has visible edge (border and/or shadow).
-3. Header band ≠ body.
-4. Table header sand inset.
-5. Footer pills readable.
+1. Canvas darker/more sand than module body (canvas→panel ≈ 20 L\*).
+2. Module has visible edge (border and/or shadow). Border is the primary separator.
+3. Header band ≠ body (elevated ≈ 5 L\* lighter than panel).
+4. Table header sand inset (inset ≈ 13 L\* darker than panel).
+5. Footer pills readable with `--cba-border-strong` outline.
 6. Secondary buttons differ from their panel and from their active/pressed state.
+7. Selected state (pill, nav tab, table row) uses `--cba-selected-*` tokens — distinct from hover.
+8. Form controls show distinct disabled / readonly / invalid states.
+9. Typography uses the scale (`.cba-text-*` utilities or `--cba-font-size-*` tokens), not hard-coded pixel sizes.
 
 ## Cross-References
 
