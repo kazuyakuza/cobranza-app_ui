@@ -34,10 +34,10 @@
 /* Task 4 — module chrome applied only when NOT fullscreen. */
 :host(:not(.cba-module-container--fullscreen)) {
   background-color: var(--cba-bg-secondary);
-  border: 1px solid var(--cba-border-subtle);
+  border: 1px solid var(--cba-border-default);
   border-radius: var(--cba-radius-md);
   box-shadow: var(--cba-shadow-module);
-  /* Clip projected header to the rounded corners. */
+  /* Border is the primary separator; shadow is secondary depth. */
   overflow: hidden;
 }
 
