@@ -9,24 +9,40 @@
  * notes, and accent-discipline rules.
  *
  * TOKEN GROUPS:
- *   Backgrounds  — canvas, panel, inset, elevated (lightest).
- *   Text         — primary, secondary, muted (restricted on canvas/inset), inverse.
- *   Borders      — subtle, default, strong.
- *   Accents      — primary (taupe), success, warning, danger, info.
- *   Interactive  — hover/active overlays (dark for light surfaces, inverse for solid accents), warm-coral focus-ring.
+ *   Backgrounds  — canvas → panel → elevated (lightest); inset recessed.
+ *                   Roles: canvas = Shell workspace floor (darkest),
+ *                          panel  = library module card body (clearer cream),
+ *                          elevated = module header / floating chrome (near-white cream),
+ *                          inset   = table header, module footer / wells (sand, recessed).
+ *   Text         — primary, secondary, muted (restricted on canvas & inset), inverse.
+ *   Borders      — subtle (internal separators), default (structural edges:
+ *                          module frame, cards, inputs), strong (chrome / interactive outlines).
+ *                          Border is the PRIMARY separator; shadow is secondary depth.
+ *   Accents      — primary (warm taupe, NOT coral), success, warning, danger, info.
+ *                   Coral stays accent-only (warning/danger/focus) — not primary CTAs.
+ *   Interactive  — hover/active overlays + warm-coral focus-ring.
+ *   Selected     — selected ≠ active(pressed) ≠ focus. Active = momentary pressed overlay;
+ *                   focus = coral ring. Use --cba-selected-* for chosen items
+ *                   (footer pills, nav tabs, table rows, dropdown options, filter chips).
+ *   Form states  — invalid / valid border+text, disabled bg+text. readonly = inset surface.
+ *   Typography   — six-step scale (display / heading-lg / heading-md / body / small / caption)
+ *                   as --cba-font-size-* + --cba-line-height-*; see _utilities.scss for classes.
  *   Layout       — header/footer/module-header dimensions.
- *   Radius       — sm, md, lg.
- *   Shadows      — warm-tinted.
+ *   Radius       — sm, md, lg (pill = 999px for nav/tags only).
+ *   Shadows      — warm-tinted, secondary to borders.
  *   Spacing      — 4px-based scale.
  *
  * Do NOT hard-code color values in components; reference var(--cba-*).
+ * Authoritative values live in .agent/project-info/brief.md §5 (kept in sync by docs step).
  */
 :root {
-  /* Backgrounds — warm Minimal-Yet-Warm surface scale (canvas → panel → elevated → inset) */
-  --cba-bg-primary: #C5BFAE;
-  --cba-bg-secondary: #E6DDC6;
+  /* Backgrounds — Minimal-Yet-Warm surface scale: canvas (dark sand floor) → panel (clearer
+     cream) → elevated (near-white cream; lightest) ; inset (recessed sand) for table headers,
+     module footers, wells. Canvas is deliberately darker so modules read as cards on a desk. */
+  --cba-bg-primary: #BCB5A4;
+  --cba-bg-secondary: #F2F0E8;
   --cba-bg-tertiary: #D8C3A5;
-  --cba-bg-elevated: #FBF7ED;
+  --cba-bg-elevated: #FDFCF8;
   --cba-bg-overlay: rgba(43, 38, 32, 0.45);
 
   /* Text — warm near-black/taupe; muted restricted on bg-tertiary (see header) */
@@ -35,10 +51,13 @@
   --cba-text-muted: #625C55;
   --cba-text-inverse: #FDFCF8;
 
-  /* Borders — visible on cream/sand */
-  --cba-border-subtle: #DAD7CA;
-  --cba-border-default: #A7A6A2;
-  --cba-border-strong: #8E8D8A;
+  /* Borders — three deliberately distinct levels on cream/sand.
+     subtle = internal separators (row lines, soft dividers); default = structural edges
+     (module frame, cards, inputs); strong = important chrome & interactive outlines
+     (footer pills, icon buttons). Border is the primary separator; shadows are secondary. */
+  --cba-border-subtle: #E8E5DB;
+  --cba-border-default: #A29D94;
+  --cba-border-strong: #6B665E;
 
   /* Accents — primary is warm taupe (NOT coral); coral reserved for status/focus */
   --cba-accent-primary: #6B5B4F;
@@ -54,6 +73,25 @@
   --cba-hover-inverse: rgba(253, 252, 248, 0.12);
   --cba-active-inverse: rgba(253, 252, 248, 0.22);
   --cba-focus-ring: 0 0 0 3px rgba(232, 90, 79, 0.45);
+
+  /* Selected — item is actively chosen in a set. selected ≠ active(pressed) ≠ focus.
+     active = momentary pointer-down overlay (--cba-active); focus = coral ring (--cba-focus-ring).
+     Consumers: footer section pill, nav/tab, table row, dropdown option, filter chip, module
+     "focused" chrome. Selected is a fill+border+text combination, not an outline. */
+  --cba-selected-bg: #E4DDD0;
+  --cba-selected-border: #6B5B4F;
+  --cba-selected-text: #2B2620;
+  --cba-selected-hover: #D8CFC0;
+
+  /* Form & control state tokens. invalid/valid reuse warmed danger/success hues (no parallel
+     reds/greens invented); disabled uses a warm muted pair. readonly is NOT a token set — it
+     reuses --cba-bg-tertiary + --cba-text-secondary (distinct from disabled; set in components). */
+  --cba-state-invalid-border: #B93E36;
+  --cba-state-invalid-text: #8B3028;
+  --cba-state-valid-border: #3E6B4F;
+  --cba-state-valid-text: #2E523C;
+  --cba-state-disabled-bg: #E0DCD4;
+  --cba-state-disabled-text: #9A958D;
 
   /* Layout (unchanged) */
   --cba-header-height: 56px;
@@ -77,4 +115,20 @@
   --cba-space-5: 20px;
   --cba-space-6: 24px;
   --cba-space-8: 32px;
+
+  /* Typography scale — six steps paired with line-heights.
+     Base stays Inter / 14px / 1.5. Utility classes in _utilities.scss. */
+  --cba-font-size-display: 1.25rem;
+  --cba-font-size-heading-lg: 1.125rem;
+  --cba-font-size-heading-md: 1rem;
+  --cba-font-size-body: 0.875rem;
+  --cba-font-size-small: 0.8125rem;
+  --cba-font-size-caption: 0.75rem;
+
+  --cba-line-height-display: 1.2;
+  --cba-line-height-heading-lg: 1.222;
+  --cba-line-height-heading-md: 1.25;
+  --cba-line-height-body: 1.5;
+  --cba-line-height-small: 1.385;
+  --cba-line-height-caption: 1.333;
 }

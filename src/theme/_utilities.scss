@@ -78,3 +78,24 @@ $spacing-scales: 1, 2, 3, 4, 5, 6, 8;
     margin: var(--cba-space-#{$scale});
   }
 }
+
+/* Typography scale utilities — two-property classes (font-size + line-height), hence a
+   dedicated single-level @each (NOT the single-property $utility-groups loop above).
+   Mirrors the --cba-font-size-* / --cba-line-height-* token pairs from _variables.scss.
+   Use: module title -> .cba-text-heading-md/lg; section title -> .cba-text-heading-md;
+   table header -> .cba-text-small (semibold); body -> default (body); meta -> .cba-text-caption. */
+$typography-scale: (
+  display: (fs: --cba-font-size-display, lh: --cba-line-height-display),
+  'heading-lg': (fs: --cba-font-size-heading-lg, lh: --cba-line-height-heading-lg),
+  'heading-md': (fs: --cba-font-size-heading-md, lh: --cba-line-height-heading-md),
+  body: (fs: --cba-font-size-body, lh: --cba-line-height-body),
+  small: (fs: --cba-font-size-small, lh: --cba-line-height-small),
+  caption: (fs: --cba-font-size-caption, lh: --cba-line-height-caption),
+);
+
+@each $step, $pair in $typography-scale {
+  .cba-text-#{$step} {
+    font-size: var(#{map-get($pair, fs)});
+    line-height: var(#{map-get($pair, lh)});
+  }
+}
