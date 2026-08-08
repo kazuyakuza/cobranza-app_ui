@@ -88,16 +88,17 @@
     .module{max-width:900px}
     .module-body{padding:14px}
     .panel-title-row{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px}
-    .panel-title{font-weight:700;font-size:var(--cba-font-size-heading-md)}
+    .panel-title{font-weight:700}
     .panel-meta{font-size:12px;color:var(--cba-text-muted);font-weight:600}
     table{width:100%;border-collapse:collapse;font-size:var(--cba-font-size-small)}
     thead th{text-align:left;padding:11px 12px;background:var(--cba-bg-tertiary);color:var(--cba-text-secondary);font-weight:700;border-bottom:1px solid var(--cba-border-default)}
     tbody td{padding:11px 12px;border-bottom:1px solid var(--cba-border-default);font-weight:500}
     tbody tr:hover td{background:var(--cba-hover)}
     tbody tr:last-child td{border-bottom:none}
-    .module-footer{padding:9px 12px;background:var(--cba-bg-tertiary);border-top:1px solid var(--cba-border-default);font-size:var(--cba-font-size-small);font-weight:700;color:var(--cba-accent-success)}
+    .module-footer{padding:9px 12px;background:var(--cba-bg-tertiary);border-top:1px solid var(--cba-border-default);font-weight:700;color:var(--cba-accent-success)}
     .shell-footer{height:var(--cba-footer-height);display:flex;align-items:center;justify-content:center;gap:10px;border-top:1px solid var(--cba-border-default);background:var(--cba-bg-elevated)}
-    .section-pill{padding:8px 16px;border-radius:999px;border:1px solid var(--cba-border-strong);background:var(--cba-bg-secondary);color:var(--cba-text-secondary);font-size:13px;font-weight:700}
+    .section-pill,
+    .demo-pill{padding:8px 16px;border-radius:999px;border:1px solid var(--cba-border-strong);background:var(--cba-bg-secondary);color:var(--cba-text-secondary);font-size:13px;font-weight:700}
     .section-pill.active{border-color:var(--cba-accent-primary);color:var(--cba-text-primary)}
 
     /* Extras: swatches, button matrix, text-on-surfaces */
@@ -123,7 +124,7 @@
     .btn-variant__label{width:90px;flex:0 0 auto;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--cba-text-secondary)}
     .btn-states{display:flex;gap:6px;flex-wrap:wrap}
     .pv-btn{display:inline-flex;align-items:center;justify-content:center;padding:8px 14px;border-radius:var(--cba-radius-sm);border:1px solid transparent;font-size:13px;font-weight:600;font-family:inherit;cursor:pointer}
-    .pv-btn:focus-visible{outline:none;box-shadow:var(--cba-focus-ring)}
+    .pv-btn:focus-visible,.cba-module-header__action:focus-visible{outline:none;box-shadow:var(--cba-focus-ring)}
     .pv-btn--primary{background:var(--cba-accent-primary);color:var(--cba-text-inverse)}
     .pv-btn--secondary{background:var(--cba-bg-elevated);border-color:var(--cba-border-subtle);color:var(--cba-text-primary)}
     .pv-btn--ghost{background:transparent;color:var(--cba-text-primary)}
@@ -175,7 +176,6 @@
 
     /* Selected / nav / footer pill samples */
     .demo-pills{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
-    .demo-pill{padding:8px 16px;border-radius:999px;border:1px solid var(--cba-border-strong);background:var(--cba-bg-secondary);color:var(--cba-text-secondary);font-size:13px;font-weight:700}
     .demo-pill.is-hover{background-image:linear-gradient(var(--cba-hover),var(--cba-hover));color:var(--cba-text-primary)}
     .demo-pill.is-selected{border-color:var(--cba-selected-border);background:var(--cba-selected-bg);color:var(--cba-selected-text)}
     .demo-pill.is-disabled{background:var(--cba-state-disabled-bg);border-color:var(--cba-border-subtle);color:var(--cba-state-disabled-text);cursor:not-allowed}
@@ -287,11 +287,6 @@
     .cba-module-header__action--drag:active {
       cursor: grabbing;
       background-color: transparent;
-    }
-
-    .cba-module-header__action:focus-visible {
-      outline: none;
-      box-shadow: var(--cba-focus-ring);
     }
 
     .cba-module-header--fullscreen {
@@ -478,7 +473,7 @@
           </header>
           <div class="module-body">
             <div class="panel-title-row">
-              <div class="panel-title">Lista de clientes</div>
+              <div class="panel-title cba-text-heading-md">Lista de clientes</div>
               <div class="panel-meta">100% · expandido</div>
             </div>
             <table>
@@ -491,7 +486,7 @@
               </tbody>
             </table>
           </div>
-          <div class="module-footer">Listo</div>
+          <div class="module-footer cba-text-small">Listo</div>
         </section>
         <!--
           EXTRAS SECTION — Token reference panels below the Shell mockup.
@@ -802,7 +797,7 @@ function renderDensityStrip(host){
     return `<div class="module cba-module-container">
   <header class="cba-module-header">
     <div class="cba-module-header__section cba-module-header__section--status cba-module-header__status--loaded"><i class="fa-solid fa-check" aria-hidden="true"></i></div>
-    <div class="cba-module-header__section cba-module-header__section--title cba-text-heading-md">${m.title} <span class="cba-text-small" style="color:var(--cba-text-muted)">${m.meta}</span></div>
+    <div class="cba-module-header__section cba-module-header__section--title cba-text-heading-md">${m.title} <span class="cba-text-small cba-text-muted">${m.meta}</span></div>
     <nav class="cba-module-header__section cba-module-header__section--actions">
       <button type="button" class="cba-module-header__action cba-module-header__action--drag" aria-label="Arrastrar módulo" title="Arrastrar módulo"><i class="fa-solid fa-up-down-left-right" aria-hidden="true"></i></button>
       <button type="button" class="cba-module-header__action" aria-label="Colapsar módulo" title="Colapsar módulo"><i class="fa-solid fa-chevron-up" aria-hidden="true"></i></button>
@@ -812,7 +807,7 @@ function renderDensityStrip(host){
     </nav>
   </header>
   <div class="module-body"><table class="demo-table"><thead><tr><th>Documento</th><th>Nombre</th><th>Deuda</th></tr></thead><tbody>${rows}</tbody></table></div>
-  <div class="module-footer">Listo</div>
+  <div class="module-footer cba-text-small">Listo</div>
 </div>`;
   }).join('');
   host.innerHTML=modules;
