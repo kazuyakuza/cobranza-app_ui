@@ -336,6 +336,26 @@ Badge and inline status recipes for success / warning / danger / info / neutral.
 - [ ] Avoid painting the entire shell with `--cba-bg-secondary` (kills canvas/module
   contrast).
 
+### ModuleHeader drag handle
+
+The Shell can project an optional drag handle into `cba-module-header` via the
+`[cbaModuleDragHandle]` attribute-projection slot:
+
+- Project a native `<button type="button" cbaModuleDragHandle cdkDragHandle>` as a
+  child of `<cba-module-header>`.
+- Apply `cdkDrag` on an **ancestor the Shell controls** (the wrapper around
+  `cba-module-container`) and `cdkDragHandle` on the projected element.
+- Apply `class="cba-module-header__action cba-module-header__action--drag"` on the
+  projected button to inherit the library's action-button sizing, hover/active
+  states, focus ring, and grab cursor — no `::ng-deep` needed.
+- The slot is hidden in fullscreen mode along with the other actions.
+- The Shell **must** provide the accessible name (`aria-label="Arrastrar módulo"`).
+- Full example: see [`MODULE_HEADER.md` §Drag handle slot](./MODULE_HEADER.md#drag-handle-slot).
+
+**Anti-pattern:** asking the UI library to implement drag behaviour or to add
+`@angular/cdk` as a dependency. The library provides only the projection slot and
+the visual contract; drag-and-drop is Shell-owned.
+
 ## MFE checklist
 
 - [ ] Prefer lib components (`cba-button`, `cba-card`, form wrappers) over unthemed Bootstrap.
@@ -358,6 +378,7 @@ Badge and inline status recipes for success / warning / danger / info / neutral.
 - Inventing parallel reds/greens for form validation. Reuse `--cba-state-invalid-*` and `--cba-state-valid-*` tokens which reuse warmed accent hues.
 - Hard-coding `font-size` pixel values instead of using the typography scale tokens or `.cba-text-*` utility classes.
 - Using `border-radius` values other than `sm`/`md`/`lg`/`pill` (999px). The four values cover all cases.
+- Asking `@cobranza-apps/ui` to implement drag-and-drop or to depend on `@angular/cdk`. The Library exposes the `[cbaModuleDragHandle]` projection slot; the Shell owns DnD. See [`MODULE_HEADER.md` §Drag handle slot](./MODULE_HEADER.md#drag-handle-slot).
 
 ## Quick verify
 

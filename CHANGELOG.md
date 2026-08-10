@@ -30,6 +30,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > Releases prior to 0.8.1 predate this changelog and are not reconstructed retroactively.
 
+## [0.13.0] — 2026-08-09
+
+### Added
+
+- **ModuleHeader optional drag-handle projection slot** — consumers can project a `[cbaModuleDragHandle]` element into the header actions area. The library does not render a default handle when the slot is empty, and the slot is hidden in fullscreen mode along with other actions. Enables Shell-owned `@angular/cdk/drag-drop` integration without adding CDK as a library dependency. See `docs/MODULE_HEADER.md` §Drag handle slot and `docs/CONSUMER_GUIDE.md` §ModuleHeader drag handle.
+
+### Removed
+
+- Removed the built-in visual-only drag button from `ModuleHeader` (was `faUpDownLeftRight` / `aria.drag`). Drag handle is now consumer-projected via the `[cbaModuleDragHandle]` slot. Removed the `drag` key from `CBA_UI_MESSAGES.moduleHeader.aria` and the `faDrag` property from `ModuleHeaderComponent`.
+
+### Notes
+
+- No `@angular/cdk` peer dependency added. Existing `ModuleHeader` inputs/outputs are unchanged. Spec: [20260809-phase11-drag-handle-frontend-spec.md](.kilo/plans/20260809-phase11-drag-handle-frontend-spec.md).
+
 ## [0.12.1] — 2026-08-08
 
 ### Fixed

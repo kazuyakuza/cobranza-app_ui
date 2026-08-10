@@ -261,6 +261,15 @@ Shell-injected header above each MFE module. See [`MODULE_HEADER.md`](./MODULE_H
 
 **Outputs:** `collapseToggle`, `sizeToggle`, `remove`, `fullscreenToggle`
 
+**Optional drag-handle slot:** Project a `[cbaModuleDragHandle]` element as a child
+of `<cba-module-header>` to let the Shell wire `cdkDrag` / `cdkDragHandle`. The
+library renders nothing when the slot is empty and does not depend on
+`@angular/cdk`. See [`MODULE_HEADER.md` §Drag handle slot](./MODULE_HEADER.md#drag-handle-slot)
+for the full Shell wiring example.
+
+> The basic example above intentionally omits the drag handle so the simplest
+> usage stays simple.
+
 ### ModuleContainer
 
 Wraps `ModuleHeader` + MFE content.
