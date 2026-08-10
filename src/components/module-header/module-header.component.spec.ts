@@ -1,4 +1,4 @@
-import { OutputEmitterRef } from '@angular/core';
+import { Component, OutputEmitterRef } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ModuleHeaderComponent } from './module-header.component';
 import { ModuleHeaderSize } from './module-header.types';
@@ -15,6 +15,24 @@ const ACTION_CASES: readonly ActionCase[] = [
   { label: 'Quitar módulo', output: 'remove' },
   { label: 'Pantalla completa', output: 'fullscreenToggle' },
 ];
+
+@Component({
+  standalone: true,
+  imports: [ModuleHeaderComponent],
+  template: `
+    <cba-module-header title="Host Module" [isFullscreen]="isFullscreen">
+      <button
+        type="button"
+        cbaModuleDragHandle
+        class="cba-module-header__action cba-module-header__action--drag"
+        aria-label="Arrastrar módulo">
+      </button>
+    </cba-module-header>
+  `,
+})
+class TestHostComponent {
+  isFullscreen = false;
+}
 
 describe('ModuleHeaderComponent', () => {
   let fixture: ComponentFixture<ModuleHeaderComponent>;
@@ -89,5 +107,54 @@ describe('ModuleHeaderComponent', () => {
     fixture.componentRef.setInput('status', 'loading');
     fixture.detectChanges();
     expect(statusSection.querySelector('fa-icon')).not.toBeNull();
+  });
+});
+
+describe('ModuleHeaderComponent — drag handle projection slot', () => {
+  function setupHost(inputs: { isFullscreen?: boolean }): ComponentFixture<TestHostComponent> {
+    const hostFixture = TestBed.createComponent(TestHostComponent);
+    if (inputs.isFullscreen !== undefined) {
+      hostFixture.componentInstance.isFullscreen = inputs.isFullscreen;
+    }
+    hostFixture.detectChanges();
+    return hostFixture;
+  }
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [TestHostComponent],
+    }).compileComponents();
+  });
+
+  it('renders the four built-in action buttons when no drag handle is projected (empty slot)', () => {
+    const directFixture = TestBed.createComponent(ModuleHeaderComponent);
+    directFixture.componentRef.setInput('title', 'Direct Module');
+    directFixture.detectChanges();
+
+    const navButtons = directFixture.nativeElement.querySelectorAll('nav button');
+    expect(navButtons).toHaveLength(4);
+  });
+
+  it('projects the drag handle into the actions nav before the built-in buttons', () => {
+    const hostFixture = setupHost({});
+
+    const nav = hostFixture.nativeElement.querySelector('nav');
+    const navButtons = nav.querySelectorAll('button');
+    const dragHandle = nav.querySelector('button[aria-label="Arrastrar módulo"]');
+
+    expect(nav).not.toBeNull();
+    expect(dragHandle).not.toBeNull();
+    expect(navButtons).toHaveLength(5);
+    expect(navButtons[0]).toBe(dragHandle);
+  });
+
+  it('hides the projected drag handle when isFullscreen is true', () => {
+    const hostFixture = setupHost({ isFullscreen: true });
+
+    const nav = hostFixture.nativeElement.querySelector('nav');
+    const dragHandle = hostFixture.nativeElement.querySelector('button[aria-label="Arrastrar módulo"]');
+
+    expect(nav).toBeNull();
+    expect(dragHandle).toBeNull();
   });
 });
