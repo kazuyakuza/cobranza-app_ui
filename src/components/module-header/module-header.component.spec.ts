@@ -108,14 +108,18 @@ describe('ModuleHeaderComponent', () => {
     fixture.detectChanges();
     expect(statusSection.querySelector('fa-icon')).not.toBeNull();
   });
+
+  it('renders the four built-in action buttons when no drag handle is projected (empty slot)', () => {
+    setup();
+    const navButtons = fixture.nativeElement.querySelectorAll('nav button');
+    expect(navButtons).toHaveLength(4);
+  });
 });
 
 describe('ModuleHeaderComponent — drag handle projection slot', () => {
-  function setupHost(inputs: { isFullscreen?: boolean }): ComponentFixture<TestHostComponent> {
+  function setupHost(isFullscreen = false): ComponentFixture<TestHostComponent> {
     const hostFixture = TestBed.createComponent(TestHostComponent);
-    if (inputs.isFullscreen !== undefined) {
-      hostFixture.componentInstance.isFullscreen = inputs.isFullscreen;
-    }
+    hostFixture.componentInstance.isFullscreen = isFullscreen;
     hostFixture.detectChanges();
     return hostFixture;
   }
@@ -126,17 +130,8 @@ describe('ModuleHeaderComponent — drag handle projection slot', () => {
     }).compileComponents();
   });
 
-  it('renders the four built-in action buttons when no drag handle is projected (empty slot)', () => {
-    const directFixture = TestBed.createComponent(ModuleHeaderComponent);
-    directFixture.componentRef.setInput('title', 'Direct Module');
-    directFixture.detectChanges();
-
-    const navButtons = directFixture.nativeElement.querySelectorAll('nav button');
-    expect(navButtons).toHaveLength(4);
-  });
-
   it('projects the drag handle into the actions nav before the built-in buttons', () => {
-    const hostFixture = setupHost({});
+    const hostFixture = setupHost();
 
     const nav = hostFixture.nativeElement.querySelector('nav');
     const navButtons = nav.querySelectorAll('button');
@@ -149,7 +144,7 @@ describe('ModuleHeaderComponent — drag handle projection slot', () => {
   });
 
   it('hides the projected drag handle when isFullscreen is true', () => {
-    const hostFixture = setupHost({ isFullscreen: true });
+    const hostFixture = setupHost(true);
 
     const nav = hostFixture.nativeElement.querySelector('nav');
     const dragHandle = hostFixture.nativeElement.querySelector('button[aria-label="Arrastrar módulo"]');

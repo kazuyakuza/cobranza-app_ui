@@ -19,7 +19,7 @@
 .cba-module-header__section {
   display: flex;
   align-items: center;
-  min-height: var(--cba-module-header-min-height, 40px);
+  min-height: inherit;
 }
 
 .cba-module-header__section--status {

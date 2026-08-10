@@ -352,10 +352,6 @@ The Shell can project an optional drag handle into `cba-module-header` via the
 - The Shell **must** provide the accessible name (`aria-label="Arrastrar módulo"`).
 - Full example: see [`MODULE_HEADER.md` §Drag handle slot](./MODULE_HEADER.md#drag-handle-slot).
 
-**Anti-pattern:** asking the UI library to implement drag behaviour or to add
-`@angular/cdk` as a dependency. The library provides only the projection slot and
-the visual contract; drag-and-drop is Shell-owned.
-
 ## MFE checklist
 
 - [ ] Prefer lib components (`cba-button`, `cba-card`, form wrappers) over unthemed Bootstrap.
