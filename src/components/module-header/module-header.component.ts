@@ -56,6 +56,7 @@ const STATUS_VISUALS: Readonly<Record<Exclude<ModuleHeaderStatus, null>, StatusV
  * Exported from `@cobranza-apps/ui` via `src/public-api.ts`.
  *
  * @usageNotes
+ * Basic (no drag handle):
  * ```html
  * <cba-module-header
  *   title="Customers"
@@ -69,6 +70,33 @@ const STATUS_VISUALS: Readonly<Record<Exclude<ModuleHeaderStatus, null>, StatusV
  *   (fullscreenToggle)="onFullscreen()">
  * </cba-module-header>
  * ```
+ *
+ * Shell wiring with optional drag-handle projection slot:
+ * ```html
+ * <div cdkDrag>
+ *   <cba-module-container [size]="size">
+ *     <cba-module-header
+ *       [title]="title"
+ *       [status]="status"
+ *       [size]="size"
+ *       [isCollapsed]="isCollapsed"
+ *       [isFullscreen]="false"
+ *       (collapseToggle)="onCollapse()"
+ *       (sizeToggle)="onSizeChange($event)"
+ *       (remove)="onRemove()"
+ *       (fullscreenToggle)="onFullscreen()">
+ *       <button
+ *         type="button"
+ *         cbaModuleDragHandle
+ *         cdkDragHandle
+ *         class="cba-module-header__action cba-module-header__action--drag"
+ *         aria-label="Arrastrar módulo">
+ *       </button>
+ *     </cba-module-header>
+ *   </cba-module-container>
+ * </div>
+ * ```
+ * The library does NOT depend on `@angular/cdk`; drag-and-drop is owned by the Shell.
  *
  * Aria-labels and tooltips for action buttons are Spanish by default (sourced
  * from `CBA_UI_MESSAGES`). There is no i18n framework; the platform is

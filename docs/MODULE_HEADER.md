@@ -10,8 +10,10 @@ Shell-injected header rendered above each MFE module in the Company Back-office 
 - [Outputs](#outputs)
 - [Status values](#status-values)
 - [Fullscreen behaviour](#fullscreen-behaviour)
+- [Icon order](#icon-order)
 - [Drag handle slot](#drag-handle-slot)
 - [Spinner animation](#spinner-animation)
+- [Title typography](#title-typography)
 - [Accessibility](#accessibility)
 - [Related docs](#related-docs)
 
