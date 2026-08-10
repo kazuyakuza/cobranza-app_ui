@@ -18,7 +18,6 @@ import {
   faPen,
   faSpinner,
   faTriangleExclamation,
-  faUpDownLeftRight,
   faWindowMaximize,
   faXmark,
 } from '@fortawesome/free-solid-svg-icons';
@@ -48,9 +47,11 @@ const STATUS_VISUALS: Readonly<Record<Exclude<ModuleHeaderStatus, null>, StatusV
  * Shell-injected header rendered above each MFE module.
  *
  * Renders a three-section layout — status | title | actions — using only
- * `--cba-*` design tokens. In fullscreen mode only the title is shown. Drag
- * and drop are intentionally NOT implemented here (owned by the Shell +
- * `@cobranza-apps/mfe-events`); the title is never editable from this header.
+ * `--cba-*` design tokens. In fullscreen mode only the title is shown. The
+ * Shell projects an optional drag handle via the `[cbaModuleDragHandle]`
+ * projection slot; drag-and-drop is intentionally NOT implemented here (owned
+ * by the Shell + `@cobranza-apps/mfe-events`); the title is never editable
+ * from this header.
  *
  * Exported from `@cobranza-apps/ui` via `src/public-api.ts`.
  *
@@ -131,9 +132,6 @@ export class ModuleHeaderComponent {
 
   /** Icon for the expand button (visible when `isCollapsed === true`). Template-referenced. */
   protected readonly faChevronDown = faChevronDown;
-
-  /** Drag handle icon (visual only; drag is owned by the Shell). Template-referenced. */
-  protected readonly faDrag = faUpDownLeftRight;
 
   /** Fullscreen button icon. Template-referenced. */
   protected readonly faFullscreen = faWindowMaximize;
