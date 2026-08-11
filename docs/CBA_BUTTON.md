@@ -44,6 +44,9 @@ import { CbaButtonComponent } from '@cobranza-apps/ui';
 | `type` | `'button' \| 'submit' \| 'reset'` | `'button'` | Native button type forwarded to the inner `<button>`. |
 | `icon` | `IconDefinition \| undefined` | `undefined` | Optional Font Awesome icon definition. |
 | `iconPosition` | `'leading' \| 'trailing'` | `'leading'` | Position of the icon relative to the label. |
+| `truncate` | `boolean` | `false` | Truncates the label with an ellipsis when space is constrained (sets `overflow: hidden`, `text-overflow: ellipsis`, `white-space: nowrap` on `.cba-button__label`). Useful in constrained flex containers. |
+| `iconOnly` | `boolean` | `false` | Renders a minimal square button for icon-only usage. Sets `aspect-ratio: 1 / 1`, `min-width: auto`, and per-size padding (`--cba-space-1` for `sm`, `--cba-space-2` for `md`) so the button collapses to the icon. The rendered icon is `aria-hidden`; consumers must provide an accessible label via `aria-label` on `<cba-button>`. |
+| `block` | `boolean` | `false` | Makes the button fill the full width of its parent. The host becomes `display: block` at `width: 100%` and the internal control spans `100%`. When combined with `variant="ghost"`, the label is left-aligned via `justify-content: flex-start`. |
 
 ## Outputs
 
@@ -94,6 +97,36 @@ export class MyComponent {
 ```
 
 When `loading` is `true`, the icon is replaced by a spinner regardless of `iconPosition`.
+
+### Label truncation
+
+Set `[truncate]="true"` to ellipsis-clamp long labels inside a constrained parent. The host modifier `cba-button--truncate` sets `min-width: 0` on the control and `overflow: hidden; text-overflow: ellipsis; white-space: nowrap` on `.cba-button__label`.
+
+```html
+<cba-button [truncate]="true" style="max-width: 120px;">
+  Very long action label that should ellipsis
+</cba-button>
+```
+
+### Icon-only
+
+Set `[iconOnly]="true"` to render a minimal square button when the button contains only an icon. The host modifier `cba-button--icon-only` sets `aspect-ratio: 1 / 1`, `min-width: auto`, and per-size padding (`--cba-space-1` for `sm`, `--cba-space-2` for `md`) so the button collapses to the icon. Pair with consumer-side `flex: 0 0 auto` to prevent stretching in a flex parent.
+
+```html
+<cba-button [icon]="faPlus" [iconOnly]="true" (cbaClick)="onAdd()"></cba-button>
+```
+
+> **Accessibility:** the rendered `<fa-icon>` is `aria-hidden`. When using `iconOnly`, supply an accessible label via `aria-label` on `<cba-button>` (e.g. `<cba-button [icon]="faPlus" [iconOnly]="true" aria-label="Add item">`) so the control remains announced by assistive technology.
+
+### Block
+
+Set `[block]="true"` to make the button host `display: block` at `width: 100%` so the internal control fills its parent. Ghost block buttons left-align their label.
+
+```html
+<cba-button variant="ghost" [block]="true" (cbaClick)="onFilter()">
+  Filter results
+</cba-button>
+```
 
 ## State overlays (hover / active)
 

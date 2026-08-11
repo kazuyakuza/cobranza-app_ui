@@ -62,6 +62,9 @@ export type CbaButtonIconPosition = 'leading' | 'trailing';
     '[class.cba-button--md]': "size() === 'md'",
     '[class.cba-button--loading]': 'loading()',
     '[class.cba-button--disabled]': 'isDisabled()',
+    '[class.cba-button--truncate]': 'truncate()',
+    '[class.cba-button--icon-only]': 'iconOnly()',
+    '[class.cba-button--block]': 'block()',
   },
 })
 export class CbaButtonComponent {
@@ -85,6 +88,43 @@ export class CbaButtonComponent {
 
   /** Position of the optional icon relative to the label. */
   readonly iconPosition = input<CbaButtonIconPosition>('leading');
+
+  /**
+   * Truncates the button label with an ellipsis when it overflows the
+   * available space. Useful for buttons inside constrained flex containers.
+   *
+   * Drives the host modifier class `cba-button--truncate`.
+   *
+   * @default false
+   */
+  readonly truncate = input<boolean>(false);
+
+  /**
+   * Renders the button as a minimal square icon-only control.
+   *
+   * Use when the button has an `icon` but no text content. Removes excessive
+   * horizontal padding, applies a square aspect ratio, and keeps the icon
+   * centered. Consumers should provide an accessible label via `aria-label`
+   * on `<cba-button>` (the icon itself is `aria-hidden`).
+   *
+   * Drives the host modifier class `cba-button--icon-only`.
+   *
+   * @default false
+   */
+  readonly iconOnly = input<boolean>(false);
+
+  /**
+   * Makes the button fill the full width of its parent container.
+   *
+   * The host becomes a block-level element and the internal control spans
+   * 100% width. When combined with `variant="ghost"`, the label is
+   * left-aligned via `justify-content: flex-start`.
+   *
+   * Drives the host modifier class `cba-button--block`.
+   *
+   * @default false
+   */
+  readonly block = input<boolean>(false);
 
   /**
    * Emitted when the user clicks the internal native `<button>`.
