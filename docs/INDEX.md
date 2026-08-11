@@ -53,7 +53,7 @@
 
 ## Visual preview
 
-- [theme-preview.html](./theme-preview.html) — Live Minimal Yet Warm theme preview: linked to compiled library CSS, token swatches, button state matrix (5 variants × 4 states × 3 surfaces), text-on-surfaces legibility cards, and Shell mockup demonstrating surface ownership (canvas → panel → elevated → inset). Regenerate with `npm run build:preview` after token changes.
+- [theme-preview.html](./theme-preview.html) — Live Minimal Yet Warm theme preview: minimizable sidebar (state persisted in localStorage), Shell mockup (header + non-scrolling workspace + footer), 7 module examples (100%/50%, expanded/collapsed) using the exact library component CSS classes and Font Awesome icons, full style showcase (31 color-token swatches, button state matrix, labels & pills, icon list, text-on-surfaces, typography scale, border scale, selected states, form states, semantic status badges). Regenerate with `npm run build:preview` after token changes.
 
 ## Regression tests
 

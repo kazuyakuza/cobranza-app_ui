@@ -2,7 +2,7 @@
 <!--
   docs/theme-preview.html
   =======================
-  Single-theme visual preview for @cobranza-apps/ui — Minimal Yet Warm (refined 2026-08-06).
+  Single-theme visual preview for @cobranza-apps/ui — Minimal Yet Warm (reimplemented 2026-08-11).
 
   HOW TO REGENERATE THEME CSS:
     npm run build:preview
@@ -20,31 +20,44 @@
 
   FONT AWESOME CDN:
     The preview loads Font Awesome 6.7.2 via CDN (<link> in <head>) to render the same
-    icons the Angular module-header component uses (drag, collapse, size toggle, fullscreen,
-    remove, status indicators). This requires network access — the preview is a dev/CI
-    artifact, not an offline-capable deliverable. If the CDN is unreachable, icons will
-    not render but the layout remains intact.
+    icons the Angular components use (module header actions, status indicators, shell
+    chrome). This requires network access — the preview is a dev/CI artifact, not an
+    offline-capable deliverable. If the CDN is unreachable, icons will not render but
+    the layout remains intact.
 
   COPIED COMPONENT SCSS:
-    Two component stylesheets are copied verbatim into the inline <style> so the static
+    Three component stylesheets are copied into the inline <style> so the static
     file:// preview renders the emulated Angular component styles without the Angular runtime:
       - .cba-module-header rules from src/components/module-header/module-header.component.scss
       - .cba-module-container rules from src/components/module-container/module-container.component.scss
+      - .cba-module-footer rules from src/components/module-footer/module-footer.component.scss
     Each copied block is marked with a "keep in sync" comment. When the source SCSS changes,
     update the corresponding block in this file to maintain visual parity. Known divergence:
     the container border-radius uses --cba-radius-lg (design-token intent) instead of the
-    component's current --cba-radius-md; flagged as a follow-up.
+    component's current --cba-radius-md; flagged as a follow-up. The footer status font-size
+    uses the value-equivalent tokens --cba-font-size-body (0.875rem) / --cba-line-height-body
+    (1.5) instead of the component's literal 14px / 1.5 (spec §6 token compliance).
+
+  SIDEBAR MINIMIZATION:
+    The left sidebar (.controls) can be hidden with the "X" close button (top-right of the
+    sidebar). When hidden, the .preview-bar shows a "Controles" reopen button. The open/close
+    state persists in localStorage under key 'cba-theme-preview-sidebar-visible' (default open)
+    and is applied on page load. Hidden state toggles the .app.is-sidebar-hidden grid rule
+    (single-column layout, .controls display:none).
 
   STRUCTURE:
     Left sidebar (.controls) — dark tool chrome: theme selector, source hex chips, role map.
     Right panel (.preview) — live Shell mockup using real --cba-* tokens:
-      - Shell header (.shell-header) — elevated surface
-      - Module card (.module) — panel surface with elevated header, inset footer
-      - Workspace (.workspace) — canvas surface (visible behind the module)
-      - Token swatches (.swatch-grid) — 9 chips: 4 bg + text + border + 3 accents
-      - Button matrix (.btn-matrix) — 5 variants × 4 states × 3 surfaces = 60 buttons
-      - Text on surfaces (.text-grid) — 4 cards showing text tokens on each bg surface
-      - Accent pills + raw strip — informational color reference
+      - Preview bar (.preview-bar) — theme label + sidebar reopen button
+      - Shell header (.shell-header) — elevated surface, search + notification icons
+      - Workspace (.workspace) — non-scrolling canvas; the page itself scrolls
+      - 7 module examples (#moduleHost) — 100%/50% × expanded/collapsed using the exact
+        library component CSS classes (cba-module-container, cba-module-header,
+        cba-module-footer); module #1 holds a 5-row client table and a right-aligned
+        status footer (pv-module-footer--end preview-only modifier)
+      - Style showcase (.extras) — 31 token swatches, button matrix (5×4×3), labels &
+        pills, icon grid, text-on-surfaces, typography scale, border scale, selected
+        states, form states, semantic status badges
 
   SURFACE OWNERSHIP (see docs/CONSUMER_GUIDE.md):
     canvas (--cba-bg-primary)    → Shell workspace floor
@@ -56,6 +69,7 @@
     - Do NOT mirror token values inline; always link the compiled CSS.
     - Coral (--cba-accent-danger, --cba-accent-warning) reserved for accents/status only.
     - --cba-text-muted is RESTRICTED on canvas and inset (fails WCAG AA); show callout.
+    - Every JS function takes ≤2 params and is ≤50 lines (project rules).
 -->
 <html lang="es">
 <head>
@@ -90,29 +104,45 @@
     .src-hex .row i{width:20px;height:12px;border-radius:3px;border:1px solid rgba(255,255,255,.12);display:block}
     .map{margin-top:8px;font-size:10.5px;color:#9ab;font-family:ui-monospace,monospace;line-height:1.5}
 
+    /* Sidebar minimization — preview only */
+    .app.is-sidebar-hidden{grid-template-columns:1fr}
+    .app.is-sidebar-hidden .controls{display:none}
+    .controls__header{display:flex;align-items:center;justify-content:space-between;gap:8px}
+    .controls__close{flex:0 0 auto;width:24px;height:24px;border:1px solid #333;background:#222;color:#ddd;border-radius:6px;cursor:pointer;font:inherit;display:inline-flex;align-items:center;justify-content:center}
+    .controls__close:hover{border-color:#555}
+    .controls__close:focus-visible{outline:none;box-shadow:var(--cba-focus-ring)}
+    .preview-bar__show{display:none;border:1px solid var(--cba-border-strong);background:var(--cba-bg-secondary);color:var(--cba-text-secondary);border-radius:var(--cba-radius-sm);padding:4px 10px;font:inherit;font-size:12px;cursor:pointer;margin-right:var(--cba-space-3)}
+    .preview-bar__show:hover{background-image:linear-gradient(var(--cba-hover),var(--cba-hover));color:var(--cba-text-primary)}
+    .preview-bar__show:focus-visible{outline:none;box-shadow:var(--cba-focus-ring)}
+    .app.is-sidebar-hidden .preview-bar__show{display:inline-flex}
+
     /* Preview surface — tokens resolve from linked theme-preview.css (:root --cba-*) */
     .preview{display:flex;flex-direction:column;min-height:100vh;background:var(--cba-bg-primary);color:var(--cba-text-primary)}
-    .preview-bar{padding:8px 14px;font-size:12px;color:var(--cba-text-muted);border-bottom:1px solid var(--cba-border-default);background:var(--cba-bg-elevated)}
+    .preview-bar{padding:8px 14px;font-size:12px;color:var(--cba-text-muted);border-bottom:1px solid var(--cba-border-default);background:var(--cba-bg-elevated);display:flex;align-items:center;gap:var(--cba-space-2)}
     .preview-bar strong{color:var(--cba-text-secondary)}
-    .shell-header{height:var(--cba-header-height);display:flex;align-items:center;gap:12px;padding:0 14px;background:var(--cba-bg-elevated);border-bottom:1px solid var(--cba-border-default)}
-    .logo{width:28px;height:28px;border-radius:8px;background:var(--cba-bg-tertiary);border:1px solid var(--cba-border-strong)}
+    .shell-header{height:var(--cba-header-height);display:flex;align-items:center;gap:var(--cba-space-3);padding:0 var(--cba-space-4);background:var(--cba-bg-elevated);border-bottom:1px solid var(--cba-border-default)}
+    .logo{width:28px;height:28px;border-radius:var(--cba-radius-md);background:var(--cba-bg-tertiary);border:1px solid var(--cba-border-strong)}
     .brand{font-weight:700}
     .spacer{flex:1}
     .search{display:flex;align-items:center;gap:8px;padding:6px 12px;border-radius:999px;border:1px solid var(--cba-border-strong);background:var(--cba-bg-tertiary);color:var(--cba-text-secondary);font-size:12px;min-width:140px}
     .icon-btn{width:32px;height:32px;border-radius:999px;border:1px solid var(--cba-border-strong);background:var(--cba-bg-secondary);color:var(--cba-text-secondary);display:inline-flex;align-items:center;justify-content:center}
-    .workspace{flex:1;padding:16px;overflow-y:auto}
-    /* .module kept as a layout wrapper only (used by JS renderers). All visuals owned by .cba-module-container. */
-    .module{max-width:900px}
-    .module-body{padding:14px}
-    .panel-title-row{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px}
+    .workspace{flex:1 0 auto;padding:var(--cba-space-4);background:var(--cba-bg-primary);display:flex;flex-direction:column}
+
+    /* Module rows — preview only (no library counterpart needed) */
+    .module-row{display:flex;gap:var(--cba-space-4);align-items:flex-start;margin-bottom:var(--cba-space-4)}
+    .module-row .module{margin-bottom:0}
+    .module{margin-bottom:var(--cba-space-4);max-width:none}
+    .pv-module-footer--end{justify-content:flex-end}
+
+    /* Panel table chrome (preview-only helpers; modules own visuals via .cba-module-container) */
+    .panel-title-row{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:var(--cba-space-3)}
     .panel-title{font-weight:700}
-    .panel-meta{font-size:12px;color:var(--cba-text-muted);font-weight:600}
-    table{width:100%;border-collapse:collapse;font-size:var(--cba-font-size-small)}
-    thead th{text-align:left;padding:11px 12px;background:var(--cba-bg-tertiary);color:var(--cba-text-secondary);font-weight:700;border-bottom:1px solid var(--cba-border-default)}
-    tbody td{padding:11px 12px;border-bottom:1px solid var(--cba-border-default);font-weight:500}
-    tbody tr:hover td{background:var(--cba-hover)}
-    tbody tr:last-child td{border-bottom:none}
-    .module-footer{padding:9px 12px;background:var(--cba-bg-tertiary);border-top:1px solid var(--cba-border-default);font-weight:700;color:var(--cba-accent-success)}
+    .panel-meta{font-size:var(--cba-font-size-small);color:var(--cba-text-muted);font-weight:600}
+    .cba-module-container__body table{width:100%;border-collapse:collapse;font-size:var(--cba-font-size-small)}
+    .cba-module-container__body thead th{text-align:left;padding:var(--cba-space-3);background:var(--cba-bg-tertiary);color:var(--cba-text-secondary);font-weight:700;border-bottom:1px solid var(--cba-border-default)}
+    .cba-module-container__body tbody td{padding:var(--cba-space-3);border-bottom:1px solid var(--cba-border-default);font-weight:500;color:var(--cba-text-primary)}
+    .cba-module-container__body tbody tr:hover td{background:var(--cba-hover)}
+    .cba-module-container__body tbody tr:last-child td{border-bottom:none}
     .shell-footer{height:var(--cba-footer-height);display:flex;align-items:center;justify-content:center;gap:10px;border-top:1px solid var(--cba-border-default);background:var(--cba-bg-elevated)}
     .section-pill,
     .demo-pill{padding:8px 16px;border-radius:999px;border:1px solid var(--cba-border-strong);background:var(--cba-bg-secondary);color:var(--cba-text-secondary);font-size:13px;font-weight:700}
@@ -426,12 +456,30 @@
         height: 6px;
       }
     }
+
+    /* Copied from src/components/module-footer/module-footer.component.scss — keep in sync.
+       NOTE: :host mapped to .cba-module-footer (preview has no Shadow DOM).
+       NOTE: the component uses font-size:14px; line-height:1.5; for __status; the preview uses
+       the value-equivalent tokens --cba-font-size-body (0.875rem === 14px) and
+       --cba-line-height-body (1.5) per spec §6 token compliance. */
+    .cba-module-footer{display:flex;align-items:center;height:var(--cba-module-footer-height,40px);padding:0 var(--cba-space-4);gap:var(--cba-space-2);background-color:var(--cba-bg-tertiary);overflow:hidden;box-sizing:border-box}
+    .cba-module-footer__status{display:inline-flex;align-items:center;gap:var(--cba-space-2);font-size:var(--cba-font-size-body);line-height:var(--cba-line-height-body)}
+    .cba-module-footer__status--loading{color:var(--cba-accent-info)}
+    .cba-module-footer__status--loaded,.cba-module-footer__status--success{color:var(--cba-accent-success)}
+    .cba-module-footer__status--warning{color:var(--cba-accent-warning)}
+    .cba-module-footer__status--error{color:var(--cba-accent-danger)}
+    .cba-module-footer__status--dirty{color:var(--cba-text-secondary)}
   </style>
 </head>
 <body>
-  <div class="app">
+  <div class="app" id="app">
     <aside class="controls">
-      <h1>Minimal Yet Warm — preview</h1>
+      <div class="controls__header">
+        <h1>Minimal Yet Warm — preview</h1>
+        <button type="button" id="controlsClose" class="controls__close" aria-label="Cerrar panel de controles" title="Cerrar panel de controles">
+          <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+        </button>
+      </div>
       <p class="hint">Preview enlazado a docs/theme-preview.css (compilado de src/theme/theme.scss). Regenera con `npm run build:preview` tras cambiar tokens. Coral reservado a acentos.</p>
       <div class="theme-list" id="themeList"></div>
       <div class="src-hex">
@@ -441,83 +489,27 @@
       </div>
     </aside>
     <div class="preview" id="preview">
-      <div class="preview-bar">Theme · <strong id="activeName">—</strong></div>
+      <div class="preview-bar">
+        <button type="button" id="previewBarShow" class="preview-bar__show" aria-label="Mostrar panel de controles" title="Mostrar panel de controles">
+          <i class="fa-solid fa-bars" aria-hidden="true"></i> Controles
+        </button>
+        <span>Theme · <strong id="activeName">—</strong></span>
+      </div>
       <header class="shell-header">
-        <div class="logo"></div><div class="brand">Cobranza</div><div class="spacer"></div>
-        <div class="search">⌕ &nbsp; Ctrl + K</div>
-        <div class="icon-btn">🔔</div><div class="icon-btn">U</div>
+        <div class="logo" aria-hidden="true"></div><div class="brand">Cobranza</div><div class="spacer"></div>
+        <div class="search"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>&nbsp;Ctrl + K</div>
+        <button type="button" class="icon-btn" aria-label="Notificaciones"><i class="fa-regular fa-bell" aria-hidden="true"></i></button>
+        <button type="button" class="icon-btn" aria-label="Usuario">U</button>
       </header>
       <main class="workspace">
-        <section class="module cba-module-container">
-          <header class="cba-module-header">
-            <div class="cba-module-header__section cba-module-header__section--status cba-module-header__status--loaded">
-              <i class="fa-solid fa-check" aria-hidden="true"></i>
-            </div>
-            <div class="cba-module-header__section cba-module-header__section--title cba-text-heading-md">
-              Clientes List
-            </div>
-            <nav class="cba-module-header__section cba-module-header__section--actions">
-              <button type="button"
-                      class="cba-module-header__action cba-module-header__action--drag"
-                      aria-label="Arrastrar módulo"
-                      title="Arrastrar módulo">
-                <i class="fa-solid fa-up-down-left-right" aria-hidden="true"></i>
-              </button>
-              <button type="button"
-                      class="cba-module-header__action"
-                      aria-label="Colapsar módulo"
-                      title="Colapsar módulo">
-                <i class="fa-solid fa-chevron-up" aria-hidden="true"></i>
-              </button>
-              <button type="button"
-                      class="cba-module-header__action"
-                      aria-label="Reducir módulo a 50%"
-                      title="Reducir módulo a 50%">
-                <i class="fa-solid fa-arrows-left-right-to-line" aria-hidden="true"></i>
-              </button>
-              <button type="button"
-                      class="cba-module-header__action"
-                      aria-label="Pantalla completa"
-                      title="Pantalla completa">
-                <i class="fa-solid fa-window-maximize" aria-hidden="true"></i>
-              </button>
-              <button type="button"
-                      class="cba-module-header__action"
-                      aria-label="Quitar módulo"
-                      title="Quitar módulo">
-                <i class="fa-solid fa-xmark" aria-hidden="true"></i>
-              </button>
-            </nav>
-          </header>
-          <div class="module-body">
-            <div class="panel-title-row">
-              <div class="panel-title cba-text-heading-md">Lista de clientes</div>
-              <div class="panel-meta">100% · expandido</div>
-            </div>
-            <table>
-              <thead><tr><th>Documento</th><th>Nombre</th><th>Deuda actual</th></tr></thead>
-              <tbody>
-                <tr><td>12.345.678-9</td><td>Acme S.A.</td><td>1,200,000</td></tr>
-                <tr><td>9.876.543-2</td><td>Comercial del Norte</td><td>540,000</td></tr>
-                <tr><td>11.223.344-5</td><td>Distribuidora Sur</td><td>0</td></tr>
-                <tr><td>45.678.901-3</td><td>Ferretería El Tornillo</td><td>87,500</td></tr>
-              </tbody>
-            </table>
-          </div>
-          <div class="module-footer cba-text-small">Listo</div>
-        </section>
-        <!--
-          EXTRAS SECTION — Token reference panels below the Shell mockup.
-          Swatches and text samples are rendered by JS from TOKEN_ROLES / TEXT_SAMPLES arrays.
-          Button matrix is generated by buildButtonMatrix() from BUTTON_VARIANTS / STATES / SURFACES.
-          When adding a new token to TOKEN_ROLES, the swatch grid updates automatically.
-        -->
+        <!-- 7 module examples rendered by renderModuleExamples() from MODULE_INSTANCES + MODULE_LAYOUT -->
+        <div id="moduleHost"></div>
         <div class="extras">
           <!--
-            TOKEN SWATCHES — 9 chips showing the key design tokens.
-            First 4 use .cba-bg-* utility classes from the compiled CSS.
-            Remaining 5 use inline var(--cba-*) backgrounds (no utility class exists for them).
-            Each chip shows: semantic name, hex value, and --cba-* token name.
+            TOKEN SWATCHES — 31 chips: one per background, text, border, accent, interactive,
+            selected, and form-state token. Backgrounds with a .cba-bg-* utility class use it;
+            the rest fall back to inline var(--cba-*) backgrounds. Each chip shows: semantic
+            name, reference value (hex / rgba / alias var), and --cba-* token name.
           -->
           <h2>Token swatches</h2>
           <div class="swatch-grid" id="swatchGrid"></div>
@@ -531,13 +523,20 @@
           <h2>Button states</h2>
           <div class="btn-matrix" id="buttonMatrix"></div>
 
+          <!-- Labels (.cba-text-*) in normal/disabled/error states + pill chips (normal/hover/selected/disabled) -->
+          <h2>Labels &amp; pills</h2>
+          <div id="labelsPills"></div>
+
+          <!-- Every Font Awesome icon the library uses (module header, footer, shell chrome) -->
+          <h2>Icons</h2>
+          <div id="iconsGrid"></div>
+
           <!--
-            TEXT ON SURFACES — 4 cards showing text token legibility on each bg surface.
-            Primary and secondary text shown on all surfaces.
-            Muted text shown ONLY on panel and elevated (passes WCAG AA).
-            On canvas and inset: a warning callout explains the restriction and recommends
-            --cba-text-secondary instead. Canvas also shows --cba-text-inverse on accent.
-            Generated by renderTextSamples() from TEXT_SAMPLES array.
+            TEXT ON SURFACES — cards showing text token legibility on each bg surface.
+            Primary and secondary text shown on all surfaces. Muted text shown ONLY on panel
+            and elevated (passes WCAG AA). On canvas and inset: a warning callout explains the
+            restriction and recommends --cba-text-secondary instead. Canvas also shows
+            --cba-text-inverse on accent. Generated by renderTextSamples() from TEXT_SAMPLES.
           -->
           <h2>Text on surfaces</h2>
           <div class="text-grid" id="textGrid"></div>
@@ -547,106 +546,23 @@
           <div class="accent-row" id="accentRow"></div>
           <div class="raw-strip" id="rawStrip"></div>
 
-          <!--
-            CLUSTER 3 — Multi-module density strip.
-            WHAT IT DEMOS: Two module cards side by side on the canvas workspace to verify
-            that canvas→panel→elevated→inset separation holds under multi-module density
-            (2–4 modules visible simultaneously). Reuses the existing .module chrome classes.
-            TOKENS USED: --cba-bg-primary (canvas), --cba-bg-secondary (panel/module body),
-            --cba-bg-elevated (module header), --cba-bg-tertiary (module footer, thead),
-            --cba-border-default (module frame), --cba-shadow-module (depth).
-            HOW TO EXTEND: Add more module cards to the DENSITY_MODULES array in the <script>
-            below. Each entry needs {title, status, meta}. Rows come from DENSITY_ROWS.
-            No new tokens are needed — this section validates existing surface hierarchy.
-          -->
-          <h2>Multi-module density</h2>
-          <div class="pattern-grid" id="densityStrip"></div>
+          <!-- Six typography steps at their token pairs (font-size + line-height) -->
+          <h2>Typography scale</h2>
+          <div class="type-scale" id="typeScale"></div>
 
-          <!--
-            CLUSTER 3 — Border scale swatches.
-            WHAT IT DEMOS: Three swatches on a panel background showing the three border
-            levels side by side so the visual difference is immediately verifiable.
-            TOKENS USED: --cba-border-subtle (internal separators / row lines),
-            --cba-border-default (structural edges / module frames / input borders),
-            --cba-border-strong (important chrome / footer pills / icon-button outlines).
-            HOW TO EXTEND: Add a new entry to the BORDER_LEVELS array in the <script>
-            below: [id, --cba-* token name, role description]. Add a matching
-            .border-swatch--<id> CSS rule if a new visual treatment is needed.
-            See docs/THEME.md §Border Roles for the authoritative usage table.
-          -->
+          <!-- Three border levels on a panel background: subtle / default / strong -->
           <h2>Border scale</h2>
           <div class="border-scale" id="borderScale"></div>
 
-          <!--
-            CLUSTER 3 — Selected samples (footer pill + fake nav item + fake table row).
-            WHAT IT DEMOS: Three control types (pill, nav item, table row) each showing
-            normal / hover / selected / disabled states side by side. Selected must be
-            visually stronger than hover — this is the key distinction for AI agents.
-            TOKENS USED: --cba-selected-bg, --cba-selected-border, --cba-selected-text
-            (selected state); --cba-hover (hover overlay); --cba-state-disabled-bg,
-            --cba-state-disabled-text (disabled state); --cba-border-strong (pill border).
-            HOW TO EXTEND: Add entries to SELECTED_PILLS / SELECTED_NAV / TABLE_ROWS arrays
-            in the <script> below. Each array entry is [label, cssClass]. To demo a new
-            control type (e.g. dropdown option, filter chip), add a new pattern-card block
-            in renderSelectedSamples() with the appropriate .is-selected class.
-            See docs/CONSUMER_GUIDE.md §Selected State Usage for wiring recipes.
-          -->
+          <!-- Selected-state samples: footer pills, nav items, table rows -->
           <h2>Selected states</h2>
           <div class="pattern-grid" id="selectedSamples"></div>
 
-          <!--
-            CLUSTER 3 — Form state samples.
-            WHAT IT DEMOS: Five static field boxes showing the form-state matrix:
-            default / focus / disabled / readonly / invalid. These are CSS-only
-            approximations (no Angular components) so AI agents can verify token wiring
-            visually. readonly is distinct from disabled (inset bg, no opacity fade).
-            TOKENS USED: --cba-bg-secondary + --cba-border-default (default);
-            --cba-accent-primary + --cba-focus-ring (focus); --cba-state-disabled-bg +
-            --cba-state-disabled-text (disabled); --cba-bg-tertiary + --cba-text-secondary
-            (readonly); --cba-state-invalid-border + --cba-state-invalid-text (invalid).
-            HOW TO EXTEND: Add a new entry to the FORM_STATES array in the <script>
-            below: [label, cssClass, displayText]. Add a matching .form-field--<state>
-            CSS rule above. For a "valid" state, add .form-field--valid using
-            --cba-state-valid-border + --cba-state-valid-text.
-            See docs/THEME.md §Form State Matrix for the full token table.
-          -->
+          <!-- Static form-state field boxes: default / focus / disabled / readonly / invalid -->
           <h2>Form states</h2>
           <div class="form-states" id="formStates"></div>
 
-          <!--
-            CLUSTER 3 — Type scale sample.
-            WHAT IT DEMOS: All six typography steps rendered at their actual token values
-            so the scale is visually verifiable. Each row shows the step name, the
-            --cba-font-size-* token, and the rendered sample text at that size.
-            TOKENS USED: --cba-font-size-{display,heading-lg,heading-md,body,small,caption}
-            paired with --cba-line-height-{display,heading-lg,heading-md,body,small,caption}.
-            Base stays Inter / 14px / 1.5.
-            HOW TO EXTEND: Add a new entry to the TYPE_SCALE array in the <script>
-            below: [stepName, fontSizeToken, lineHeightToken, sampleText]. The renderer
-            applies the tokens inline via var(). To add a new step, also add matching
-            --cba-font-size-<step> and --cba-line-height-<step> tokens in
-            src/theme/_variables.scss, and a .cba-text-<step> utility in _utilities.scss.
-            See docs/THEME.md §Typography Scale for the full step table and usage guidance.
-          -->
-          <h2>Type scale</h2>
-          <div class="type-scale" id="typeScale"></div>
-
-          <!--
-            CLUSTER 3 — Semantic status badges (solid + outline + neutral).
-            WHAT IT DEMOS: Three badge variants (solid, outline, neutral) for each
-            semantic status: success / warning / danger / info / neutral. Solid badges
-            use accent bg + inverse text; outline badges use accent color for border+text
-            on transparent bg; neutral uses inset bg + border-default.
-            TOKENS USED: --cba-accent-success, --cba-accent-warning, --cba-accent-danger,
-            --cba-accent-info (solid/outline badges); --cba-text-inverse (solid badge text);
-            --cba-bg-tertiary + --cba-border-default + --cba-text-secondary (neutral badge).
-            HOW TO EXTEND: Add a new entry to the STATUS_BADGES array in the <script>
-            below: [name, --cba-* token, label]. The renderer produces solid + outline
-            variants automatically. For a new badge shape (e.g. dot indicator), add a
-            new CSS class and extend renderStatusBadges().
-            IMPORTANT: warning vs danger must be distinguishable by label/icon, not color
-            alone. See docs/THEME.md §Semantic Status Patterns for the full recipe table.
-          -->
+          <!-- Semantic status badges: solid + outline + neutral -->
           <h2>Semantic status</h2>
           <div class="status-row" id="statusBadges"></div>
         </div>
@@ -660,12 +576,13 @@
     </div>
   </div>
 <!--
-  SCRIPT — Data-driven rendering of swatches, button matrix, text samples, and accent pills.
+  SCRIPT — Data-driven rendering of swatches, button matrix, module examples, text samples,
+  accent pills, labels & pills, icons, typography/border/selected/form/status showcases,
+  and the sidebar minimization lifecycle (localStorage key cba-theme-preview-sidebar-visible).
   All functions take ≤2 params and are ≤50 lines (project rules).
   TOKEN_ROLES drives the swatch grid and the sidebar role map.
-  TEXT_SAMPLES drives text-on-surfaces cards (mutedNote:true → show restriction callout).
-  BUTTON_VARIANTS / BUTTON_STATES / BUTTON_SURFACES drive the 60-button matrix.
-  To add a new token swatch: append to TOKEN_ROLES [name, --cba-* token, hex] array.
+  MODULE_INSTANCES + MODULE_LAYOUT drive the 7 module examples (100%/50% × expanded/collapsed).
+  To add a new token swatch: append to TOKEN_ROLES [name, --cba-* token, value] array.
   To add a new button variant: append to BUTTON_VARIANTS and add .pv-btn--<variant> CSS rule.
 -->
 <script>
@@ -678,15 +595,37 @@ const theme={
 };
 
 const TOKEN_ROLES=[
-  ['canvas','--cba-bg-primary','#BCB5A4'],
-  ['panel','--cba-bg-secondary','#F2F0E8'],
-  ['elevated','--cba-bg-elevated','#FDFCF8'],
-  ['inset','--cba-bg-tertiary','#D8C3A5'],
-  ['text','--cba-text-primary','#2B2620'],
-  ['border','--cba-border-default','#A29D94'],
-  ['accent','--cba-accent-primary','#6B5B4F'],
-  ['warning','--cba-accent-warning','#E98074'],
-  ['danger','--cba-accent-danger','#B93E36']
+  ['bg-primary','--cba-bg-primary','#BCB5A4'],
+  ['bg-secondary','--cba-bg-secondary','#F2F0E8'],
+  ['bg-tertiary','--cba-bg-tertiary','#D8C3A5'],
+  ['bg-elevated','--cba-bg-elevated','#FDFCF8'],
+  ['bg-overlay','--cba-bg-overlay','rgba(43, 38, 32, 0.45)'],
+  ['text-primary','--cba-text-primary','#2B2620'],
+  ['text-secondary','--cba-text-secondary','#4A4640'],
+  ['text-muted','--cba-text-muted','#625C55'],
+  ['text-inverse','--cba-text-inverse','#FDFCF8'],
+  ['border-subtle','--cba-border-subtle','#E8E5DB'],
+  ['border-default','--cba-border-default','#A29D94'],
+  ['border-strong','--cba-border-strong','#6B665E'],
+  ['accent-primary','--cba-accent-primary','#6B5B4F'],
+  ['accent-success','--cba-accent-success','#3E6B4F'],
+  ['accent-warning','--cba-accent-warning','#E98074'],
+  ['accent-danger','--cba-accent-danger','#B93E36'],
+  ['accent-info','--cba-accent-info','#56717E'],
+  ['hover','--cba-hover','rgba(43, 38, 32, 0.10)'],
+  ['active','--cba-active','rgba(43, 38, 32, 0.18)'],
+  ['hover-inverse','--cba-hover-inverse','rgba(253, 252, 248, 0.12)'],
+  ['active-inverse','--cba-active-inverse','rgba(253, 252, 248, 0.22)'],
+  ['selected-bg','--cba-selected-bg','#E4DDD0'],
+  ['selected-border','--cba-selected-border','var(--cba-accent-primary)'],
+  ['selected-text','--cba-selected-text','var(--cba-text-primary)'],
+  ['selected-hover','--cba-selected-hover','#D8CFC0'],
+  ['state-invalid-border','--cba-state-invalid-border','#B93E36'],
+  ['state-invalid-text','--cba-state-invalid-text','#8B3028'],
+  ['state-valid-border','--cba-state-valid-border','#3E6B4F'],
+  ['state-valid-text','--cba-state-valid-text','#2E523C'],
+  ['state-disabled-bg','--cba-state-disabled-bg','#E0DCD4'],
+  ['state-disabled-text','--cba-state-disabled-text','#9A958D']
 ];
 
 const ACCENTS=[
@@ -712,13 +651,67 @@ const TEXT_SAMPLES=[
   {name:'inset',token:'--cba-bg-tertiary',mutedNote:true}
 ];
 
-const DENSITY_MODULES=[
-  {title:'Clientes List',status:'loaded',meta:'50%'},
-  {title:'Deudas List',status:'loaded',meta:'50%'}
-];
-const DENSITY_ROWS=[
+const CLIENT_ROWS=[
   ['12.345.678-9','Acme S.A.','1,200,000'],
-  ['9.876.543-2','Comercial del Norte','540,000']
+  ['9.876.543-2','Comercial del Norte','540,000'],
+  ['11.223.344-5','Distribuidora Sur','0'],
+  ['45.678.901-3','Ferretería El Tornillo','87,500'],
+  ['33.444.555-6','Inversiones Oriente','320,000']
+];
+const PAYMENT_ROWS=[
+  ['P-1001','Transferencia','1,200,000'],
+  ['P-1002','Cheque','540,000'],
+  ['P-1003','Efectivo','320,000'],
+  ['P-1004','Tarjeta','87,500'],
+  ['P-1005','Depósito','0']
+];
+const REPORT_ROWS=[
+  ['R-01','Mensual','12','Cerrado'],
+  ['R-02','Trimestral','4','Cerrado'],
+  ['R-03','Anual','1','Abierto'],
+  ['R-04','Semanal','52','Cerrado'],
+  ['R-05','Diario','365','Abierto']
+];
+
+const MODULE_INSTANCES=[
+  {id:1,size:'100',collapsed:false,title:'Clientes List',status:'loaded',withBody:true,withFooter:true,footerStatus:'loaded',footerText:'Listo',footerEnd:true,rows:CLIENT_ROWS},
+  {id:2,size:'100',collapsed:true,title:'Deudas List',status:'loaded'},
+  {id:3,size:'50',collapsed:false,title:'Pagos List',status:'loaded',withBody:true,rows:PAYMENT_ROWS},
+  {id:4,size:'50',collapsed:false,title:'Reportes List',status:'loaded',withBody:true,rows:REPORT_ROWS},
+  {id:5,size:'50',collapsed:true,title:'Configuración',status:'loaded'},
+  {id:6,size:'50',collapsed:true,title:'Ayuda',status:'loaded'},
+  {id:7,size:'50',collapsed:true,title:' Auditoría',status:'loaded'}
+];
+
+const LABELS=[
+  ['Caption','cba-text-caption','normal'],
+  ['Small','cba-text-small','normal'],
+  ['Body','cba-text-body','normal'],
+  ['Body disabled','cba-text-body','disabled'],
+  ['Body error','cba-text-body','error']
+];
+const PILLS=[
+  ['Normal','',''],
+  ['Hover','is-hover',''],
+  ['Selected','is-selected',''],
+  ['Disabled','is-disabled','']
+];
+const ICONS=[
+  ['fa-solid fa-arrows-left-right','arrows-left-right','ModuleHeader (size toggle 50→100)'],
+  ['fa-solid fa-arrows-left-right-to-line','arrows-left-right-to-line','ModuleHeader (size toggle 100→50)'],
+  ['fa-solid fa-check','check','ModuleHeader/Footer (loaded)'],
+  ['fa-solid fa-chevron-down','chevron-down','ModuleHeader (collapsed)'],
+  ['fa-solid fa-chevron-up','chevron-up','ModuleHeader (expanded)'],
+  ['fa-solid fa-circle-check','circle-check','ModuleHeader/Footer (success)'],
+  ['fa-solid fa-circle-xmark','circle-xmark','ModuleHeader/Footer (error)'],
+  ['fa-solid fa-pen','pen','ModuleHeader/Footer (dirty)'],
+  ['fa-solid fa-spinner','spinner','ModuleHeader/Footer (loading)'],
+  ['fa-solid fa-triangle-exclamation','triangle-exclamation','ModuleHeader/Footer (warning)'],
+  ['fa-solid fa-window-maximize','window-maximize','ModuleHeader (fullscreen)'],
+  ['fa-solid fa-xmark','xmark','ModuleHeader (remove)'],
+  ['fa-solid fa-calendar','calendar','CbaDatepicker'],
+  ['fa-regular fa-bell','bell (regular)','Shell header (preview)'],
+  ['fa-solid fa-magnifying-glass','magnifying-glass','Shell header (preview)']
 ];
 
 const BORDER_LEVELS=[
@@ -770,6 +763,8 @@ const STATUS_BADGES=[
   ['info','--cba-accent-info','info']
 ];
 
+const STORAGE_KEY='cba-theme-preview-sidebar-visible';
+
 function renderSourceHex(sourceColors, host){
   host.innerHTML=sourceColors.map(h=>`<div class="row"><i style="background:${h}"></i>${h}</div>`).join('');
 }
@@ -789,10 +784,14 @@ function renderRawStrip(sourceColors, host){
   host.innerHTML=sourceColors.map(h=>`<div class="chip" style="background:${h}" title="${h}"></div>`).join('');
 }
 
+function hasBgUtilityClass(token){
+  return token==='--cba-bg-primary'||token==='--cba-bg-secondary'||token==='--cba-bg-tertiary'||token==='--cba-bg-elevated';
+}
+
 function renderSwatches(host){
   host.innerHTML=TOKEN_ROLES.map(([name,token,hex])=>{
-    const bgClass=token.startsWith('--cba-bg-')?`swatch-chip ${token.slice(2)}`:'swatch-chip';
-    const bgStyle=bgClass.includes(' ')?'':` style="background:var(${token})"`;
+    const bgClass=hasBgUtilityClass(token)?`swatch-chip ${token.slice(2)}`:'swatch-chip';
+    const bgStyle=hasBgUtilityClass(token)?'':` style="background:var(${token})"`;
     return `<div class="swatch"><div class="${bgClass}"${bgStyle}></div><div class="swatch-meta"><b>${name}</b>${hex}<br>${token}</div></div>`;
   }).join('');
 }
@@ -807,28 +806,6 @@ function renderTextSamples(host){
       :'';
     return `<div class="text-sample text-sample--${s.name}"><h3>${s.name} · ${s.token}</h3><div class="t-row t-primary">Primary text <span class="tok">--cba-text-primary</span></div><div class="t-row t-secondary">Secondary text <span class="tok">--cba-text-secondary</span></div>${mutedRow}${inverseRow}</div>`;
   }).join('');
-}
-
-function renderDensityStrip(host){
-  const modules=DENSITY_MODULES.map(m=>{
-    const rows=DENSITY_ROWS.map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td></tr>`).join('');
-    return `<div class="module cba-module-container">
-  <header class="cba-module-header">
-    <div class="cba-module-header__section cba-module-header__section--status cba-module-header__status--loaded"><i class="fa-solid fa-check" aria-hidden="true"></i></div>
-    <div class="cba-module-header__section cba-module-header__section--title cba-text-heading-md">${m.title} <span class="cba-text-small cba-text-muted">${m.meta}</span></div>
-    <nav class="cba-module-header__section cba-module-header__section--actions">
-      <button type="button" class="cba-module-header__action cba-module-header__action--drag" aria-label="Arrastrar módulo" title="Arrastrar módulo"><i class="fa-solid fa-up-down-left-right" aria-hidden="true"></i></button>
-      <button type="button" class="cba-module-header__action" aria-label="Colapsar módulo" title="Colapsar módulo"><i class="fa-solid fa-chevron-up" aria-hidden="true"></i></button>
-      <button type="button" class="cba-module-header__action" aria-label="Reducir módulo a 50%" title="Reducir módulo a 50%"><i class="fa-solid fa-arrows-left-right-to-line" aria-hidden="true"></i></button>
-      <button type="button" class="cba-module-header__action" aria-label="Pantalla completa" title="Pantalla completa"><i class="fa-solid fa-window-maximize" aria-hidden="true"></i></button>
-      <button type="button" class="cba-module-header__action" aria-label="Quitar módulo" title="Quitar módulo"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
-    </nav>
-  </header>
-  <div class="module-body"><table class="demo-table"><thead><tr><th>Documento</th><th>Nombre</th><th>Deuda</th></tr></thead><tbody>${rows}</tbody></table></div>
-  <div class="module-footer cba-text-small">Listo</div>
-</div>`;
-  }).join('');
-  host.innerHTML=modules;
 }
 
 function renderBorderScale(host){
@@ -894,6 +871,97 @@ function buildButtonMatrix(host){
   host.innerHTML=surfaces;
 }
 
+function buildHeaderActions(size){
+  const dragBtn='<button type="button" class="cba-module-header__action cba-module-header__action--drag" aria-label="Arrastrar módulo" title="Arrastrar módulo"><i class="fa-solid fa-up-down-left-right" aria-hidden="true"></i></button>';
+  const collapseIcon=size===undefined?'fa-chevron-up':'fa-chevron-up';
+  const collapseBtn='<button type="button" class="cba-module-header__action" aria-label="Colapsar módulo" title="Colapsar módulo"><i class="fa-solid fa-'+collapseIcon+'" aria-hidden="true"></i></button>';
+  const sizeIcon=size==='100'?'arrows-left-right-to-line':'arrows-left-right';
+  const sizeLabel=size==='100'?'Reducir módulo a 50%':'Ampliar módulo a 100%';
+  const sizeBtn='<button type="button" class="cba-module-header__action" aria-label="'+sizeLabel+'" title="'+sizeLabel+'"><i class="fa-solid fa-'+sizeIcon+'" aria-hidden="true"></i></button>';
+  const fsBtn='<button type="button" class="cba-module-header__action" aria-label="Pantalla completa" title="Pantalla completa"><i class="fa-solid fa-window-maximize" aria-hidden="true"></i></button>';
+  const rmBtn='<button type="button" class="cba-module-header__action" aria-label="Quitar módulo" title="Quitar módulo"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>';
+  return dragBtn+collapseBtn+sizeBtn+fsBtn+rmBtn;
+}
+
+function buildModuleHeader(cfg){
+  const statusHtml=cfg.status?'<div class="cba-module-header__section cba-module-header__section--status cba-module-header__status--'+cfg.status+'"><i class="fa-solid fa-check" aria-hidden="true"></i></div>':'';
+  const titleHtml='<div class="cba-module-header__section cba-module-header__section--title cba-text-heading-md">'+cfg.title+'</div>';
+  const actions='<nav class="cba-module-header__section cba-module-header__section--actions">'+buildHeaderActions(cfg.size)+'</nav>';
+  return '<header class="cba-module-header">'+statusHtml+titleHtml+actions+'</header>';
+}
+
+function buildModuleBody(cfg){
+  const head=cfg.rowsHead?'<thead><tr>'+cfg.rowsHead.map(h=>'<th>'+h+'</th>').join('')+'</tr></thead>':'';
+  const body=cfg.rows.map(r=>'<tr>'+r.map(c=>'<td>'+c+'</td>').join('')+'</tr>').join('');
+  const meta='<div class="panel-meta">'+cfg.size+'% · '+(cfg.collapsed?'colapsado':'expandido')+'</div>';
+  return '<div class="cba-module-container__body"><div class="panel-title-row"><div class="panel-title cba-text-heading-md">'+cfg.title+'</div>'+meta+'</div><table>'+head+'<tbody>'+body+'</tbody></table></div>';
+}
+
+function buildModuleFooter(cfg){
+  const endCls=cfg.footerEnd?' pv-module-footer--end':'';
+  return '<footer class="cba-module-footer'+endCls+'"><div class="cba-module-footer__status cba-module-footer__status--'+cfg.footerStatus+'" role="status" aria-live="polite" aria-atomic="true"><i class="fa-solid fa-check" aria-hidden="true"></i><span class="cba-module-footer__text">'+cfg.footerText+'</span></div></footer>';
+}
+
+function buildModule(cfg){
+  const sizeCls=cfg.size==='50'?'cba-module-container--size-50':'cba-module-container--size-100';
+  const host='<section class="module cba-module-container '+sizeCls+' cba-module-container--padding-md">';
+  const header=buildModuleHeader(cfg);
+  const body=cfg.withBody?buildModuleBody(cfg):'';
+  const footer=cfg.withFooter?buildModuleFooter(cfg):'';
+  return host+header+body+footer+'</section>';
+}
+
+function renderModuleRow(host,modules){
+  host.innerHTML=modules.map(buildModule).join('');
+}
+
+function renderLabelsPills(host){
+  const labels=LABELS.map(([label,cls,state])=>{
+    const stateStyle=state==='disabled'?' style="color:var(--cba-state-disabled-text)"':(state==='error'?' style="color:var(--cba-state-invalid-text)"':'');
+    return '<div class="t-row"><span class="'+cls+'"'+stateStyle+'>'+label+'</span></div>';
+  }).join('');
+  const pills=PILLS.map(([label,cls])=>'<span class="demo-pill '+cls+'">'+label+'</span>').join('');
+  host.innerHTML='<div class="pattern-card"><h3>Labels</h3>'+labels+'</div><div class="pattern-card"><h3>Pills</h3><div class="demo-pills">'+pills+'</div></div>';
+}
+
+function renderIcons(host){
+  host.innerHTML=ICONS.map(([cls,name,usedBy])=>{
+    return '<div class="swatch"><i class="'+cls+'" aria-hidden="true" style="font-size:18px;color:var(--cba-text-primary)"></i><div class="swatch-meta"><b>'+name+'</b>'+usedBy+'</div></div>';
+  }).join('');
+}
+
+const MODULE_LAYOUT=[
+  {kind:'single',ids:[1]},
+  {kind:'single',ids:[2]},
+  {kind:'row',ids:[3,4]},
+  {kind:'row',ids:[5,6]},
+  {kind:'single',ids:[7]}
+];
+
+function renderModuleExamples(host){
+  host.innerHTML=MODULE_LAYOUT.map(layout=>{
+    const modules=layout.ids.map(id=>MODULE_INSTANCES.find(m=>m.id===id));
+    if(layout.kind==='row'){
+      return '<div class="module-row">'+modules.map(buildModule).join('')+'</div>';
+    }
+    return buildModule(modules[0]);
+  }).join('');
+}
+
+function loadSidebarState(){
+  const stored=localStorage.getItem(STORAGE_KEY);
+  return stored===null?true:stored==='true';
+}
+
+function saveSidebarState(isVisible){
+  localStorage.setItem(STORAGE_KEY,String(isVisible));
+}
+
+function applySidebarState(isVisible){
+  const app=document.getElementById('app');
+  app.classList.toggle('is-sidebar-hidden',!isVisible);
+}
+
 const themeList=document.getElementById('themeList');
 const themeButton=document.createElement('button');
 themeButton.type='button';
@@ -907,12 +975,23 @@ selectTheme(theme);
 buildButtonMatrix(document.getElementById('buttonMatrix'));
 renderSwatches(document.getElementById('swatchGrid'));
 renderTextSamples(document.getElementById('textGrid'));
-renderDensityStrip(document.getElementById('densityStrip'));
+renderLabelsPills(document.getElementById('labelsPills'));
+renderIcons(document.getElementById('iconsGrid'));
+renderModuleExamples(document.getElementById('moduleHost'));
 renderBorderScale(document.getElementById('borderScale'));
 renderSelectedSamples(document.getElementById('selectedSamples'));
 renderFormStates(document.getElementById('formStates'));
 renderTypeScale(document.getElementById('typeScale'));
 renderStatusBadges(document.getElementById('statusBadges'));
+
+document.getElementById('controlsClose').addEventListener('click',()=>{
+  applySidebarState(false); saveSidebarState(false);
+});
+document.getElementById('previewBarShow').addEventListener('click',()=>{
+  applySidebarState(true); saveSidebarState(true);
+});
+
+applySidebarState(loadSidebarState());
 </script>
 </body>
 </html>

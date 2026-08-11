@@ -38,10 +38,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **`CbaButtonComponent.truncate` input** (`boolean`, default `false`) — ellipsis-clamp long labels in constrained containers. Sets `min-width: 0` on `.cba-button__control` and `overflow: hidden; text-overflow: ellipsis; white-space: nowrap` on `.cba-button__label`. Drives the `cba-button--truncate` host modifier. See `docs/CBA_BUTTON.md` §Label truncation.
 - **`CbaButtonComponent.iconOnly` input** (`boolean`, default `false`) — minimal square icon-only button. Sets `aspect-ratio: 1 / 1`, `min-width: auto`, and per-size padding (`--cba-space-1` for `sm`, `--cba-space-2` for `md`). Drives the `cba-button--icon-only` host modifier. The icon is `aria-hidden`; consumers must supply an accessible label via `aria-label`. See `docs/CBA_BUTTON.md` §Icon-only.
 - **`CbaButtonComponent.block` input** (`boolean`, default `false`) — block-level button that fills its parent width. Host becomes `display: block` at `width: 100%`; internal control spans `100%`. Ghost block buttons left-align the label. Drives the `cba-button--block` host modifier. See `docs/CBA_BUTTON.md` §Block.
+- **Reimplemented `docs/theme-preview.html`** as a faithful, interactive reference of `@cobranza-apps/ui`. The preview now models the Cobranza back-office shell (header + non-scrolling workspace + footer) with 7 module examples covering 100% / 50% width modes and expanded / collapsed states, all rendered with the exact library CSS class names (`cba-module-container--size-100/50`, `cba-module-header__action`, `cba-module-footer__status--*`) and Font Awesome icons. Module #1 includes a 5-row client-list table and a right-aligned status footer. See `docs/theme-preview.html` and [Consumer Guide](docs/CONSUMER_GUIDE.md).
+- **Minimizable sidebar** — an "X" close button at the top of the sidebar collapses it; a "Show controls" button in `.preview-bar` reopens it. The open/close state persists across reloads via `localStorage` key `cba-theme-preview-sidebar-visible` (default open).
+- **Expanded style showcase** — 31 color-token swatches (all backgrounds, text, borders, accents, interactive, selected, and form-state tokens), button state matrix (5 variants × 4 states × 3 surfaces), labels & pills, icon list (every Font Awesome icon used by the library + shell preview), text-on-surfaces legibility cards with WCAG-AA muted-restriction callouts, typography scale, border scale, selected-state samples, form-state field boxes, and semantic status badges (solid / outline / neutral).
+- **Sidebar state regression tests** in `src/theme/preview-html.spec.ts` (localStorage key, close/reopen buttons, `is-sidebar-hidden` grid rule) and expanded `SWATCH_ROLE_TOKEN` map from 9 → 31 entries.
 
 ### Changed
 
 - **`ModuleContainerComponent` fullscreen mode now retains `background-color`** — moved `background-color: var(--cba-bg-secondary)` from `:host(:not(.cba-module-container--fullscreen))` to the base `:host` rule. Only `border`, `border-radius`, `box-shadow`, and `overflow: hidden` are suppressed in fullscreen mode. Fixes transparent panel surface in the Shell fullscreen placeholder. See `docs/MODULE_CONTAINER.md` §Fullscreen behaviour.
+- `docs/theme-preview.html` module footer mockup now uses the real `.cba-module-footer` / `.cba-module-footer__status--*` classes (copied inline from `module-footer.component.scss` with a "keep in sync" comment) instead of the previous ad-hoc `.module-footer` class. The workspace no longer scrolls (`flex:1 0 auto`, page scrolls instead) per the back-office mockup intent.
+- `src/theme/preview-html.spec.ts` `SWATCH_ROLE_TOKEN` map expanded to 31 entries so the `TOKEN_ROLES.length` assertion stays green alongside the expanded swatch grid.
 
 ### Notes
 
@@ -49,6 +55,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Source TODO: `.agent/todos/20260811/20260811-todo-0.md` (Tasks 1–5). Front-end spec: [20260811-task-a-frontend-spec.md](.kilo/plans/20260811-task-a-frontend-spec.md).
 - The Shell `.cba-bg-secondary` workaround on `<cba-module-container>` in the fullscreen placeholder (see TODO Task 2 reference) becomes harmless after this release and may be removed in a follow-up Shell PR — out of scope for this library change.
 - Compliance: no `[Unreleased]` section introduced (per `.kilo/rules/changelog-versioning.md`).
+- The preview reimplementation introduces no `--cba-*` token names, values, or library component SCSS changes. `docs/theme-preview.css` is regenerated via `npm run build:preview` (content unchanged — `src/theme/theme.scss` untouched; command must succeed).
+- Authoritative token values: [brief.md §5](.agent/project-info/brief.md#5-design-tokens-theme) and [`src/theme/_variables.scss`](src/theme/_variables.scss).
+- Front-end spec: [20260811-task-b-frontend-spec.md](.kilo/plans/20260811-task-b-frontend-spec.md).
 
 ## [0.13.0] — 2026-08-09
 
