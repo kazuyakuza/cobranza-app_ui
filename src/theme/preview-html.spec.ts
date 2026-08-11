@@ -3,8 +3,9 @@
  *
  * Verifies that `docs/theme-preview.html` links the compiled CSS, contains all required
  * structural sections (swatch grid, button matrix, text grid, accent row, raw strip),
- * renders 9 token swatch labels, maps TOKEN_ROLES to canonical hex values, declares the
- * muted-text restriction, and uses `var(--cba-*)` tokens instead of hard-coded hex.
+ * renders 31 token swatch labels, maps TOKEN_ROLES to canonical hex values, declares the
+ * muted-text restriction, uses `var(--cba-*)` tokens instead of hard-coded hex, and wires
+ * the sidebar minimization (localStorage key, close/reopen buttons, grid rule).
  * Also verifies that `docs/theme-preview.css` `:root` matches canonical token values.
  *
  * Run: `npm test -- src/theme/preview-html.spec.ts`
@@ -38,15 +39,37 @@ const REQUIRED_IDS = ['swatchGrid', 'buttonMatrix', 'textGrid', 'accentRow', 'ra
 
 // Maps the preview TOKEN_ROLES swatch label → --cba-* token name (mirrors docs/theme-preview.html).
 const SWATCH_ROLE_TOKEN: Record<string, string> = {
-  canvas: '--cba-bg-primary',
-  panel: '--cba-bg-secondary',
-  elevated: '--cba-bg-elevated',
-  inset: '--cba-bg-tertiary',
-  text: '--cba-text-primary',
-  border: '--cba-border-default',
-  accent: '--cba-accent-primary',
-  warning: '--cba-accent-warning',
-  danger: '--cba-accent-danger',
+  'bg-primary': '--cba-bg-primary',
+  'bg-secondary': '--cba-bg-secondary',
+  'bg-tertiary': '--cba-bg-tertiary',
+  'bg-elevated': '--cba-bg-elevated',
+  'bg-overlay': '--cba-bg-overlay',
+  'text-primary': '--cba-text-primary',
+  'text-secondary': '--cba-text-secondary',
+  'text-muted': '--cba-text-muted',
+  'text-inverse': '--cba-text-inverse',
+  'border-subtle': '--cba-border-subtle',
+  'border-default': '--cba-border-default',
+  'border-strong': '--cba-border-strong',
+  'accent-primary': '--cba-accent-primary',
+  'accent-success': '--cba-accent-success',
+  'accent-warning': '--cba-accent-warning',
+  'accent-danger': '--cba-accent-danger',
+  'accent-info': '--cba-accent-info',
+  'hover': '--cba-hover',
+  'active': '--cba-active',
+  'hover-inverse': '--cba-hover-inverse',
+  'active-inverse': '--cba-active-inverse',
+  'selected-bg': '--cba-selected-bg',
+  'selected-border': '--cba-selected-border',
+  'selected-text': '--cba-selected-text',
+  'selected-hover': '--cba-selected-hover',
+  'state-invalid-border': '--cba-state-invalid-border',
+  'state-invalid-text': '--cba-state-invalid-text',
+  'state-valid-border': '--cba-state-valid-border',
+  'state-valid-text': '--cba-state-valid-text',
+  'state-disabled-bg': '--cba-state-disabled-bg',
+  'state-disabled-text': '--cba-state-disabled-text',
 };
 
 describe('docs/theme-preview.html structure', () => {
@@ -176,5 +199,23 @@ describe('docs/theme-preview.css interactive state overlay values', () => {
   it('compiled preview CSS declares the inverse tokens', () => {
     expect(css).toContain('--cba-hover-inverse');
     expect(css).toContain('--cba-active-inverse');
+  });
+});
+
+describe('docs/theme-preview.html sidebar minimization', () => {
+  it('declares the localStorage key', () => {
+    expect(html).toContain("'cba-theme-preview-sidebar-visible'");
+  });
+  it('has a sidebar close button inside .controls', () => {
+    const closeBtn = root.querySelector('.controls__close');
+    expect(closeBtn?.getAttribute('aria-label')).toBe('Cerrar panel de controles');
+  });
+  it('has a reopen sidebar button inside .preview-bar', () => {
+    const showBtn = root.querySelector('.preview-bar__show');
+    expect(showBtn?.getAttribute('aria-label')).toBe('Mostrar panel de controles');
+  });
+  it('defines the is-sidebar-hidden grid rule', () => {
+    expect(html).toContain('.app.is-sidebar-hidden');
+    expect(html).toContain('.app.is-sidebar-hidden .controls{display:none}');
   });
 });
