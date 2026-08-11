@@ -596,6 +596,8 @@ const theme={
   source:['#BCB5A4','#D8C3A5','#6B665E','#E98074','#B93E36']
 };
 
+// TOKEN_ROLES: [semanticRole, cssToken, hexOrAlias] — drives swatch grid + sidebar role map.
+// Third element matches EXPECTED_TOKENS[token] from src/components/testing/theme-fixtures.ts.
 const TOKEN_ROLES=[
   ['bg-primary','--cba-bg-primary','#BCB5A4'],
   ['bg-secondary','--cba-bg-secondary','#F2F0E8'],
@@ -630,6 +632,7 @@ const TOKEN_ROLES=[
   ['state-disabled-text','--cba-state-disabled-text','#9A958D']
 ];
 
+// ACCENTS: [displayName, cssToken] — drives accent pill row.
 const ACCENTS=[
   ['Primary','--cba-accent-primary'],
   ['Success','--cba-accent-success'],
@@ -639,13 +642,16 @@ const ACCENTS=[
 ];
 
 const BUTTON_VARIANTS=['primary','secondary','ghost','danger','success'];
+// BUTTON_STATES: [label, cssModifierClass] — four states per variant in the matrix.
 const BUTTON_STATES=[['Normal',''],['Hover','is-hover'],['Active','is-active'],['Disabled','is-disabled']];
+// BUTTON_SURFACES: [displayName, surfaceCssClass, cssToken] — three surface backgrounds.
 const BUTTON_SURFACES=[
   ['Panel','btn-surface--panel','--cba-bg-secondary'],
   ['Elevated','btn-surface--elevated','--cba-bg-elevated'],
   ['Canvas','btn-surface--canvas','--cba-bg-primary']
 ];
 
+// TEXT_SAMPLES: mutedNote=true shows WCAG-AA restriction callout; showInverse=true shows inverse text on accent.
 const TEXT_SAMPLES=[
   {name:'canvas',token:'--cba-bg-primary',mutedNote:true,showInverse:true},
   {name:'panel',token:'--cba-bg-secondary',muted:false},
@@ -653,6 +659,7 @@ const TEXT_SAMPLES=[
   {name:'inset',token:'--cba-bg-tertiary',mutedNote:true}
 ];
 
+// CLIENT_ROWS: [documento, nombre, deuda] — module #1 table body (5 rows).
 const CLIENT_ROWS=[
   ['12.345.678-9','Acme S.A.','1,200,000'],
   ['9.876.543-2','Comercial del Norte','540,000'],
@@ -660,6 +667,7 @@ const CLIENT_ROWS=[
   ['45.678.901-3','Ferretería El Tornillo','87,500'],
   ['33.444.555-6','Inversiones Oriente','320,000']
 ];
+// PAYMENT_ROWS: [id, tipo, monto] — module #3 table body.
 const PAYMENT_ROWS=[
   ['P-1001','Transferencia','1,200,000'],
   ['P-1002','Cheque','540,000'],
@@ -667,6 +675,7 @@ const PAYMENT_ROWS=[
   ['P-1004','Tarjeta','87,500'],
   ['P-1005','Depósito','0']
 ];
+// REPORT_ROWS: [id, frecuencia, semanas, estado] — module #4 table body.
 const REPORT_ROWS=[
   ['R-01','Mensual','12','Cerrado'],
   ['R-02','Trimestral','4','Cerrado'],
@@ -685,6 +694,7 @@ const MODULE_INSTANCES=[
   {id:7,size:'50',collapsed:true,title:'Auditoría',status:'loaded'}
 ];
 
+// LABELS: [displayText, utilityClass, state] — state is 'normal'|'disabled'|'error'.
 const LABELS=[
   ['Caption','cba-text-caption','normal'],
   ['Small','cba-text-small','normal'],
@@ -692,12 +702,14 @@ const LABELS=[
   ['Body disabled','cba-text-body','disabled'],
   ['Body error','cba-text-body','error']
 ];
+// PILL_STATES: [label, cssModifierClass] — demo pill states for labels & pills showcase.
 const PILL_STATES=[
   ['Normal','',''],
   ['Hover','is-hover',''],
   ['Selected','is-selected',''],
   ['Disabled','is-disabled','']
 ];
+// ICONS: [faClassList, iconName, usedByComponent] — every FA icon used by the lib + preview.
 const ICONS=[
   ['fa-solid fa-arrows-left-right','arrows-left-right','ModuleHeader (size toggle 50→100)'],
   ['fa-solid fa-arrows-left-right-to-line','arrows-left-right-to-line','ModuleHeader (size toggle 100→50)'],
@@ -716,18 +728,21 @@ const ICONS=[
   ['fa-solid fa-magnifying-glass','magnifying-glass','Shell header (preview)']
 ];
 
+// BORDER_LEVELS: [levelId, cssToken, roleDescription] — three border tokens.
 const BORDER_LEVELS=[
   ['subtle','--cba-border-subtle','Internal separators'],
   ['default','--cba-border-default','Structural edges'],
   ['strong','--cba-border-strong','Important chrome']
 ];
 
+// SELECTED_NAV: [label, cssModifierClass] — nav item states for selected-state showcase.
 const SELECTED_NAV=[
   ['Clientes',''],
   ['Deudas','is-hover'],
   ['Pagos','is-selected'],
   ['Reportes','is-disabled']
 ];
+// TABLE_ROWS: [documento, nombre, deuda, cssModifierClass] — selected-state table demo.
 const TABLE_ROWS=[
   ['12.345.678-9','Acme S.A.','1,200,000',''],
   ['9.876.543-2','Comercial del Norte','540,000','is-hover'],
@@ -735,6 +750,7 @@ const TABLE_ROWS=[
   ['45.678.901-3','Ferretería El Tornillo','87,500','is-disabled']
 ];
 
+// FORM_STATES: [stateLabel, cssModifierClass, displayText] — seven form field states.
 const FORM_STATES=[
   ['default','form-field--default','Texto por defecto'],
   ['hover','form-field--hover','Texto hover'],
@@ -745,6 +761,7 @@ const FORM_STATES=[
   ['valid','form-field--valid','Campo válido']
 ];
 
+// TYPE_SCALE: [stepName, fontSizeToken, lineHeightToken, sampleText] — six type steps.
 const TYPE_SCALE=[
   ['display','--cba-font-size-display','--cba-line-height-display','Clientes'],
   ['heading-lg','--cba-font-size-heading-lg','--cba-line-height-heading-lg','Lista de clientes'],
@@ -754,6 +771,7 @@ const TYPE_SCALE=[
   ['caption','--cba-font-size-caption','--cba-line-height-caption','Pista terciaria o nota corta']
 ];
 
+// STATUS_BADGES: [cssToken, statusLabel] — drives solid + outline badge rows.
 const STATUS_BADGES=[
   ['--cba-accent-success','success'],
   ['--cba-accent-warning','warning'],
@@ -930,6 +948,7 @@ function renderIcons(host){
   }).join('');
 }
 
+// MODULE_LAYOUT: rendering order — 'single' = full-width module, 'row' = two 50% modules side by side.
 const MODULE_LAYOUT=[
   {kind:'single',ids:[1]},
   {kind:'single',ids:[2]},
