@@ -249,6 +249,8 @@
     .form-field--disabled{background:var(--cba-state-disabled-bg);border:1px solid var(--cba-border-subtle);color:var(--cba-state-disabled-text);cursor:not-allowed}
     .form-field--readonly{background:var(--cba-bg-tertiary);border:1px solid var(--cba-border-subtle);color:var(--cba-text-secondary)}
     .form-field--invalid{background:var(--cba-bg-secondary);border:1px solid var(--cba-state-invalid-border);color:var(--cba-state-invalid-text)}
+    .form-field--hover{background:var(--cba-bg-secondary);background-image:linear-gradient(var(--cba-hover),var(--cba-hover));border:1px solid var(--cba-border-default);color:var(--cba-text-primary)}
+    .form-field--valid{background:var(--cba-bg-secondary);border:1px solid var(--cba-state-valid-border);color:var(--cba-state-valid-text)}
 
     /* Type scale sample */
     .type-scale{display:flex;flex-direction:column;gap:6px}
@@ -558,7 +560,7 @@
           <h2>Selected states</h2>
           <div class="pattern-grid" id="selectedSamples"></div>
 
-          <!-- Static form-state field boxes: default / focus / disabled / readonly / invalid -->
+          <!-- Static form-state field boxes: default / hover / focus / disabled / readonly / invalid / valid -->
           <h2>Form states</h2>
           <div class="form-states" id="formStates"></div>
 
@@ -680,7 +682,7 @@ const MODULE_INSTANCES=[
   {id:4,size:'50',collapsed:false,title:'Reportes List',status:'loaded',withBody:true,rows:REPORT_ROWS},
   {id:5,size:'50',collapsed:true,title:'Configuración',status:'loaded'},
   {id:6,size:'50',collapsed:true,title:'Ayuda',status:'loaded'},
-  {id:7,size:'50',collapsed:true,title:' Auditoría',status:'loaded'}
+  {id:7,size:'50',collapsed:true,title:'Auditoría',status:'loaded'}
 ];
 
 const LABELS=[
@@ -690,7 +692,7 @@ const LABELS=[
   ['Body disabled','cba-text-body','disabled'],
   ['Body error','cba-text-body','error']
 ];
-const PILLS=[
+const PILL_STATES=[
   ['Normal','',''],
   ['Hover','is-hover',''],
   ['Selected','is-selected',''],
@@ -720,12 +722,6 @@ const BORDER_LEVELS=[
   ['strong','--cba-border-strong','Important chrome']
 ];
 
-const SELECTED_PILLS=[
-  ['Normal','',''],
-  ['Hover','is-hover',''],
-  ['Selected','is-selected',''],
-  ['Disabled','is-disabled','']
-];
 const SELECTED_NAV=[
   ['Clientes',''],
   ['Deudas','is-hover'],
@@ -741,10 +737,12 @@ const TABLE_ROWS=[
 
 const FORM_STATES=[
   ['default','form-field--default','Texto por defecto'],
+  ['hover','form-field--hover','Texto hover'],
   ['focus','form-field--focus','Texto enfocado'],
   ['disabled','form-field--disabled','No editable'],
   ['readonly','form-field--readonly','Solo lectura'],
-  ['invalid','form-field--invalid','Campo inválido']
+  ['invalid','form-field--invalid','Campo inválido'],
+  ['valid','form-field--valid','Campo válido']
 ];
 
 const TYPE_SCALE=[
@@ -757,10 +755,10 @@ const TYPE_SCALE=[
 ];
 
 const STATUS_BADGES=[
-  ['success','--cba-accent-success','success'],
-  ['warning','--cba-accent-warning','warning'],
-  ['danger','--cba-accent-danger','danger'],
-  ['info','--cba-accent-info','info']
+  ['--cba-accent-success','success'],
+  ['--cba-accent-warning','warning'],
+  ['--cba-accent-danger','danger'],
+  ['--cba-accent-info','info']
 ];
 
 const STORAGE_KEY='cba-theme-preview-sidebar-visible';
@@ -815,7 +813,7 @@ function renderBorderScale(host){
 }
 
 function renderSelectedSamples(host){
-  const pills=SELECTED_PILLS.map(([label,cls])=>`<span class="demo-pill ${cls}">${label}</span>`).join('');
+  const pills=PILL_STATES.map(([label,cls])=>`<span class="demo-pill ${cls}">${label}</span>`).join('');
   const nav=SELECTED_NAV.map(([label,cls])=>`<span class="demo-nav__item ${cls}">${label}</span>`).join('');
   const rows=TABLE_ROWS.map(([a,b,c,cls])=>`<tr class="${cls}"><td>${a}</td><td>${b}</td><td>${c}</td></tr>`).join('');
   host.innerHTML=`<div class="pattern-card"><h3>Footer pills</h3><div class="demo-pills">${pills}</div></div><div class="pattern-card"><h3>Nav items</h3><div class="demo-nav">${nav}</div></div><div class="pattern-card"><h3>Table rows</h3><table class="demo-table"><thead><tr><th>Documento</th><th>Nombre</th><th>Deuda</th></tr></thead><tbody>${rows}</tbody></table></div>`;
@@ -834,8 +832,8 @@ function renderTypeScale(host){
 }
 
 function renderStatusBadges(host){
-  const solid=STATUS_BADGES.map(([name,token,label])=>`<span class="status-badge" style="background:var(${token})">${label}</span>`).join('');
-  const outline=STATUS_BADGES.map(([name,token,label])=>`<span class="status-badge status-badge--outline" style="color:var(${token})">${label}</span>`).join('');
+  const solid=STATUS_BADGES.map(([token,label])=>`<span class="status-badge" style="background:var(${token})">${label}</span>`).join('');
+  const outline=STATUS_BADGES.map(([token,label])=>`<span class="status-badge status-badge--outline" style="color:var(${token})">${label}</span>`).join('');
   const neutral=`<span class="status-badge status-badge--neutral">neutral</span>`;
   host.innerHTML=`${solid}${outline}${neutral}`;
 }
@@ -871,9 +869,9 @@ function buildButtonMatrix(host){
   host.innerHTML=surfaces;
 }
 
-function buildHeaderActions(size){
+function buildHeaderActions(size, isCollapsed){
   const dragBtn='<button type="button" class="cba-module-header__action cba-module-header__action--drag" aria-label="Arrastrar módulo" title="Arrastrar módulo"><i class="fa-solid fa-up-down-left-right" aria-hidden="true"></i></button>';
-  const collapseIcon=size===undefined?'fa-chevron-up':'fa-chevron-up';
+  const collapseIcon=isCollapsed?'fa-chevron-down':'fa-chevron-up';
   const collapseBtn='<button type="button" class="cba-module-header__action" aria-label="Colapsar módulo" title="Colapsar módulo"><i class="fa-solid fa-'+collapseIcon+'" aria-hidden="true"></i></button>';
   const sizeIcon=size==='100'?'arrows-left-right-to-line':'arrows-left-right';
   const sizeLabel=size==='100'?'Reducir módulo a 50%':'Ampliar módulo a 100%';
@@ -886,15 +884,14 @@ function buildHeaderActions(size){
 function buildModuleHeader(cfg){
   const statusHtml=cfg.status?'<div class="cba-module-header__section cba-module-header__section--status cba-module-header__status--'+cfg.status+'"><i class="fa-solid fa-check" aria-hidden="true"></i></div>':'';
   const titleHtml='<div class="cba-module-header__section cba-module-header__section--title cba-text-heading-md">'+cfg.title+'</div>';
-  const actions='<nav class="cba-module-header__section cba-module-header__section--actions">'+buildHeaderActions(cfg.size)+'</nav>';
+  const actions='<nav class="cba-module-header__section cba-module-header__section--actions">'+buildHeaderActions(cfg.size, cfg.collapsed)+'</nav>';
   return '<header class="cba-module-header">'+statusHtml+titleHtml+actions+'</header>';
 }
 
 function buildModuleBody(cfg){
-  const head=cfg.rowsHead?'<thead><tr>'+cfg.rowsHead.map(h=>'<th>'+h+'</th>').join('')+'</tr></thead>':'';
   const body=cfg.rows.map(r=>'<tr>'+r.map(c=>'<td>'+c+'</td>').join('')+'</tr>').join('');
   const meta='<div class="panel-meta">'+cfg.size+'% · '+(cfg.collapsed?'colapsado':'expandido')+'</div>';
-  return '<div class="cba-module-container__body"><div class="panel-title-row"><div class="panel-title cba-text-heading-md">'+cfg.title+'</div>'+meta+'</div><table>'+head+'<tbody>'+body+'</tbody></table></div>';
+  return '<div class="cba-module-container__body"><div class="panel-title-row"><div class="panel-title cba-text-heading-md">'+cfg.title+'</div>'+meta+'</div><table><tbody>'+body+'</tbody></table></div>';
 }
 
 function buildModuleFooter(cfg){
@@ -911,16 +908,19 @@ function buildModule(cfg){
   return host+header+body+footer+'</section>';
 }
 
-function renderModuleRow(host,modules){
-  host.innerHTML=modules.map(buildModule).join('');
+function labelStateColor(state){
+  if(state==='disabled') return 'var(--cba-state-disabled-text)';
+  if(state==='error') return 'var(--cba-state-invalid-text)';
+  return '';
 }
 
 function renderLabelsPills(host){
   const labels=LABELS.map(([label,cls,state])=>{
-    const stateStyle=state==='disabled'?' style="color:var(--cba-state-disabled-text)"':(state==='error'?' style="color:var(--cba-state-invalid-text)"':'');
+    const color=labelStateColor(state);
+    const stateStyle=color?' style="color:'+color+'"':'';
     return '<div class="t-row"><span class="'+cls+'"'+stateStyle+'>'+label+'</span></div>';
   }).join('');
-  const pills=PILLS.map(([label,cls])=>'<span class="demo-pill '+cls+'">'+label+'</span>').join('');
+  const pills=PILL_STATES.map(([label,cls])=>'<span class="demo-pill '+cls+'">'+label+'</span>').join('');
   host.innerHTML='<div class="pattern-card"><h3>Labels</h3>'+labels+'</div><div class="pattern-card"><h3>Pills</h3><div class="demo-pills">'+pills+'</div></div>';
 }
 
