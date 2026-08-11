@@ -27,6 +27,11 @@ export type CbaButtonIconPosition = 'leading' | 'trailing';
  * variant styles, two sizes, an optional leading/trailing icon via the `icon`
  * input, and a loading state that shows a spinner and disables interaction.
  *
+ * Layout modifiers:
+ * - `[truncate]="true"` — ellipsis-clamp long labels in constrained containers.
+ * - `[iconOnly]="true"` — minimal square icon-only button (provide `aria-label`).
+ * - `[block]="true"` — full-width block-level button; ghost variant left-aligns the label.
+ *
  * @usageNotes
  * ```html
  * <!-- Primary (default) -->
@@ -40,6 +45,15 @@ export type CbaButtonIconPosition = 'leading' | 'trailing';
  *
  * <!-- Loading / spinner -->
  * <cba-button [loading]="isSaving" (cbaClick)="onSave()">Saving…</cba-button>
+ *
+ * <!-- Truncated label -->
+ * <cba-button [truncate]="true" style="max-width: 120px;">Very long label</cba-button>
+ *
+ * <!-- Icon-only (aria-label required) -->
+ * <cba-button [icon]="faPlus" [iconOnly]="true" aria-label="Add item"></cba-button>
+ *
+ * <!-- Block-level ghost -->
+ * <cba-button variant="ghost" [block]="true" (cbaClick)="onFilter()">Filter</cba-button>
  * ```
  *
  * @see [CBA_BUTTON.md](/docs/CBA_BUTTON.md) — full API docs.

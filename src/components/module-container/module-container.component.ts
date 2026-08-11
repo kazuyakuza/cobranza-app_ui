@@ -24,9 +24,13 @@ import {
  *
  * The body region is removed from the DOM while `isCollapsed` is `true`,
  * so it never participates in layout or scroll. In fullscreen mode the
- * container still hosts header + body; the chrome (border-radius, shadow)
- * modifiers are suppressed via the `cba-module-container--fullscreen`
- * host class (styled in Block B).
+ * container still hosts header + body; the chrome (border, border-radius,
+ * box-shadow, overflow clipping) is suppressed via the
+ * `cba-module-container--fullscreen` host class, while `background-color`
+ * is retained so the panel keeps its cream surface.
+ *
+ * Scroll is contained inside the body by default (`overscroll-behavior: contain`).
+ * Set `[scrollChaining]="true"` to opt into workspace scroll chaining.
  *
  * Styling of size / chrome / padding / scroll is intentionally handled in
  * Block B. Block A wires the host modifier classes only.
@@ -39,7 +43,8 @@ import {
  *   [size]="size"
  *   [isCollapsed]="isCollapsed"
  *   [isFullscreen]="isFullscreen"
- *   [padding]="padding">
+ *   [padding]="padding"
+ *   [scrollChaining]="scrollChaining">
  *
  *   <cba-module-header
  *     cbaModuleContainerHeader
@@ -56,6 +61,7 @@ import {
  * @see {@link ModuleContainerSize}
  * @see {@link ModuleContainerPadding}
  * @see {@link ModuleHeaderComponent}
+ * @see [MODULE_CONTAINER.md](/docs/MODULE_CONTAINER.md) — full API docs.
  */
 @Component({
   selector: 'cba-module-container',

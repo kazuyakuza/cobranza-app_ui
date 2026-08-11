@@ -154,8 +154,8 @@ switcher.
 | Component | Description |
 | --- | --- |
 | `ModuleHeaderComponent` | Shell-injected header above each MFE module (title, size, collapse, fullscreen, status). |
-| `ModuleContainerComponent` | Wraps `ModuleHeader` + MFE content; handles size, collapse, padding, scroll. |
-| `CbaButton` | Variants: primary, secondary, ghost, danger, success; sizes sm/md; loading; icon support. |
+| `ModuleContainerComponent` | Wraps `ModuleHeader` + MFE content; handles size, collapse, fullscreen, padding, scroll (with opt-in scroll chaining). |
+| `CbaButton` | Variants: primary, secondary, ghost, danger, success; sizes sm/md; loading; icon support; `truncate` (ellipsis label), `iconOnly` (square icon button), `block` (full-width). |
 | `CbaCard` | Optional header & footer; no forced hover elevation. |
 | `CbaBadge` | Semantic colours; solid/outline styles. |
 | `CbaEmptyState` | Slots: icon, title, description, primary action. |
