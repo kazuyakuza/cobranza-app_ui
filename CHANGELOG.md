@@ -30,6 +30,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > Releases prior to 0.8.1 predate this changelog and are not reconstructed retroactively.
 
+## [0.14.0] — 2026-08-11
+
+### Added
+
+- **`ModuleContainerComponent.scrollChaining` input** (`boolean`, default `false`) — opt into workspace scroll chaining. When `true`, `.cba-module-container__body` switches from `overscroll-behavior: contain` (default) to `overscroll-behavior: auto`, so wheel events bubble to the workspace once the module body reaches its edge. Drives the `cba-module-container--scroll-chaining` host modifier. Replaces the Shell's removed `::ng-deep` override. See `docs/MODULE_CONTAINER.md` §Scroll behaviour.
+- **`CbaButtonComponent.truncate` input** (`boolean`, default `false`) — ellipsis-clamp long labels in constrained containers. Sets `min-width: 0` on `.cba-button__control` and `overflow: hidden; text-overflow: ellipsis; white-space: nowrap` on `.cba-button__label`. Drives the `cba-button--truncate` host modifier. See `docs/CBA_BUTTON.md` §Label truncation.
+- **`CbaButtonComponent.iconOnly` input** (`boolean`, default `false`) — minimal square icon-only button. Sets `aspect-ratio: 1 / 1`, `min-width: auto`, and per-size padding (`--cba-space-1` for `sm`, `--cba-space-2` for `md`). Drives the `cba-button--icon-only` host modifier. The icon is `aria-hidden`; consumers must supply an accessible label via `aria-label`. See `docs/CBA_BUTTON.md` §Icon-only.
+- **`CbaButtonComponent.block` input** (`boolean`, default `false`) — block-level button that fills its parent width. Host becomes `display: block` at `width: 100%`; internal control spans `100%`. Ghost block buttons left-align the label. Drives the `cba-button--block` host modifier. See `docs/CBA_BUTTON.md` §Block.
+
+### Changed
+
+- **`ModuleContainerComponent` fullscreen mode now retains `background-color`** — moved `background-color: var(--cba-bg-secondary)` from `:host(:not(.cba-module-container--fullscreen))` to the base `:host` rule. Only `border`, `border-radius`, `box-shadow`, and `overflow: hidden` are suppressed in fullscreen mode. Fixes transparent panel surface in the Shell fullscreen placeholder. See `docs/MODULE_CONTAINER.md` §Fullscreen behaviour.
+
+### Notes
+
+- All new inputs default to `false`; the change is additive and backward-compatible. No `--cba-*` token names, component selectors, or public exports changed.
+- Source TODO: `.agent/todos/20260811/20260811-todo-0.md` (Tasks 1–5). Front-end spec: [20260811-task-a-frontend-spec.md](.kilo/plans/20260811-task-a-frontend-spec.md).
+- The Shell `.cba-bg-secondary` workaround on `<cba-module-container>` in the fullscreen placeholder (see TODO Task 2 reference) becomes harmless after this release and may be removed in a follow-up Shell PR — out of scope for this library change.
+- Compliance: no `[Unreleased]` section introduced (per `.kilo/rules/changelog-versioning.md`).
+
 ## [0.13.0] — 2026-08-09
 
 ### Added
