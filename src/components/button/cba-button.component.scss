@@ -118,8 +118,7 @@
   }
 }
 
-// Task 3 (Round 2) — label truncation. min-width: 0 on the control lets the
-// flex child shrink so the label can ellipsis-clamp inside a constrained host.
+// Task 3 (Round 2) — label truncation.
 .cba-button--truncate .cba-button__control {
   min-width: 0;
 }
@@ -130,11 +129,7 @@
   white-space: nowrap;
 }
 
-// Task 4 (Round 2) — minimal square icon-only button. The aspect-ratio keeps
-// the button square; min-width: auto overrides any size-based min-width so the
-// button collapses to the icon + minimal padding. Padding is per-size so the
-// icon stays centered without horizontal bloat. Pair with consumer flex
-// `flex: 0 0 auto` to prevent stretching in a flex parent.
+// Task 4 (Round 2) — minimal square icon-only button.
 .cba-button--icon-only .cba-button__control {
   aspect-ratio: 1 / 1;
   min-width: auto;
@@ -148,9 +143,11 @@
   padding: var(--cba-space-2);
 }
 
-// Task 5 (Round 2) — block-level button. The host swaps from inline-block to
-// block at 100% width; the internal control also spans 100% so ghost block
-// buttons can left-align their label.
+.cba-button--icon-only .cba-button__label {
+  display: none;
+}
+
+// Task 5 (Round 2) — block-level button.
 :host(.cba-button--block) {
   display: block;
   width: 100%;

@@ -14,7 +14,7 @@ import { hostEl } from '../testing/test-helpers';
   imports: [CbaButtonComponent],
   template: '<cba-button><span class="label-host">Save</span></cba-button>',
 })
-class ButtonWithLabelHost {}
+class ButtonWithLabelHost { }
 
 describe('CbaButtonComponent', () => {
   describe('direct (no projection)', () => {
@@ -116,34 +116,25 @@ describe('CbaButtonComponent', () => {
       expect(button().getAttribute('type')).toBe('submit');
     });
 
-    it('does not apply the truncate host modifier by default and applies it when truncate is true', () => {
-      expect(hostEl(fixture).classList.contains('cba-button--truncate')).toBe(false);
+    function assertInputDrivesHostClass(inputName: string, className: string): void {
+      expect(hostEl(fixture).classList.contains(className)).toBe(false);
 
-      fixture.componentRef.setInput('truncate', true);
+      fixture.componentRef.setInput(inputName, true);
       fixture.detectChanges();
-      // text-overflow / white-space are not computable in jsdom; the host
-      // modifier class is the contract (mirrors ModuleContainer convention).
-      expect(hostEl(fixture).classList.contains('cba-button--truncate')).toBe(true);
+
+      expect(hostEl(fixture).classList.contains(className)).toBe(true);
+    }
+
+    it('drives the truncate host modifier', () => {
+      assertInputDrivesHostClass('truncate', 'cba-button--truncate');
     });
 
-    it('does not apply the icon-only host modifier by default and applies it when iconOnly is true', () => {
-      expect(hostEl(fixture).classList.contains('cba-button--icon-only')).toBe(false);
-
-      fixture.componentRef.setInput('iconOnly', true);
-      fixture.detectChanges();
-      // aspect-ratio / padding computed values are not computable in jsdom;
-      // the host modifier class is the contract.
-      expect(hostEl(fixture).classList.contains('cba-button--icon-only')).toBe(true);
+    it('drives the icon-only host modifier', () => {
+      assertInputDrivesHostClass('iconOnly', 'cba-button--icon-only');
     });
 
-    it('does not apply the block host modifier by default and applies it when block is true', () => {
-      expect(hostEl(fixture).classList.contains('cba-button--block')).toBe(false);
-
-      fixture.componentRef.setInput('block', true);
-      fixture.detectChanges();
-      // display / width / justify-content are not computable in jsdom;
-      // the host modifier class is the contract.
-      expect(hostEl(fixture).classList.contains('cba-button--block')).toBe(true);
+    it('drives the block host modifier', () => {
+      assertInputDrivesHostClass('block', 'cba-button--block');
     });
   });
 

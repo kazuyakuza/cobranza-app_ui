@@ -51,28 +51,15 @@ describe('ModuleContainerComponent', () => {
     expect(hostHasClass('cba-module-container--collapsed')).toBe(true);
   });
 
-  it('applies the fullscreen host modifier that suppresses module chrome', () => {
+  it('applies the fullscreen host modifier (chrome suppression and background retention are CSS-only)', () => {
     setup();
     expect(hostHasClass('cba-module-container--fullscreen')).toBe(false);
 
     fixture.componentRef.setInput('isFullscreen', true);
     fixture.detectChanges();
 
-    // CSS chrome suppression is not testable in jsdom; the host modifier is the contract.
-    expect(hostHasClass('cba-module-container--fullscreen')).toBe(true);
-  });
-
-  it('retains the fullscreen host modifier without losing the panel surface contract', () => {
-    setup();
-    expect(hostHasClass('cba-module-container--fullscreen')).toBe(false);
-
-    fixture.componentRef.setInput('isFullscreen', true);
-    fixture.detectChanges();
-
-    // background-color retention is a CSS rule (jsdom cannot compute it); the
-    // host modifier is the contract. Task 2 guarantees background-color is
-    // declared on :host, not under :not(--fullscreen), so fullscreen keeps
-    // the cream panel surface.
+    // CSS chrome suppression and background-color retention are not testable
+    // in jsdom; the host modifier is the contract.
     expect(hostHasClass('cba-module-container--fullscreen')).toBe(true);
   });
 

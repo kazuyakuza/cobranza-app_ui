@@ -20,7 +20,7 @@
   flex-direction: column;
   height: 100%;
   box-sizing: border-box;
-  /* Panel surface retained in every mode (including fullscreen). */
+  /* Panel surface retained in every mode. */
   background-color: var(--cba-bg-secondary);
 }
 
@@ -33,9 +33,7 @@
   width: 100%;
 }
 
-/* Task 4 — module chrome (border, radius, shadow, overflow clipping) applied
-   only when NOT fullscreen. Background-color lives on the base :host above so
-   fullscreen mode still renders the cream panel surface. */
+/* Task 4 — chrome applied only when NOT fullscreen. */
 :host(:not(.cba-module-container--fullscreen)) {
   border: 1px solid var(--cba-border-default);
   border-radius: var(--cba-radius-md);
@@ -104,8 +102,7 @@
   padding: var(--cba-space-4);
 }
 
-/* Task 1 (Round 2) — opt-in scroll chaining. When enabled, wheel events
-   bubble to the workspace once the module body reaches its scroll boundary. */
+/* Task 1 (Round 2) — opt-in scroll chaining. */
 :host(.cba-module-container--scroll-chaining) .cba-module-container__body {
   overscroll-behavior: auto;
 }
