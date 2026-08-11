@@ -62,6 +62,20 @@ describe('ModuleContainerComponent', () => {
     expect(hostHasClass('cba-module-container--fullscreen')).toBe(true);
   });
 
+  it('retains the fullscreen host modifier without losing the panel surface contract', () => {
+    setup();
+    expect(hostHasClass('cba-module-container--fullscreen')).toBe(false);
+
+    fixture.componentRef.setInput('isFullscreen', true);
+    fixture.detectChanges();
+
+    // background-color retention is a CSS rule (jsdom cannot compute it); the
+    // host modifier is the contract. Task 2 guarantees background-color is
+    // declared on :host, not under :not(--fullscreen), so fullscreen keeps
+    // the cream panel surface.
+    expect(hostHasClass('cba-module-container--fullscreen')).toBe(true);
+  });
+
   it('applies the expected padding modifier for none sm and md', () => {
     setup();
     expect(hostHasClass('cba-module-container--padding-sm')).toBe(true);
@@ -73,5 +87,17 @@ describe('ModuleContainerComponent', () => {
     fixture.componentRef.setInput('padding', 'md');
     fixture.detectChanges();
     expect(hostHasClass('cba-module-container--padding-md')).toBe(true);
+  });
+
+  it('does not apply the scroll-chaining host modifier by default and applies it when scrollChaining is true', () => {
+    setup();
+    expect(hostHasClass('cba-module-container--scroll-chaining')).toBe(false);
+
+    fixture.componentRef.setInput('scrollChaining', true);
+    fixture.detectChanges();
+
+    // CSS overscroll-behavior switch is not computable in jsdom; the host
+    // modifier class is the contract (mirrors the fullscreen chrome test).
+    expect(hostHasClass('cba-module-container--scroll-chaining')).toBe(true);
   });
 });

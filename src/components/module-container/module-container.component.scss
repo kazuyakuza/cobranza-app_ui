@@ -20,6 +20,8 @@
   flex-direction: column;
   height: 100%;
   box-sizing: border-box;
+  /* Panel surface retained in every mode (including fullscreen). */
+  background-color: var(--cba-bg-secondary);
 }
 
 /* Task 3 — width mode driven by Shell. */
@@ -31,9 +33,10 @@
   width: 100%;
 }
 
-/* Task 4 — module chrome applied only when NOT fullscreen. */
+/* Task 4 — module chrome (border, radius, shadow, overflow clipping) applied
+   only when NOT fullscreen. Background-color lives on the base :host above so
+   fullscreen mode still renders the cream panel surface. */
 :host(:not(.cba-module-container--fullscreen)) {
-  background-color: var(--cba-bg-secondary);
   border: 1px solid var(--cba-border-default);
   border-radius: var(--cba-radius-md);
   box-shadow: var(--cba-shadow-module);
@@ -52,7 +55,7 @@
   flex: 1 1 auto;
   min-height: 0;
   overflow-y: auto;
-  /* Keep scroll inside the body; never bubble to the workspace. */
+  /* Keep scroll inside the body by default; scrollChaining allows bubbling to the workspace. */
   overscroll-behavior: contain;
   scrollbar-width: thin;
   scrollbar-color: var(--cba-border-default) transparent;
@@ -99,4 +102,10 @@
 
 :host(.cba-module-container--padding-md) .cba-module-container__body {
   padding: var(--cba-space-4);
+}
+
+/* Task 1 (Round 2) — opt-in scroll chaining. When enabled, wheel events
+   bubble to the workspace once the module body reaches its scroll boundary. */
+:host(.cba-module-container--scroll-chaining) .cba-module-container__body {
+  overscroll-behavior: auto;
 }

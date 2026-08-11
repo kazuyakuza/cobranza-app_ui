@@ -94,6 +94,7 @@ export class ShellComponent {
 | isCollapsed | `boolean` | `false` | no | When `true` the body region is removed from the DOM (no layout box, no scroll). Adds the `cba-module-container--collapsed` host modifier. |
 | isFullscreen | `boolean` | `false` | no | When `true` module chrome (border-radius, shadow) is suppressed; the Shell fullscreen view owns the outer chrome. Adds the `cba-module-container--fullscreen` host modifier. |
 | padding | `'none' \| 'sm' \| 'md'` | `'sm'` | no | Internal padding of the body region. Drives the `cba-module-container--padding-none` / `cba-module-container--padding-sm` / `cba-module-container--padding-md` host modifiers. |
+| scrollChaining | `boolean` | `false` | no | When `true`, wheel events chain to the workspace once the module body reaches its scroll edge (sets `overscroll-behavior: auto` on `.cba-module-container__body`). Default `false` keeps scroll contained inside the module body. Drives the `cba-module-container--scroll-chaining` host modifier. |
 
 The container never mutates these values — the Shell owns the source of truth and re-binds state on every change.
 
@@ -120,8 +121,8 @@ When `isCollapsed === true`:
 When `isFullscreen === true`:
 
 - The host receives the `cba-module-container--fullscreen` modifier.
-- **Border-radius and module shadow are suppressed** (`box-shadow: var(--cba-shadow-module)` and `border-radius` are only applied under `:host(:not(.cba-module-container--fullscreen))`). Background and border are also removed.
-- The Shell fullscreen view owns the outer chrome.
+- **Border, border-radius, module shadow, and overflow clipping are suppressed** — these chrome properties are declared under `:host(:not(.cba-module-container--fullscreen))` only.
+- **`background-color` (`--cba-bg-secondary`) is retained** so the panel keeps its cream surface in fullscreen mode; only the chrome (border, radius, shadow, `overflow: hidden`) is removed, letting the Shell fullscreen view own the outer shape.
 - The container still hosts both the projected header and the body.
 
 ## Padding options
@@ -139,8 +140,8 @@ All values come from `--cba-*` spacing tokens (see `src/theme/_variables.scss`).
 ## Scroll behaviour
 
 - Scroll exists **only** while the module is expanded (`isCollapsed === false`).
-- The body region (`.cba-module-container__body`) is the scroll container: `overflow-y: auto`, `flex: 1 1 auto`, `min-height: 0`, and `overscroll-behavior: contain`.
-- Scroll never bubbles outside the body; the Shell workspace scrolls independently.
+- The body region (`.cba-module-container__body`) is the scroll container: `overflow-y: auto`, `flex: 1 1 auto`, `min-height: 0`, and `overscroll-behavior: contain` (default).
+- By default scroll is contained inside the body — wheel events stop at the module's edge and the Shell workspace scrolls independently. Set `[scrollChaining]="true"` to switch the body to `overscroll-behavior: auto` so wheel events chain to the workspace once the module body reaches its scroll boundary.
 - Scrollbar styling is CSS-only and thin by default; the WebKit thumb widens on hover. Optional top/bottom jump buttons are out of scope for this phase.
 
 ## Accessibility

@@ -72,6 +72,7 @@ import {
     '[class.cba-module-container--padding-none]': "padding() === 'none'",
     '[class.cba-module-container--padding-sm]': "padding() === 'sm'",
     '[class.cba-module-container--padding-md]': "padding() === 'md'",
+    '[class.cba-module-container--scroll-chaining]': 'scrollChaining()',
   },
 })
 export class ModuleContainerComponent {
@@ -121,4 +122,18 @@ export class ModuleContainerComponent {
    * @default 'sm'
    */
   readonly padding = input<ModuleContainerPadding>('sm');
+
+  /**
+   * Allows scroll gestures to chain to the parent workspace container.
+   *
+   * When `false` (default), the module body uses `overscroll-behavior: contain`
+   * so wheel events stay inside the module. When `true`, the body uses
+   * `overscroll-behavior: auto` so the workspace can scroll once the module
+   * body reaches its edge.
+   *
+   * Drives the host modifier class `cba-module-container--scroll-chaining`.
+   *
+   * @default false
+   */
+  readonly scrollChaining = input<boolean>(false);
 }
