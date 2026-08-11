@@ -889,7 +889,7 @@ function buildButtonMatrix(host){
 
 function buildHeaderActions(size, isCollapsed){
   const dragBtn='<button type="button" class="cba-module-header__action cba-module-header__action--drag" aria-label="Arrastrar módulo" title="Arrastrar módulo"><i class="fa-solid fa-up-down-left-right" aria-hidden="true"></i></button>';
-  const collapseIcon=isCollapsed?'fa-chevron-down':'fa-chevron-up';
+  const collapseIcon=isCollapsed?'chevron-down':'chevron-up';
   const collapseBtn='<button type="button" class="cba-module-header__action" aria-label="Colapsar módulo" title="Colapsar módulo"><i class="fa-solid fa-'+collapseIcon+'" aria-hidden="true"></i></button>';
   const sizeIcon=size==='100'?'arrows-left-right-to-line':'arrows-left-right';
   const sizeLabel=size==='100'?'Reducir módulo a 50%':'Ampliar módulo a 100%';
