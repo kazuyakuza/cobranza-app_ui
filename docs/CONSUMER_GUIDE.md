@@ -350,7 +350,7 @@ The Shell can project an optional drag handle into `cba-module-header` via the
   states, focus ring, and grab cursor — no `::ng-deep` needed.
 - The slot is hidden in fullscreen mode along with the other actions.
 - The Shell **must** provide the accessible name (`aria-label="Arrastrar módulo"`).
-- Full example: see [`MODULE_HEADER.md` §Drag handle slot](./MODULE_HEADER.md#drag-handle-slot).
+- Full example: see [`CBA_MODULE_HEADER.md` §Drag handle slot](./CBA_MODULE_HEADER.md#drag-handle-slot).
 
 ## MFE checklist
 
@@ -374,7 +374,7 @@ The Shell can project an optional drag handle into `cba-module-header` via the
 - Inventing parallel reds/greens for form validation. Reuse `--cba-state-invalid-*` and `--cba-state-valid-*` tokens which reuse warmed accent hues.
 - Hard-coding `font-size` pixel values instead of using the typography scale tokens or `.cba-text-*` utility classes.
 - Using `border-radius` values other than `sm`/`md`/`lg`/`pill` (999px). The four values cover all cases.
-- Asking `@cobranza-apps/ui` to implement drag-and-drop or to depend on `@angular/cdk`. The Library exposes the `[cbaModuleDragHandle]` projection slot; the Shell owns DnD. See [`MODULE_HEADER.md` §Drag handle slot](./MODULE_HEADER.md#drag-handle-slot).
+- Asking `@cobranza-apps/ui` to implement drag-and-drop or to depend on `@angular/cdk`. The Library exposes the `[cbaModuleDragHandle]` projection slot; the Shell owns DnD. See [`CBA_MODULE_HEADER.md` §Drag handle slot](./CBA_MODULE_HEADER.md#drag-handle-slot).
 
 ## Quick verify
 
