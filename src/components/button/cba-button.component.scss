@@ -12,7 +12,7 @@
   cursor: pointer;
   font-family: inherit;
   font-weight: 500;
-  line-height: 1.5;
+  line-height: var(--cba-line-height-body);
   transition: background-color 120ms ease, border-color 120ms ease, color 120ms ease;
 
   &:focus-visible {
@@ -43,12 +43,12 @@
 // Size modifiers
 .cba-button--sm .cba-button__control {
   padding: var(--cba-space-1) var(--cba-space-3);
-  font-size: 0.8125rem;
+  font-size: var(--cba-font-size-small);
 }
 
 .cba-button--md .cba-button__control {
   padding: var(--cba-space-2) var(--cba-space-4);
-  font-size: 0.875rem;
+  font-size: var(--cba-font-size-body);
 }
 
 // Variants

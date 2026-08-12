@@ -17,8 +17,8 @@
   display: inline-flex;
   align-items: center;
   gap: var(--cba-space-2);
-  font-size: 14px;
-  line-height: 1.5;
+  font-size: var(--cba-font-size-body);
+  line-height: var(--cba-line-height-body);
 }
 
 .cba-module-footer__status fa-icon {

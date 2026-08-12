@@ -64,7 +64,7 @@
   gap: var(--cba-space-1);
   padding: var(--cba-space-1) var(--cba-space-2);
   border-radius: 9999px;
-  font-size: 0.75rem;
+  font-size: var(--cba-font-size-caption);
   font-weight: 500;
   line-height: 1;
   border: 1px solid transparent;

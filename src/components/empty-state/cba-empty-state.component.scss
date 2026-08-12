@@ -18,7 +18,7 @@
   justify-content: center;
   width: var(--cba-space-8);
   height: var(--cba-space-8);
-  font-size: 1.75rem;
+  font-size: var(--cba-icon-size-md);
   color: var(--cba-text-muted);
 
   &:empty {
@@ -29,16 +29,16 @@
 .cba-empty-state__title {
   margin: 0;
   color: var(--cba-text-primary);
-  font-size: 1rem;
+  font-size: var(--cba-font-size-heading-md);
   font-weight: 500;
-  line-height: 1.5;
+  line-height: var(--cba-line-height-body);
 }
 
 .cba-empty-state__description {
   margin: 0;
   color: var(--cba-text-muted);
-  font-size: 0.875rem;
-  line-height: 1.5;
+  font-size: var(--cba-font-size-body);
+  line-height: var(--cba-line-height-body);
 }
 
 .cba-empty-state__action {

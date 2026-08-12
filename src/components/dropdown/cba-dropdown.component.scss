@@ -13,7 +13,7 @@
   border-radius: var(--cba-radius-md);
   box-shadow: var(--cba-shadow-elevated);
   padding: var(--cba-space-1) 0;
-  min-width: 12rem;
+  min-width: var(--cba-dropdown-min-width);
 }
 
 .cba-dropdown__menu [ngbDropdownItem] {
@@ -24,8 +24,8 @@
   border: none;
   background: transparent;
   color: var(--cba-text-primary);
-  font-size: 0.875rem;
-  line-height: 1.5;
+  font-size: var(--cba-font-size-body);
+  line-height: var(--cba-line-height-body);
   text-align: left;
   cursor: pointer;
   transition: background-color 120ms ease, color 120ms ease;
