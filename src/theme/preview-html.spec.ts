@@ -108,6 +108,11 @@ describe('docs/theme-preview.html structure', () => {
   it('inline preview style uses var(--cba-bg-primary), not a hard-coded canvas hex', () => {
     expect(html).toContain('var(--cba-bg-primary)');
   });
+
+  it('uses the real <cba-field> selector (not <cba-form-field>) in captions', () => {
+    expect(html).toContain('&lt;cba-field');
+    expect(html).not.toContain('cba-form-field');
+  });
 });
 
 describe('docs/theme-preview.css :root matches canonical tokens', () => {
@@ -135,9 +140,9 @@ describe('docs/theme-preview.html readability fixes', () => {
     expect(html).toContain('.t-row{font-size:13px;font-weight:500;margin-bottom:4px}');
   });
 
-  it('warning callout uses solid accent bg with inverse text', () => {
-    expect(html).toContain('background:var(--cba-accent-warning)');
-    expect(html).toContain('color:var(--cba-text-inverse)');
+  it('warning callout uses solid accent bg with WCAG-AA primary text', () => {
+    expect(html).toContain('background-color:var(--cba-accent-warning)');
+    expect(html).toContain('color:var(--cba-text-primary)');
     expect(html).toContain('.t-callout{');
   });
 

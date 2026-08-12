@@ -389,6 +389,7 @@ After integration, confirm:
 7. Selected state (pill, nav tab, table row) uses `--cba-selected-*` tokens — distinct from hover.
 8. Form controls show distinct disabled / readonly / invalid states.
 9. Typography uses the scale (`.cba-text-*` utilities or `--cba-font-size-*` tokens), not hard-coded pixel sizes.
+10. **Theme preview as canonical visual reference** — open `docs/theme-preview.html` in a browser (or via `file://`). Every top-level section (`<h2>`) now carries a `<p class="section-caption">` mapping the demo pattern to the real library API: `<cba-button>`, `<cba-badge>`, `<cba-field>`, `<cba-module-container/header/footer>`, `.cba-text-*`, `.cba-border-*`, `.cba-radius-*`, `.cba-shadow-*`, and direct `--cba-*` tokens. Shell mockup and module examples headings (`<h2>Shell mockup</h2>`, `<h2>Module examples</h2>`, `<h2>Radius &amp; Shadow</h2>`) delimit preview-only vs library-exported surfaces. Regenerate the preview stylesheet with `npm run build:preview`.
 
 ## Cross-References
 

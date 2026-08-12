@@ -85,7 +85,14 @@
         referrerpolicy="no-referrer" />
   <style>
     *{box-sizing:border-box}
-    body{margin:0;font-family:Inter,system-ui,sans-serif;font-size:14px;line-height:1.45;background:#111;color:#eee}
+    body{margin:0;font-family:Inter,system-ui,sans-serif;font-size:var(--cba-font-size-body);line-height:1.45;background:#111;color:#eee}
+    /*
+      DEV-TOOL / PREVIEW CHROME EXEMPTION:
+      The rules below describe the dark sidebar, shell mockup, and preview controls.
+      They are intentionally preview-only and use hard-coded px values for a stable
+      dev-tool UI. They are NOT part of the published library theme and do not need
+      to use --cba-* tokens.
+    */
     .app{display:grid;grid-template-columns:340px 1fr;min-height:100vh}
     .controls{background:#1a1a1a;border-right:1px solid #333;padding:12px 10px;overflow:auto;height:100vh;position:sticky;top:0}
     .controls h1{margin:0 0 2px;font-size:13px}
@@ -138,11 +145,12 @@
     .panel-title-row{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:var(--cba-space-3)}
     .panel-title{font-weight:700}
     .panel-meta{font-size:var(--cba-font-size-small);color:var(--cba-text-muted);font-weight:600}
-    .cba-module-container__body table{width:100%;border-collapse:collapse;font-size:var(--cba-font-size-small)}
-    .cba-module-container__body thead th{text-align:left;padding:var(--cba-space-3);background:var(--cba-bg-tertiary);color:var(--cba-text-secondary);font-weight:700;border-bottom:1px solid var(--cba-border-default)}
-    .cba-module-container__body tbody td{padding:var(--cba-space-3);border-bottom:1px solid var(--cba-border-default);font-weight:500;color:var(--cba-text-primary)}
-    .cba-module-container__body tbody tr:hover td{background:var(--cba-hover)}
-    .cba-module-container__body tbody tr:last-child td{border-bottom:none}
+    /* Preview-only table chrome; not exported by the library. */
+    .preview-module-table{width:100%;border-collapse:collapse;font-size:var(--cba-font-size-small)}
+    .preview-module-table thead th{text-align:left;padding:var(--cba-space-3);background:var(--cba-bg-tertiary);color:var(--cba-text-secondary);font-weight:700;border-bottom:1px solid var(--cba-border-default)}
+    .preview-module-table tbody td{padding:var(--cba-space-3);border-bottom:1px solid var(--cba-border-default);font-weight:500;color:var(--cba-text-primary)}
+    .preview-module-table tbody tr:hover td{background:var(--cba-hover)}
+    .preview-module-table tbody tr:last-child td{border-bottom:none}
     .shell-footer{height:var(--cba-footer-height);display:flex;align-items:center;justify-content:center;gap:10px;border-top:1px solid var(--cba-border-default);background:var(--cba-bg-elevated)}
     .section-pill,
     .demo-pill{padding:8px 16px;border-radius:999px;border:1px solid var(--cba-border-strong);background:var(--cba-bg-secondary);color:var(--cba-text-secondary);font-size:13px;font-weight:700}
@@ -152,6 +160,9 @@
     .extras{max-width:900px;margin-top:14px}
     .extras h2{font-size:14px;margin:14px 0 6px}
     .extras h2:first-child{margin-top:0}
+    .section-caption{color:var(--cba-text-secondary);font-size:var(--cba-font-size-caption);font-style:italic;line-height:var(--cba-line-height-caption);margin:0 0 var(--cba-space-2) 0}
+    .radius-shadow-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:var(--cba-space-3)}
+    .radius-shadow-card{display:flex;align-items:center;justify-content:center;height:80px;background:var(--cba-bg-secondary);border:1px solid var(--cba-border-default);color:var(--cba-text-secondary);font-size:var(--cba-font-size-small);font-weight:600;text-align:center}
 
     /* Token swatches (spec §5) */
     .swatch-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:8px}
@@ -184,6 +195,10 @@
     .pv-btn--secondary.is-active{background-image:linear-gradient(var(--cba-active),var(--cba-active))}
     .pv-btn--ghost.is-active{background:var(--cba-active)}
     .pv-btn.is-disabled,.pv-btn:disabled{cursor:not-allowed;opacity:.6}
+    .pv-btn.is-focus,.pv-btn:focus-visible{outline:none;box-shadow:var(--cba-focus-ring)}
+    .pv-btn.is-loading{cursor:not-allowed;opacity:.6}
+    .pv-btn--sm{padding:var(--cba-space-1) var(--cba-space-3);font-size:var(--cba-font-size-small)}
+    .pv-btn--md{padding:var(--cba-space-2) var(--cba-space-4);font-size:var(--cba-font-size-body)}
 
     /* Text on surfaces (spec §7) */
     .text-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px}
@@ -199,7 +214,7 @@
     .t-secondary{color:var(--cba-text-secondary)}
     .t-muted{color:var(--cba-text-muted)}
     .t-inverse{color:var(--cba-text-inverse);background:var(--cba-accent-primary);padding:2px 6px;border-radius:var(--cba-radius-sm)}
-    .t-callout{margin-top:6px;padding:6px 8px;border-radius:var(--cba-radius-sm);border:1px solid transparent;background:var(--cba-accent-warning);color:var(--cba-text-inverse);font-size:11px;font-weight:600}
+    .t-callout{margin-top:var(--cba-space-2);padding:var(--cba-space-2) var(--cba-space-3);border-radius:var(--cba-radius-sm);border:1px solid var(--cba-border-strong);background-color:var(--cba-accent-warning);color:var(--cba-text-primary);font-size:var(--cba-font-size-caption);font-weight:600}
 
     /* Preserved informational rows */
     .accent-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
@@ -497,14 +512,27 @@
         </button>
         <span>Theme · <strong id="activeName">—</strong></span>
       </div>
+        <h2>Shell mockup</h2>
+        <p class="section-caption">
+          Application shell — NOT a library component. Library exports <code>&lt;cba-module-container&gt;</code>,
+          <code>&lt;cba-module-header&gt;</code>, <code>&lt;cba-module-footer&gt;</code> only.
+        </p>
       <header class="shell-header">
         <div class="logo" aria-hidden="true"></div><div class="brand">Cobranza</div><div class="spacer"></div>
-        <div class="search"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>&nbsp;Ctrl + K</div>
+        <input type="search" class="search" value="Ctrl + K" disabled aria-label="Buscar (solo vista previa)" />
         <button type="button" class="icon-btn" aria-label="Notificaciones"><i class="fa-regular fa-bell" aria-hidden="true"></i></button>
         <button type="button" class="icon-btn" aria-label="Usuario">U</button>
       </header>
       <main class="workspace">
         <!-- 7 module examples rendered by renderModuleExamples() from MODULE_INSTANCES + MODULE_LAYOUT -->
+          <h2>Module examples</h2>
+          <p class="section-caption">
+            Real library components: <code>&lt;cba-module-container&gt;</code>, <code>&lt;cba-module-header&gt;</code>,
+            <code>&lt;cba-module-footer&gt;</code>. Exported classes: <code>.cba-module-container--size-100</code>,
+            <code>.cba-module-header__action</code>, <code>.cba-module-footer__status--*</code>.
+            Preview-only helpers (<code>.panel-meta</code>, <code>.panel-title-row</code>) are not exported.
+            See <code>docs/CBA_MODULE_CONTAINER.md</code>, <code>docs/CBA_MODULE_HEADER.md</code>, <code>docs/CBA_MODULE_FOOTER.md</code>.
+          </p>
         <div id="moduleHost"></div>
         <div class="extras">
           <!--
@@ -514,6 +542,10 @@
             name, reference value (hex / rgba / alias var), and --cba-* token name.
           -->
           <h2>Token swatches</h2>
+          <p class="section-caption">
+            Direct <code>--cba-*</code> tokens and <code>.cba-bg-*</code> utility classes. No component equivalent;
+            consume via <code>var(--cba-bg-primary)</code> or <code>.cba-bg-primary</code>. See <code>docs/THEME.md</code>.
+          </p>
           <div class="swatch-grid" id="swatchGrid"></div>
 
           <!--
@@ -523,14 +555,62 @@
             Generated by buildButtonMatrix() in the <script> below.
           -->
           <h2>Button states</h2>
+          <p class="section-caption">
+            DEMO CSS ONLY. Reproduction: <code>&lt;cba-button variant="primary" size="md"&gt;Primary&lt;/cba-button&gt;</code>.
+            Focus, loading and sizes are also component inputs. See <code>docs/CBA_BUTTON.md</code>.
+          </p>
           <div class="btn-matrix" id="buttonMatrix"></div>
+          <!-- Button extra states — focus / loading / sizes. Static markup; no JS array. -->
+          <div class="btn-surface btn-surface--panel">
+            <h3>Focus</h3>
+            <div class="btn-variant">
+              <span class="btn-variant__label">primary</span>
+              <div class="btn-states">
+                <button type="button" class="pv-btn pv-btn--primary is-focus">Focused</button>
+              </div>
+            </div>
+          </div>
+          <div class="btn-surface btn-surface--panel">
+            <h3>Loading</h3>
+            <div class="btn-variant">
+              <span class="btn-variant__label">primary</span>
+              <div class="btn-states">
+                <button type="button" class="pv-btn pv-btn--primary is-loading" disabled>
+                  <i class="fa-solid fa-spinner fa-spin" aria-hidden="true"></i> Loading
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="btn-surface btn-surface--panel">
+            <h3>Sizes</h3>
+            <div class="btn-variant">
+              <span class="btn-variant__label">sm</span>
+              <div class="btn-states">
+                <button type="button" class="pv-btn pv-btn--primary pv-btn--sm">Small</button>
+              </div>
+            </div>
+            <div class="btn-variant">
+              <span class="btn-variant__label">md</span>
+              <div class="btn-states">
+                <button type="button" class="pv-btn pv-btn--primary pv-btn--md">Medium</button>
+              </div>
+            </div>
+          </div>
 
           <!-- Labels (.cba-text-*) in normal/disabled/error states + pill chips (normal/hover/selected/disabled) -->
           <h2>Labels &amp; pills</h2>
+          <p class="section-caption">
+            Labels: use <code>.cba-text-caption</code> / <code>.cba-text-small</code> / <code>.cba-text-body</code>.
+            Pills: no library component; apply <code>--cba-selected-*</code> tokens directly.
+          </p>
           <div id="labelsPills"></div>
 
           <!-- Every Font Awesome icon the library uses (module header, footer, shell chrome) -->
           <h2>Icons</h2>
+          <p class="section-caption">
+            Icons come from Font Awesome. Use <code>&lt;fa-icon [icon]="..."&gt;</code> or plain <code>&lt;i class="fa-solid fa-..."&gt;</code>.
+            See <code>docs/INDEX.md</code> for the icon list.
+          </p>
           <div id="iconsGrid"></div>
 
           <!--
@@ -541,32 +621,75 @@
             --cba-text-inverse on accent. Generated by renderTextSamples() from TEXT_SAMPLES.
           -->
           <h2>Text on surfaces</h2>
+          <p class="section-caption">
+            Use <code>.cba-text-primary</code>, <code>.cba-text-secondary</code>, <code>.cba-text-muted</code> and
+            <code>.cba-text-inverse</code> utilities. <code>--cba-text-muted</code> is restricted on canvas and inset sand.
+          </p>
           <div class="text-grid" id="textGrid"></div>
 
           <!-- Accent pills + raw source-color strip (informational, from theme.source array) -->
           <h2>Accent pills</h2>
+          <p class="section-caption">
+            Reproduction: <code>&lt;cba-badge appearance="solid" variant="success"&gt;success&lt;/cba-badge&gt;</code>.
+            See <code>docs/CBA_BADGE.md</code>.
+          </p>
           <div class="accent-row" id="accentRow"></div>
           <div class="raw-strip" id="rawStrip"></div>
 
           <!-- Six typography steps at their token pairs (font-size + line-height) -->
           <h2>Typography scale</h2>
+          <p class="section-caption">
+            Use <code>.cba-text-display</code> / <code>.cba-text-heading-lg</code> / <code>.cba-text-heading-md</code> /
+            <code>.cba-text-body</code> / <code>.cba-text-small</code> / <code>.cba-text-caption</code> utilities.
+          </p>
           <div class="type-scale" id="typeScale"></div>
 
           <!-- Three border levels on a panel background: subtle / default / strong -->
           <h2>Border scale</h2>
+          <p class="section-caption">
+            Use <code>.cba-border-subtle</code> / <code>.cba-border-default</code> / <code>.cba-border-strong</code> utilities;
+            pair with Bootstrap <code>.border</code> / <code>.border-1</code>.
+          </p>
           <div class="border-scale" id="borderScale"></div>
 
           <!-- Selected-state samples: footer pills, nav items, table rows -->
           <h2>Selected states</h2>
+          <p class="section-caption">
+            Selected-state tokens: <code>--cba-selected-bg</code>, <code>--cba-selected-border</code>,
+            <code>--cba-selected-text</code>, <code>--cba-selected-hover</code>. No dedicated component; apply directly.
+          </p>
           <div class="pattern-grid" id="selectedSamples"></div>
 
           <!-- Static form-state field boxes: default / hover / focus / disabled / readonly / invalid / valid -->
           <h2>Form states</h2>
+          <p class="section-caption">
+            Reproduction: <code>&lt;cba-field [disabled]="true" [readonly]="true" [valid]="true" [error]="'...'"&gt;</code>.
+            Host modifiers: <code>.cba-field--disabled</code>, <code>.cba-field--readonly</code>, <code>.cba-field--valid</code>,
+            <code>.cba-field--error</code> (and <code>.cba-field--invalid</code>). See <code>docs/CBA_FORM_FIELD.md</code>.
+          </p>
           <div class="form-states" id="formStates"></div>
 
           <!-- Semantic status badges: solid + outline + neutral -->
           <h2>Semantic status</h2>
+          <p class="section-caption">
+            Reproduction: <code>&lt;cba-badge appearance="solid" variant="success"&gt;success&lt;/cba-badge&gt;</code>
+            or <code>appearance="outline"</code>. See <code>docs/CBA_BADGE.md</code>.
+          </p>
           <div class="status-row" id="statusBadges"></div>
+
+          <!-- Radius & Shadow showcase — utility classes, no component. -->
+          <h2>Radius &amp; Shadow</h2>
+          <p class="section-caption">
+            Utility classes: <code>.cba-radius-sm</code>, <code>.cba-radius-md</code>, <code>.cba-radius-lg</code>,
+            <code>.cba-shadow-module</code>, <code>.cba-shadow-elevated</code>. No component; apply directly.
+          </p>
+          <div class="radius-shadow-grid">
+            <div class="radius-shadow-card cba-radius-sm"><span>radius-sm</span></div>
+            <div class="radius-shadow-card cba-radius-md"><span>radius-md</span></div>
+            <div class="radius-shadow-card cba-radius-lg"><span>radius-lg</span></div>
+            <div class="radius-shadow-card cba-radius-md cba-shadow-module"><span>shadow-module</span></div>
+            <div class="radius-shadow-card cba-radius-md cba-shadow-elevated"><span>shadow-elevated</span></div>
+          </div>
         </div>
       </main>
       <footer class="shell-footer">
@@ -909,7 +1032,7 @@ function buildModuleHeader(cfg){
 function buildModuleBody(cfg){
   const body=cfg.rows.map(r=>'<tr>'+r.map(c=>'<td>'+c+'</td>').join('')+'</tr>').join('');
   const meta='<div class="panel-meta">'+cfg.size+'% · '+(cfg.collapsed?'colapsado':'expandido')+'</div>';
-  return '<div class="cba-module-container__body"><div class="panel-title-row"><div class="panel-title cba-text-heading-md">'+cfg.title+'</div>'+meta+'</div><table><tbody>'+body+'</tbody></table></div>';
+  return '<div class="cba-module-container__body"><div class="panel-title-row"><div class="panel-title cba-text-heading-md">'+cfg.title+'</div>'+meta+'</div><table class="preview-module-table"><tbody>'+body+'</tbody></table></div>';
 }
 
 function buildModuleFooter(cfg){

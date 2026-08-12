@@ -39,6 +39,7 @@ Project-wide audit: package exports, theme tokens, component SCSS compliance, do
 - New layout/typography tokens: `--cba-module-footer-height` (40px), `--cba-icon-size-md` (1.75rem), `--cba-dropdown-min-width` (12rem). Registered in `src/components/testing/theme-fixtures.ts`; `docs/theme-preview.css` regenerated. See `docs/THEME.md` and `src/theme/_variables.scss`.
 - `package.json` `exports["./theme"]` now resolves under `sass`, `style`, and `default` conditions (previously `sass`-only).
 - `src/theme/theme.scss` now `@forward`s `_mixins.scss` so `@use '@cobranza-apps/ui/theme' as cba; @include cba.cba-elevated-surface;` works as documented in `docs/THEME.md`.
+- `docs/theme-preview.html` now wears a `<p class="section-caption">` beneath every top-level `<h2>` preview heading. Each caption maps the demo CSS to the real library API (`<cba-*>` component, `.cba-*` utility class, or `--cba-*` token) with a link to the relevant `docs/CBA_*.md`. New sections: `<h2>Shell mockup</h2>`, `<h2>Module examples</h2>`, `<h2>Radius &amp; Shadow</h2>` (shows `.cba-radius-sm/md/lg` and `.cba-shadow-module/elevated`). New Button sub-states: `Focus` (`.is-focus`), `Loading` (`.is-loading`), and `sm`/`md` sizes (`.pv-btn--sm/--md`). See `docs/theme-preview.html`.
 
 ### Changed
 
@@ -48,6 +49,9 @@ Project-wide audit: package exports, theme tokens, component SCSS compliance, do
 - `CbaModuleFooterComponent` gains `host: { class: 'cba-module-footer' }` (was host-less).
 - Component SCSS now uses `--cba-*` tokens in place of hard-coded sizes: `CbaModalComponent` title (was `--cba-space-5` → `--cba-font-size-display`), `CbaButtonComponent` sm/md line-height & font-size, `CbaDropdownComponent` menu min-width + item typography, `ModuleFooterComponent` status typography, `CbaEmptyStateComponent` icon/title/description typography (adds `--cba-icon-size-md`), `CbaBadgeComponent` caption font-size.
 - Doc file renames: `MODULE_HEADER.md` → `CBA_MODULE_HEADER.md`, `MODULE_CONTAINER.md` → `CBA_MODULE_CONTAINER.md`. Cross-refs updated in `docs/INDEX.md`, `README.md`, `docs/CBA_MODULE_FOOTER.md`, `docs/CONSUMER_GUIDE.md`, and the `@see` JSDoc of `ModuleHeaderComponent` / `ModuleContainerComponent`.
+- `docs/theme-preview.html` `body` font-size now uses `var(--cba-font-size-body)` (was hard-coded `14px`). Inline dev-tool / preview-chrome CSS rules (dark sidebar, shell mockup, preview controls) are now explicitly segregated by a `DEV-TOOL / PREVIEW CHROME EXEMPTION` comment block that documents why those rules intentionally use hard-coded px values and are exempt from the `--cba-*` token mandate.
+- `docs/theme-preview.html` `.search` element changed from a non-focusable `<div>` to a disabled native `<input type="search">` with `aria-label="Buscar (solo vista previa)"`. Visually unchanged (same pill); accessibility improved (now keyboard-focusable and screen-reader-announced).
+- `docs/theme-preview.html` fake component-table selectors (`.cba-module-container__body table`, `thead th`, `tbody td`, `tr:hover`, `tr:last-child td`) renamed to the preview-only `.preview-module-table` class. The copied component SCSS block no longer claims table selectors the real `<cba-module-container>` does not export. The new block is prefixed with `/* Preview-only table chrome; not exported by the library. */`. `buildModuleBody(cfg)` in the preview script applies the new class to the rendered `<table>`.
 
 ### Fixed
 
@@ -59,6 +63,8 @@ Project-wide audit: package exports, theme tokens, component SCSS compliance, do
 - `docs/CBA_INPUT.md`, `docs/CBA_SELECT.md`, `docs/CBA_DATEPICKER.md` host-class lists now include `--invalid` (each component binds both `--error` and `--invalid` to `error()`).
 - `docs/CBA_EMPTY_STATE.md` clarifies that the consumer must add `aria-hidden="true"` on the projected icon (component does not add it).
 - `docs/CBA_BUTTON.md` Table of Contents now lists `Non-goals` and `Related docs`.
+- `docs/theme-preview.html` `.t-callout` warning callout now uses `color: var(--cba-text-primary)` on `background-color: var(--cba-accent-warning)` (was `color: var(--cba-text-inverse)`). New contrast ratio ≈ 5.6:1, passing WCAG AA (≥4.5:1). Related assertion in `src/theme/preview-html.spec.ts` updated to pin the corrected contrast behavior.
+- `docs/CONSUMER_GUIDE.md` now references the preview captions as the canonical visual reproduction map for the library (`<cba-button>`, `<cba-badge>`, `<cba-field>`, module components, and `.cba-*` utility classes).
 
 ## [0.14.0] — 2026-08-11
 

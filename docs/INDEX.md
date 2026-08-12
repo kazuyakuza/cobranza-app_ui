@@ -53,7 +53,7 @@
 
 ## Visual preview
 
-- [theme-preview.html](./theme-preview.html) — Live Minimal Yet Warm theme preview: minimizable sidebar (state persisted in localStorage), Shell mockup (header + non-scrolling workspace + footer), 7 module examples (100%/50%, expanded/collapsed) using the exact library component CSS classes and Font Awesome icons, full style showcase (31 color-token swatches, button state matrix, labels & pills, icon list, text-on-surfaces, typography scale, border scale, selected states, form states, semantic status badges). Regenerate with `npm run build:preview` after token changes.
+- [theme-preview.html](./theme-preview.html) — Live Minimal Yet Warm theme preview: minimizable sidebar (state persisted in localStorage), Shell mockup (header + non-scrolling workspace + footer), 7 module examples (100%/50%, expanded/collapsed) using the exact library component CSS classes and Font Awesome icons, full style showcase (31 color-token swatches, button state matrix, labels & pills, icon list, text-on-surfaces, typography scale, border scale, selected states, form states, semantic status badges). Now with per-section reproduction captions (real `<cba-*>` / `.cba-*` / `--cba-*` mapping), a Radius & Shadow showcase, and accessibility fixes (`.search` is a disabled input, `.t-callout` passes WCAG AA). Regenerate with `npm run build:preview` after token changes.
 
 ## Regression tests
 
