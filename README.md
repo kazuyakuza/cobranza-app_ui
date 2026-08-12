@@ -228,8 +228,8 @@ For a quick reference, see [`./docs/THEME.md`](./docs/THEME.md) (surface hierarc
 - [`./docs/USAGE.md`](./docs/USAGE.md) — Patterns and examples for consuming the library.
 - [`./docs/THEME.md`](./docs/THEME.md) — Theme import, tokens, and utility classes.
 - [`./docs/CONSUMER_GUIDE.md`](./docs/CONSUMER_GUIDE.md) — Shell & MFE integration rules: token compliance mandate, theme load (once), surface ownership map, button color guide, surface decision tree, text color rules, bar/chrome guide, checklists, anti-patterns, quick verify.
-- [`./docs/MODULE_HEADER.md`](./docs/MODULE_HEADER.md) — `ModuleHeader` selector, API, status values, fullscreen & drag notes.
-- [`./docs/MODULE_CONTAINER.md`](./docs/MODULE_CONTAINER.md) — `ModuleContainer` selector, API, size/collapse/fullscreen/padding behaviour, scroll & chrome notes.
+- [`./docs/CBA_MODULE_HEADER.md`](./docs/CBA_MODULE_HEADER.md) — `ModuleHeader` selector, API, status values, fullscreen & drag notes.
+- [`./docs/CBA_MODULE_CONTAINER.md`](./docs/CBA_MODULE_CONTAINER.md) — `ModuleContainer` selector, API, size/collapse/fullscreen/padding behaviour, scroll & chrome notes.
 - [`./docs/CBA_BUTTON.md`](./docs/CBA_BUTTON.md) — `CbaButton` selector, API, variant mapping, size options, loading/disabled behaviour.
 - [`./docs/CBA_CARD.md`](./docs/CBA_CARD.md) — `CbaCard` selector, content projection slots, layout examples.
 - [`./docs/CBA_BADGE.md`](./docs/CBA_BADGE.md) — `CbaBadge` selector, API, variant colours, solid vs outline.

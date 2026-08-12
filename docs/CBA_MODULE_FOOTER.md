@@ -146,6 +146,6 @@ footer acts as a plain bar for projected content only.
 
 ## Related docs
 
-- [`MODULE_HEADER.md`](./MODULE_HEADER.md) — `ModuleHeader` selector, API, status values.
-- [`MODULE_CONTAINER.md`](./MODULE_CONTAINER.md) — `ModuleContainer` layout wrapper.
+- [`CBA_MODULE_HEADER.md`](./CBA_MODULE_HEADER.md) — `ModuleHeader` selector, API, status values.
+- [`CBA_MODULE_CONTAINER.md`](./CBA_MODULE_CONTAINER.md) — `ModuleContainer` layout wrapper.
 - [Project brief](../.agent/project-info/brief.md) — Source of truth for scope and contracts.

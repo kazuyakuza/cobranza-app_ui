@@ -236,7 +236,7 @@ Library-owned default chrome strings are Spanish by default. See the
 
 ### ModuleHeader
 
-Shell-injected header above each MFE module. See [`MODULE_HEADER.md`](./MODULE_HEADER.md) for the full API and notes.
+Shell-injected header above each MFE module. See [`CBA_MODULE_HEADER.md`](./CBA_MODULE_HEADER.md) for the full API and notes.
 
 ```html
 <cba-module-header
@@ -259,7 +259,7 @@ Shell-injected header above each MFE module. See [`MODULE_HEADER.md`](./MODULE_H
 **Optional drag-handle slot:** Project a `[cbaModuleDragHandle]` element as a child
 of `<cba-module-header>` to let the Shell wire `cdkDrag` / `cdkDragHandle`. The
 library renders nothing when the slot is empty and does not depend on
-`@angular/cdk`. See [`MODULE_HEADER.md` §Drag handle slot](./MODULE_HEADER.md#drag-handle-slot)
+`@angular/cdk`. See [`CBA_MODULE_HEADER.md` §Drag handle slot](./CBA_MODULE_HEADER.md#drag-handle-slot)
 for the full Shell wiring example.
 
 > The basic example above intentionally omits the drag handle so the simplest

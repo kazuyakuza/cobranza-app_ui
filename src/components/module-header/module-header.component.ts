@@ -104,7 +104,7 @@ const STATUS_VISUALS: Readonly<Record<Exclude<ModuleHeaderStatus, null>, StatusV
  *
  * @see {@link ModuleHeaderSize}
  * @see {@link ModuleHeaderStatus}
- * @see [MODULE_HEADER.md](/docs/MODULE_HEADER.md) — full API, status values, fullscreen & drag notes.
+ * @see [CBA_MODULE_HEADER.md](/docs/CBA_MODULE_HEADER.md) — full API, status values, fullscreen & drag notes.
  */
 @Component({
   selector: 'cba-module-header',

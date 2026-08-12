@@ -161,4 +161,4 @@ All values come from `--cba-*` spacing tokens (see `src/theme/_variables.scss`).
 - [README.md](../README.md)
 - [USAGE.md](./USAGE.md)
 - [THEME.md](./THEME.md)
-- [MODULE_HEADER.md](./MODULE_HEADER.md)
+- [CBA_MODULE_HEADER.md](./CBA_MODULE_HEADER.md)

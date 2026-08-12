@@ -61,7 +61,7 @@ import {
  * @see {@link ModuleContainerSize}
  * @see {@link ModuleContainerPadding}
  * @see {@link ModuleHeaderComponent}
- * @see [MODULE_CONTAINER.md](/docs/MODULE_CONTAINER.md) — full API docs.
+ * @see [CBA_MODULE_CONTAINER.md](/docs/CBA_MODULE_CONTAINER.md) — full API docs.
  */
 @Component({
   selector: 'cba-module-container',
