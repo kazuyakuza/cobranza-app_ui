@@ -40,18 +40,11 @@ Load the theme once in a global styles file. It emits `--cba-*` CSS variables on
 @use '@cobranza-apps/ui/theme';
 ```
 
-**CSS-only fallback (no SCSS toolchain):**
-
-```css
-/* global-styles.css */
-@import '@cobranza-apps/ui/theme.css';
-```
-
 Notes:
 
+- The theme is Sass-only — no compiled `theme.css` artifact is published. Load via `@use '@cobranza-apps/ui/theme';` (or `@use '@cobranza-apps/ui/theme' as cba;` when also using mixins — mixins are forwarded by `theme.scss`).
 - `bootstrap` is a CSS-only peer dependency (`bootstrap@^5`). Never require jQuery.
 - CSS variables are global once the theme is loaded (`:root`); utility classes remain opt-in (apply only where added).
-- Exact import paths are tentative until the library build is finalized; the canonical form is `@cobranza-apps/ui/theme`.
 
 ## Token Prefix
 
