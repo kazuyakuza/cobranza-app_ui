@@ -84,13 +84,13 @@
   @include cba-focus-ring;
 }
 
-.cba-module-header--fullscreen {
+:host(.cba-module-header--fullscreen) .cba-module-header {
   background-color: transparent;
   border-bottom: none;
   justify-content: center;
 }
 
-.cba-module-header--fullscreen .cba-module-header__section--title {
+:host(.cba-module-header--fullscreen) .cba-module-header__section--title {
   flex: 0 1 auto;
 }
 

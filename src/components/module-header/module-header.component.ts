@@ -113,7 +113,10 @@ const STATUS_VISUALS: Readonly<Record<Exclude<ModuleHeaderStatus, null>, StatusV
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './module-header.component.html',
   styleUrl: './module-header.component.scss',
-  host: {},
+  host: {
+    class: 'cba-module-header',
+    '[class.cba-module-header--fullscreen]': 'isFullscreen()',
+  },
 })
 export class ModuleHeaderComponent {
   /** Module title rendered in the center section. Provided by the MFE / Shell. Required. */
