@@ -34,6 +34,32 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 Project-wide audit: package exports, theme tokens, component SCSS compliance, documentation fixes, and preview HTML consumer-reference overhaul.
 
+### Added
+
+- New layout/typography tokens: `--cba-module-footer-height` (40px), `--cba-icon-size-md` (1.75rem), `--cba-dropdown-min-width` (12rem). Registered in `src/components/testing/theme-fixtures.ts`; `docs/theme-preview.css` regenerated. See `docs/THEME.md` and `src/theme/_variables.scss`.
+- `package.json` `exports["./theme"]` now resolves under `sass`, `style`, and `default` conditions (previously `sass`-only).
+- `src/theme/theme.scss` now `@forward`s `_mixins.scss` so `@use '@cobranza-apps/ui/theme' as cba; @include cba.cba-elevated-surface;` works as documented in `docs/THEME.md`.
+
+### Changed
+
+- `package.json` `sideEffects` changed from `false` to `["**/*.scss"]` so SCSS is not tree-shaken away from consumers' bundles.
+- **BREAKING:** `ModuleFooterComponent` renamed to `CbaModuleFooterComponent` (class, barrel export, spec describe block, README inventory, `CBA_MODULE_FOOTER.md` import). The `<cba-module-footer>` selector and `.cba-module-footer` CSS class are unchanged — consumer templates need no edit; only TS imports of the class symbol require updating.
+- `ModuleHeaderComponent` gains `host: { class: 'cba-module-header', '[class.cba-module-header--fullscreen]': 'isFullscreen()' }`; the inner `<header>` no longer carries the `--fullscreen` modifier. SCSS `--fullscreen` rules now use `:host(.cba-module-header--fullscreen)`. Visual behaviour unchanged.
+- `CbaModuleFooterComponent` gains `host: { class: 'cba-module-footer' }` (was host-less).
+- Component SCSS now uses `--cba-*` tokens in place of hard-coded sizes: `CbaModalComponent` title (was `--cba-space-5` → `--cba-font-size-display`), `CbaButtonComponent` sm/md line-height & font-size, `CbaDropdownComponent` menu min-width + item typography, `ModuleFooterComponent` status typography, `CbaEmptyStateComponent` icon/title/description typography (adds `--cba-icon-size-md`), `CbaBadgeComponent` caption font-size.
+- Doc file renames: `MODULE_HEADER.md` → `CBA_MODULE_HEADER.md`, `MODULE_CONTAINER.md` → `CBA_MODULE_CONTAINER.md`. Cross-refs updated in `docs/INDEX.md`, `README.md`, `docs/CBA_MODULE_FOOTER.md`, `docs/CONSUMER_GUIDE.md`, and the `@see` JSDoc of `ModuleHeaderComponent` / `ModuleContainerComponent`.
+
+### Fixed
+
+- `docs/USAGE.md` no longer documents a non-existent `@import '@cobranza-apps/ui/theme.css';` fallback (Sass-only import is the only supported path); same removal in `docs/THEME.md`.
+- 6 stale hex values in `docs/USAGE.md` (borders and canvas) corrected against `src/theme/_variables.scss`: `--cba-bg-primary` `#C5BFAE` → `#BCB5A4`, `--cba-border-subtle` `#DAD7CA` → `#E8E5DB`, `--cba-border-default` `#A7A6A2` → `#A29D94`, `--cba-border-strong` `#8E8D8A` → `#6B665E`.
+- `docs/CBA_TYPEAHEAD.md` correctly reports the input surface token as `--cba-bg-secondary` (was `--cba-bg-primary`).
+- `docs/CBA_MODULE_FOOTER.md` height token reference kept and simplified after `--cba-module-footer-height` was added to `_variables.scss`.
+- `docs/CBA_FORM_FIELD.md` ASCII tree now lists `readonly` and `valid` inputs.
+- `docs/CBA_INPUT.md`, `docs/CBA_SELECT.md`, `docs/CBA_DATEPICKER.md` host-class lists now include `--invalid` (each component binds both `--error` and `--invalid` to `error()`).
+- `docs/CBA_EMPTY_STATE.md` clarifies that the consumer must add `aria-hidden="true"` on the projected icon (component does not add it).
+- `docs/CBA_BUTTON.md` Table of Contents now lists `Non-goals` and `Related docs`.
+
 ## [0.14.0] — 2026-08-11
 
 ### Added
