@@ -77,7 +77,10 @@
   /* Selected — item is actively chosen in a set. selected ≠ active(pressed) ≠ focus.
      active = momentary pointer-down overlay (--cba-active); focus = coral ring (--cba-focus-ring).
      Consumers: footer section pill, nav/tab, table row, dropdown option, filter chip, module
-     "focused" chrome. Selected is a fill+border+text combination, not an outline. */
+     "focused" chrome. Selected is a fill+border+text combination, not an outline.
+   Reserved tokens: --cba-selected-border is available for consumers that wish to
+     draw an explicit border on selected items; library components currently use only
+     --cba-selected-bg / --cba-selected-text / --cba-selected-hover. */
   --cba-selected-bg: #E4DDD0;
   --cba-selected-border: var(--cba-accent-primary);
   --cba-selected-text: var(--cba-text-primary);
@@ -85,7 +88,11 @@
 
   /* Form & control state tokens. invalid/valid reuse warmed danger/success hues (no parallel
      reds/greens invented); disabled uses a warm muted pair. readonly is NOT a token set — it
-     reuses --cba-bg-tertiary + --cba-text-secondary (distinct from disabled; set in components). */
+     reuses --cba-bg-tertiary + --cba-text-secondary (distinct from disabled; set in components).
+   Reserved token: --cba-state-valid-text is available for consumers / future
+     components that want a green-tinted valid-state text colour. The current
+     CbaFieldComponent valid state styles only the control border
+     (--cba-state-valid-border); the text colour stays --cba-text-primary. */
   --cba-state-invalid-border: #B93E36;
   --cba-state-invalid-text: #8B3028;
   --cba-state-valid-border: #3E6B4F;
@@ -97,6 +104,8 @@
   --cba-header-height: 56px;
   --cba-footer-height: 64px;
   --cba-module-header-min-height: 40px;
+  --cba-module-footer-height: 40px;
+  --cba-dropdown-min-width: 12rem;
 
   /* Radius (unchanged) */
   --cba-radius-sm: 6px;
@@ -124,6 +133,9 @@
   --cba-font-size-body: 0.875rem;
   --cba-font-size-small: 0.8125rem;
   --cba-font-size-caption: 0.75rem;
+
+  /* Iconography — distinct from typography scale; used for decorative icon sizing. */
+  --cba-icon-size-md: 1.75rem;
 
   --cba-line-height-display: 1.2;
   --cba-line-height-heading-lg: 1.222;
