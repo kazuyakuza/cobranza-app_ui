@@ -136,8 +136,6 @@ Import the theme in your global styles file to apply the Minimal Yet Warm design
 @use '@cobranza-apps/ui/theme';
 ```
 
-**CSS variables only (if not using SCSS):**
-
 > **Note:** The theme is shipped as Sass only — no compiled `theme.css` artifact is published. Import via `@use '@cobranza-apps/ui/theme';`. Custom CSS properties (`--cba-*`) and opt-in `.cba-*` utility classes emit on `:root` after the `@use`.
 
 The theme provides CSS custom properties with the `--cba-` prefix (e.g., `--cba-bg-primary`, `--cba-text-primary`, `--cba-accent-primary`).
