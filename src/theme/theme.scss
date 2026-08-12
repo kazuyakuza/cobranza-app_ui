@@ -12,5 +12,5 @@
 @use 'popover';
 @use 'typeahead';
 @use 'accordion';
-@use 'mixins';
+@forward 'mixins';
 @use 'utilities';
