@@ -67,6 +67,16 @@ Acknowledge alignment like this:
 
 **Critical Closing Step**: Before emitting the final completion signal or stopping execution, the agent MUST explicitly update `.agent/project-info/context.md` with the recent changes, current state, and next steps.
 
+### Pre-Commit Cross-File Sync Verification
+
+Before committing any change that touches `src/theme/_variables.scss`, `src/theme/theme.scss`, any `src/components/**/*.scss` file, or `docs/theme-preview.html`, the AI agent MUST run a cross-file grep for every changed token name (`--cba-*`) and CSS class name (`cba-*`) to confirm the docs and preview are in sync:
+
+1. `rg --no-heading "<token-or-class-name>" docs/ src/` against each changed `--cba-*` token and `.cba-*` class.
+2. For each match in `docs/` or `docs/theme-preview.html`, confirm the value/caption reflects the new token (per `brief.md` §8.1 Token Change Checklist).
+3. Any mismatch MUST be reconciled in the same commit before pushing to `origin`.
+
+This verification is mandatory even when the change is AI- or docs-only; it is the operational counterpart of the authoritative-token-source rule in `brief.md` §5.
+
 ## Context Window Management
 
 When the context window fills up during an extended session:
