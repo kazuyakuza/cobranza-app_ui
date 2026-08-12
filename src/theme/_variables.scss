@@ -100,13 +100,7 @@
   --cba-state-disabled-bg: #E0DCD4;
   --cba-state-disabled-text: #9A958D;
 
-  /* Layout (unchanged)
-   * --cba-header-height: Shell top chrome height.
-   * --cba-footer-height: Shell bottom chrome height.
-   * --cba-module-header-min-height: Minimum height for the module header band.
-   * --cba-module-footer-height: Minimum height for the module footer bar (CbaModuleFooterComponent).
-   * --cba-dropdown-min-width: Minimum width for dropdown menu surfaces (CbaDropdownComponent).
-   */
+  /* Layout (unchanged) */
   --cba-header-height: 56px;
   --cba-footer-height: 64px;
   --cba-module-header-min-height: 40px;
@@ -140,10 +134,7 @@
   --cba-font-size-small: 0.8125rem;
   --cba-font-size-caption: 0.75rem;
 
-  /* Iconography — distinct from typography scale; used for decorative icon sizing.
-   * --cba-icon-size-md: Medium icon size for decorative icons (e.g., empty state icons).
-   *   Used by CbaEmptyStateComponent and other components needing consistent icon dimensions.
-   */
+  /* Iconography — distinct from typography scale; used for decorative icon sizing. */
   --cba-icon-size-md: 1.75rem;
 
   --cba-line-height-display: 1.2;
