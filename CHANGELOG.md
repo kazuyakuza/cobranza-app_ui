@@ -30,6 +30,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > Releases prior to 0.8.1 predate this changelog and are not reconstructed retroactively.
 
+## [0.15.0] — 2026-08-12
+
+Project-wide audit: package exports, theme tokens, component SCSS compliance, documentation fixes, and preview HTML consumer-reference overhaul.
+
 ## [0.14.0] — 2026-08-11
 
 ### Added
