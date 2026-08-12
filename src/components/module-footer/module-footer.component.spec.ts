@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ModuleFooterComponent } from './module-footer.component';
+import { CbaModuleFooterComponent } from './module-footer.component';
 import { ModuleHeaderStatus } from '../module-header/module-header.types';
 
 interface Scenario {
@@ -20,7 +20,7 @@ const STATUS_SCENARIOS: Scenario[] = [
 
 @Component({
   standalone: true,
-  imports: [ModuleFooterComponent],
+  imports: [CbaModuleFooterComponent],
   template: `<cba-module-footer [status]="status" [statusText]="statusText"><span class="proj">hint</span></cba-module-footer>`,
 })
 class FooterHost {
@@ -28,17 +28,17 @@ class FooterHost {
   statusText: string | undefined = undefined;
 }
 
-describe('ModuleFooterComponent', () => {
-  let fixture: ComponentFixture<ModuleFooterComponent>;
+describe('CbaModuleFooterComponent', () => {
+  let fixture: ComponentFixture<CbaModuleFooterComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ModuleFooterComponent],
+      imports: [CbaModuleFooterComponent],
     }).compileComponents();
   });
 
-  function render(): ComponentFixture<ModuleFooterComponent> {
-    fixture = TestBed.createComponent(ModuleFooterComponent);
+  function render(): ComponentFixture<CbaModuleFooterComponent> {
+    fixture = TestBed.createComponent(CbaModuleFooterComponent);
     fixture.detectChanges();
     return fixture;
   }

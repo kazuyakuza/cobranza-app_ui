@@ -31,7 +31,7 @@ The footer is never mandatory — modules omit it entirely when not needed.
 ## Import
 
 ```ts
-import { ModuleFooterComponent } from '@cobranza-apps/ui';
+import { CbaModuleFooterComponent } from '@cobranza-apps/ui';
 ```
 
 ## Inputs

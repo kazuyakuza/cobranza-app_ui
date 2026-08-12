@@ -165,7 +165,7 @@ switcher.
 | `CbaPopover` | Thin wrapper around ng-bootstrap popover with themed window surface. |
 | `CbaTypeahead` | Thin wrapper around ng-bootstrap typeahead with themed input and popup surface. |
 | `CbaAccordion` | Thin wrapper around ng-bootstrap accordion with themed surface and passthrough inputs/outputs. |
-| `ModuleFooterComponent` | Optional plain footer bar for a module; status text aligned with `ModuleHeaderStatus` plus a default projection slot. |
+| `CbaModuleFooterComponent` | Optional plain footer bar for a module; status text aligned with `ModuleHeaderStatus` plus a default projection slot. |
 | Form controls | Thin wrappers around ng-bootstrap/Bootstrap inputs, selects, datepickers. |
 
 Full Input/Output contracts are in JSDoc and the [project brief](.agent/project-info/brief.md#6-core-components-proposal).

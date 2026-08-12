@@ -69,8 +69,11 @@ const STATUS_VISUALS: Readonly<Record<Exclude<ModuleHeaderStatus, null>, StatusV
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './module-footer.component.html',
   styleUrl: './module-footer.component.scss',
+  host: {
+    class: 'cba-module-footer',
+  },
 })
-export class ModuleFooterComponent {
+export class CbaModuleFooterComponent {
   /** Module status aligned with {@link ModuleHeaderStatus}. `null` renders no status region. */
   readonly status = input<ModuleHeaderStatus>(null);
 
