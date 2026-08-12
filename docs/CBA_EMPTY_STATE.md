@@ -107,7 +107,7 @@ export class CustomerListComponent {
 ## Accessibility
 
 - Title is rendered as `<h3>` for proper heading hierarchy.
-- Icon has `aria-hidden="true"` — it is decorative; meaning is conveyed by the title.
+- Consumer must add `aria-hidden="true"` on the projected icon element — it is decorative; meaning is conveyed by the title. (See the usage example above.)
 - Action slot content (e.g. button) retains its own keyboard accessibility.
 - Empty slots (icon, action) are hidden from the DOM when not projected.
 

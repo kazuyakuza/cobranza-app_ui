@@ -221,7 +221,7 @@ focus ring come from the parent `CbaFieldComponent` wrapper.
 The calendar popup uses the `cba-datepicker-popup` CSS class (set via
 `datepickerClass`) for ng-bootstrap theme integration.
 
-Host classes: `cba-datepicker`, `cba-datepicker--disabled`, `cba-datepicker--readonly`, `cba-datepicker--error`, `cba-datepicker--valid`.
+Host classes: `cba-datepicker`, `cba-datepicker--disabled`, `cba-datepicker--readonly`, `cba-datepicker--error`, `cba-datepicker--invalid`, `cba-datepicker--valid`.
 
 ## Non-goals
 

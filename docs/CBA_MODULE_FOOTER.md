@@ -114,7 +114,7 @@ footer acts as a plain bar for projected content only.
 ## Theming notes
 
 - Background: `var(--cba-bg-secondary)`
-- Height: `var(--cba-module-footer-height, 40px)`
+- Height: `var(--cba-module-footer-height)` (40px)
 - Padding: `0 var(--cba-space-4)`
 - Gap between status icon/text and projected content: `var(--cba-space-2)`
 - Status colors follow the accent tokens (`--cba-accent-info`, `--cba-accent-success`,

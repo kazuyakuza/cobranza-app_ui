@@ -130,7 +130,7 @@ attribute. Hint and error ids are derived as `{controlId}-hint` and
 
 ```
 CbaControlValueAccessor<T>              <- abstract; holds value signal, disabledFromCva signal
-  +- CbaFieldControlValueAccessor<T>    <- abstract; adds label/hint/error/disabled inputs,
+  +- CbaFieldControlValueAccessor<T>    <- abstract; adds label/hint/error/disabled/readonly/valid inputs,
   |                                       isDisabled computed, describedBy computed
   +- CbaInputComponent                  <- controlId = cba-input-control-{n}
   +- CbaSelectComponent                 <- controlId = cba-select-control-{n}

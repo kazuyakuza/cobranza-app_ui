@@ -655,7 +655,7 @@ See [`CBA_MODULE_FOOTER.md`](./CBA_MODULE_FOOTER.md) for the full API and exampl
 All tokens use the `--cba-` prefix. Full reference in [brief.md §5](../.agent/project-info/brief.md#5-design-tokens-theme).
 Source file: [`src/theme/_variables.scss`](../src/theme/_variables.scss).
 
-The palette is **Minimal Yet Warm** (warm sand / cream / taupe + controlled coral): canvas `#C5BFAE` (warm sand floor), panel `#F2F0E8` (clean cream), elevated `#FDFCF8` (warm near-white), inset `#D8C3A5` (warm sand). Coral is reserved for accent/status/focus — not for primary CTAs or large fills.
+The palette is **Minimal Yet Warm** (warm sand / cream / taupe + controlled coral): canvas `#BCB5A4` (warm sand floor), panel `#F2F0E8` (clean cream), elevated `#FDFCF8` (warm near-white), inset `#D8C3A5` (warm sand). Coral is reserved for accent/status/focus — not for primary CTAs or large fills.
 
 > **Note:** The tables below are a summary. [brief.md §5](../.agent/project-info/brief.md#5-design-tokens-theme) and [`src/theme/_variables.scss`](../src/theme/_variables.scss) are the authoritative sources for token values.
 
@@ -663,7 +663,7 @@ The palette is **Minimal Yet Warm** (warm sand / cream / taupe + controlled cora
 
 | Token | Value | Usage |
 | --- | --- | --- |
-| `--cba-bg-primary` | `#C5BFAE` | Canvas / workspace floor |
+| `--cba-bg-primary` | `#BCB5A4` | Canvas / workspace floor |
 | `--cba-bg-secondary` | `#F2F0E8` | Panel / module body / cards |
 | `--cba-bg-tertiary` | `#D8C3A5` | Inset — table headers, wells, module footer |
 | `--cba-bg-elevated` | `#FDFCF8` | Module header, dropdowns, popovers |
@@ -678,15 +678,15 @@ The palette is **Minimal Yet Warm** (warm sand / cream / taupe + controlled cora
 | `--cba-text-muted` | `#625C55` | De-emphasized text (NOT on canvas or inset) |
 | `--cba-text-inverse` | `#FDFCF8` | Light text on dark accents / overlays |
 
-> **`--cba-text-muted` restriction:** Do not use on the darker canvas `--cba-bg-primary` (`#C5BFAE`, ~3.6:1) or on inset `--cba-bg-tertiary` (`#D8C3A5`, ~3.86:1) — both fail WCAG AA. Prefer `--cba-text-secondary` on those surfaces.
+> **`--cba-text-muted` restriction:** Do not use on the darker canvas `--cba-bg-primary` (`#BCB5A4`, ~3.6:1) or on inset `--cba-bg-tertiary` (`#D8C3A5`, ~3.86:1) — both fail WCAG AA. Prefer `--cba-text-secondary` on those surfaces.
 
 ### Borders
 
 | Token | Value | Usage |
 | --- | --- | --- |
-| `--cba-border-subtle` | `#DAD7CA` | Separators, dividers |
-| `--cba-border-default` | `#A7A6A2` | Input borders, card borders |
-| `--cba-border-strong` | `#8E8D8A` | Focus borders, footer pills, emphasis |
+| `--cba-border-subtle` | `#E8E5DB` | Separators, dividers |
+| `--cba-border-default` | `#A29D94` | Input borders, card borders |
+| `--cba-border-strong` | `#6B665E` | Focus borders, footer pills, emphasis |
 
 ### Accents
 

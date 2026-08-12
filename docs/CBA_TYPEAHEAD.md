@@ -206,7 +206,7 @@ onStateSelected(event: NgbTypeaheadSelectItemEvent): void {
 
 ## Theming notes
 
-- Input surface: same as `CbaInput` — `--cba-bg-primary`, `--cba-border-subtle`,
+- Input surface: same as `CbaInput` — `--cba-bg-secondary`, `--cba-border-subtle`,
   `--cba-radius-sm`, `--cba-focus-ring` (via `CbaFieldComponent`).
 - Disabled host: `cba-typeahead--disabled` — `opacity: 0.6`, `cursor: not-allowed`.
 - Error host: `cba-typeahead--error` — red border applied by `CbaFieldComponent`.

@@ -174,7 +174,7 @@ focus ring come from the parent `CbaFieldComponent` wrapper.
 | Border radius | `--cba-radius-sm` |
 | Padding | `--cba-space-2` (vertical), `--cba-space-3` (horizontal) |
 
-Host classes: `cba-input`, `cba-input--disabled`, `cba-input--readonly`, `cba-input--error`, `cba-input--valid`.
+Host classes: `cba-input`, `cba-input--disabled`, `cba-input--readonly`, `cba-input--error`, `cba-input--invalid`, `cba-input--valid`.
 
 ## Non-goals
 

@@ -15,6 +15,7 @@ Primary action button for the Cobranza App design system. Renders a native `<but
 - [State overlays (hover / active)](#state-overlays-hover--active)
 - [Loading & disabled behaviour](#loading--disabled-behaviour)
 - [Accessibility](#accessibility)
+- [Non-goals](#non-goals)
 - [Related docs](#related-docs)
 
 ## Selector
