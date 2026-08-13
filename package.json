@@ -1,12 +1,19 @@
 {
   "name": "@cobranza-apps/ui",
-  "version": "0.15.2",
+  "version": "0.15.3",
   "description": "Shared Angular component library and design system for the Cobranza App Company Back-office.",
   "license": "UNLICENSED",
   "private": false,
-  "sideEffects": ["**/*.scss"],
+  "sideEffects": [
+    "**/*.scss"
+  ],
   "exports": {
     "./theme": {
+      "sass": "./theme/theme.scss",
+      "style": "./theme/theme.scss",
+      "default": "./theme/theme.scss"
+    },
+    "./theme.scss": {
       "sass": "./theme/theme.scss",
       "style": "./theme/theme.scss",
       "default": "./theme/theme.scss"
