@@ -30,6 +30,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > Releases prior to 0.8.1 predate this changelog and are not reconstructed retroactively.
 
+## [0.15.1] — 2026-08-12
+
+### Fixed
+
+- **Theme import works in Angular dev-server** — `@use '@cobranza-apps/ui/theme'` now resolves under `ng serve` (dev-server via `@angular/build:dev-server` + native-federation) as well as production `ng build`. The Angular Sass importer ignores `package.json` `exports` conditions and resolves package imports to a literal file, so it looked for `node_modules/@cobranza-apps/ui/theme.scss` (which did not exist) instead of the `exports["./theme"]`-mapped `./theme/theme.scss`. Added a package-root re-export shim `src/theme.scss` (→ published to `dist/theme.scss`) containing `@forward './theme/theme.scss'`, and a second `ng-package.json` asset entry to copy it to `dist/` root. The existing `exports["./theme"]` map (`sass`/`style`/`default`) is unchanged and remains the canonical entry for resolvers that honor it. Consumer projects can now drop the `stylePreprocessorOptions.includePaths` workaround and use the canonical import. See `.agent/todos/20260812/20260812-todo-1.md`, [docs/THEME.md](docs/THEME.md), and [docs/CONSUMER_GUIDE.md](docs/CONSUMER_GUIDE.md).
+
 ## [0.15.0] — 2026-08-12
 
 Project-wide audit: package exports, theme tokens, component SCSS compliance, documentation fixes, and preview HTML consumer-reference overhaul.
