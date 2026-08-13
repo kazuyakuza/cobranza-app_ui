@@ -1,16 +1,8 @@
 // Sass directory-index partial for @cobranza-apps/ui/theme.
 //
-// PURPOSE:
-//   Make `@use '@cobranza-apps/ui/theme';` resolvable by Angular's dev-server
-//   (`ng serve`) Sass importer. The dev-server importer joins the specifier to
-//   `<pkgRoot>/theme`, which points at the `theme/` directory, and Dart Sass then
-//   auto-resolves that directory to this `_index.scss` (standard directory-index
-//   resolution — no `.scss` suffix needed, no package.json `exports` involved).
-//   The v0.15.1 package-root `src/theme.scss` shim is insufficient because the
-//   dev-server importer never appends `.scss` to the joined path.
-//
-// REAL ENTRY: ./theme.scss   (src/theme/theme.scss)
-// SOURCE OF TRUTH: .agent/project-info/brief.md §5
-// PUBLISHED AS: dist/theme/_index.scss   (ng-package.json `**/*.scss` glob in src/theme)
-// SEE ALSO: docs/THEME.md, .agent/todos/20260812/20260812-todo-2.md
+// Angular's dev-server Sass importer joins `@use '@cobranza-apps/ui/theme'` to
+// `<pkgRoot>/theme` and looks for that literal path. Dart Sass then resolves the
+// directory to this `_index.scss` automatically. The v0.15.1 package-root
+// `src/theme.scss` shim is insufficient because the dev-server importer never
+// appends `.scss` to the joined path. See .agent/todos/20260812/20260812-todo-2.md.
 @forward './theme.scss';
