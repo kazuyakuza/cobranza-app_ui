@@ -20,9 +20,11 @@
 - **Phase 10 — Theme Hardening complete (v0.12.1)**: theme is hardened and ready as platform foundation for real MFEs. Preview now accurately reflects actual component rendering. Surfaces and borders retuned for multi-module density, selected/form-state/typography tokens added, ModuleHeader actions reworked, form controls wired to visual states, and consumer docs (THEME.md, CONSUMER_GUIDE.md) updated. Next focus: real product UI on top of tokens + consumer guide.
 - **Phase 9 — Surface hierarchy fix + consumer guide**: widened the four-level Minimal Yet Warm surface scale in `src/theme/_variables.scss`, strengthened borders and module shadows, refreshed `docs/theme-preview.html` for visual verification, and published `docs/CONSUMER_GUIDE.md` for Shell/MFE authors.
 - **Phase 0 — Library scaffolding complete**: all seven TODO tasks finished. Peer deps configured (Angular 22, Bootstrap 5, ng-bootstrap 21, Font Awesome); TypeScript path mapping for `@cobranza-apps/ui`; theme SCSS folder at `src/theme/`; build, Jest, ESLint all pass.
-- Active branch: `fix/theme-import-dev-server` (v0.15.1 — theme dev-server import fix in progress).
+- Active branch: `fix/theme-import-dev-server` (v0.15.2 — theme dev-server directory-index fix in progress).
 
 ## Recent Changes
+
+- **Theme dev-server directory-index fix (2026-08-13, v0.15.2)** — `@use '@cobranza-apps/ui/theme'` now resolves under Angular's dev-server Sass importer via standard Sass directory-index resolution. The v0.15.1 package-root `src/theme.scss` shim was insufficient because the dev-server importer joins the specifier to `<pkgRoot>/theme` and looks for it as a file without appending `.scss`, so the root shim was never matched. Added `src/theme/_index.scss` (`@forward './theme.scss';`) — a Sass partial inside the existing `theme/` directory; the dev-server importer now resolves the joined directory to `_index.scss` automatically. Published to `dist/theme/_index.scss` by the existing `ng-package.json` `**/*.scss` glob (no build-config change). The v0.15.1 root shim and `package.json` `exports["./theme"]` map are unchanged. See `.agent/todos/20260812/20260812-todo-2.md` and `.kilo/plans/20260813-theme-dev-server-index-fix-task-plan.md`.
 
 - **Theme dev-server import fix (2026-08-12, v0.15.1)** — patched `@use '@cobranza-apps/ui/theme'` so it resolves under Angular's dev-server Sass importer, which ignores `package.json` `exports` conditions. Added package-root shim `src/theme.scss` (`@forward './theme/theme.scss'`) and a second `ng-package.json` asset entry to publish it to `dist/theme.scss`. The existing `exports["./theme"]` map remains unchanged. Shell can drop its `stylePreprocessorOptions.includePaths` workaround and use the canonical import. See `.agent/todos/20260812/20260812-todo-1.md`.
 
@@ -81,4 +83,4 @@
 - [Phase 9 global plan](../../.kilo/plans/20260805-phase9-surface-hierarchy-fix.md) — overall workflow.
 - [Consumer Guide](../../docs/CONSUMER_GUIDE.md) — Shell & MFE integration rules (surface ownership, checklists, anti-patterns).
 - [Theme Reference](../../docs/THEME.md) — token quick reference.
-- [CHANGELOG](../../CHANGELOG.md) — release changelog (Keep a Changelog format), latest 0.15.1.
+- [CHANGELOG](../../CHANGELOG.md) — release changelog (Keep a Changelog format), latest 0.15.2.
