@@ -6,6 +6,11 @@
       "glob": "**/*.scss",
       "input": "src/theme",
       "output": "theme"
+    },
+    {
+      "glob": "theme.scss",
+      "input": "src",
+      "output": ""
     }
   ],
   "lib": {
