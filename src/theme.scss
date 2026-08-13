@@ -1,14 +1,11 @@
-// Package-root theme re-export for Angular's Sass importer.
+// Package-root Sass re-export for Angular's dev-server importer.
 //
-// Angular's dev-server Sass resolver does NOT honor package.json `exports`
-// conditions; it resolves `@use '@cobranza-apps/ui/theme'` to a literal
-// `<pkgRoot>/theme.scss` file. This shim exists so that literal resolution
-// succeeds and forwards to the real entry at `src/theme/theme.scss`
-// (published to `dist/theme/theme.scss`).
+// Angular's dev-server Sass resolver does not honor package.json `exports`
+// conditions, so `@use '@cobranza-apps/ui/theme'` resolves to a literal
+// `<pkgRoot>/theme.scss` file. This shim forwards that literal request to
+// the real entry at `./theme/theme.scss`.
 //
 // SOURCE OF TRUTH: .agent/project-info/brief.md §5
-// REAL ENTRY: ./theme/theme.scss  (sibling `theme/` directory)
-//
-// Copied verbatim to `dist/theme.scss` by the ng-package.json asset entry
-// { "glob": "theme.scss", "input": "src", "output": "" }.
+// REAL ENTRY: ./theme/theme.scss
+// PUBLISHED AS: dist/theme.scss
 @forward './theme/theme.scss';
