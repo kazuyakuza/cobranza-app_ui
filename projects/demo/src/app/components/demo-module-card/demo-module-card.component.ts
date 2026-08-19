@@ -11,6 +11,14 @@ import {
  * Demo-only wrapper combining a `cba-module-container` with its
  * `cba-module-header`, projecting extra body content (table, actions, …).
  *
+ * **NOT part of the public library API.** This component exists solely for the
+ * `projects/demo/` mini-app and is not exported from `@cobranza-apps/ui`.
+ *
+ * @see DemoModuleCardComponent simplifies demo markup by wrapping the library's
+ *      `ModuleContainerComponent` + `ModuleHeaderComponent` pair with sensible
+ *      defaults and no-op event handlers. Consumers should use the library
+ *      components directly, not this demo wrapper.
+ *
  * Emits no-op handlers for the header outputs so the demo stays interactive
  * without side effects.
  */

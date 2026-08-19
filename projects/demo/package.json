@@ -1,5 +1,6 @@
 {
   "name": "cobranza-demo-app",
   "version": "0.0.0",
-  "private": true
+  "private": true,
+  "description": "Angular demo mini-app that consumes the built @cobranza-apps/ui library. Not published — exists only as a visual reference and regression surface for the design system."
 }

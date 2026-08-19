@@ -30,7 +30,17 @@ const VARIANTS_ROW: ButtonSpec[] = [
   { label: 'Success', variant: 'success' },
 ];
 
-/** Button state matrix: variants × surfaces × normal/disabled/loading, sizes sm/md. */
+/**
+ * Demo-only button state matrix: variants × surfaces × normal/disabled/loading, sizes sm/md.
+ *
+ * **NOT part of the public library API.** This component exists solely for the
+ * `projects/demo/` mini-app and is not exported from `@cobranza-apps/ui`.
+ *
+ * @see DemoButtonMatrixComponent renders the complete `CbaButton` variant/state matrix
+ *      (primary/secondary/ghost/danger/success × panel/elevated/canvas surfaces ×
+ *      normal/disabled/loading states × sm/md sizes) using real library components.
+ *      Replaces the static HTML preview's fake `.pv-btn` button matrix.
+ */
 @Component({
   selector: 'demo-button-matrix',
   standalone: true,
