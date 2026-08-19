@@ -151,7 +151,18 @@ theme and components (replaces the static HTML preview). Order of commands:
 then refresh the dev server. Browser verification against `dist/demo/browser/index.html`
 applies to production builds.
 
-**Regression test suite** — `src/theme/*.spec.ts` guards theme integrity: token values, WCAG AA contrast, surface lightness gaps, preview HTML/CSS structure, and Consumer Guide section presence. Shared helpers live in `src/components/testing/`. Run all with `npm test`; run one with `npm test -- src/theme/<name>.spec.ts`.
+**Build artifacts:**
+
+| Command | Output |
+| --- | --- |
+| `npm run build:lib` | `dist/` (publishable library, ng-packagr) |
+| `npm run build:demo` | `dist/demo/browser/` (static Angular demo bundle) |
+
+`dist/` is gitignored; demo artifacts are produced locally and not committed.
+Serve `dist/demo/browser/` with any static file server (e.g. `npx http-server dist/demo/browser`)
+or run `npm run start:demo` for the dev server at `http://localhost:4200/`.
+
+**Regression test suite** — `src/theme/*.spec.ts` guards theme integrity: token values, WCAG AA contrast, surface lightness gaps, and Consumer Guide section presence. Shared helpers live in `src/components/testing/`. Run all with `npm test`; run one with `npm test -- src/theme/<name>.spec.ts`.
 
 **Config files reference:**
 
@@ -267,7 +278,7 @@ For a quick reference, see [`./docs/THEME.md`](./docs/THEME.md) (surface hierarc
 - [Architecture](.agent/project-info/architecture.md) — Build strategy, folder layout, integration patterns.
 - [Tech stack](.agent/project-info/tech.md) — Exact versions, dependencies, tooling constraints.
 - JSDoc on every public `@Input()`, `@Output()`, and component class.
-- [`./docs/theme-preview.html`](./docs/theme-preview.html) — Live theme preview: minimizable sidebar, Shell mockup, 7 module examples (100%/50%, expanded/collapsed), 31 color-token swatches, button state matrix, labels & pills, icon list, text-on-surfaces, typography scale, border scale, selected states, form states, semantic status badges. Regenerate with `npm run build:preview`.
+- [`./projects/demo/`](./projects/demo/) — Angular demo mini-app (canonical visual reference). Consumes the built library and renders every theme/component section with real `<cba-*>` components and live `var(--cba-*)` token swatches. Run `npm run start:demo` (dev) or `npm run build:demo` → serve `dist/demo/browser/`. See [`./projects/demo/README.md`](./projects/demo/README.md).
 - [`./CHANGELOG.md`](./CHANGELOG.md) — Notable changes per release (Keep a Changelog format).
 
 <!-- AI Agent Note: Before contributing, read AGENTS.md and .agent/project-info/ files.

@@ -30,6 +30,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > Releases prior to 0.8.1 predate this changelog and are not reconstructed retroactively.
 
+## [0.18.0] — 2026-08-19
+
+### Added
+
+- Demo app artifact location documented in `README.md` (`dist/demo/browser/` from `npm run build:demo`; `dist/` is gitignored, produced locally).
+- `docs/CONSUMER_GUIDE.md` quick-verify item 10 now names the Angular demo app as the canonical visual reference and lists the exact `build:lib` → `npm install` → `start:demo` / `build:demo` command order.
+
+### Changed
+
+- `.agent/project-info/brief.md` §5 authoritative-token-source note and §8.1 Token Change Checklist item 5 now reference `projects/demo/` instead of the deleted `docs/theme-preview.html`; the demo reads `var(--cba-*)` directly so a `build:lib` + `build:demo` cycle replaces the old `npm run build:preview` step.
+- `.agent/project-info/instructions.md` Pre-Commit Cross-File Sync Verification now greps `docs/`, `src/`, and `projects/demo/src/`; the `docs/theme-preview.html` reference is removed.
+- `docs/INDEX.md` `## Visual preview` and `## Regression tests` sections now point at the demo app and drop the deleted `preview-html.spec.ts` entry.
+- `package.json` version bumped to 0.18.0.
+
+### Removed
+
+- `docs/theme-preview.html` and `docs/theme-preview.css` — the static "DEMO CSS ONLY" preview is replaced by the Angular demo app at `projects/demo/`, which consumes the built library and renders real `<cba-*>` components instead of fake `.pv-btn--*` CSS. Shell teams should compare against the demo app, not outdated screenshots of the static HTML.
+- `npm run build:preview` script — obsolete after the static preview deletion. The demo app builds via `npm run build:demo`.
+- `src/theme/preview-html.spec.ts` — regression spec for the deleted preview files. Canonical token-value coverage remains in `src/theme/tokens.spec.ts` and `src/theme/contrast.spec.ts`.
+- `PREVIEW_HTML_PATH` / `PREVIEW_CSS_PATH` exports from `src/components/testing/theme-fixtures.ts`.
+
 ## [0.17.0] — 2026-08-18
 
 ### Added

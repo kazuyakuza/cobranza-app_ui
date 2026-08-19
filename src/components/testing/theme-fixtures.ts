@@ -67,8 +67,6 @@ export const EXPECTED_TOKENS: Record<string, string> = {
 };
 
 export const SCSS_VARIABLES_PATH = 'src/theme/_variables.scss';
-export const PREVIEW_HTML_PATH = 'docs/theme-preview.html';
-export const PREVIEW_CSS_PATH = 'docs/theme-preview.css';
 export const CONSUMER_GUIDE_PATH = 'docs/CONSUMER_GUIDE.md';
 
 // Derive every duplicated colour from EXPECTED_TOKENS so a token change needs a single edit.

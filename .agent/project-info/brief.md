@@ -208,7 +208,7 @@ All tokens live under the `--cba-` prefix.
 
 Theme is published as SCSS and can be imported by Shell and every MFE. Prefer encapsulation; global styles only when strictly necessary.
 
-> **Authoritative token source:** Token values live ONLY in `src/theme/_variables.scss`. The `docs/USAGE.md` per-token table and `docs/THEME.md` are convenience views, NOT sources of truth. `docs/theme-preview.html` swatches are a visual view, NOT a source of truth. If any value diverges, `_variables.scss` wins and the docs/preview MUST be corrected in the same change. See §8.1 Token Change Checklist.
+> **Authoritative token source:** Token values live ONLY in `src/theme/_variables.scss`. The `docs/USAGE.md` per-token table and `docs/THEME.md` are convenience views, NOT sources of truth. The Angular demo app at `projects/demo/` is the canonical visual reference (it renders real `<cba-*>` components against the built library), but it is a visual view, NOT a token source of truth. If any value diverges, `_variables.scss` wins and the docs/demo MUST be corrected in the same change. See §8.1 Token Change Checklist.
 
 ## 6. Core Components (Proposal)
 
@@ -351,7 +351,7 @@ Whenever a `--cba-*` token is **added, removed, renamed, or value-changed** in `
 2. **`docs/CONSUMER_GUIDE.md`** reflects the token wherever it is referenced as a consumer-facing contract.
 3. **`docs/USAGE.md`** per-token table is updated — or, if it duplicates `docs/THEME.md`, removed in favour of the single source.
 4. **Every component SCSS file** that references the token (`src/components/**/*.scss`) still compiles (`npm run build`).
-5. **`docs/theme-preview.html`** swatches / section captions for the token are updated, then `npm run build:preview` regenerates `docs/theme-preview.css`.
+5. **`projects/demo/`** swatches / sections that display the token are updated to reflect the new value (the demo reads `var(--cba-*)` directly, so a `build:lib` + `build:demo` cycle regenerates the rendered output; no separate compile step is needed).
 6. **`CHANGELOG.md`** records the token change under the current dated `[x.y.z] — YYYY-MM-DD` header (never under `[Unreleased]`).
 7. **`context.md`** "Recent Changes" entry mentions the token name that changed.
 

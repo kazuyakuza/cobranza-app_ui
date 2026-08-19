@@ -53,14 +53,13 @@
 
 ## Visual preview
 
-- [theme-preview.html](./theme-preview.html) — Live Minimal Yet Warm theme preview: minimizable sidebar (state persisted in localStorage), Shell mockup (header + non-scrolling workspace + footer), 7 module examples (100%/50%, expanded/collapsed) using the exact library component CSS classes and Font Awesome icons, full style showcase (31 color-token swatches, button state matrix, labels & pills, icon list, text-on-surfaces, typography scale, border scale, selected states, form states, semantic status badges). Now with per-section reproduction captions (real `<cba-*>` / `.cba-*` / `--cba-*` mapping), a Radius & Shadow showcase, and accessibility fixes (`.search` is a disabled input, `.t-callout` passes WCAG AA). Regenerate with `npm run build:preview` after token changes.
+- [Demo app](../projects/demo/) — Angular mini-app (canonical visual reference). Consumes the built `@cobranza-apps/ui` library and renders every theme/component section with real `<cba-*>` components and live `var(--cba-*)` token swatches. Run `npm run start:demo` (dev server) or `npm run build:demo` → serve `dist/demo/browser/`. See [projects/demo/README.md](../projects/demo/README.md).
 
 ## Regression tests
 
 - `src/theme/tokens.spec.ts` — canonical `--cba-*` token names and values.
 - `src/theme/contrast.spec.ts` — WCAG AA contrast ratios for text/background pairs.
 - `src/theme/surfaces.spec.ts` — surface lightness ordering and minimum L* gaps.
-- `src/theme/preview-html.spec.ts` — `docs/theme-preview.html` structure and `docs/theme-preview.css` canonical values.
 - `src/theme/consumer-guide.spec.ts` — mandated sections in `docs/CONSUMER_GUIDE.md`.
 - Run all: `npm test`. Run one: `npm test -- src/theme/<name>.spec.ts`.
 

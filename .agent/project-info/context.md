@@ -16,6 +16,7 @@
 
 ## Current Work Focus
 
+- **Phase 12 — Part C complete (v0.18.0)**: demo app integrated into the documented `build:lib` → `build:demo` delivery pipeline; static `docs/theme-preview.html` + `docs/theme-preview.css` deleted along with the fake `.pv-btn--*` button matrix and the `build:preview` script; all docs (README, INDEX, CONSUMER_GUIDE, brief §5/§8.1, instructions.md) retargeted to the demo app as the canonical visual reference; `preview-html.spec.ts` removed and `theme-fixtures.ts` cleaned. The demo app at `projects/demo/` is now the visual source of truth for components and tokens.
 - **Shell UI Bug Fixes Round 2 complete (v0.14.0)**: six library-side fixes identified during Shell UI Bug Fixes Round 2 have been implemented and published. ModuleContainer now exposes `scrollChaining` and retains background color in fullscreen mode. CbaButton gained `truncate`, `iconOnly`, and `block` inputs. The theme preview HTML was completely rewritten with a minimizable sidebar, Shell+MFE workspace mockup, seven module examples, and an expanded style showcase. All changes merged to `main` and pushed to `origin`.
 - **Phase 10 — Theme Hardening complete (v0.12.1)**: theme is hardened and ready as platform foundation for real MFEs. Preview now accurately reflects actual component rendering. Surfaces and borders retuned for multi-module density, selected/form-state/typography tokens added, ModuleHeader actions reworked, form controls wired to visual states, and consumer docs (THEME.md, CONSUMER_GUIDE.md) updated. Next focus: real product UI on top of tokens + consumer guide.
 - **Phase 9 — Surface hierarchy fix + consumer guide**: widened the four-level Minimal Yet Warm surface scale in `src/theme/_variables.scss`, strengthened borders and module shadows, refreshed `docs/theme-preview.html` for visual verification, and published `docs/CONSUMER_GUIDE.md` for Shell/MFE authors.
@@ -23,6 +24,8 @@
 - Active branch: `fix/theme-import-dev-server` (v0.15.2 — theme dev-server directory-index fix in progress).
 
 ## Recent Changes
+
+- **Phase 12 Part C — demo delivery + static preview removal (2026-08-19, v0.18.0)** — `build:lib` → `build:demo` pipeline documented in README with `dist/demo/browser/` artifact location; `docs/theme-preview.html` + `docs/theme-preview.css` deleted; `npm run build:preview` script removed; `src/theme/preview-html.spec.ts` deleted; `PREVIEW_HTML_PATH` / `PREVIEW_CSS_PATH` exports removed from `src/components/testing/theme-fixtures.ts`; README, docs/INDEX.md, docs/CONSUMER_GUIDE.md, brief.md §5/§8.1, instructions.md retargeted to `projects/demo/` as the canonical visual reference. See `.agent/todos/20260818/20260818-todo-0.md` Part C and `.kilo/plans/20260818-phase12-partC-plan.md`.
 
 - **Theme dev-server directory-index fix (2026-08-13, v0.15.2)** — `@use '@cobranza-apps/ui/theme'` now resolves under Angular's dev-server Sass importer via the new `src/theme/_index.scss` directory-index partial. The v0.15.1 package-root `src/theme.scss` shim and `package.json` `exports["./theme"]` remain unchanged. See `CHANGELOG.md` and `.agent/todos/20260812/20260812-todo-2.md`.
 
