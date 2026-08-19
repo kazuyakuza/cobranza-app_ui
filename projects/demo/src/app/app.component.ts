@@ -1,49 +1,52 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import {
   faBell,
   faDownload,
-  faGear,
   faPlus,
   faRefresh,
+  faUser,
 } from '@fortawesome/free-solid-svg-icons';
 import {
   CbaBadgeComponent,
-  CbaBadgeVariant,
   CbaButtonComponent,
+  CbaCardComponent,
+  CbaDatepickerComponent,
   CbaInputComponent,
   CbaModuleFooterComponent,
   CbaSelectComponent,
 } from '@cobranza-apps/ui';
 import { DemoButtonMatrixComponent } from './components/demo-button-matrix/demo-button-matrix.component';
+import { DemoIconGridComponent } from './components/demo-icon-grid/demo-icon-grid.component';
 import { DemoModuleCardComponent } from './components/demo-module-card/demo-module-card.component';
+import { DemoNavItemsComponent } from './components/demo-nav-items/demo-nav-items.component';
+import { DemoPillMatrixComponent } from './components/demo-pill-matrix/demo-pill-matrix.component';
 import { DemoSectionComponent } from './components/demo-section/demo-section.component';
 import { DemoSwatchComponent } from './components/demo-swatch/demo-swatch.component';
+import { DemoTableComponent } from './components/demo-table/demo-table.component';
+import { DemoTextShowcaseComponent } from './components/demo-text-showcase/demo-text-showcase.component';
 
-interface ColorSwatch {
-  label: string;
-  background: string;
-  color?: string;
+/** One color token shown in the token grid. */
+interface ColorToken {
+  readonly name: string;
+  readonly tag: string;
+  readonly hex: string;
+  readonly variable: string;
 }
 
-interface TextSurfaceItem {
-  className: string;
-  label: string;
+/** One form-control surface card in the inputs section. */
+interface InputSurface {
+  readonly title: string;
+  readonly className: string;
 }
 
-interface TextSurface {
-  background: string;
-  items: TextSurfaceItem[];
-}
-
-interface AccentPill {
-  label: string;
-  style: string;
-}
-
-interface DemoBadge {
-  variant: CbaBadgeVariant;
-  label: string;
+/** Model for the form example (two-way bound via ngModel). */
+interface FormFieldModel {
+  readonly customerName: string;
+  readonly email: string;
+  readonly status: string;
+  readonly dueDate: NgbDateStruct | null;
 }
 
 @Component({
@@ -51,15 +54,22 @@ interface DemoBadge {
   standalone: true,
   imports: [
     FormsModule,
-    CbaButtonComponent,
     CbaBadgeComponent,
+    CbaButtonComponent,
+    CbaCardComponent,
+    CbaDatepickerComponent,
     CbaInputComponent,
-    CbaSelectComponent,
     CbaModuleFooterComponent,
+    CbaSelectComponent,
+    DemoButtonMatrixComponent,
+    DemoIconGridComponent,
+    DemoModuleCardComponent,
+    DemoNavItemsComponent,
+    DemoPillMatrixComponent,
     DemoSectionComponent,
     DemoSwatchComponent,
-    DemoButtonMatrixComponent,
-    DemoModuleCardComponent,
+    DemoTableComponent,
+    DemoTextShowcaseComponent,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './app.component.html',
@@ -68,118 +78,57 @@ interface DemoBadge {
 export class AppComponent {
   protected readonly pageTitle = 'Demo app — consumes @cobranza-apps/ui build';
 
-  // Font Awesome icon definitions bound to <cba-button [icon]="...">.
   protected readonly faBell = faBell;
-  protected readonly faGear = faGear;
-  protected readonly faRefresh = faRefresh;
+  protected readonly faUser = faUser;
   protected readonly faPlus = faPlus;
+  protected readonly faRefresh = faRefresh;
   protected readonly faDownload = faDownload;
 
-  // Interactive form samples (ngModel).
   protected sampleText = '';
   protected sampleSelect = '';
+  protected readonly formModel: FormFieldModel = {
+    customerName: '',
+    email: '',
+    status: '',
+    dueDate: null,
+  };
 
-  // No-op handler for module header outputs (event wiring required for type checks).
+  protected readonly colorTokens: ColorToken[] = [
+    { name: 'bg-primary', tag: 'Background', hex: '#BCB5A4', variable: 'var(--cba-bg-primary)' },
+    { name: 'bg-secondary', tag: 'Background', hex: '#F2F0E8', variable: 'var(--cba-bg-secondary)' },
+    { name: 'bg-tertiary', tag: 'Background', hex: '#D8C3A5', variable: 'var(--cba-bg-tertiary)' },
+    { name: 'bg-elevated', tag: 'Background', hex: '#FDFCF8', variable: 'var(--cba-bg-elevated)' },
+    { name: 'text-primary', tag: 'Text', hex: '#2B2620', variable: 'var(--cba-text-primary)' },
+    { name: 'text-secondary', tag: 'Text', hex: '#4A4640', variable: 'var(--cba-text-secondary)' },
+    { name: 'text-muted', tag: 'Text', hex: '#625C55', variable: 'var(--cba-text-muted)' },
+    { name: 'text-inverse', tag: 'Text', hex: '#FDFCF8', variable: 'var(--cba-text-inverse)' },
+    { name: 'border-subtle', tag: 'Border', hex: '#E8E5DB', variable: 'var(--cba-border-subtle)' },
+    { name: 'border-default', tag: 'Border', hex: '#A29D94', variable: 'var(--cba-border-default)' },
+    { name: 'border-strong', tag: 'Border', hex: '#6B665E', variable: 'var(--cba-border-strong)' },
+    { name: 'accent-primary', tag: 'Accent', hex: '#6B5B4F', variable: 'var(--cba-accent-primary)' },
+    { name: 'accent-success', tag: 'Accent', hex: '#3E6B4F', variable: 'var(--cba-accent-success)' },
+    { name: 'accent-warning', tag: 'Accent', hex: '#E98074', variable: 'var(--cba-accent-warning)' },
+    { name: 'accent-danger', tag: 'Accent', hex: '#B93E36', variable: 'var(--cba-accent-danger)' },
+    { name: 'accent-info', tag: 'Accent', hex: '#56717E', variable: 'var(--cba-accent-info)' },
+    { name: 'selected-bg', tag: 'Selected', hex: '#E4DDD0', variable: 'var(--cba-selected-bg)' },
+    { name: 'selected-text', tag: 'Selected', hex: '#2B2620', variable: 'var(--cba-selected-text)' },
+    { name: 'state-valid-border', tag: 'Form state', hex: '#3E6B4F', variable: 'var(--cba-state-valid-border)' },
+    { name: 'state-invalid-border', tag: 'Form state', hex: '#B93E36', variable: 'var(--cba-state-invalid-border)' },
+  ];
+
+  protected readonly inputSurfaces: InputSurface[] = [
+    { title: 'bg-secondary', className: 'demo-surface--secondary' },
+    { title: 'bg-elevated', className: 'demo-surface--elevated' },
+    { title: 'bg-primary', className: 'demo-surface--primary' },
+    { title: 'bg-tertiary', className: 'demo-surface--tertiary' },
+  ];
+
+  /** Text color must invert when the swatch fill is a dark text token. */
+  protected swatchColor(token: ColorToken): string | undefined {
+    const isTextTag = token.tag === 'Text';
+    const isInverse = token.name === 'text-inverse';
+    return isTextTag && !isInverse ? 'var(--cba-bg-elevated)' : undefined;
+  }
+
   protected noop(): void {}
-
-  protected readonly colorSwatches: ColorSwatch[] = [
-    { label: 'bg-primary', background: 'var(--cba-bg-primary)' },
-    { label: 'bg-secondary', background: 'var(--cba-bg-secondary)' },
-    { label: 'bg-tertiary', background: 'var(--cba-bg-tertiary)' },
-    { label: 'bg-elevated', background: 'var(--cba-bg-elevated)' },
-    { label: 'inset (bg-tertiary)', background: 'var(--cba-bg-tertiary)' },
-    { label: 'text-primary', background: 'var(--cba-text-primary)', color: 'var(--cba-bg-elevated)' },
-    { label: 'text-secondary', background: 'var(--cba-text-secondary)', color: 'var(--cba-bg-elevated)' },
-    { label: 'text-muted', background: 'var(--cba-text-muted)', color: 'var(--cba-bg-elevated)' },
-    { label: 'text-inverse', background: 'var(--cba-text-inverse)', color: 'var(--cba-bg-primary)' },
-    { label: 'accent-primary', background: 'var(--cba-accent-primary)' },
-    { label: 'hover (interactive)', background: 'var(--cba-hover)' },
-    { label: 'accent-success', background: 'var(--cba-accent-success)' },
-    { label: 'accent-danger', background: 'var(--cba-accent-danger)' },
-    { label: 'accent-warning', background: 'var(--cba-accent-warning)' },
-    { label: 'accent-info', background: 'var(--cba-accent-info)' },
-    { label: 'selected-bg', background: 'var(--cba-selected-bg)', color: 'var(--cba-selected-text)' },
-    { label: 'state-valid-border', background: 'var(--cba-state-valid-border)' },
-    { label: 'state-error-border', background: 'var(--cba-state-invalid-border)' },
-  ];
-
-  protected readonly textSurfaces: TextSurface[] = [
-    {
-      background: 'var(--cba-bg-primary)',
-      items: [
-        { className: 'cba-text-primary', label: 'Primary · canvas' },
-        { className: 'cba-text-secondary', label: 'Secondary · canvas' },
-        { className: 'cba-text-inverse', label: 'Inverse · canvas' },
-      ],
-    },
-    {
-      background: 'var(--cba-bg-secondary)',
-      items: [
-        { className: 'cba-text-primary', label: 'Primary · panel' },
-        { className: 'cba-text-secondary', label: 'Secondary · panel' },
-        { className: 'cba-text-muted', label: 'Muted · panel' },
-      ],
-    },
-    {
-      background: 'var(--cba-bg-elevated)',
-      items: [
-        { className: 'cba-text-primary', label: 'Primary · elevated' },
-        { className: 'cba-text-secondary', label: 'Secondary · elevated' },
-        { className: 'cba-text-muted', label: 'Muted · elevated' },
-      ],
-    },
-    {
-      background: 'var(--cba-bg-tertiary)',
-      items: [
-        { className: 'cba-text-primary', label: 'Primary · inset' },
-        { className: 'cba-text-secondary', label: 'Secondary · inset' },
-        { className: 'cba-text-inverse', label: 'Inverse · inset' },
-      ],
-    },
-  ];
-
-  protected readonly accentPills: AccentPill[] = [
-    { label: 'accent-primary', style: 'background: var(--cba-accent-primary); color: var(--cba-text-inverse)' },
-    { label: 'accent-success', style: 'background: var(--cba-accent-success); color: var(--cba-text-inverse)' },
-    { label: 'accent-danger', style: 'background: var(--cba-accent-danger); color: var(--cba-text-inverse)' },
-    { label: 'accent-warning', style: 'border: 1px solid var(--cba-accent-warning); color: var(--cba-text-primary)' },
-    { label: 'accent-info', style: 'border: 1px solid var(--cba-accent-info); color: var(--cba-text-primary)' },
-  ];
-
-  protected readonly typeScale: TextSurfaceItem[] = [
-    { className: 'cba-text-display', label: 'Display · cba-text-display' },
-    { className: 'cba-text-heading-lg', label: 'Heading lg · cba-text-heading-lg' },
-    { className: 'cba-text-heading-md', label: 'Heading md · cba-text-heading-md' },
-    { className: 'cba-text-body', label: 'Body · cba-text-body' },
-    { className: 'cba-text-small', label: 'Small · cba-text-small' },
-    { className: 'cba-text-caption', label: 'Caption · cba-text-caption' },
-  ];
-
-  protected readonly borders: TextSurfaceItem[] = [
-    { className: 'var(--cba-border-subtle)', label: 'border-subtle' },
-    { className: 'var(--cba-border-default)', label: 'border-default' },
-    { className: 'var(--cba-border-strong)', label: 'border-strong' },
-  ];
-
-  protected readonly radiusBoxes: TextSurfaceItem[] = [
-    { className: 'cba-radius-sm', label: 'radius-sm' },
-    { className: 'cba-radius-md', label: 'radius-md' },
-    { className: 'cba-radius-lg', label: 'radius-lg' },
-  ];
-
-  protected readonly shadowBoxes: TextSurfaceItem[] = [
-    { className: 'cba-shadow-module', label: 'shadow-module' },
-    { className: 'cba-shadow-elevated', label: 'shadow-elevated' },
-  ];
-
-  protected readonly badges: DemoBadge[] = [
-    { variant: 'primary', label: 'Primary' },
-    { variant: 'success', label: 'Success' },
-    { variant: 'warning', label: 'Warning' },
-    { variant: 'danger', label: 'Danger' },
-    { variant: 'info', label: 'Info' },
-    { variant: 'neutral', label: 'Neutral' },
-  ];
-
-  protected readonly footerNavItems = ['Resumen', 'Clientes', 'Facturas', 'Reportes'];
 }
