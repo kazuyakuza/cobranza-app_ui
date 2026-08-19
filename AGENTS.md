@@ -18,3 +18,11 @@ Also read the [Project Info Instructions](.agent/project-info/instructions.md) f
 ## [Workflows](.agent/WORKFLOWS.md)
 
 ## [Rules](.agent/RULES.md)
+
+## Component authoring: host modifiers
+
+When a modifier class is bound to the component host via `host: { '[class.foo--bar]': ... }`
+or `@HostBinding('class.foo--bar')`, style internal children with `:host(.foo--bar) .child { }`.
+Plain descendant selectors such as `.foo--bar .child { }` are broken under Angular emulated
+encapsulation: the modifier lands on the `_nghost-*` element while the selector compiles to
+`[_ngcontent-*]`, so it never matches. See `docs/CBA_BUTTON.md` for the canonical example.

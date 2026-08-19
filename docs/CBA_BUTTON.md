@@ -160,3 +160,13 @@ AI agents: the solid-variant styling is consolidated in the `cba-solid-button($a
 - [README.md](../README.md)
 - [USAGE.md](./USAGE.md)
 - [THEME.md](./THEME.md)
+
+## Host modifiers and encapsulation
+
+`<cba-button>` binds variant/size/state/layout modifier classes on its host
+(`cba-button--primary`, `--sm`, `--disabled`, etc.). The component SCSS therefore
+uses `:host(.cba-button--primary) .cba-button__control { … }` rather than
+`.cba-button--primary .cba-button__control { … }`. Under Angular emulated
+encapsulation the host carries `_nghost-*` while internals carry `_ngcontent-*`;
+a bare descendant selector compiles to `[_ngcontent-*]` and never matches the
+host. Apply the same `:host(.modifier)` pattern to any new host-bound modifier.
