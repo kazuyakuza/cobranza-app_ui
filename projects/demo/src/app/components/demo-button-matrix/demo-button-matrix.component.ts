@@ -1,65 +1,79 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { TitleCasePipe } from '@angular/common';
 import {
   CbaButtonComponent,
-  CbaButtonSize,
   CbaButtonVariant,
 } from '@cobranza-apps/ui';
 
-/** One button rendered inside the variant/size matrix. */
-interface ButtonSpec {
-  label: string;
-  variant: CbaButtonVariant;
-  size?: CbaButtonSize;
-  disabled?: boolean;
-  loading?: boolean;
+/** One button rendered inside the variant × state matrix. */
+interface ButtonMatrixCell {
+  readonly variant: CbaButtonVariant;
+  readonly state: 'normal' | 'disabled' | 'loading';
 }
 
-/** One surface (panel / elevated / canvas) holding rows of buttons. */
-interface ButtonSurface {
-  cssClass: string;
-  title: string;
-  rows: ButtonSpec[][];
+/** One state row inside a surface block. */
+interface ButtonMatrixRow {
+  readonly state: 'normal' | 'disabled' | 'loading';
+  readonly cells: ButtonMatrixCell[];
 }
 
-/** Standard five-variant row reused on every surface. */
-const VARIANTS_ROW: ButtonSpec[] = [
-  { label: 'Primary', variant: 'primary' },
-  { label: 'Secondary', variant: 'secondary' },
-  { label: 'Ghost', variant: 'ghost' },
-  { label: 'Danger', variant: 'danger' },
-  { label: 'Success', variant: 'success' },
-];
+/** One surface block holding three state rows. */
+interface ButtonMatrixBlock {
+  readonly surfaceTitle: string;
+  readonly surfaceClass: string;
+  readonly rows: ButtonMatrixRow[];
+}
+
+/** The five standard variants reused on every state row. */
+const VARIANTS: readonly CbaButtonVariant[] = ['primary', 'secondary', 'ghost', 'danger', 'success'];
+
+/** State names reused for every surface block. */
+const STATES: readonly ('normal' | 'disabled' | 'loading')[] = ['normal', 'disabled', 'loading'];
+
+/** Builds a single state row containing all five variants in that state. */
+function buildRow(state: 'normal' | 'disabled' | 'loading'): ButtonMatrixRow {
+  const cells: ButtonMatrixCell[] = VARIANTS.map((variant) => ({ variant, state }));
+  return { state, cells };
+}
+
+/** Builds the three-row matrix for one surface block. */
+function buildBlock(surfaceTitle: string, surfaceClass: string): ButtonMatrixBlock {
+  const rows: ButtonMatrixRow[] = STATES.map((state) => buildRow(state));
+  return { surfaceTitle, surfaceClass, rows };
+}
 
 /**
- * Demo-only button state matrix: variants × surfaces × normal/disabled/loading, sizes sm/md.
+ * Demo-only button matrix: five variants × three surfaces × three states
+ * (normal / disabled / loading), with a caption under each button.
  *
- * **NOT part of the public library API.** This component exists solely for the
- * `projects/demo/` mini-app and is not exported from `@cobranza-apps/ui`.
- *
- * @see DemoButtonMatrixComponent renders the complete `CbaButton` variant/state matrix
- *      (primary/secondary/ghost/danger/success × panel/elevated/canvas surfaces ×
- *      normal/disabled/loading states × sm/md sizes) using real library components.
- *      Replaces the static HTML preview's fake `.pv-btn` button matrix.
+ * **NOT part of the public library API.** This component exists solely for
+ * the `projects/demo/` mini-app and is not exported from `@cobranza-apps/ui`.
  */
 @Component({
   selector: 'demo-button-matrix',
   standalone: true,
-  imports: [CbaButtonComponent],
+  imports: [CbaButtonComponent, TitleCasePipe],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <div class="demo-surfaces">
-      @for (surface of surfaces; track surface.title) {
-        <div [class]="'demo-surface ' + surface.cssClass">
-          <h3>{{ surface.title }}</h3>
-          @for (row of surface.rows; track $index) {
-            <div class="demo-btn-row">
-              @for (button of row; track button.label) {
-                <cba-button
-                  [variant]="button.variant"
-                  [size]="button.size ?? 'md'"
-                  [disabled]="button.disabled ?? false"
-                  [loading]="button.loading ?? false"
-                >{{ button.label }}</cba-button>
+    <div class="demo-matrix">
+      @for (block of blocks; track block.surfaceTitle) {
+        <div [class]="'demo-surface ' + block.surfaceClass">
+          <h3>{{ block.surfaceTitle }}</h3>
+          @for (row of block.rows; track row.state) {
+            <div class="demo-matrix-row">
+              <span class="demo-matrix-row__status">{{ row.state }}</span>
+              @for (cell of row.cells; track cell.variant) {
+                <div class="demo-matrix-cell">
+                  <cba-button
+                    [variant]="cell.variant"
+                    [disabled]="cell.state === 'disabled'"
+                    [loading]="cell.state === 'loading'">
+                    {{ cell.variant | titlecase }}
+                  </cba-button>
+                  <span class="demo-matrix-cell__caption">
+                    {{ cell.variant }} · .cba-button--{{ cell.variant }} · {{ row.state }} · {{ block.surfaceTitle }}
+                  </span>
+                </div>
               }
             </div>
           }
@@ -71,10 +85,10 @@ const VARIANTS_ROW: ButtonSpec[] = [
     :host {
       display: block;
     }
-    .demo-surfaces {
+    .demo-matrix {
       display: flex;
       flex-direction: column;
-      gap: var(--cba-space-2);
+      gap: var(--cba-space-3);
     }
     .demo-surface {
       padding: var(--cba-space-3);
@@ -89,38 +103,35 @@ const VARIANTS_ROW: ButtonSpec[] = [
     .demo-surface--primary {
       background: var(--cba-bg-primary);
     }
-    .demo-btn-row {
+    .demo-matrix-row {
       display: flex;
       flex-wrap: wrap;
-      gap: var(--cba-space-2);
+      align-items: center;
+      gap: var(--cba-space-3);
       margin-top: var(--cba-space-2);
+    }
+    .demo-matrix-row__status {
+      width: 80px;
+      font-size: var(--cba-font-size-caption);
+      color: var(--cba-text-secondary);
+      text-transform: capitalize;
+    }
+    .demo-matrix-cell {
+      display: flex;
+      flex-direction: column;
+      gap: var(--cba-space-1);
+      align-items: flex-start;
+    }
+    .demo-matrix-cell__caption {
+      font-size: var(--cba-font-size-caption);
+      color: var(--cba-text-secondary);
     }
   `,
 })
 export class DemoButtonMatrixComponent {
-  protected readonly surfaces: ButtonSurface[] = [
-    {
-      cssClass: 'demo-surface--secondary',
-      title: 'bg-secondary · panel',
-      rows: [
-        VARIANTS_ROW,
-        [
-          { label: 'Disabled', variant: 'primary', disabled: true },
-          { label: 'Loading', variant: 'secondary', loading: true },
-          { label: 'Ghost sm', variant: 'ghost', size: 'sm' },
-          { label: 'Primary sm', variant: 'primary', size: 'sm' },
-        ],
-      ],
-    },
-    {
-      cssClass: 'demo-surface--elevated',
-      title: 'bg-elevated',
-      rows: [VARIANTS_ROW],
-    },
-    {
-      cssClass: 'demo-surface--primary',
-      title: 'bg-primary · canvas',
-      rows: [VARIANTS_ROW],
-    },
+  protected readonly blocks: ButtonMatrixBlock[] = [
+    buildBlock('bg-secondary', 'demo-surface--secondary'),
+    buildBlock('bg-elevated', 'demo-surface--elevated'),
+    buildBlock('bg-primary', 'demo-surface--primary'),
   ];
 }
