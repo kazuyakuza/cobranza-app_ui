@@ -8,10 +8,10 @@
   @extend %cba-native-control;
 }
 
-.cba-input--disabled .cba-input__control {
+:host(.cba-input--disabled) .cba-input__control {
   cursor: not-allowed;
 }
 
-.cba-input--readonly .cba-input__control {
+:host(.cba-input--readonly) .cba-input__control {
   cursor: default;
 }

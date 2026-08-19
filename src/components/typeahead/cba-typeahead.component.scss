@@ -8,6 +8,6 @@
   @extend %cba-native-control;
 }
 
-.cba-typeahead--disabled .cba-typeahead__control {
+:host(.cba-typeahead--disabled) .cba-typeahead__control {
   cursor: not-allowed;
 }
