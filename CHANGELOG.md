@@ -39,10 +39,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- `.agent/project-info/brief.md` §5 authoritative-token-source note and §8.1 Token Change Checklist item 5 now reference `projects/demo/` instead of the deleted `docs/theme-preview.html`; the demo reads `var(--cba-*)` directly so a `build:lib` + `build:demo` cycle replaces the old `npm run build:preview` step.
-- `.agent/project-info/instructions.md` Pre-Commit Cross-File Sync Verification now greps `docs/`, `src/`, and `projects/demo/src/`; the `docs/theme-preview.html` reference is removed.
-- `docs/INDEX.md` `## Visual preview` and `## Regression tests` sections now point at the demo app and drop the deleted `preview-html.spec.ts` entry.
-- `package.json` version bumped to 0.18.0.
+- Docs retargeted to the demo app as the canonical visual reference: `brief.md` §5/§8.1, `instructions.md` pre-commit grep scope, and `docs/INDEX.md` now reference `projects/demo/` and grep `projects/demo/src/` instead of the deleted `docs/theme-preview.html` / `preview-html.spec.ts`.
+- `build:lib` + `build:demo` now replaces the removed `npm run build:preview` step for regenerating the visual reference.
 
 ### Removed
 

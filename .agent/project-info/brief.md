@@ -208,7 +208,7 @@ All tokens live under the `--cba-` prefix.
 
 Theme is published as SCSS and can be imported by Shell and every MFE. Prefer encapsulation; global styles only when strictly necessary.
 
-> **Authoritative token source:** Token values live ONLY in `src/theme/_variables.scss`. The `docs/USAGE.md` per-token table and `docs/THEME.md` are convenience views, NOT sources of truth. The Angular demo app at `projects/demo/` is the canonical visual reference (it renders real `<cba-*>` components against the built library), but it is a visual view, NOT a token source of truth. If any value diverges, `_variables.scss` wins and the docs/demo MUST be corrected in the same change. See §8.1 Token Change Checklist.
+> **Authoritative token source:** Token values live ONLY in `src/theme/_variables.scss`. The `docs/USAGE.md` per-token table and `docs/THEME.md` are convenience views, NOT sources of truth. The Angular demo app at `projects/demo/` is the canonical visual reference, but it is a visual view, NOT a token source of truth. If any value diverges, `_variables.scss` wins and the docs/demo MUST be corrected in the same change. See §8.1 Token Change Checklist.
 
 ## 6. Core Components (Proposal)
 

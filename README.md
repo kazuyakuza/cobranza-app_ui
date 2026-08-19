@@ -141,15 +141,14 @@ switcher.
 
 The Angular demo mini-app under `projects/demo/` consumes the **built** library
 (`dist/`), never deep `src/` imports. It is the canonical visual example of the
-theme and components (replaces the static HTML preview). Order of commands:
+theme and components (replaces the static HTML preview).
 
-1. `npm run build:lib` — emits `dist/`
-2. `npm install` — materializes `node_modules/@cobranza-apps/ui` from `file:./dist`
-3. `npm run start:demo` (dev server) **or** `npm run build:demo` (emits `dist/demo/browser/`)
-
-`start:demo` does **not** rebuild the library — re-run `build:lib` after library changes,
-then refresh the dev server. Browser verification against `dist/demo/browser/index.html`
-applies to production builds.
+For a dev-server workflow, build the library first, then install it locally and
+serve the demo: `npm run build:lib` → `npm install` → `npm run start:demo` (see the
+Build artifacts table for the corresponding one-shot `build:demo` command). Note that
+`start:demo` does **not** rebuild the library — re-run `build:lib` after library
+changes, then refresh the dev server. Browser verification against
+`dist/demo/browser/index.html` applies to production builds.
 
 **Build artifacts:**
 
