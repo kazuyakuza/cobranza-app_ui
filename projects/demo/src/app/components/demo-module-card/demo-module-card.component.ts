@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import {
+  CbaModuleFooterComponent,
   ModuleContainerComponent,
   ModuleContainerPadding,
   ModuleContainerSize,
@@ -10,14 +11,11 @@ import {
 /**
  * Demo-only wrapper combining a `cba-module-container` with its
  * `cba-module-header`, projecting extra body content (table, actions, …).
+ * Optionally renders a `cba-module-footer` OUTSIDE the container so the
+ * footer stays visible even when the module body is collapsed.
  *
- * **NOT part of the public library API.** This component exists solely for the
- * `projects/demo/` mini-app and is not exported from `@cobranza-apps/ui`.
- *
- * @see DemoModuleCardComponent simplifies demo markup by wrapping the library's
- *      `ModuleContainerComponent` + `ModuleHeaderComponent` pair with sensible
- *      defaults and no-op event handlers. Consumers should use the library
- *      components directly, not this demo wrapper.
+ * **NOT part of the public library API.** This component exists solely for
+ * the `projects/demo/` mini-app and is not exported from `@cobranza-apps/ui`.
  *
  * Emits no-op handlers for the header outputs so the demo stays interactive
  * without side effects.
@@ -25,24 +23,37 @@ import {
 @Component({
   selector: 'demo-module-card',
   standalone: true,
-  imports: [ModuleContainerComponent, ModuleHeaderComponent],
+  imports: [ModuleContainerComponent, ModuleHeaderComponent, CbaModuleFooterComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <cba-module-container [size]="size" [padding]="padding" [isCollapsed]="isCollapsed">
-      <cba-module-header
-        cbaModuleContainerHeader
-        [title]="title"
-        [size]="size"
-        [isCollapsed]="isCollapsed"
-        [isFullscreen]="false"
-        [status]="status"
-        (collapseToggle)="noop()"
-        (sizeToggle)="noop()"
-        (fullscreenToggle)="noop()"
-        (remove)="noop()"
-      />
-      <ng-content />
-    </cba-module-container>
+    <div class="demo-module-card" [class.demo-module-card--size-50]="size === '50%'">
+      <cba-module-container [size]="size" [padding]="padding" [isCollapsed]="isCollapsed">
+        <cba-module-header
+          cbaModuleContainerHeader
+          [title]="title"
+          [size]="size"
+          [isCollapsed]="isCollapsed"
+          [isFullscreen]="false"
+          [status]="status"
+          (collapseToggle)="noop()"
+          (sizeToggle)="noop()"
+          (fullscreenToggle)="noop()"
+          (remove)="noop()"
+        />
+        <ng-content />
+      </cba-module-container>
+      @if (hasFooter) {
+        <cba-module-footer [status]="footerStatus" [statusText]="footerText" />
+      }
+    </div>
+  `,
+  styles: `
+    :host {
+      display: block;
+    }
+    .demo-module-card--size-50 {
+      flex: 0 0 calc(50% - var(--cba-space-3) / 2);
+    }
   `,
 })
 export class DemoModuleCardComponent {
@@ -51,6 +62,12 @@ export class DemoModuleCardComponent {
   @Input() padding: ModuleContainerPadding = 'md';
   @Input() status: ModuleHeaderStatus = 'loaded';
   @Input() isCollapsed = false;
+  @Input() footerStatus: ModuleHeaderStatus | null = null;
+  @Input() footerText = '';
+
+  private get hasFooter(): boolean {
+    return this.footerStatus !== null || this.footerText.length > 0;
+  }
 
   protected noop(): void {}
 }
