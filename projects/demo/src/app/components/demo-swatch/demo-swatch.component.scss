@@ -1,13 +1,30 @@
-$swatch-height: 56px;
+$swatch-min-height: 72px;
 
 :host {
   display: block;
 }
 
 .demo-swatch {
-  height: $swatch-height;
+  min-height: $swatch-min-height;
   border-radius: var(--cba-radius-sm);
   border: 1px solid var(--cba-border-default);
   padding: var(--cba-space-2);
   font-size: var(--cba-font-size-small);
+  display: flex;
+  flex-direction: column;
+  gap: var(--cba-space-1);
+}
+
+.demo-swatch__name {
+  font-weight: 600;
+}
+
+.demo-swatch__tag {
+  font-size: var(--cba-font-size-caption);
+  opacity: 0.85;
+}
+
+.demo-swatch__hex {
+  font-size: var(--cba-font-size-caption);
+  font-variant-numeric: tabular-nums;
 }
