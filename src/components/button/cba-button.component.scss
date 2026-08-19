@@ -119,44 +119,54 @@
 }
 
 // Task 3 (Round 2) — label truncation.
-:host(.cba-button--truncate) .cba-button__control {
-  min-width: 0;
-}
+:host(.cba-button--truncate) {
+  .cba-button__control {
+    min-width: 0;
+  }
 
-:host(.cba-button--truncate) .cba-button__label {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  .cba-button__label {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
 }
 
 // Task 4 (Round 2) — minimal square icon-only button.
-:host(.cba-button--icon-only) .cba-button__control {
-  aspect-ratio: 1 / 1;
-  min-width: auto;
-}
+:host(.cba-button--icon-only) {
+  .cba-button__control {
+    aspect-ratio: 1 / 1;
+    min-width: auto;
+  }
 
-:host(.cba-button--icon-only.cba-button--sm) .cba-button__control {
-  padding: var(--cba-space-1);
-}
+  &.cba-button--sm {
+    .cba-button__control {
+      padding: var(--cba-space-1);
+    }
+  }
 
-:host(.cba-button--icon-only.cba-button--md) .cba-button__control {
-  padding: var(--cba-space-2);
-}
+  &.cba-button--md {
+    .cba-button__control {
+      padding: var(--cba-space-2);
+    }
+  }
 
-:host(.cba-button--icon-only) .cba-button__label {
-  display: none;
+  .cba-button__label {
+    display: none;
+  }
 }
 
 // Task 5 (Round 2) — block-level button.
 :host(.cba-button--block) {
   display: block;
   width: 100%;
-}
 
-:host(.cba-button--block) .cba-button__control {
-  width: 100%;
-}
+  .cba-button__control {
+    width: 100%;
+  }
 
-:host(.cba-button--block.cba-button--ghost) .cba-button__control {
-  justify-content: flex-start;
+  &.cba-button--ghost {
+    .cba-button__control {
+      justify-content: flex-start;
+    }
+  }
 }

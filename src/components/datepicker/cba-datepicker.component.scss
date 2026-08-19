@@ -39,15 +39,19 @@
   }
 }
 
-:host(.cba-datepicker--disabled) .cba-datepicker__toggle,
-:host(.cba-datepicker--disabled) .cba-datepicker__control {
-  cursor: not-allowed;
+:host(.cba-datepicker--disabled) {
+  .cba-datepicker__toggle,
+  .cba-datepicker__control {
+    cursor: not-allowed;
+  }
 }
 
-:host(.cba-datepicker--readonly) .cba-datepicker__control {
-  cursor: default;
-}
+:host(.cba-datepicker--readonly) {
+  .cba-datepicker__control {
+    cursor: default;
+  }
 
-:host(.cba-datepicker--readonly) .cba-datepicker__toggle {
-  cursor: pointer;
+  .cba-datepicker__toggle {
+    cursor: pointer;
+  }
 }
