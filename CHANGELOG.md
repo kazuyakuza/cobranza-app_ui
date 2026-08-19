@@ -30,6 +30,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > Releases prior to 0.8.1 predate this changelog and are not reconstructed retroactively.
 
+## [0.18.1] — 2026-08-19
+
+### Changed
+
+- Updated Angular demo app (`projects/demo/`) to match the full design-system showcase specification: reorganized header bar with back button and centered search, expanded module examples in exact order, token color grid with hex values, button and pill matrices over all surfaces, size variants, icon grid, typography and text samples, complete table and navigation examples, inputs over backgrounds, form example, and centered footer. All demo text switched to English.
+
 ## [0.18.0] — 2026-08-19
 
 ### Added
