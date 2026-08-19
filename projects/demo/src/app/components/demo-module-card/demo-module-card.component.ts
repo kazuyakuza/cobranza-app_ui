@@ -50,12 +50,19 @@ import {
   styleUrl: './demo-module-card.component.scss',
 })
 export class DemoModuleCardComponent {
+  /** Header title displayed in the module header. */
   @Input() title = '';
+  /** Module width — forwarded to `cba-module-container[size]`. */
   @Input() size: ModuleContainerSize = '100%';
+  /** Inner padding — forwarded to `cba-module-container[padding]`. */
   @Input() padding: ModuleContainerPadding = 'md';
+  /** Header status indicator (loaded / loading / error). */
   @Input() status: ModuleHeaderStatus = 'loaded';
+  /** Whether the module body is collapsed. */
   @Input() isCollapsed = false;
+  /** Optional footer status; `null` hides the footer. */
   @Input() footerStatus: ModuleHeaderStatus | null = null;
+  /** Optional footer status text shown beside `footerStatus`. */
   @Input() footerText = '';
 
   protected get hasFooter(): boolean {

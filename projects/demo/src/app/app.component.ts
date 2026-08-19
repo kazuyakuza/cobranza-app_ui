@@ -47,6 +47,18 @@ interface FormFieldModel {
   readonly dueDate: NgbDateStruct | null;
 }
 
+/**
+ * Root component of the demo mini-app. Assembles the shell chrome
+ * (header, workspace, footer) and wires every `demo-*` showcase section
+ * to the built `@cobranza-apps/ui` library.
+ *
+ * **NOT part of the public library API.** This component exists solely
+ * for the `projects/demo/` mini-app and is not exported from
+ * `@cobranza-apps/ui`.
+ *
+ * @see DemoWorkspaceComponent — module card grid
+ * @see DemoSectionComponent — repeated section wrapper
+ */
 @Component({
   selector: 'app-root',
   standalone: true,

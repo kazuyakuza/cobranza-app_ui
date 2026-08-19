@@ -11,16 +11,16 @@ how components and tokens look in a real consumer app.
 
 ## What the demo shows
 
-- Shell chrome mock (header / workspace / footer) using theme tokens + real `cba-button`
-- Module card + header + footer using real `cba-module-container`, `cba-module-header`, `cba-module-footer`
-- Token swatches reading `var(--cba-*)` directly (no duplicated hex tables)
-- Button state matrix: real `<cba-button>` variants × surfaces (panel / elevated / canvas) × states (normal / disabled / loading) × sizes (sm / md)
-- Text on surfaces, border scale, radius & shadow samples
-- Selected / nav / footer pill patterns using `--cba-selected-*` tokens
-- Form states using real `cba-input`, `cba-select`
-- Typography scale using `--cba-font-size-*` tokens
-- Semantic status using real `cba-badge`
-- Accent pills using token-based styles
+- **Shell chrome** — header (back button, title, search bar, notification & profile icons), workspace, and centered footer using theme tokens + real `cba-button`.
+- **Module cards** — six rows of `demo-module-card` in 100% / 50% sizes, expanded / collapsed, with headers and footers, using real `cba-module-container`, `cba-module-header`, `cba-module-footer`.
+- **Token swatches** — grid of color tokens reading `var(--cba-*)` directly (no duplicated hex tables): fill, name, category tag, hex value.
+- **Button matrix** — real `<cba-button>` variants × surfaces × states (normal / disabled / loading), with captions.
+- **Pill matrix** — five pill variants × surfaces × states (normal / disabled / selected), styled with theme tokens.
+- **Icon grid** — predefined Font Awesome icons rendered as icon-only ghost buttons with `aria-label`.
+- **Text showcase** — typography scale + text-color variants on four surfaces (bg-secondary, bg-elevated, bg-primary, bg-tertiary); status colors on light surfaces only.
+- **Table** — complete table example with header, body, a selected row, and status badges via real `cba-badge`.
+- **Navigation items** — horizontal nav row showing normal, selected, hover, and disabled states.
+- **Inputs & form** — input variants over different background surfaces, plus a complete form example using real `cba-input`, `cba-select`, `cba-datepicker`.
 
 ## Prerequisites
 

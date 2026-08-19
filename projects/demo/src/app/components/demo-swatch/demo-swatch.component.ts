@@ -22,9 +22,14 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
   styleUrl: './demo-swatch.component.scss',
 })
 export class DemoSwatchComponent {
+  /** Token display name (e.g. `bg-primary`). */
   @Input() label = '';
+  /** CSS background value — typically `var(--cba-<token>)`. */
   @Input() background = '';
+  /** Optional foreground color; falls back to the CSS default when unset. */
   @Input() color?: string;
+  /** Category tag shown as a small chip (e.g. `Background`, `Text`). */
   @Input() tag = '';
+  /** Raw hex value displayed as text (e.g. `#BCB5A4`). */
   @Input() hex = '';
 }

@@ -115,8 +115,8 @@
     <cba-card>
       <div cbaCardHeader>Customer form</div>
       <div class="demo-form-grid">
-        <cba-input label="Customer name" hint="Full business name." [(ngModel)]="formModel.customerName" />
-        <cba-input label="Email" hint="Billing contact email." type="email" [(ngModel)]="formModel.email" />
+        <cba-input label="Customer name" hint="Full business name." error="Customer name is required." [(ngModel)]="formModel.customerName" />
+        <cba-input label="Email" hint="Billing contact email." type="email" error="Enter a valid email." [(ngModel)]="formModel.email" />
         <cba-select label="Status" [(ngModel)]="formModel.status">
           @for (option of statusOptions; track option.value) {
             <option [value]="option.value">{{ option.label }}</option>

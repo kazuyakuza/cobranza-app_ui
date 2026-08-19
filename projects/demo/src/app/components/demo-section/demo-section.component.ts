@@ -26,6 +26,8 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
   styleUrl: './demo-section.component.scss',
 })
 export class DemoSectionComponent {
+  /** Section heading rendered as `<h2>`. */
   @Input() title = '';
+  /** Optional subtitle rendered below the heading. Empty string hides it. */
   @Input() caption = '';
 }
