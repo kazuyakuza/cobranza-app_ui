@@ -30,6 +30,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > Releases prior to 0.8.1 predate this changelog and are not reconstructed retroactively.
 
+## [0.16.1] — 2026-08-18
+
+### Fixed
+
+- Host-bound modifier classes (`cba-button--primary`, `--secondary`, `--ghost`,
+  `--danger`, `--success`, `--sm`, `--md`, `--disabled`, `--loading`,
+  `--truncate`, `--icon-only`, `--block`, and the `--disabled`/`--readonly`
+  modifiers on `cba-input`, `cba-select`, `cba-datepicker`, `cba-typeahead`) now
+  use `:host(.modifier)` selectors so styles apply under Angular emulated
+  encapsulation. Previously the primary button (and other variants) rendered
+  without their accent fill in consumer apps like the Shell because the modifier
+  lives on the `_nghost-*` element while the SCSS targeted `_ngcontent-*`. See
+  `docs/CBA_BUTTON.md` "Host modifiers and encapsulation".
+
+### Added
+
+- Component-authoring note in `AGENTS.md` documenting the `:host(.modifier)` rule
+  for host-bound classes.
+- Unit-test assertions for `readonly`/`disabled` host classes on
+  `cba-input`, `cba-select`, `cba-datepicker`.
+
 ## [0.16.0] — 2026-08-18
 
 ## [0.15.2] — 2026-08-13
