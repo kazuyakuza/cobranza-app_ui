@@ -11,6 +11,7 @@ $input-grid-min: 320px;
 $size-row-gap: var(--cba-space-3);
 $pill-sm-padding: 2px 8px;
 $pill-md-padding: 6px 16px;
+$pill-radius-pill: 999px;
 
 :host {
   display: block;
@@ -63,26 +64,6 @@ $pill-md-padding: 6px 16px;
   color: var(--cba-text-primary);
 }
 
-.workspace {
-  padding: var(--cba-space-3);
-  display: flex;
-  flex-direction: column;
-  gap: var(--cba-space-3);
-}
-.workspace__row {
-  display: flex;
-  gap: var(--cba-space-3);
-}
-.workspace__row--single-50 .demo-module-card--size-50 {
-  flex: 0 0 50%;
-}
-
-.demo-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--cba-space-2);
-}
-
 .demo-swatch-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax($swatch-grid-min, 1fr));
@@ -126,7 +107,7 @@ $pill-md-padding: 6px 16px;
   display: inline-flex;
   align-items: center;
   gap: var(--cba-space-1);
-  border-radius: 999px;
+  border-radius: $pill-radius-pill;
   font-size: var(--cba-font-size-small);
   border: 1px solid transparent;
   background: var(--cba-bg-tertiary);

@@ -53,30 +53,7 @@ interface IconEntry {
       }
     </div>
   `,
-  styles: `
-    :host {
-      display: block;
-    }
-    .demo-icon-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
-      gap: var(--cba-space-3);
-    }
-    .demo-icon-cell {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: var(--cba-space-1);
-      padding: var(--cba-space-2);
-      border: 1px solid var(--cba-border-subtle);
-      border-radius: var(--cba-radius-sm);
-      background: var(--cba-bg-elevated);
-    }
-    .demo-icon-cell__label {
-      font-size: var(--cba-font-size-caption);
-      color: var(--cba-text-secondary);
-    }
-  `,
+  styleUrl: './demo-icon-grid.component.scss',
 })
 export class DemoIconGridComponent {
   protected readonly icons: IconEntry[] = [

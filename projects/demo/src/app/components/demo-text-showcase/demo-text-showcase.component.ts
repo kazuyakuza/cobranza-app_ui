@@ -73,48 +73,7 @@ const STATUS_COLORS: readonly TextColorItem[] = [
       }
     </div>
   `,
-  styles: `
-    :host {
-      display: block;
-    }
-    .demo-text-panels {
-      display: grid;
-      gap: var(--cba-space-3);
-    }
-    .demo-text-panel {
-      padding: var(--cba-space-3);
-      border-radius: var(--cba-radius-md);
-      display: flex;
-      flex-direction: column;
-      gap: var(--cba-space-2);
-    }
-    .demo-text-panel--secondary {
-      background: var(--cba-bg-secondary);
-    }
-    .demo-text-panel--elevated {
-      background: var(--cba-bg-elevated);
-    }
-    .demo-text-panel--primary {
-      background: var(--cba-bg-primary);
-    }
-    .demo-text-panel--tertiary {
-      background: var(--cba-bg-tertiary);
-    }
-    .demo-text-scale {
-      display: flex;
-      flex-direction: column;
-      gap: var(--cba-space-1);
-      margin: 0;
-    }
-    .demo-text-scale p {
-      margin: 0;
-    }
-    .demo-text-colors {
-      display: flex;
-      flex-wrap: wrap;
-      gap: var(--cba-space-2);
-    }
-  `,
+  styleUrl: './demo-text-showcase.component.scss',
 })
 export class DemoTextShowcaseComponent {
   protected readonly typeScale: TypeSample[] = [...TYPE_SCALE];

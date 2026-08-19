@@ -57,31 +57,7 @@ export interface TableRow {
       </tbody>
     </table>
   `,
-  styles: `
-    :host {
-      display: block;
-    }
-    .demo-table {
-      width: 100%;
-      border-collapse: collapse;
-      background: var(--cba-bg-elevated);
-    }
-    .demo-table th,
-    .demo-table td {
-      padding: var(--cba-space-2) var(--cba-space-3);
-      border-bottom: 1px solid var(--cba-border-subtle);
-      text-align: left;
-      font-size: var(--cba-font-size-small);
-    }
-    .demo-table th {
-      font-weight: 600;
-      color: var(--cba-text-secondary);
-    }
-    .demo-row--selected {
-      background: var(--cba-selected-bg);
-      color: var(--cba-selected-text);
-    }
-  `,
+  styleUrl: './demo-table.component.scss',
 })
 export class DemoTableComponent {
   protected readonly rows: TableRow[] = [

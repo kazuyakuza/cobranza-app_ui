@@ -1,0 +1,41 @@
+// Demo-only horizontal navigation items example. Uses theme tokens only.
+
+:host {
+  display: block;
+}
+.demo-nav {
+  display: flex;
+  gap: var(--cba-space-2);
+  flex-wrap: wrap;
+}
+.demo-nav-item {
+  padding: var(--cba-space-1) var(--cba-space-3);
+  border-radius: var(--cba-radius-sm);
+  border: 1px solid var(--cba-border-strong);
+  color: var(--cba-text-secondary);
+  background: var(--cba-bg-secondary);
+  text-decoration: none;
+  font-size: var(--cba-font-size-small);
+}
+.demo-nav-item:hover {
+  background-image: linear-gradient(var(--cba-hover), var(--cba-hover));
+  color: var(--cba-text-primary);
+}
+.demo-nav-item--selected {
+  background: var(--cba-selected-bg);
+  border-color: var(--cba-selected-border);
+  color: var(--cba-selected-text);
+  font-weight: 600;
+}
+.demo-nav-item--selected:hover {
+  background-image: none;
+}
+.demo-nav-item--disabled {
+  background: var(--cba-state-disabled-bg);
+  border-color: var(--cba-border-subtle);
+  color: var(--cba-state-disabled-text);
+  cursor: not-allowed;
+}
+.demo-nav-item--disabled:hover {
+  background-image: none;
+}

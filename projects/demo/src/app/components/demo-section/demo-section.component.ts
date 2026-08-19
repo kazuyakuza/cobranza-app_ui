@@ -23,20 +23,7 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
       <ng-content />
     </section>
   `,
-  styles: `
-    :host {
-      display: block;
-      max-width: 960px;
-      margin: var(--cba-space-4) auto;
-      padding: 0 var(--cba-space-3);
-    }
-    .section-caption {
-      color: var(--cba-text-secondary);
-      font-size: var(--cba-font-size-caption);
-      font-style: italic;
-      margin: 0 0 var(--cba-space-2);
-    }
-  `,
+  styleUrl: './demo-section.component.scss',
 })
 export class DemoSectionComponent {
   @Input() title = '';

@@ -1,0 +1,49 @@
+// Demo-only button matrix — five variants × three surfaces × three states.
+// Pixel value exposed as a named SCSS constant; the rest use theme tokens.
+
+$matrix-status-width: 80px;
+
+:host {
+  display: block;
+}
+.demo-matrix {
+  display: flex;
+  flex-direction: column;
+  gap: var(--cba-space-3);
+}
+.demo-surface {
+  padding: var(--cba-space-3);
+  border-radius: var(--cba-radius-md);
+}
+.demo-surface--secondary {
+  background: var(--cba-bg-secondary);
+}
+.demo-surface--elevated {
+  background: var(--cba-bg-elevated);
+}
+.demo-surface--primary {
+  background: var(--cba-bg-primary);
+}
+.demo-matrix-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--cba-space-3);
+  margin-top: var(--cba-space-2);
+}
+.demo-matrix-row__status {
+  width: $matrix-status-width;
+  font-size: var(--cba-font-size-caption);
+  color: var(--cba-text-secondary);
+  text-transform: capitalize;
+}
+.demo-matrix-cell {
+  display: flex;
+  flex-direction: column;
+  gap: var(--cba-space-1);
+  align-items: flex-start;
+}
+.demo-matrix-cell__caption {
+  font-size: var(--cba-font-size-caption);
+  color: var(--cba-text-secondary);
+}

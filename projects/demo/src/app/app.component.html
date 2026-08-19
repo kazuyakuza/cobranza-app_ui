@@ -22,101 +22,7 @@
   </header>
 
   <!-- 3. Workspace section: module examples -->
-  <main class="workspace">
-
-    <!-- Row 1: expanded 100% with header + footer -->
-    <demo-module-card
-      title="Customer portfolio"
-      size="100%"
-      padding="md"
-      status="loaded"
-      footerStatus="loaded"
-      footerText="3 customers · total debt $ 1,730,000">
-      <demo-table />
-    </demo-module-card>
-
-    <!-- Row 2: collapsed 100%, header only (no footer) -->
-    <demo-module-card
-      title="Quick actions"
-      size="100%"
-      padding="md"
-      status="warning"
-      [isCollapsed]="true" />
-
-    <!-- Row 3: two expanded 50% with header + footer -->
-    <div class="workspace__row">
-      <demo-module-card
-        title="New customer"
-        size="50%"
-        padding="sm"
-        status="success"
-        footerStatus="success"
-        footerText="Saved">
-        <div class="demo-actions">
-          <cba-button variant="primary" [icon]="faPlus">Add customer</cba-button>
-          <cba-button variant="secondary" [icon]="faRefresh">Sync</cba-button>
-        </div>
-      </demo-module-card>
-
-      <demo-module-card
-        title="Export data"
-        size="50%"
-        padding="sm"
-        status="loaded"
-        footerStatus="loaded"
-        footerText="Ready">
-        <div class="demo-actions">
-          <cba-button variant="ghost" [icon]="faDownload">Export CSV</cba-button>
-        </div>
-      </demo-module-card>
-    </div>
-
-    <!-- Row 4: two collapsed 50% with header + footer -->
-    <div class="workspace__row">
-      <demo-module-card
-        title="Invoices"
-        size="50%"
-        padding="md"
-        status="dirty"
-        [isCollapsed]="true"
-        footerStatus="dirty"
-        footerText="Unsaved changes" />
-
-      <demo-module-card
-        title="Reports"
-        size="50%"
-        padding="md"
-        status="error"
-        [isCollapsed]="true"
-        footerStatus="error"
-        footerText="Load failed" />
-    </div>
-
-    <!-- Row 5: one expanded 50% with empty space at the right -->
-    <div class="workspace__row workspace__row--single-50">
-      <demo-module-card
-        title="Payment schedule"
-        size="50%"
-        padding="sm"
-        status="loaded"
-        footerStatus="loaded"
-        footerText="Up to date">
-        <p class="cba-text-body">Next payment: 2026-09-15</p>
-      </demo-module-card>
-    </div>
-
-    <!-- Row 6: one collapsed 50% with empty space at the right -->
-    <div class="workspace__row workspace__row--single-50">
-      <demo-module-card
-        title="Settings"
-        size="50%"
-        padding="md"
-        status="dirty"
-        [isCollapsed]="true"
-        footerStatus="dirty"
-        footerText="Pending changes" />
-    </div>
-  </main>
+  <demo-workspace />
 
   <!-- 4. Token colors grid -->
   <demo-section
@@ -194,10 +100,9 @@
           <cba-input label="Valid" [valid]="true" hint="Validated successfully." />
           <cba-input label="Invalid" error="The entered tax ID is invalid." />
           <cba-select label="Status" [(ngModel)]="sampleSelect">
-            <option value="">Choose…</option>
-            <option value="active">Active</option>
-            <option value="overdue">Overdue</option>
-            <option value="settled">Settled</option>
+            @for (option of statusOptions; track option.value) {
+              <option [value]="option.value">{{ option.label }}</option>
+            }
           </cba-select>
           <cba-datepicker label="Due date" hint="YYYY-MM-DD" [(ngModel)]="formModel.dueDate" />
         </div>
@@ -213,10 +118,9 @@
         <cba-input label="Customer name" hint="Full business name." [(ngModel)]="formModel.customerName" />
         <cba-input label="Email" hint="Billing contact email." type="email" [(ngModel)]="formModel.email" />
         <cba-select label="Status" [(ngModel)]="formModel.status">
-          <option value="">Choose…</option>
-          <option value="active">Active</option>
-          <option value="overdue">Overdue</option>
-          <option value="settled">Settled</option>
+          @for (option of statusOptions; track option.value) {
+            <option [value]="option.value">{{ option.label }}</option>
+          }
         </cba-select>
         <cba-datepicker label="Due date" hint="Pick a date." [(ngModel)]="formModel.dueDate" />
         <cba-input label="Notes" hint="Optional observations." />

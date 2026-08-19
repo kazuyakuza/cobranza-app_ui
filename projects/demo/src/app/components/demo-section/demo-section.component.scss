@@ -1,0 +1,17 @@
+// Demo-only section wrapper (title + optional caption + projected content).
+// Pixel value exposed as a named SCSS constant; the rest use theme tokens.
+
+$section-max-width: 960px;
+
+:host {
+  display: block;
+  max-width: $section-max-width;
+  margin: var(--cba-space-4) auto;
+  padding: 0 var(--cba-space-3);
+}
+.section-caption {
+  color: var(--cba-text-secondary);
+  font-size: var(--cba-font-size-caption);
+  font-style: italic;
+  margin: 0 0 var(--cba-space-2);
+}

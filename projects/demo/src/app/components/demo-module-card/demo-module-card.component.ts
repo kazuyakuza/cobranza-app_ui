@@ -47,14 +47,7 @@ import {
       }
     </div>
   `,
-  styles: `
-    :host {
-      display: block;
-    }
-    .demo-module-card--size-50 {
-      flex: 0 0 calc(50% - var(--cba-space-3) / 2);
-    }
-  `,
+  styleUrl: './demo-module-card.component.scss',
 })
 export class DemoModuleCardComponent {
   @Input() title = '';
@@ -66,6 +59,10 @@ export class DemoModuleCardComponent {
   @Input() footerText = '';
 
   protected get hasFooter(): boolean {
+    return this.hasFooterContent();
+  }
+
+  private hasFooterContent(): boolean {
     return this.footerStatus !== null || this.footerText.length > 0;
   }
 

@@ -81,52 +81,7 @@ function buildBlock(surfaceTitle: string, surfaceClass: string): ButtonMatrixBlo
       }
     </div>
   `,
-  styles: `
-    :host {
-      display: block;
-    }
-    .demo-matrix {
-      display: flex;
-      flex-direction: column;
-      gap: var(--cba-space-3);
-    }
-    .demo-surface {
-      padding: var(--cba-space-3);
-      border-radius: var(--cba-radius-md);
-    }
-    .demo-surface--secondary {
-      background: var(--cba-bg-secondary);
-    }
-    .demo-surface--elevated {
-      background: var(--cba-bg-elevated);
-    }
-    .demo-surface--primary {
-      background: var(--cba-bg-primary);
-    }
-    .demo-matrix-row {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: var(--cba-space-3);
-      margin-top: var(--cba-space-2);
-    }
-    .demo-matrix-row__status {
-      width: 80px;
-      font-size: var(--cba-font-size-caption);
-      color: var(--cba-text-secondary);
-      text-transform: capitalize;
-    }
-    .demo-matrix-cell {
-      display: flex;
-      flex-direction: column;
-      gap: var(--cba-space-1);
-      align-items: flex-start;
-    }
-    .demo-matrix-cell__caption {
-      font-size: var(--cba-font-size-caption);
-      color: var(--cba-text-secondary);
-    }
-  `,
+  styleUrl: './demo-button-matrix.component.scss',
 })
 export class DemoButtonMatrixComponent {
   protected readonly blocks: ButtonMatrixBlock[] = [

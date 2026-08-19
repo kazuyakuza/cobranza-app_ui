@@ -1,0 +1,9 @@
+// Demo-only module-card: module container + projected body + optional footer.
+// Uses theme tokens only.
+
+:host {
+  display: block;
+}
+.demo-module-card--size-50 {
+  flex: 0 0 calc(50% - var(--cba-space-3) / 2);
+}

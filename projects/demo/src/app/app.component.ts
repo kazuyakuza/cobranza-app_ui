@@ -17,13 +17,13 @@ import {
 } from '@cobranza-apps/ui';
 import { DemoButtonMatrixComponent } from './components/demo-button-matrix/demo-button-matrix.component';
 import { DemoIconGridComponent } from './components/demo-icon-grid/demo-icon-grid.component';
-import { DemoModuleCardComponent } from './components/demo-module-card/demo-module-card.component';
 import { DemoNavItemsComponent } from './components/demo-nav-items/demo-nav-items.component';
 import { DemoPillMatrixComponent } from './components/demo-pill-matrix/demo-pill-matrix.component';
 import { DemoSectionComponent } from './components/demo-section/demo-section.component';
 import { DemoSwatchComponent } from './components/demo-swatch/demo-swatch.component';
 import { DemoTableComponent } from './components/demo-table/demo-table.component';
 import { DemoTextShowcaseComponent } from './components/demo-text-showcase/demo-text-showcase.component';
+import { DemoWorkspaceComponent } from './components/demo-workspace/demo-workspace.component';
 
 /** One color token shown in the token grid. */
 interface ColorToken {
@@ -59,13 +59,13 @@ interface FormFieldModel {
     CbaSelectComponent,
     DemoButtonMatrixComponent,
     DemoIconGridComponent,
-    DemoModuleCardComponent,
     DemoNavItemsComponent,
     DemoPillMatrixComponent,
     DemoSectionComponent,
     DemoSwatchComponent,
     DemoTableComponent,
     DemoTextShowcaseComponent,
+    DemoWorkspaceComponent,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './app.component.html',
@@ -89,28 +89,33 @@ export class AppComponent {
     dueDate: null,
   };
 
-  protected readonly colorTokens: ColorToken[] = [
-    { name: 'bg-primary', tag: 'Background', hex: '#BCB5A4', variable: 'var(--cba-bg-primary)' },
-    { name: 'bg-secondary', tag: 'Background', hex: '#F2F0E8', variable: 'var(--cba-bg-secondary)' },
-    { name: 'bg-tertiary', tag: 'Background', hex: '#D8C3A5', variable: 'var(--cba-bg-tertiary)' },
-    { name: 'bg-elevated', tag: 'Background', hex: '#FDFCF8', variable: 'var(--cba-bg-elevated)' },
-    { name: 'text-primary', tag: 'Text', hex: '#2B2620', variable: 'var(--cba-text-primary)' },
-    { name: 'text-secondary', tag: 'Text', hex: '#4A4640', variable: 'var(--cba-text-secondary)' },
-    { name: 'text-muted', tag: 'Text', hex: '#625C55', variable: 'var(--cba-text-muted)' },
-    { name: 'text-inverse', tag: 'Text', hex: '#FDFCF8', variable: 'var(--cba-text-inverse)' },
-    { name: 'border-subtle', tag: 'Border', hex: '#E8E5DB', variable: 'var(--cba-border-subtle)' },
-    { name: 'border-default', tag: 'Border', hex: '#A29D94', variable: 'var(--cba-border-default)' },
-    { name: 'border-strong', tag: 'Border', hex: '#6B665E', variable: 'var(--cba-border-strong)' },
-    { name: 'accent-primary', tag: 'Accent', hex: '#6B5B4F', variable: 'var(--cba-accent-primary)' },
-    { name: 'accent-success', tag: 'Accent', hex: '#3E6B4F', variable: 'var(--cba-accent-success)' },
-    { name: 'accent-warning', tag: 'Accent', hex: '#E98074', variable: 'var(--cba-accent-warning)' },
-    { name: 'accent-danger', tag: 'Accent', hex: '#B93E36', variable: 'var(--cba-accent-danger)' },
-    { name: 'accent-info', tag: 'Accent', hex: '#56717E', variable: 'var(--cba-accent-info)' },
-    { name: 'selected-bg', tag: 'Selected', hex: '#E4DDD0', variable: 'var(--cba-selected-bg)' },
-    { name: 'selected-text', tag: 'Selected', hex: '#2B2620', variable: 'var(--cba-selected-text)' },
-    { name: 'state-valid-border', tag: 'Form state', hex: '#3E6B4F', variable: 'var(--cba-state-valid-border)' },
-    { name: 'state-invalid-border', tag: 'Form state', hex: '#B93E36', variable: 'var(--cba-state-invalid-border)' },
+  private readonly COLOR_TOKEN_SOURCE: readonly { readonly name: string; readonly tag: string; readonly hex: string }[] = [
+    { name: 'bg-primary', tag: 'Background', hex: '#BCB5A4' },
+    { name: 'bg-secondary', tag: 'Background', hex: '#F2F0E8' },
+    { name: 'bg-tertiary', tag: 'Background', hex: '#D8C3A5' },
+    { name: 'bg-elevated', tag: 'Background', hex: '#FDFCF8' },
+    { name: 'text-primary', tag: 'Text', hex: '#2B2620' },
+    { name: 'text-secondary', tag: 'Text', hex: '#4A4640' },
+    { name: 'text-muted', tag: 'Text', hex: '#625C55' },
+    { name: 'text-inverse', tag: 'Text', hex: '#FDFCF8' },
+    { name: 'border-subtle', tag: 'Border', hex: '#E8E5DB' },
+    { name: 'border-default', tag: 'Border', hex: '#A29D94' },
+    { name: 'border-strong', tag: 'Border', hex: '#6B665E' },
+    { name: 'accent-primary', tag: 'Accent', hex: '#6B5B4F' },
+    { name: 'accent-success', tag: 'Accent', hex: '#3E6B4F' },
+    { name: 'accent-warning', tag: 'Accent', hex: '#E98074' },
+    { name: 'accent-danger', tag: 'Accent', hex: '#B93E36' },
+    { name: 'accent-info', tag: 'Accent', hex: '#56717E' },
+    { name: 'selected-bg', tag: 'Selected', hex: '#E4DDD0' },
+    { name: 'selected-text', tag: 'Selected', hex: '#2B2620' },
+    { name: 'state-valid-border', tag: 'Form state', hex: '#3E6B4F' },
+    { name: 'state-invalid-border', tag: 'Form state', hex: '#B93E36' },
   ];
+
+  protected readonly colorTokens: ColorToken[] = this.COLOR_TOKEN_SOURCE.map((token) => ({
+    ...token,
+    variable: `var(--cba-${token.name})`,
+  }));
 
   protected readonly inputSurfaces: InputSurface[] = [
     { title: 'bg-secondary', className: 'demo-surface--secondary' },
@@ -119,11 +124,20 @@ export class AppComponent {
     { title: 'bg-tertiary', className: 'demo-surface--tertiary' },
   ];
 
+  protected readonly statusOptions: readonly { readonly value: string; readonly label: string }[] = [
+    { value: '', label: 'Choose…' },
+    { value: 'active', label: 'Active' },
+    { value: 'overdue', label: 'Overdue' },
+    { value: 'settled', label: 'Settled' },
+  ];
+
   /** Text color must invert when the swatch fill is a dark text token. */
   protected swatchColor(token: ColorToken): string | undefined {
-    const isTextTag = token.tag === 'Text';
-    const isInverse = token.name === 'text-inverse';
-    return isTextTag && !isInverse ? 'var(--cba-bg-elevated)' : undefined;
+    return this.needsSwatchInverseColor(token) ? 'var(--cba-bg-elevated)' : undefined;
+  }
+
+  private needsSwatchInverseColor(token: ColorToken): boolean {
+    return token.tag === 'Text' && token.name !== 'text-inverse';
   }
 
   protected noop(): void {}
