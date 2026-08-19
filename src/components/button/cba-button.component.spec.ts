@@ -133,6 +133,20 @@ describe('CbaButtonComponent', () => {
       assertInputDrivesHostClass('iconOnly', 'cba-button--icon-only');
     });
 
+    it('drives the loading host modifier', () => {
+      assertInputDrivesHostClass('loading', 'cba-button--loading');
+    });
+
+    it('applies combined host classes for icon-only with sm size', () => {
+      fixture.componentRef.setInput('iconOnly', true);
+      fixture.componentRef.setInput('size', 'sm');
+      fixture.detectChanges();
+
+      const hostClasses = hostEl(fixture).classList;
+      expect(hostClasses.contains('cba-button--icon-only')).toBe(true);
+      expect(hostClasses.contains('cba-button--sm')).toBe(true);
+    });
+
     it('drives the block host modifier', () => {
       assertInputDrivesHostClass('block', 'cba-button--block');
     });
