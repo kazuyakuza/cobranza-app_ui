@@ -41,22 +41,22 @@
 }
 
 // Size modifiers
-.cba-button--sm .cba-button__control {
+:host(.cba-button--sm) .cba-button__control {
   padding: var(--cba-space-1) var(--cba-space-3);
   font-size: var(--cba-font-size-small);
 }
 
-.cba-button--md .cba-button__control {
+:host(.cba-button--md) .cba-button__control {
   padding: var(--cba-space-2) var(--cba-space-4);
   font-size: var(--cba-font-size-body);
 }
 
 // Variants
-.cba-button--primary .cba-button__control {
+:host(.cba-button--primary) .cba-button__control {
   @include cba-solid-button(var(--cba-accent-primary));
 }
 
-.cba-button--secondary .cba-button__control {
+:host(.cba-button--secondary) .cba-button__control {
   background-color: var(--cba-bg-elevated);
   border-color: var(--cba-border-subtle);
   color: var(--cba-text-primary);
@@ -70,7 +70,7 @@
   }
 }
 
-.cba-button--ghost .cba-button__control {
+:host(.cba-button--ghost) .cba-button__control {
   background-color: transparent;
   color: var(--cba-text-primary);
 
@@ -83,17 +83,17 @@
   }
 }
 
-.cba-button--danger .cba-button__control {
+:host(.cba-button--danger) .cba-button__control {
   @include cba-solid-button(var(--cba-accent-danger));
 }
 
-.cba-button--success .cba-button__control {
+:host(.cba-button--success) .cba-button__control {
   @include cba-solid-button(var(--cba-accent-success));
 }
 
 // Disabled / loading state
-.cba-button--disabled .cba-button__control,
-.cba-button--loading .cba-button__control {
+:host(.cba-button--disabled) .cba-button__control,
+:host(.cba-button--loading) .cba-button__control {
   cursor: not-allowed;
   opacity: 0.6;
 }
@@ -119,31 +119,31 @@
 }
 
 // Task 3 (Round 2) — label truncation.
-.cba-button--truncate .cba-button__control {
+:host(.cba-button--truncate) .cba-button__control {
   min-width: 0;
 }
 
-.cba-button--truncate .cba-button__label {
+:host(.cba-button--truncate) .cba-button__label {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
 // Task 4 (Round 2) — minimal square icon-only button.
-.cba-button--icon-only .cba-button__control {
+:host(.cba-button--icon-only) .cba-button__control {
   aspect-ratio: 1 / 1;
   min-width: auto;
 }
 
-.cba-button--icon-only.cba-button--sm .cba-button__control {
+:host(.cba-button--icon-only.cba-button--sm) .cba-button__control {
   padding: var(--cba-space-1);
 }
 
-.cba-button--icon-only.cba-button--md .cba-button__control {
+:host(.cba-button--icon-only.cba-button--md) .cba-button__control {
   padding: var(--cba-space-2);
 }
 
-.cba-button--icon-only .cba-button__label {
+:host(.cba-button--icon-only) .cba-button__label {
   display: none;
 }
 
@@ -153,10 +153,10 @@
   width: 100%;
 }
 
-.cba-button--block .cba-button__control {
+:host(.cba-button--block) .cba-button__control {
   width: 100%;
 }
 
-.cba-button--block.cba-button--ghost .cba-button__control {
+:host(.cba-button--block.cba-button--ghost) .cba-button__control {
   justify-content: flex-start;
 }
