@@ -30,9 +30,9 @@
     "node": "^22.22.3 || ^24.15.0 || >=26.0.0"
   },
   "scripts": {
-    "build": "ng-packagr -p ng-package.json -c tsconfig.lib.json",
+    "build": "npm run build:lib && npm run build:demo",
     "build:lib": "ng-packagr -p ng-package.json -c tsconfig.lib.json",
-    "build:demo": "npm run build:lib && ng build demo",
+    "build:demo": "ng build demo",
     "start:demo": "ng serve demo",
     "test": "jest --passWithNoTests",
     "lint": "eslint \"src/**/*.ts\"",
