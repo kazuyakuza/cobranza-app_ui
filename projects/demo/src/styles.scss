@@ -1,0 +1,13 @@
+// Demo app global styles.
+// Single source of visual truth: the built @cobranza-apps/ui theme.
+// Do NOT add component styles here; component looks come from library components.
+@use '@cobranza-apps/ui/theme';
+
+html,
+body {
+  margin: 0;
+}
+
+body {
+  font-family: var(--cba-font-family-base, system-ui, sans-serif);
+}

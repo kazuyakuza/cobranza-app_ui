@@ -1,0 +1,202 @@
+:host {
+  display: block;
+}
+
+.demo-app {
+  min-height: 100vh;
+  background: var(--cba-bg-primary);
+  color: var(--cba-text-primary);
+}
+
+.preview-bar {
+  padding: 8px 14px;
+  font-size: 12px;
+  color: var(--cba-text-muted);
+  background: var(--cba-bg-elevated);
+  border-bottom: 1px solid var(--cba-border-default);
+  display: flex;
+  gap: var(--cba-space-2);
+  strong {
+    color: var(--cba-text-secondary);
+  }
+}
+
+.shell-header {
+  height: var(--cba-header-height, 48px);
+  display: flex;
+  align-items: center;
+  gap: var(--cba-space-3);
+  padding: 0 var(--cba-space-3);
+  background: var(--cba-bg-elevated);
+  border-bottom: 1px solid var(--cba-border-default);
+}
+.shell-header__search {
+  flex: 0 0 320px;
+}
+.shell-header__actions {
+  display: flex;
+  gap: var(--cba-space-1);
+}
+
+.workspace {
+  padding: var(--cba-space-3);
+  display: flex;
+  flex-direction: column;
+  gap: var(--cba-space-3);
+}
+
+.demo-section {
+  max-width: 960px;
+  margin: var(--cba-space-4) auto;
+  padding: 0 var(--cba-space-3);
+}
+.section-caption {
+  color: var(--cba-text-secondary);
+  font-size: var(--cba-font-size-caption);
+  font-style: italic;
+  margin: 0 0 var(--cba-space-2);
+}
+.demo-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--cba-space-2);
+}
+
+.demo-swatch-grid,
+.demo-border-grid,
+.demo-badge-grid,
+.demo-form-grid {
+  display: grid;
+  gap: var(--cba-space-2);
+}
+
+.demo-swatch {
+  height: 56px;
+  border-radius: var(--cba-radius-sm);
+  border: 1px solid var(--cba-border-default);
+  padding: var(--cba-space-2);
+  font-size: var(--cba-font-size-small);
+}
+
+.demo-surfaces {
+  display: flex;
+  flex-direction: column;
+  gap: var(--cba-space-2);
+}
+.demo-surface {
+  padding: var(--cba-space-3);
+  border-radius: var(--cba-radius-md);
+}
+.demo-surface--secondary {
+  background: var(--cba-bg-secondary);
+}
+.demo-surface--elevated {
+  background: var(--cba-bg-elevated);
+}
+.demo-surface--primary {
+  background: var(--cba-bg-primary);
+}
+.demo-btn-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--cba-space-2);
+  margin-top: var(--cba-space-2);
+}
+
+.demo-text-surfaces {
+  display: grid;
+  gap: var(--cba-space-2);
+}
+.demo-text-panel {
+  padding: var(--cba-space-3);
+  border-radius: var(--cba-radius-md);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.demo-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--cba-space-2);
+}
+.demo-pill {
+  padding: 4px 10px;
+  border-radius: var(--cba-radius-sm);
+  background: var(--cba-bg-tertiary);
+  color: var(--cba-text-primary);
+  font-size: var(--cba-font-size-small);
+}
+.demo-pill--selected {
+  background: var(--cba-selected-bg);
+  color: var(--cba-selected-text);
+}
+.demo-source-color {
+  height: 40px;
+  border-radius: var(--cba-radius-sm);
+  margin-top: var(--cba-space-2);
+}
+
+.demo-border-box {
+  padding: var(--cba-space-2);
+  border-radius: var(--cba-radius-sm);
+  background: var(--cba-bg-elevated);
+}
+
+.demo-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--cba-bg-tertiary);
+}
+.demo-table th,
+.demo-table td {
+  padding: 6px 10px;
+  border-bottom: 1px solid var(--cba-border-default);
+  text-align: left;
+  font-size: var(--cba-font-size-small);
+}
+
+.demo-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.demo-nav-item {
+  padding: 6px 10px;
+  border-radius: var(--cba-radius-sm);
+  color: var(--cba-text-secondary);
+}
+.demo-nav-item--selected {
+  background: var(--cba-selected-bg);
+  color: var(--cba-selected-text);
+}
+.demo-row--selected {
+  background: var(--cba-selected-bg);
+  color: var(--cba-selected-text);
+}
+
+.demo-radius-box,
+.demo-shadow-box {
+  padding: var(--cba-space-3);
+  background: var(--cba-bg-elevated);
+  border: 1px solid var(--cba-border-default);
+}
+.demo-radius-grid {
+  display: grid;
+  gap: var(--cba-space-2);
+}
+.demo-shadow-grid {
+  display: flex;
+  gap: var(--cba-space-3);
+  margin-top: var(--cba-space-2);
+}
+
+.shell-footer {
+  border-top: 1px solid var(--cba-border-default);
+  background: var(--cba-bg-secondary);
+  padding: var(--cba-space-2) var(--cba-space-3);
+}
+.shell-footer__nav {
+  display: flex;
+  gap: var(--cba-space-2);
+}

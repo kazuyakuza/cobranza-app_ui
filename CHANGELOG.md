@@ -30,6 +30,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > Releases prior to 0.8.1 predate this changelog and are not reconstructed retroactively.
 
+## [0.17.0] — 2026-08-18
+
+### Added
+
+- Angular demo mini-app under `projects/demo/` that consumes the built `@cobranza-apps/ui`
+  library and renders every `docs/theme-preview.html` section with real library components and
+  live `var(--cba-*)` token swatches (no fake `.pv-btn` CSS as the button source of truth).
+- npm scripts `build:lib`, `build:demo`, `start:demo`.
+- `@cobranza-apps/ui` exposed as a local `file:./dist` devDependency so the demo resolves the
+  built package via `node_modules` (no deep `src/` imports).
+- `angular.json` with a single `demo` application project rooted at `projects/demo`.
+- `projects/demo/package.json` isolating the demo from the library package scope so in-repo
+  native-package resolution reaches the built `dist` output.
+
+### Changed
+
+- `package.json` devDependencies: added `@angular-devkit/build-angular@22.1.2`.
+- Root `package.json` `exports` now exposes a `.` entry pointing at the built `dist` output so
+  in-repo consumers of the demo app resolve the library root path under `ng serve`.
+
 ## [0.16.1] — 2026-08-18
 
 ### Fixed

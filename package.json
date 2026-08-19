@@ -1,6 +1,6 @@
 {
   "name": "@cobranza-apps/ui",
-  "version": "0.16.1",
+  "version": "0.17.0",
   "description": "Shared Angular component library and design system for the Cobranza App Company Back-office.",
   "license": "UNLICENSED",
   "private": false,
@@ -8,6 +8,10 @@
     "**/*.scss"
   ],
   "exports": {
+    ".": {
+      "types": "./dist/types/cobranza-apps-ui.d.ts",
+      "default": "./dist/fesm2022/cobranza-apps-ui.mjs"
+    },
     "./theme": {
       "sass": "./theme/theme.scss",
       "style": "./theme/theme.scss",
@@ -27,6 +31,9 @@
   },
   "scripts": {
     "build": "ng-packagr -p ng-package.json -c tsconfig.lib.json",
+    "build:lib": "ng-packagr -p ng-package.json -c tsconfig.lib.json",
+    "build:demo": "npm run build:lib && ng build demo",
+    "start:demo": "ng serve demo",
     "build:preview": "sass src/theme/theme.scss docs/theme-preview.css --no-source-map --style=compressed",
     "test": "jest --passWithNoTests",
     "lint": "eslint \"src/**/*.ts\"",
@@ -44,6 +51,7 @@
     "bootstrap": "^5.3.0"
   },
   "devDependencies": {
+    "@angular-devkit/build-angular": "22.1.2",
     "@angular/cli": "22.1.2",
     "@angular/common": "22.1.2",
     "@angular/compiler": "22.1.2",
@@ -52,6 +60,7 @@
     "@angular/forms": "22.1.2",
     "@angular/localize": "22.1.2",
     "@angular/platform-browser": "22.1.2",
+    "@cobranza-apps/ui": "file:./dist",
     "@fortawesome/angular-fontawesome": "^5.1.0",
     "@fortawesome/fontawesome-svg-core": "^7.3.0",
     "@fortawesome/free-regular-svg-icons": "^7.3.1",

@@ -130,9 +130,26 @@ switcher.
 | Command | Description |
 | --- | --- |
 | `npm run build` | Build the library via ng-packagr → outputs to `dist/` |
+| `npm run build:lib` | Alias of `npm run build` (emits `dist/`) |
+| `npm run build:demo` | Build the library then the demo app (`ng build demo`) → emits `dist/demo/` |
+| `npm run start:demo` | Serve the demo app via the Angular dev server (does NOT rebuild the library) |
 | `npm test` | Run Jest unit tests (`--passWithNoTests`) |
 | `npm run lint` | Lint `src/**/*.ts` with ESLint (angular-eslint) |
 | `npm run format` | Format source files with Prettier (TS, SCSS, CSS, JSON, MD) |
+
+### Demo app
+
+The Angular demo mini-app under `projects/demo/` consumes the **built** library
+(`dist/`), never deep `src/` imports. It is the canonical visual example of the
+theme and components (replaces the static HTML preview). Order of commands:
+
+1. `npm run build:lib` — emits `dist/`
+2. `npm install` — materializes `node_modules/@cobranza-apps/ui` from `file:./dist`
+3. `npm run start:demo` (dev server) **or** `npm run build:demo` (emits `dist/demo/browser/`)
+
+`start:demo` does **not** rebuild the library — re-run `build:lib` after library changes,
+then refresh the dev server. Browser verification against `dist/demo/browser/index.html`
+applies to production builds.
 
 **Regression test suite** — `src/theme/*.spec.ts` guards theme integrity: token values, WCAG AA contrast, surface lightness gaps, preview HTML/CSS structure, and Consumer Guide section presence. Shared helpers live in `src/components/testing/`. Run all with `npm test`; run one with `npm test -- src/theme/<name>.spec.ts`.
 
