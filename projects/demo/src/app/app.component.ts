@@ -9,12 +9,10 @@ import {
   faUser,
 } from '@fortawesome/free-solid-svg-icons';
 import {
-  CbaBadgeComponent,
   CbaButtonComponent,
   CbaCardComponent,
   CbaDatepickerComponent,
   CbaInputComponent,
-  CbaModuleFooterComponent,
   CbaSelectComponent,
 } from '@cobranza-apps/ui';
 import { DemoButtonMatrixComponent } from './components/demo-button-matrix/demo-button-matrix.component';
@@ -54,12 +52,10 @@ interface FormFieldModel {
   standalone: true,
   imports: [
     FormsModule,
-    CbaBadgeComponent,
     CbaButtonComponent,
     CbaCardComponent,
     CbaDatepickerComponent,
     CbaInputComponent,
-    CbaModuleFooterComponent,
     CbaSelectComponent,
     DemoButtonMatrixComponent,
     DemoIconGridComponent,

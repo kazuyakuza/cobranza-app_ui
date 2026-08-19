@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { FaIconComponent } from '@fortawesome/angular-fontawesome';
+import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 import {
   faBell,
   faCalendar,
@@ -21,7 +21,7 @@ import { CbaButtonComponent } from '@cobranza-apps/ui';
 
 /** One predefined icon entry shown in the grid. */
 interface IconEntry {
-  readonly icon: unknown;
+  readonly icon: IconDefinition;
   readonly label: string;
   readonly ariaLabel: string;
 }
@@ -37,7 +37,7 @@ interface IconEntry {
 @Component({
   selector: 'demo-icon-grid',
   standalone: true,
-  imports: [CbaButtonComponent, FaIconComponent],
+  imports: [CbaButtonComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <div class="demo-icon-grid">

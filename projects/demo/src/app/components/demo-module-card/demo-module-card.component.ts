@@ -65,7 +65,7 @@ export class DemoModuleCardComponent {
   @Input() footerStatus: ModuleHeaderStatus | null = null;
   @Input() footerText = '';
 
-  private get hasFooter(): boolean {
+  protected get hasFooter(): boolean {
     return this.footerStatus !== null || this.footerText.length > 0;
   }
 

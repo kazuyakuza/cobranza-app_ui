@@ -9,7 +9,7 @@ interface PillCell {
 /** One state row inside a surface block. */
 interface PillMatrixRow {
   readonly state: 'normal' | 'disabled' | 'selected';
-  readonly pills: PillCell[];
+  readonly pills: readonly PillCell[];
 }
 
 /** One surface block holding three state rows. */
