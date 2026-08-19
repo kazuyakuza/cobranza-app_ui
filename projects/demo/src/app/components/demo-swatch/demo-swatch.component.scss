@@ -1,0 +1,13 @@
+$swatch-height: 56px;
+
+:host {
+  display: block;
+}
+
+.demo-swatch {
+  height: $swatch-height;
+  border-radius: var(--cba-radius-sm);
+  border: 1px solid var(--cba-border-default);
+  padding: var(--cba-space-2);
+  font-size: var(--cba-font-size-small);
+}

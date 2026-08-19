@@ -1,3 +1,25 @@
+// Demo app styles — layout chrome + demo-specific grids only.
+// Component looks come from the built @cobranza-apps/ui library.
+//
+// Token substitutions (theme names absent from _variables.scss):
+// - --cba-bg-inset       -> --cba-bg-tertiary
+// - --cba-source-color   -> --cba-accent-primary
+// - --cba-state-valid-bg -> --cba-state-valid-border
+// - --cba-state-error-bg -> --cba-state-invalid-border
+//
+// Demo-only pixel values are exposed as named SCSS variables below; the rest
+// use theme tokens directly.
+
+$preview-bar-padding: var(--cba-space-2) 14px;
+$preview-bar-font-size: 12px;
+$search-width: 320px;
+$text-panel-gap: var(--cba-space-1);
+$pill-padding: 4px 10px;
+$table-cell-padding: 6px 10px;
+$nav-gap: 2px;
+$nav-item-padding: 6px 10px;
+$source-color-height: 40px;
+
 :host {
   display: block;
 }
@@ -9,8 +31,8 @@
 }
 
 .preview-bar {
-  padding: 8px 14px;
-  font-size: 12px;
+  padding: $preview-bar-padding;
+  font-size: $preview-bar-font-size;
   color: var(--cba-text-muted);
   background: var(--cba-bg-elevated);
   border-bottom: 1px solid var(--cba-border-default);
@@ -22,7 +44,7 @@
 }
 
 .shell-header {
-  height: var(--cba-header-height, 48px);
+  height: var(--cba-header-height);
   display: flex;
   align-items: center;
   gap: var(--cba-space-3);
@@ -31,7 +53,7 @@
   border-bottom: 1px solid var(--cba-border-default);
 }
 .shell-header__search {
-  flex: 0 0 320px;
+  flex: 0 0 $search-width;
 }
 .shell-header__actions {
   display: flex;
@@ -45,17 +67,6 @@
   gap: var(--cba-space-3);
 }
 
-.demo-section {
-  max-width: 960px;
-  margin: var(--cba-space-4) auto;
-  padding: 0 var(--cba-space-3);
-}
-.section-caption {
-  color: var(--cba-text-secondary);
-  font-size: var(--cba-font-size-caption);
-  font-style: italic;
-  margin: 0 0 var(--cba-space-2);
-}
 .demo-actions {
   display: flex;
   flex-wrap: wrap;
@@ -70,39 +81,6 @@
   gap: var(--cba-space-2);
 }
 
-.demo-swatch {
-  height: 56px;
-  border-radius: var(--cba-radius-sm);
-  border: 1px solid var(--cba-border-default);
-  padding: var(--cba-space-2);
-  font-size: var(--cba-font-size-small);
-}
-
-.demo-surfaces {
-  display: flex;
-  flex-direction: column;
-  gap: var(--cba-space-2);
-}
-.demo-surface {
-  padding: var(--cba-space-3);
-  border-radius: var(--cba-radius-md);
-}
-.demo-surface--secondary {
-  background: var(--cba-bg-secondary);
-}
-.demo-surface--elevated {
-  background: var(--cba-bg-elevated);
-}
-.demo-surface--primary {
-  background: var(--cba-bg-primary);
-}
-.demo-btn-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--cba-space-2);
-  margin-top: var(--cba-space-2);
-}
-
 .demo-text-surfaces {
   display: grid;
   gap: var(--cba-space-2);
@@ -112,7 +90,7 @@
   border-radius: var(--cba-radius-md);
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: $text-panel-gap;
 }
 
 .demo-pills {
@@ -121,7 +99,7 @@
   gap: var(--cba-space-2);
 }
 .demo-pill {
-  padding: 4px 10px;
+  padding: $pill-padding;
   border-radius: var(--cba-radius-sm);
   background: var(--cba-bg-tertiary);
   color: var(--cba-text-primary);
@@ -132,7 +110,7 @@
   color: var(--cba-selected-text);
 }
 .demo-source-color {
-  height: 40px;
+  height: $source-color-height;
   border-radius: var(--cba-radius-sm);
   margin-top: var(--cba-space-2);
 }
@@ -150,7 +128,7 @@
 }
 .demo-table th,
 .demo-table td {
-  padding: 6px 10px;
+  padding: $table-cell-padding;
   border-bottom: 1px solid var(--cba-border-default);
   text-align: left;
   font-size: var(--cba-font-size-small);
@@ -159,10 +137,10 @@
 .demo-nav {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: $nav-gap;
 }
 .demo-nav-item {
-  padding: 6px 10px;
+  padding: $nav-item-padding;
   border-radius: var(--cba-radius-sm);
   color: var(--cba-text-secondary);
 }
