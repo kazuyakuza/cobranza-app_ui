@@ -1,24 +1,16 @@
 // Demo app styles — layout chrome + demo-specific grids only.
 // Component looks come from the built @cobranza-apps/ui library.
-//
-// Token substitutions (theme names absent from _variables.scss):
-// - --cba-bg-inset       -> --cba-bg-tertiary
-// - --cba-source-color   -> --cba-accent-primary
-// - --cba-state-valid-bg -> --cba-state-valid-border
-// - --cba-state-error-bg -> --cba-state-invalid-border
-//
-// Demo-only pixel values are exposed as named SCSS variables below; the rest
-// use theme tokens directly.
+// Pixel values are exposed as named SCSS variables; the rest use theme tokens.
 
-$preview-bar-padding: var(--cba-space-2) 14px;
-$preview-bar-font-size: 12px;
-$search-width: 320px;
-$text-panel-gap: var(--cba-space-1);
-$pill-padding: 4px 10px;
-$table-cell-padding: 6px 10px;
-$nav-gap: 2px;
-$nav-item-padding: 6px 10px;
-$source-color-height: 40px;
+$preview-bar-padding: var(--cba-space-2) var(--cba-space-3);
+$preview-bar-font-size: var(--cba-font-size-caption);
+$header-height: var(--cba-header-height);
+$search-max-width: 600px;
+$swatch-grid-min: 140px;
+$input-grid-min: 320px;
+$size-row-gap: var(--cba-space-3);
+$pill-sm-padding: 2px 8px;
+$pill-md-padding: 6px 16px;
 
 :host {
   display: block;
@@ -44,20 +36,31 @@ $source-color-height: 40px;
 }
 
 .shell-header {
-  height: var(--cba-header-height);
+  height: $header-height;
   display: flex;
   align-items: center;
-  gap: var(--cba-space-3);
+  justify-content: space-between;
   padding: 0 var(--cba-space-3);
   background: var(--cba-bg-elevated);
   border-bottom: 1px solid var(--cba-border-default);
 }
-.shell-header__search {
-  flex: 0 0 $search-width;
-}
-.shell-header__actions {
+.shell-header__left,
+.shell-header__right {
   display: flex;
-  gap: var(--cba-space-1);
+  align-items: center;
+  gap: var(--cba-space-2);
+}
+.shell-header__center {
+  flex: 0 0 50%;
+  max-width: $search-max-width;
+  margin: 0 auto;
+}
+.shell-header__search {
+  width: 100%;
+}
+.shell-header__brand {
+  font-weight: 600;
+  color: var(--cba-text-primary);
 }
 
 .workspace {
@@ -66,6 +69,13 @@ $source-color-height: 40px;
   flex-direction: column;
   gap: var(--cba-space-3);
 }
+.workspace__row {
+  display: flex;
+  gap: var(--cba-space-3);
+}
+.workspace__row--single-50 .demo-module-card--size-50 {
+  flex: 0 0 50%;
+}
 
 .demo-actions {
   display: flex;
@@ -73,108 +83,84 @@ $source-color-height: 40px;
   gap: var(--cba-space-2);
 }
 
-.demo-swatch-grid,
-.demo-border-grid,
-.demo-badge-grid,
-.demo-form-grid {
+.demo-swatch-grid {
   display: grid;
+  grid-template-columns: repeat(auto-fill, minmax($swatch-grid-min, 1fr));
   gap: var(--cba-space-2);
 }
 
-.demo-text-surfaces {
-  display: grid;
-  gap: var(--cba-space-2);
-}
-.demo-text-panel {
+.demo-surface {
   padding: var(--cba-space-3);
   border-radius: var(--cba-radius-md);
   display: flex;
   flex-direction: column;
-  gap: $text-panel-gap;
+  gap: var(--cba-space-2);
+}
+.demo-surface--secondary {
+  background: var(--cba-bg-secondary);
+}
+.demo-surface--elevated {
+  background: var(--cba-bg-elevated);
+}
+.demo-surface--primary {
+  background: var(--cba-bg-primary);
+}
+.demo-surface--tertiary {
+  background: var(--cba-bg-tertiary);
 }
 
-.demo-pills {
+.demo-input-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax($input-grid-min, 1fr));
+  gap: var(--cba-space-3);
+}
+
+.demo-size-row {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--cba-space-2);
+  align-items: center;
+  gap: $size-row-gap;
 }
+
 .demo-pill {
-  padding: $pill-padding;
-  border-radius: var(--cba-radius-sm);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--cba-space-1);
+  border-radius: 999px;
+  font-size: var(--cba-font-size-small);
+  border: 1px solid transparent;
   background: var(--cba-bg-tertiary);
   color: var(--cba-text-primary);
-  font-size: var(--cba-font-size-small);
 }
-.demo-pill--selected {
-  background: var(--cba-selected-bg);
-  color: var(--cba-selected-text);
+.demo-pill--primary {
+  background: var(--cba-accent-primary);
+  color: var(--cba-text-inverse);
 }
-.demo-source-color {
-  height: $source-color-height;
-  border-radius: var(--cba-radius-sm);
-  margin-top: var(--cba-space-2);
+.demo-pill--sm {
+  padding: $pill-sm-padding;
 }
-
-.demo-border-box {
-  padding: var(--cba-space-2);
-  border-radius: var(--cba-radius-sm);
-  background: var(--cba-bg-elevated);
+.demo-pill--md {
+  padding: $pill-md-padding;
 }
 
-.demo-table {
-  width: 100%;
-  border-collapse: collapse;
-  background: var(--cba-bg-tertiary);
-}
-.demo-table th,
-.demo-table td {
-  padding: $table-cell-padding;
-  border-bottom: 1px solid var(--cba-border-default);
-  text-align: left;
-  font-size: var(--cba-font-size-small);
-}
-
-.demo-nav {
-  display: flex;
-  flex-direction: column;
-  gap: $nav-gap;
-}
-.demo-nav-item {
-  padding: $nav-item-padding;
-  border-radius: var(--cba-radius-sm);
-  color: var(--cba-text-secondary);
-}
-.demo-nav-item--selected {
-  background: var(--cba-selected-bg);
-  color: var(--cba-selected-text);
-}
-.demo-row--selected {
-  background: var(--cba-selected-bg);
-  color: var(--cba-selected-text);
-}
-
-.demo-radius-box,
-.demo-shadow-box {
-  padding: var(--cba-space-3);
-  background: var(--cba-bg-elevated);
-  border: 1px solid var(--cba-border-default);
-}
-.demo-radius-grid {
+.demo-form-grid {
   display: grid;
-  gap: var(--cba-space-2);
-}
-.demo-shadow-grid {
-  display: flex;
+  grid-template-columns: repeat(auto-fill, minmax($input-grid-min, 1fr));
   gap: var(--cba-space-3);
-  margin-top: var(--cba-space-2);
+}
+.demo-form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--cba-space-2);
 }
 
 .shell-footer {
   border-top: 1px solid var(--cba-border-default);
-  background: var(--cba-bg-secondary);
-  padding: var(--cba-space-2) var(--cba-space-3);
+  background: var(--cba-bg-elevated);
+  padding: var(--cba-space-3);
 }
-.shell-footer__nav {
+.shell-footer__actions {
   display: flex;
+  justify-content: center;
   gap: var(--cba-space-2);
 }
