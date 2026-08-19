@@ -30,6 +30,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > Releases prior to 0.8.1 predate this changelog and are not reconstructed retroactively.
 
+## [0.16.0] — 2026-08-18
+
 ## [0.15.2] — 2026-08-13
 
 ### Fixed
