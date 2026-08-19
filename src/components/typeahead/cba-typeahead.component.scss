@@ -1,5 +1,12 @@
 @use '../../theme/mixins' as *;
 
+// Host-bound modifier pattern:
+// Modifier classes (e.g. .cba-typeahead--disabled) are bound to the component
+// host via host: { '[class.cba-typeahead--disabled]': ... } in TypeScript. Under
+// Angular emulated encapsulation the host carries _nghost-* while internal
+// children carry _ngcontent-*. Target host modifiers with :host(.modifier) .child
+// { } — never use plain descendant selectors like .modifier .child { }, which
+// compile to [_ngcontent-*] and never match the host. See AGENTS.md §Component authoring.
 :host {
   display: block;
 }

@@ -210,6 +210,9 @@ onStateSelected(event: NgbTypeaheadSelectItemEvent): void {
   `--cba-radius-sm`, `--cba-focus-ring` (via `CbaFieldComponent`).
 - Disabled host: `cba-typeahead--disabled` — `opacity: 0.6`, `cursor: not-allowed`.
 - Error host: `cba-typeahead--error` — red border applied by `CbaFieldComponent`.
+- Host modifier classes are bound on the host element; the component SCSS targets
+  them with `:host(.cba-typeahead--disabled) .cba-typeahead__control { }` (not
+  plain descendant selectors). See `AGENTS.md` §Component authoring: host modifiers.
 - Popup surface: `--cba-bg-elevated`, `--cba-border-subtle`, `--cba-radius-md`,
   `--cba-shadow-elevated` (global `.cba-typeahead-window` class in `src/theme/_typeahead.scss`).
 - Popup item hover: `--cba-hover`; active: `--cba-active`.

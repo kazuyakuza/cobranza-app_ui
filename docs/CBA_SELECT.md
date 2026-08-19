@@ -174,6 +174,9 @@ focus ring come from the parent `CbaFieldComponent` wrapper.
 | Padding | `--cba-space-2` (vertical), `--cba-space-3` (horizontal) |
 
 Host classes: `cba-select`, `cba-select--disabled`, `cba-select--readonly`, `cba-select--error`, `cba-select--invalid`, `cba-select--valid`.
+These modifier classes are bound on the host element; the component SCSS targets
+them with `:host(.cba-select--disabled) .cba-select__control { }` (not plain
+descendant selectors). See `AGENTS.md` §Component authoring: host modifiers.
 
 ## Non-goals
 

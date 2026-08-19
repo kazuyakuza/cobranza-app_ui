@@ -222,6 +222,9 @@ The calendar popup uses the `cba-datepicker-popup` CSS class (set via
 `datepickerClass`) for ng-bootstrap theme integration.
 
 Host classes: `cba-datepicker`, `cba-datepicker--disabled`, `cba-datepicker--readonly`, `cba-datepicker--error`, `cba-datepicker--invalid`, `cba-datepicker--valid`.
+These modifier classes are bound on the host element; the component SCSS targets
+them with `:host(.cba-datepicker--disabled) { … }` (not plain descendant
+selectors). See `AGENTS.md` §Component authoring: host modifiers.
 
 ## Non-goals
 
