@@ -12,14 +12,14 @@ import { CbaInputComponent } from './cba-input.component';
     hint="We never share it."
     error="Invalid" />`,
 })
-class InputHost {}
+class InputHost { }
 
 @Component({
   standalone: true,
   imports: [CbaInputComponent],
   template: `<cba-input label="No error" />`,
 })
-class InputNoErrorHost {}
+class InputNoErrorHost { }
 
 describe('CbaInputComponent', () => {
   let fixture: ComponentFixture<InputHost>;
@@ -115,5 +115,14 @@ describe('CbaInputComponent', () => {
     f.detectChanges();
     expect(f.nativeElement.querySelector('input').hasAttribute('disabled')).toBe(true);
     expect(f.nativeElement.classList.contains('cba-input--disabled')).toBe(true);
+  });
+
+  it('applies the readonly host modifier class when readonly', () => {
+    TestBed.resetTestingModule();
+    TestBed.configureTestingModule({ imports: [CbaInputComponent] });
+    const f = TestBed.createComponent(CbaInputComponent);
+    f.componentRef.setInput('readonly', true);
+    f.detectChanges();
+    expect(f.nativeElement.classList.contains('cba-input--readonly')).toBe(true);
   });
 });

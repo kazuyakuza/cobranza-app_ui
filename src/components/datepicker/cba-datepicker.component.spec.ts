@@ -91,4 +91,18 @@ describe('CbaDatepickerComponent', () => {
     expect(inputEl.readOnly).toBe(true);
     expect(fixture.nativeElement.querySelector('.cba-datepicker__toggle').hasAttribute('disabled')).toBe(true);
   });
+
+  it('applies the disabled host modifier class when disabled', () => {
+    fixture = TestBed.createComponent(CbaDatepickerComponent);
+    fixture.componentRef.setInput('disabled', true);
+    fixture.detectChanges();
+    expect(fixture.nativeElement.classList.contains('cba-datepicker--disabled')).toBe(true);
+  });
+
+  it('applies the readonly host modifier class when readonly', () => {
+    fixture = TestBed.createComponent(CbaDatepickerComponent);
+    fixture.componentRef.setInput('readonly', true);
+    fixture.detectChanges();
+    expect(fixture.nativeElement.classList.contains('cba-datepicker--readonly')).toBe(true);
+  });
 });

@@ -11,21 +11,21 @@ import { CbaSelectComponent } from './cba-select.component';
     <option value="paused">Paused</option>
   </cba-select>`,
 })
-class SelectHost {}
+class SelectHost { }
 
 @Component({
   standalone: true,
   imports: [CbaSelectComponent],
   template: `<cba-select><option value="active">Active</option></cba-select>`,
 })
-class CvaSelectHost {}
+class CvaSelectHost { }
 
 @Component({
   standalone: true,
   imports: [CbaSelectComponent],
   template: `<cba-select label="No error"><option value="">-</option></cba-select>`,
 })
-class SelectNoErrorHost {}
+class SelectNoErrorHost { }
 
 describe('CbaSelectComponent', () => {
   let fixture: ComponentFixture<SelectHost>;
@@ -117,5 +117,14 @@ describe('CbaSelectComponent', () => {
     f.componentRef.setInput('disabled', true);
     f.detectChanges();
     expect(f.nativeElement.classList.contains('cba-select--disabled')).toBe(true);
+  });
+
+  it('applies the readonly host modifier class when readonly', () => {
+    TestBed.resetTestingModule();
+    TestBed.configureTestingModule({ imports: [CbaSelectComponent] });
+    const f = TestBed.createComponent(CbaSelectComponent);
+    f.componentRef.setInput('readonly', true);
+    f.detectChanges();
+    expect(f.nativeElement.classList.contains('cba-select--readonly')).toBe(true);
   });
 });
