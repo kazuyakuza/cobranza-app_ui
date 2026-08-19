@@ -3,190 +3,238 @@
   <!-- 1. Preview bar -->
   <div class="preview-bar">
     <strong>{{ pageTitle }}</strong>
-    <span>Minimal Yet Warm · tema único · demo de escritorio</span>
+    <span>Minimal Yet Warm · single theme · desktop demo</span>
   </div>
 
-  <!-- 2. Shell header mock -->
+  <!-- 2. Header bar -->
   <header class="shell-header">
-    <div class="shell-header__brand">Cobranza · Back-office</div>
-    <div class="shell-header__search">
-      <cba-input placeholder="Buscar cliente, factura, deuda…" />
+    <div class="shell-header__left">
+      <cba-button variant="primary" size="sm">Back</cba-button>
+      <span class="shell-header__brand">Cobranza - Back Office</span>
     </div>
-    <div class="shell-header__actions">
-      <cba-button variant="ghost" [iconOnly]="true" [icon]="faBell" aria-label="Notificaciones" />
-      <cba-button variant="ghost" [iconOnly]="true" [icon]="faGear" aria-label="Configuración" />
+    <div class="shell-header__center">
+      <cba-input class="shell-header__search" placeholder="Search customer, invoice, debt…" aria-label="Search" />
+    </div>
+    <div class="shell-header__right">
+      <cba-button variant="ghost" [iconOnly]="true" [icon]="faBell" aria-label="Notifications" />
+      <cba-button variant="ghost" [iconOnly]="true" [icon]="faUser" aria-label="Profile" />
     </div>
   </header>
 
-  <!-- 3. Workspace modules -->
+  <!-- 3. Workspace section: module examples -->
   <main class="workspace">
-    <demo-module-card title="Cartera de clientes" size="100%" padding="md" status="loaded">
-      <table class="demo-table">
-        <thead><tr><th>Documento</th><th>Nombre</th><th>Deuda</th><th>Estado</th></tr></thead>
-        <tbody>
-          <tr><td>20-12345678-9</td><td>Comercial del Sur S.A.</td><td>$ 1.250.000</td><td><cba-badge variant="warning" appearance="solid">Vencida</cba-badge></td></tr>
-          <tr><td>27-99887766-5</td><td>Distribuidora Norte</td><td>$ 480.000</td><td><cba-badge variant="success" appearance="solid">Al día</cba-badge></td></tr>
-          <tr><td>30-55443322-1</td><td>Tecnología Andina</td><td>$ 0</td><td><cba-badge variant="neutral" appearance="outline">Saldado</cba-badge></td></tr>
-        </tbody>
-      </table>
-      <cba-module-footer status="loaded">3 clientes · deuda total $ 1.730.000</cba-module-footer>
+
+    <!-- Row 1: expanded 100% with header + footer -->
+    <demo-module-card
+      title="Customer portfolio"
+      size="100%"
+      padding="md"
+      status="loaded"
+      footerStatus="loaded"
+      footerText="3 customers · total debt $ 1,730,000">
+      <demo-table />
     </demo-module-card>
 
-    <demo-module-card title="Acciones rápidas" size="50%" padding="sm" status="success">
-      <div class="demo-actions">
-        <cba-button variant="primary" [icon]="faPlus">Nuevo cliente</cba-button>
-        <cba-button variant="secondary" [icon]="faRefresh">Sincronizar</cba-button>
-        <cba-button variant="ghost" [icon]="faDownload">Exportar</cba-button>
-      </div>
-    </demo-module-card>
+    <!-- Row 2: collapsed 100%, header only (no footer) -->
+    <demo-module-card
+      title="Quick actions"
+      size="100%"
+      padding="md"
+      status="warning"
+      [isCollapsed]="true" />
 
-    <demo-module-card title="Módulo colapsado (demo)" size="50%" padding="sm" status="dirty" [isCollapsed]="true" />
+    <!-- Row 3: two expanded 50% with header + footer -->
+    <div class="workspace__row">
+      <demo-module-card
+        title="New customer"
+        size="50%"
+        padding="sm"
+        status="success"
+        footerStatus="success"
+        footerText="Saved">
+        <div class="demo-actions">
+          <cba-button variant="primary" [icon]="faPlus">Add customer</cba-button>
+          <cba-button variant="secondary" [icon]="faRefresh">Sync</cba-button>
+        </div>
+      </demo-module-card>
+
+      <demo-module-card
+        title="Export data"
+        size="50%"
+        padding="sm"
+        status="loaded"
+        footerStatus="loaded"
+        footerText="Ready">
+        <div class="demo-actions">
+          <cba-button variant="ghost" [icon]="faDownload">Export CSV</cba-button>
+        </div>
+      </demo-module-card>
+    </div>
+
+    <!-- Row 4: two collapsed 50% with header + footer -->
+    <div class="workspace__row">
+      <demo-module-card
+        title="Invoices"
+        size="50%"
+        padding="md"
+        status="dirty"
+        [isCollapsed]="true"
+        footerStatus="dirty"
+        footerText="Unsaved changes" />
+
+      <demo-module-card
+        title="Reports"
+        size="50%"
+        padding="md"
+        status="error"
+        [isCollapsed]="true"
+        footerStatus="error"
+        footerText="Load failed" />
+    </div>
+
+    <!-- Row 5: one expanded 50% with empty space at the right -->
+    <div class="workspace__row workspace__row--single-50">
+      <demo-module-card
+        title="Payment schedule"
+        size="50%"
+        padding="sm"
+        status="loaded"
+        footerStatus="loaded"
+        footerText="Up to date">
+        <p class="cba-text-body">Next payment: 2026-09-15</p>
+      </demo-module-card>
+    </div>
+
+    <!-- Row 6: one collapsed 50% with empty space at the right -->
+    <div class="workspace__row workspace__row--single-50">
+      <demo-module-card
+        title="Settings"
+        size="50%"
+        padding="md"
+        status="dirty"
+        [isCollapsed]="true"
+        footerStatus="dirty"
+        footerText="Pending changes" />
+    </div>
   </main>
 
-  <!-- 4. Token swatches -->
+  <!-- 4. Token colors grid -->
   <demo-section
-    title="Tokens de color"
-    caption="Valores leídos en runtime vía var(--cba-*) — sin tablas hex duplicadas. (inset se mapea a --cba-bg-tertiary)">
+    title="Color tokens"
+    caption="Runtime values from var(--cba-*). Hex values must stay in sync with src/theme/_variables.scss.">
     <div class="demo-swatch-grid">
-      @for (swatch of colorSwatches; track swatch.label) {
-        <demo-swatch [label]="swatch.label" [background]="swatch.background" [color]="swatch.color" />
+      @for (token of colorTokens; track token.name) {
+        <demo-swatch
+          [label]="token.name"
+          [tag]="token.tag"
+          [hex]="token.hex"
+          [background]="token.variable"
+          [color]="swatchColor(token)" />
       }
     </div>
   </demo-section>
 
-  <!-- 5. Button states matrix -->
-  <demo-section title="Estados de botón" caption="Variants × surfaces × normal/disabled/loading; sizes sm/md.">
+  <!-- 5. Button section -->
+  <demo-section
+    title="Buttons"
+    caption="Variants × surfaces × normal / disabled / loading. Caption: name · class · state · surface.">
     <demo-button-matrix />
   </demo-section>
 
-  <!-- 6. Text on surfaces -->
-  <demo-section title="Texto sobre superficies" caption="Restricción WCAG-AA: text-muted no se usa sobre canvas ni inset.">
-    <div class="demo-text-surfaces">
-      @for (surface of textSurfaces; track $index) {
-        <div class="demo-text-panel" [style.background]="surface.background">
-          @for (item of surface.items; track item.label) {
-            <span [class]="item.className">{{ item.label }}</span>
-          }
+  <!-- 6. Pills section -->
+  <demo-section
+    title="Pills"
+    caption="Demo-only pills (no library component). Variants × surfaces × normal / disabled / selected.">
+    <demo-pill-matrix />
+  </demo-section>
+
+  <!-- 7. Button / pill sizes variants -->
+  <demo-section title="Button and pill sizes" caption="sm vs md size variants.">
+    <div class="demo-size-row">
+      <cba-button variant="primary" size="sm">Small button</cba-button>
+      <cba-button variant="primary" size="md">Medium button</cba-button>
+      <span class="demo-pill demo-pill--primary demo-pill--sm">Small pill</span>
+      <span class="demo-pill demo-pill--primary demo-pill--md">Medium pill</span>
+    </div>
+  </demo-section>
+
+  <!-- 8. Predefined icons -->
+  <demo-section title="Predefined icons" caption="Icon-only ghost buttons with English aria-labels.">
+    <demo-icon-grid />
+  </demo-section>
+
+  <!-- 9. Texts, fonts, labels variants -->
+  <demo-section
+    title="Texts, fonts, labels"
+    caption="Typography scale and text color variants per surface. Muted is restricted on canvas and inset.">
+    <demo-text-showcase />
+  </demo-section>
+
+  <!-- 10. Complete table example -->
+  <demo-section title="Complete table" caption="Header, body, selected row, and status badges.">
+    <demo-table />
+  </demo-section>
+
+  <!-- 11. Navigation items example -->
+  <demo-section title="Navigation items" caption="Normal, selected, hover, and disabled states.">
+    <demo-nav-items />
+  </demo-section>
+
+  <!-- 12. Inputs variants over different backgrounds -->
+  <demo-section
+    title="Inputs"
+    caption="Real cba-input / cba-select / cba-datepicker over each surface.">
+    <div class="demo-input-grid">
+      @for (surface of inputSurfaces; track surface.className) {
+        <div [class]="'demo-surface ' + surface.className">
+          <h3>{{ surface.title }}</h3>
+          <cba-input label="Customer" hint="Name or tax ID." [(ngModel)]="sampleText" />
+          <cba-input label="Disabled" [disabled]="true" />
+          <cba-input label="Read only" [readonly]="true" value="Read-only value" />
+          <cba-input label="Valid" [valid]="true" hint="Validated successfully." />
+          <cba-input label="Invalid" error="The entered tax ID is invalid." />
+          <cba-select label="Status" [(ngModel)]="sampleSelect">
+            <option value="">Choose…</option>
+            <option value="active">Active</option>
+            <option value="overdue">Overdue</option>
+            <option value="settled">Settled</option>
+          </cba-select>
+          <cba-datepicker label="Due date" hint="YYYY-MM-DD" [(ngModel)]="formModel.dueDate" />
         </div>
       }
     </div>
   </demo-section>
 
-  <!-- 7. Accent pills + color source strip -->
-  <demo-section title="Píldoras de acento" caption="Acentos sobre fondos de superficie; sin componente de librería.">
-    <div class="demo-pills">
-      @for (pill of accentPills; track pill.label) {
-        <span class="demo-pill" [style]="pill.style">{{ pill.label }}</span>
-      }
-    </div>
-    <div class="demo-source-color" style="background: var(--cba-accent-primary)">color fuente</div>
-  </demo-section>
-
-  <!-- 8. Typography scale -->
-  <demo-section title="Escala tipográfica" caption="Utilidades .cba-text-* del tema.">
-    <div class="demo-type">
-      @for (item of typeScale; track item.label) {
-        <p [class]="item.className">{{ item.label }}</p>
-      }
-    </div>
-  </demo-section>
-
-  <!-- 9. Border scale -->
-  <demo-section title="Escala de bordes" caption="border-subtle / border-default / border-strong.">
-    <div class="demo-border-grid">
-      @for (border of borders; track border.label) {
-        <div class="demo-border-box" [style.border]="'1px solid ' + border.className">{{ border.label }}</div>
-      }
-    </div>
-  </demo-section>
-
-  <!-- 10. Selected states -->
-  <demo-section title="Estados seleccionados" caption="Patrones de footer, navegación y filas usando --cba-selected-*.">
-    <div class="demo-patterns">
-      <div class="demo-pattern-card">
-        <h3>Footer pills</h3>
-        <div class="demo-pills">
-          <span class="demo-pill" style="background: var(--cba-selected-bg); color: var(--cba-selected-text)">Activo</span>
-          <span class="demo-pill">Inactivo</span>
-        </div>
+  <!-- 13. Form example -->
+  <demo-section title="Form example" caption="Inputs, select, datepicker, labels, hints, and errors.">
+    <cba-card>
+      <div cbaCardHeader>Customer form</div>
+      <div class="demo-form-grid">
+        <cba-input label="Customer name" hint="Full business name." [(ngModel)]="formModel.customerName" />
+        <cba-input label="Email" hint="Billing contact email." type="email" [(ngModel)]="formModel.email" />
+        <cba-select label="Status" [(ngModel)]="formModel.status">
+          <option value="">Choose…</option>
+          <option value="active">Active</option>
+          <option value="overdue">Overdue</option>
+          <option value="settled">Settled</option>
+        </cba-select>
+        <cba-datepicker label="Due date" hint="Pick a date." [(ngModel)]="formModel.dueDate" />
+        <cba-input label="Notes" hint="Optional observations." />
       </div>
-      <div class="demo-pattern-card">
-        <h3>Nav items</h3>
-        <div class="demo-nav">
-          <a class="demo-nav-item demo-nav-item--selected">Clientes</a>
-          <a class="demo-nav-item">Facturas</a>
-          <a class="demo-nav-item">Reportes</a>
-        </div>
+      <div cbaCardFooter class="demo-form-actions">
+        <cba-button variant="primary" type="submit">Save</cba-button>
+        <cba-button variant="ghost">Cancel</cba-button>
       </div>
-      <div class="demo-pattern-card">
-        <h3>Table rows</h3>
-        <table class="demo-table">
-          <thead><tr><th>Documento</th><th>Nombre</th></tr></thead>
-          <tbody>
-            <tr class="demo-row--selected"><td>20-12345678-9</td><td>Comercial del Sur</td></tr>
-            <tr><td>27-99887766-5</td><td>Distribuidora Norte</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
+    </cba-card>
   </demo-section>
 
-  <!-- 11. Form states (real cba-input / cba-select; NO cba-field wrapper) -->
-  <demo-section title="Estados de formulario" caption="Controles reales cba-input / cba-select con label / hint / error / readonly / valid / disabled.">
-    <div class="demo-form-grid">
-      <cba-input label="Cliente" hint="Nombre o CUIT." [(ngModel)]="sampleText" />
-      <cba-input label="Solo lectura" [readonly]="true" hint="No editable." />
-      <cba-input label="Válido" [valid]="true" hint="Validado correctamente." />
-      <cba-input label="Con error" error="El CUIT ingresado no es válido." />
-      <cba-input label="Deshabilitado" [disabled]="true" />
-      <cba-select label="Estado" hint="Seleccione un estado." [(ngModel)]="sampleSelect">
-        <option value="">Elegir…</option>
-        <option value="active">Activo</option>
-        <option value="vencida">Vencida</option>
-        <option value="saldada">Saldada</option>
-      </cba-select>
-    </div>
-  </demo-section>
-
-  <!-- 12. Semantic status badges -->
-  <demo-section title="Estados semánticos" caption="cba-badge · variant × appearance (solid / outline).">
-    <div class="demo-badge-grid">
-      <div class="demo-badge-col">
-        <h3>Solid</h3>
-        @for (badge of badges; track badge.label) {
-          <cba-badge [variant]="badge.variant" appearance="solid">{{ badge.label }}</cba-badge>
-        }
-      </div>
-      <div class="demo-badge-col">
-        <h3>Outline</h3>
-        @for (badge of badges; track badge.label) {
-          <cba-badge [variant]="badge.variant" appearance="outline">{{ badge.label }}</cba-badge>
-        }
-      </div>
-    </div>
-  </demo-section>
-
-  <!-- 13. Radius & shadow -->
-  <demo-section title="Radio y sombra" caption="Utilidades de radio y sombra del tema.">
-    <div class="demo-radius-grid">
-      @for (box of radiusBoxes; track box.label) {
-        <div [class]="'demo-radius-box ' + box.className">{{ box.label }}</div>
-      }
-    </div>
-    <div class="demo-shadow-grid">
-      @for (box of shadowBoxes; track box.label) {
-        <div [class]="'demo-shadow-box ' + box.className">{{ box.label }}</div>
-      }
-    </div>
-  </demo-section>
-
-  <!-- 14. Shell footer pill nav mock -->
+  <!-- 14. Footer bar -->
   <footer class="shell-footer">
-    <nav class="shell-footer__nav">
-      @for (item of footerNavItems; track item) {
-        <a class="demo-pill" [class.demo-pill--selected]="$index === 0">{{ item }}</a>
-      }
-    </nav>
+    <div class="shell-footer__actions">
+      <cba-button variant="secondary" [icon]="faRefresh">Refresh</cba-button>
+      <cba-button variant="primary" [icon]="faPlus">New</cba-button>
+      <cba-button variant="ghost" [icon]="faDownload">Export</cba-button>
+    </div>
   </footer>
 
 </div>
