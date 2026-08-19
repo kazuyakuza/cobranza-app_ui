@@ -67,11 +67,11 @@
 
 ## Open Items / Risks
 
-- **Phase 10 visual breaking change** for Shell layouts that depended on the previous surface values (canvas `#C5BFAE`, panel `#E6DDC6`, elevated `#FBF7ED`): canvas is now clearly darker (`#BCB5A4`) and modules lift more distinctly; borders retuned (subtle `#E8E5DB`, default `#A29D94`, strong `#6B665E`). Shell authors should review `docs/CONSUMER_GUIDE.md` and verify in `docs/theme-preview.html`.
+- **Phase 10 visual breaking change** for Shell layouts that depended on the previous surface values (canvas `#C5BFAE`, panel `#E6DDC6`, elevated `#FBF7ED`): canvas is now clearly darker (`#BCB5A4`) and modules lift more distinctly; borders retuned (subtle `#E8E5DB`, default `#A29D94`, strong `#6B665E`). Shell authors should review `docs/CONSUMER_GUIDE.md` and verify in the demo app (`npm run start:demo`).
 - `--cba-text-muted` (`#625C55`) is restricted on the darker canvas (`--cba-bg-primary` `#BCB5A4`, ~3.2:1) AND on `--cba-bg-tertiary` (`#D8C3A5`, ~3.9:1) — both below WCAG AA; library components and Shell/MFE must use `--cba-text-secondary` on those surfaces.
 - `@cobranza-apps/mfe-events` not yet published — workspace event contracts deferred.
 
-- **Cross-file drift recurrence risk (procedural)** — the 2026-08-12 audit found tokens, component SCSS, docs, and `docs/theme-preview.html` had drifted apart sprint-by-sprint. Remediation encoded process guardrails in `brief.md` §5/§8.1 and `instructions.md` (pre-commit cross-file grep). The guardrails are only effective if every future token/class change runs the Token Change Checklist; a change that skips the checklist reintroduces drift. Mitigation: review the checklist at every `src/theme/_variables.scss` change and at every docs/preview PR.
+- **Cross-file drift recurrence risk (procedural)** — the 2026-08-12 audit found tokens, component SCSS, and docs had drifted apart sprint-by-sprint. Remediation encoded process guardrails in `brief.md` §5/§8.1 and `instructions.md` (pre-commit cross-file grep). The guardrails are only effective if every future token/class change runs the Token Change Checklist; a change that skips the checklist reintroduces drift. Mitigation: review the checklist at every `src/theme/_variables.scss` change and at every demo app / docs PR.
 
 ## Cross-Reference
 
@@ -86,4 +86,4 @@
 - [Phase 9 global plan](../../.kilo/plans/20260805-phase9-surface-hierarchy-fix.md) — overall workflow.
 - [Consumer Guide](../../docs/CONSUMER_GUIDE.md) — Shell & MFE integration rules (surface ownership, checklists, anti-patterns).
 - [Theme Reference](../../docs/THEME.md) — token quick reference.
-- [CHANGELOG](../../CHANGELOG.md) — release changelog (Keep a Changelog format), latest 0.15.2.
+- [CHANGELOG](../../CHANGELOG.md) — release changelog (Keep a Changelog format), latest 0.18.0.
