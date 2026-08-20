@@ -4,6 +4,9 @@
 :host {
   display: block;
 }
-.demo-module-card--size-50 {
-  flex: 0 0 calc(50% - var(--cba-space-3) / 2);
+.demo-module-card {
+  width: 100%;
+}
+.demo-module-card--size-50 > cba-module-container.cba-module-container--size-50 {
+  width: 100%;
 }

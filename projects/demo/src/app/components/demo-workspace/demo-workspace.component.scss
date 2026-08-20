@@ -10,11 +10,12 @@
   gap: var(--cba-space-3);
 }
 .workspace__row {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
   gap: var(--cba-space-3);
 }
-.workspace__row--single-50 .demo-module-card--size-50 {
-  flex: 0 0 50%;
+.workspace__row--single-50 {
+  grid-template-columns: 50% 1fr;
 }
 .demo-actions {
   display: flex;

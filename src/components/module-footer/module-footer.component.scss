@@ -5,6 +5,7 @@
 .cba-module-footer {
   display: flex;
   align-items: center;
+  justify-content: flex-end;
   height: var(--cba-module-footer-height, 40px);
   padding: 0 var(--cba-space-4);
   gap: var(--cba-space-2);

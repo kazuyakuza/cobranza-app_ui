@@ -11,8 +11,9 @@ import {
 /**
  * Demo-only wrapper combining a `cba-module-container` with its
  * `cba-module-header`, projecting extra body content (table, actions, …).
- * Optionally renders a `cba-module-footer` OUTSIDE the container so the
- * footer stays visible even when the module body is collapsed.
+ * Optionally renders a `cba-module-footer` INSIDE the container so the
+ * footer shares the module chrome (rounded border + shadow) and is removed
+ * from the DOM when the module body is collapsed.
  *
  * **NOT part of the public library API.** This component exists solely for
  * the `projects/demo/` mini-app and is not exported from `@cobranza-apps/ui`.
@@ -41,10 +42,10 @@ import {
           (remove)="noop()"
         />
         <ng-content />
+        @if (hasFooter) {
+          <cba-module-footer [status]="footerStatus" [statusText]="footerText" />
+        }
       </cba-module-container>
-      @if (hasFooter) {
-        <cba-module-footer [status]="footerStatus" [statusText]="footerText" />
-      }
     </div>
   `,
   styleUrl: './demo-module-card.component.scss',

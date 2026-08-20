@@ -18,6 +18,7 @@ import {
   faPen,
   faSpinner,
   faTriangleExclamation,
+  faUpDownLeftRight,
   faWindowMaximize,
   faXmark,
 } from '@fortawesome/free-solid-svg-icons';
@@ -175,6 +176,9 @@ export class ModuleHeaderComponent {
 
   /** Icon for the remove button (`fa-xmark`). Template-referenced. */
   protected readonly faXmark = faXmark;
+
+  /** Drag-handle icon shown as the first built-in action (no-op in this library). Template-referenced. */
+  protected readonly faDrag = faUpDownLeftRight;
 
   /** Aria/title defaults for header action buttons. Spanish-only, sourced from `CBA_UI_MESSAGES`. */
   protected readonly aria = CBA_UI_MESSAGES.moduleHeader.aria;

@@ -6,11 +6,11 @@
       role="status"
       aria-live="polite"
       aria-atomic="true">
-      @if (statusVisual(); as visual) {
-        <fa-icon [icon]="visual.icon" [animation]="visual.animation" aria-hidden="true" />
-      }
       @if (displayText()) {
         <span class="cba-module-footer__text">{{ displayText() }}</span>
+      }
+      @if (statusVisual(); as visual) {
+        <fa-icon [icon]="visual.icon" [animation]="visual.animation" aria-hidden="true" />
       }
     </div>
   }
