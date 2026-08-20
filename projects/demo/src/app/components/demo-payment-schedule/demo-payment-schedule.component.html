@@ -4,12 +4,12 @@
   <div
     class="demo-calendar"
     role="img"
-    [attr.aria-label]="monthYear + ' calendar, day 15 selected'">
+    [attr.aria-label]="monthYear + ' calendar, day ' + selectedDay + ' selected'">
     @for (day of days; track day) {
       <div
         class="demo-calendar__day"
-        [class.demo-calendar__day--selected]="day === 15"
-        [attr.aria-current]="day === 15 ? 'date' : null">
+        [class.demo-calendar__day--selected]="day === selectedDay"
+        [attr.aria-current]="day === selectedDay ? 'date' : null">
         {{ day }}
       </div>
     }
@@ -20,17 +20,12 @@
   <ul class="demo-payment-list">
     @for (payment of payments; track payment.customer) {
       <li class="demo-payment-list__item">
-        <span class="demo-payment-list__customer">{{ payment.customer }}</span>
+        <span class="cba-text-body cba-text-secondary">{{ payment.customer }}</span>
         <div class="demo-payment-list__meta">
-          <span class="demo-payment-list__amount">{{ payment.amount }}</span>
-          @switch (payment.status) {
-            @case ('pending') {
-              <cba-badge variant="warning" appearance="outline">Pending</cba-badge>
-            }
-            @case ('paid') {
-              <cba-badge variant="success" appearance="outline">Paid</cba-badge>
-            }
-          }
+          <span class="cba-text-body demo-payment-list__amount">{{ payment.amount }}</span>
+          <cba-badge [variant]="payment.variant" appearance="outline">
+            {{ payment.status | titlecase }}
+          </cba-badge>
         </div>
       </li>
     }
