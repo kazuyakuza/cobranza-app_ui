@@ -159,25 +159,9 @@ export class ModuleHeaderComponent {
     return current === null ? null : `cba-module-header__status--${current}`;
   });
 
-  /** Icon for the collapse button (visible when `isCollapsed === false`). Template-referenced. */
-  protected readonly faChevronUp = faChevronUp;
-
-  /** Icon for the expand button (visible when `isCollapsed === true`). Template-referenced. */
-  protected readonly faChevronDown = faChevronDown;
-
-  /** Fullscreen button icon. Template-referenced. */
+  /** Icons referenced directly by the header template. */
   protected readonly faFullscreen = faWindowMaximize;
-
-  /** Icon for the size-toggle button when current size is `100%` (action: shrink to 50%). Template-referenced. */
-  protected readonly faShrink = faArrowsLeftRightToLine;
-
-  /** Icon for the size-toggle button when current size is `50%` (action: expand to 100%). Template-referenced. */
-  protected readonly faGrow = faArrowsLeftRight;
-
-  /** Icon for the remove button (`fa-xmark`). Template-referenced. */
   protected readonly faXmark = faXmark;
-
-  /** Drag-handle icon shown as the first built-in action (no-op in this library). Template-referenced. */
   protected readonly faDrag = faUpDownLeftRight;
 
   /** Aria/title defaults for header action buttons. Spanish-only, sourced from `CBA_UI_MESSAGES`. */
@@ -204,7 +188,7 @@ export class ModuleHeaderComponent {
 
   /** Icon for the size-toggle button, derived from the current size. */
   protected readonly sizeToggleIcon = computed<IconDefinition>(() =>
-    this.isFullSize() ? this.faShrink : this.faGrow,
+    this.isFullSize() ? faArrowsLeftRightToLine : faArrowsLeftRight,
   );
 
   /** Target size emitted when the size-toggle button is clicked (the opposite of the current size). */
