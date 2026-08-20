@@ -8,7 +8,6 @@ $header-height: var(--cba-header-height);
 $search-max-width: 600px;
 $swatch-grid-min: 140px;
 $input-grid-min: 320px;
-$size-row-gap: var(--cba-space-3);
 $pill-sm-padding: 2px 8px;
 $pill-md-padding: 6px 16px;
 $pill-radius-pill: 999px;
@@ -103,11 +102,35 @@ $pill-radius-pill: 999px;
   gap: var(--cba-space-3);
 }
 
-.demo-size-row {
+.demo-size-matrix {
   display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: $size-row-gap;
+  flex-direction: column;
+  gap: var(--cba-space-4);
+}
+.demo-size-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+.demo-size-table th,
+.demo-size-table td {
+  padding: var(--cba-space-2);
+  text-align: left;
+  vertical-align: middle;
+}
+.demo-size-table thead th {
+  font-size: var(--cba-font-size-caption);
+  font-weight: 600;
+  color: var(--cba-text-secondary);
+  text-transform: capitalize;
+  border-bottom: 1px solid var(--cba-border-default);
+}
+.demo-size-table tbody th {
+  width: 60px;
+  font-size: var(--cba-font-size-caption);
+  color: var(--cba-text-secondary);
+  text-transform: uppercase;
+  font-weight: 500;
 }
 
 .demo-pill {
@@ -122,6 +145,24 @@ $pill-radius-pill: 999px;
 }
 .demo-pill--primary {
   background: var(--cba-accent-primary);
+  color: var(--cba-text-inverse);
+}
+.demo-pill--secondary {
+  background: var(--cba-bg-elevated);
+  color: var(--cba-text-primary);
+  border-color: var(--cba-border-subtle);
+}
+.demo-pill--ghost {
+  background: transparent;
+  color: var(--cba-text-primary);
+  border-color: var(--cba-border-default);
+}
+.demo-pill--danger {
+  background: var(--cba-accent-danger);
+  color: var(--cba-text-inverse);
+}
+.demo-pill--success {
+  background: var(--cba-accent-success);
   color: var(--cba-text-inverse);
 }
 .demo-pill--sm {
@@ -146,9 +187,9 @@ $pill-radius-pill: 999px;
   border-top: 1px solid var(--cba-border-default);
   background: var(--cba-bg-elevated);
   padding: var(--cba-space-3);
-}
-.shell-footer__actions {
   display: flex;
   justify-content: center;
-  gap: var(--cba-space-2);
+}
+.shell-footer__pills {
+  display: block;
 }
