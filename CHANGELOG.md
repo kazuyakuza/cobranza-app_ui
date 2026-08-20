@@ -37,10 +37,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `cba-button--secondary` variant background changed from `var(--cba-bg-secondary)` to `var(--cba-bg-elevated)` so the button is visibly distinct from `--cba-bg-secondary` panel/module-body surfaces (previously invisible inside `cba-module-container` bodies such as the demo New Customer form Cancel button). Spec: `.kilo/plans/20260820-fix-secondary-button-bg-frontend-spec.md` §2.
 - Demo button matrix caption for `cba-button--secondary` aligned to the actual border token (`var(--cba-border-default)` instead of the stale `var(--cba-border-subtle)`) so the demo documentation matches the component SCSS source of truth. Spec §4.3.
 
-### Changed
-
-- (none)
-
 ## [0.18.4] — 2026-08-20
 
 ### Added
