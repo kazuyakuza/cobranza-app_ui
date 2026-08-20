@@ -25,6 +25,8 @@
 
 ## Recent Changes
 
+- **Demo header search input centering spec (2026-08-20)** — Front-end technical specification created at `.kilo/plans/20260820-fix-demo-bugs-task2-frontend-spec.md`. Identifies the root cause as unequal left/right header group widths combined with `margin: 0 auto`, and prescribes a flexbox equal-gutter layout with no markup changes.
+
 - **Phase 12 Part C — demo delivery + static preview removal (2026-08-19, v0.18.0)** — `build:lib` → `build:demo` pipeline documented in README with `dist/demo/browser/` artifact location; `docs/theme-preview.html` + `docs/theme-preview.css` deleted; `npm run build:preview` script removed; `src/theme/preview-html.spec.ts` deleted; `PREVIEW_HTML_PATH` / `PREVIEW_CSS_PATH` exports removed from `src/components/testing/theme-fixtures.ts`; README, docs/INDEX.md, docs/CONSUMER_GUIDE.md, brief.md §5/§8.1, instructions.md retargeted to `projects/demo/` as the canonical visual reference. See `.agent/todos/20260818/20260818-todo-0.md` Part C and `.kilo/plans/20260818-phase12-partC-plan.md`.
 
 - **Theme dev-server directory-index fix (2026-08-13, v0.15.2)** — `@use '@cobranza-apps/ui/theme'` now resolves under Angular's dev-server Sass importer via the new `src/theme/_index.scss` directory-index partial. The v0.15.1 package-root `src/theme.scss` shim and `package.json` `exports["./theme"]` remain unchanged. See `CHANGELOG.md` and `.agent/todos/20260812/20260812-todo-2.md`.
