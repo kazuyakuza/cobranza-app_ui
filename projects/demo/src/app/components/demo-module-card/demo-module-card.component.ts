@@ -66,9 +66,14 @@ export class DemoModuleCardComponent {
   /** Optional footer status text shown beside `footerStatus`. */
   @Input() footerText = '';
 
+  /**
+   * Whether the optional `cba-module-footer` should render inside the container.
+   * Returns `true` when either `footerStatus` is non-null or `footerText` is non-empty.
+   */
   protected get hasFooter(): boolean {
     return this.footerStatus !== null || this.footerText.length > 0;
   }
 
+  /** No-op handler bound to header outputs so the demo stays interactive without side effects. */
   protected noop(): void {}
 }

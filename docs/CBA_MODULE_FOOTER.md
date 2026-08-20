@@ -20,6 +20,7 @@ The footer is never mandatory — modules omit it entirely when not needed.
   - [Footer with projected content](#footer-with-projected-content)
   - [Footer with no status (plain bar)](#footer-with-no-status-plain-bar)
 - [Theming notes](#theming-notes)
+- [Layout notes](#layout-notes)
 - [Accessibility](#accessibility)
 - [Relationship with ModuleHeader](#relationship-with-moduleheader)
 - [Related docs](#related-docs)
@@ -113,7 +114,7 @@ footer acts as a plain bar for projected content only.
 
 ## Theming notes
 
-- Background: `var(--cba-bg-secondary)`
+- Background: `var(--cba-bg-tertiary)`
 - Height: `var(--cba-module-footer-height)` (40px)
 - Padding: `0 var(--cba-space-4)`
 - Gap between status icon/text and projected content: `var(--cba-space-2)`
@@ -121,6 +122,17 @@ footer acts as a plain bar for projected content only.
   `--cba-accent-warning`, `--cba-accent-danger`) plus `--cba-text-secondary` for `dirty`.
 - No border-top or box-shadow (v1 plain surface).
 - `prefers-reduced-motion: reduce` disables the spinner animation.
+
+## Layout notes
+
+- The footer uses `display: flex` with `justify-content: flex-end`, so the status region
+  is **right-aligned** within the bar.
+- Inside the status region, the text appears **before** the icon: `[status text][status icon]`.
+- The footer should be placed **inside** `<cba-module-container>` (after the body content)
+  so it shares the container's rounded border and shadow, and is removed from the DOM when
+  the module is collapsed.
+- Projected content (via the default `<ng-content>` slot) renders after the status region
+  in the same flex row.
 
 ## Accessibility
 
