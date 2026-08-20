@@ -40,7 +40,6 @@ $pill-radius-pill: 999px;
   height: $header-height;
   display: flex;
   align-items: center;
-  justify-content: space-between;
   padding: 0 var(--cba-space-3);
   background: var(--cba-bg-elevated);
   border-bottom: 1px solid var(--cba-border-default);
@@ -50,11 +49,19 @@ $pill-radius-pill: 999px;
   display: flex;
   align-items: center;
   gap: var(--cba-space-2);
+  flex: 1 1 0;
+  min-width: 0;
+}
+.shell-header__left {
+  justify-content: flex-start;
+}
+.shell-header__right {
+  justify-content: flex-end;
 }
 .shell-header__center {
-  flex: 0 0 50%;
+  flex: 0 1 $search-max-width;
+  width: 50%;
   max-width: $search-max-width;
-  margin: 0 auto;
 }
 .shell-header__search {
   width: 100%;
