@@ -13,6 +13,6 @@ const { createCjsPreset } = require('jest-preset-angular/presets/index.js');
 module.exports = {
   ...createCjsPreset(),
   setupFilesAfterEnv: ['<rootDir>/setup-jest.ts'],
-  testMatch: ['<rootDir>/src/**/*.spec.ts'],
+  testMatch: ['<rootDir>/src/**/*.spec.ts', '<rootDir>/projects/demo/**/*.spec.ts'],
   modulePathIgnorePatterns: ['<rootDir>/dist/'],
 };

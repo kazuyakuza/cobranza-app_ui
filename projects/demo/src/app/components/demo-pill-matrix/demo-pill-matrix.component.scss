@@ -2,7 +2,6 @@
 // Pixel values exposed as named SCSS constants; the rest use theme tokens.
 
 $matrix-status-width: 80px;
-$pill-padding: 4px 12px;
 $pill-border-radius: 999px;
 
 :host {
@@ -71,7 +70,7 @@ $pill-border-radius: 999px;
   display: inline-flex;
   align-items: center;
   gap: var(--cba-space-1);
-  padding: $pill-padding;
+  padding: var(--cba-space-1) var(--cba-space-3);
   border-radius: $pill-border-radius;
   font-size: var(--cba-font-size-small);
   border: 1px solid transparent;

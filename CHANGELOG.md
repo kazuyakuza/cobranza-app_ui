@@ -32,6 +32,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.18.4] — 2026-08-20
 
+### Added
+
+- Demo app token-compliance regression test `projects/demo/src/app/demo-token-compliance.spec.ts`: asserts no demo SCSS file contains hard-coded hex colors, px font-size, or px spacing (padding/margin/gap) declarations, and no demo TS file imports an external UI library. Jest `testMatch` and `tsconfig.spec.json` `include` extended to cover `projects/demo/**/*.spec.ts`.
+
 ### Changed
 
 - Typography scale bumped by one step: `--cba-font-size-display` is now `1.5rem`, `--cba-font-size-heading-lg` `1.25rem`, `--cba-font-size-heading-md` `1.125rem`, `--cba-font-size-body` `1rem`, `--cba-font-size-small` `0.875rem`, `--cba-font-size-caption` `0.8125rem`. `--cba-line-height-caption` aligned to `1.385`. See `src/theme/_variables.scss`, `docs/THEME.md`, and `.agent/project-info/brief.md` §5.
@@ -42,6 +46,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - "New customer" demo form no longer overflows in 50% modules: `.demo-customer-form`, `.cba-field__control`, and `%cba-native-control` all receive `box-sizing: border-box`, and the form receives `max-width: 100%`. See `projects/demo/src/app/components/demo-customer-form/demo-customer-form.component.scss`.
 - Added Cancel button to the "New customer" demo form, right-aligned with the primary Add customer button. See `projects/demo/src/app/components/demo-customer-form/demo-customer-form.component.html`.
+- Demo pill matrix no longer hard-codes padding: `$pill-padding: 4px 12px` replaced with `padding: var(--cba-space-1) var(--cba-space-3)`. See `projects/demo/src/app/components/demo-pill-matrix/demo-pill-matrix.component.scss`.
 
 ## [0.18.3] — 2026-08-20
 

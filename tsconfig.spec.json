@@ -7,7 +7,15 @@
     "outDir": "./dist/out-tsc/spec",
     "module": "commonjs",
     "moduleResolution": "bundler",
-    "types": ["jest", "node"]
+    "types": [
+      "jest",
+      "node"
+    ]
   },
-  "include": ["src/**/*.spec.ts", "src/**/*.d.ts", "setup-jest.ts"]
+  "include": [
+    "src/**/*.spec.ts",
+    "src/**/*.d.ts",
+    "setup-jest.ts",
+    "projects/demo/**/*.spec.ts"
+  ]
 }
