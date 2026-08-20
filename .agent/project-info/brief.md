@@ -173,19 +173,19 @@ All tokens live under the `--cba-` prefix.
   --cba-space-8: 32px;
 
   /* Typography scale — six steps paired with line-heights */
-  --cba-font-size-display: 1.25rem;
-  --cba-font-size-heading-lg: 1.125rem;
-  --cba-font-size-heading-md: 1rem;
-  --cba-font-size-body: 0.875rem;
-  --cba-font-size-small: 0.8125rem;
-  --cba-font-size-caption: 0.75rem;
+  --cba-font-size-display: 1.5rem;
+  --cba-font-size-heading-lg: 1.25rem;
+  --cba-font-size-heading-md: 1.125rem;
+  --cba-font-size-body: 1rem;
+  --cba-font-size-small: 0.875rem;
+  --cba-font-size-caption: 0.8125rem;
 
   --cba-line-height-display: 1.2;
   --cba-line-height-heading-lg: 1.222;
   --cba-line-height-heading-md: 1.25;
   --cba-line-height-body: 1.5;
   --cba-line-height-small: 1.385;
-  --cba-line-height-caption: 1.333;
+  --cba-line-height-caption: 1.385;
 }
 ```
 
@@ -196,7 +196,7 @@ All tokens live under the `--cba-` prefix.
 **Typography**
 
 - Primary font: Inter (with system-ui fallback)
-- Base size: 14px
+- Base size: 16px (body step)
 - Line-height: 1.5
 - Headings: weight 500–600
 

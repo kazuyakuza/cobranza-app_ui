@@ -64,8 +64,8 @@
 }
 
 :host(.cba-button--secondary) .cba-button__control {
-  background-color: var(--cba-bg-elevated);
-  border-color: var(--cba-border-subtle);
+  background-color: var(--cba-bg-secondary);
+  border-color: var(--cba-border-default);
   color: var(--cba-text-primary);
 
   &:hover {

@@ -165,9 +165,9 @@ can be targeted by consumer CSS when needed:
 | --- | --- | --- | --- | --- |
 | `.cba-field--disabled` | `disabled` input `true` or `setDisabledState(true)` | `--cba-border-default` | `--cba-state-disabled-bg` | `--cba-state-disabled-text` |
 | `.cba-field--readonly` | `readonly` input `true` | `--cba-border-default` | `--cba-bg-tertiary` | `--cba-text-primary` |
-| `.cba-field--invalid` | `error` input truthy | `--cba-state-invalid-border` | `--cba-bg-secondary` | `--cba-text-primary` |
-| `.cba-field--valid` | `valid` input `true` (and no `error`) | `--cba-state-valid-border` | `--cba-bg-secondary` | `--cba-text-primary` |
-| `.cba-field--error` | `error` input truthy (legacy alias) | `--cba-state-invalid-border` | `--cba-bg-secondary` | `--cba-text-primary` |
+| `.cba-field--invalid` | `error` input truthy | `2px solid --cba-state-invalid-border` | `--cba-bg-elevated` | `--cba-text-primary` |
+| `.cba-field--valid` | `valid` input `true` (and no `error`) | `2px solid --cba-state-valid-border` | `--cba-bg-elevated` | `--cba-text-primary` |
+| `.cba-field--error` | `error` input truthy (legacy alias) | `2px solid --cba-state-invalid-border` | `--cba-bg-elevated` | `--cba-text-primary` |
 
 Priority order (highest first): disabled > invalid > valid > readonly > default.
 
@@ -184,11 +184,11 @@ The field layout uses these tokens:
 | Wrapper gap | `--cba-space-2` |
 | Label | `--cba-text-secondary`, `0.875rem`, weight `500` |
 | Control border | `--cba-border-default`, `--cba-radius-sm` |
-| Control background | `--cba-bg-secondary` |
-| Focus ring | `--cba-accent-primary` border, `--cba-focus-ring` shadow |
-| Invalid border | `--cba-state-invalid-border` |
+| Control background | `--cba-bg-elevated` |
+| Focus ring | `--cba-accent-info` border, `--cba-focus-ring` shadow |
+| Invalid border | `2px solid --cba-state-invalid-border` |
 | Invalid text | `--cba-state-invalid-text` |
-| Valid border | `--cba-state-valid-border` |
+| Valid border | `2px solid --cba-state-valid-border` |
 | Valid text | `--cba-state-valid-text` |
 | Disabled background | `--cba-state-disabled-bg` |
 | Disabled text | `--cba-state-disabled-text` |

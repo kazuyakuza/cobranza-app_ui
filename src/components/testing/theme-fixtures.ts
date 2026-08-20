@@ -51,19 +51,19 @@ export const EXPECTED_TOKENS: Record<string, string> = {
   '--cba-state-disabled-bg': '#E0DCD4',
   '--cba-state-disabled-text': '#9A958D',
   // Typography scale (Phase 10)
-  '--cba-font-size-display': '1.25rem',
-  '--cba-font-size-heading-lg': '1.125rem',
-  '--cba-font-size-heading-md': '1rem',
-  '--cba-font-size-body': '0.875rem',
-  '--cba-font-size-small': '0.8125rem',
-  '--cba-font-size-caption': '0.75rem',
+  '--cba-font-size-display': '1.5rem',
+  '--cba-font-size-heading-lg': '1.25rem',
+  '--cba-font-size-heading-md': '1.125rem',
+  '--cba-font-size-body': '1rem',
+  '--cba-font-size-small': '0.875rem',
+  '--cba-font-size-caption': '0.8125rem',
   '--cba-icon-size-md': '1.75rem',
   '--cba-line-height-display': '1.2',
   '--cba-line-height-heading-lg': '1.222',
   '--cba-line-height-heading-md': '1.25',
   '--cba-line-height-body': '1.5',
   '--cba-line-height-small': '1.385',
-  '--cba-line-height-caption': '1.333',
+  '--cba-line-height-caption': '1.385',
 };
 
 export const SCSS_VARIABLES_PATH = 'src/theme/_variables.scss';

@@ -128,13 +128,13 @@ combination of inputs and pseudo-classes:
 
 | State | Trigger | Border | Background | Text |
 | --- | --- | --- | --- | --- |
-| default | No interaction | `--cba-border-default` | `--cba-bg-secondary` | `--cba-text-primary` |
-| hover | `:hover` | `--cba-border-default` | `--cba-bg-secondary` | `--cba-text-primary` |
-| focus-visible | `:focus-visible` | `--cba-accent-primary` + `--cba-focus-ring` | `--cba-bg-secondary` | `--cba-text-primary` |
+| default | No interaction | `--cba-border-default` | `--cba-bg-elevated` | `--cba-text-primary` |
+| hover | `:hover` | `--cba-border-default` | `--cba-bg-elevated` | `--cba-text-primary` |
+| focus-visible | `:focus-visible` | `--cba-accent-info` + `--cba-focus-ring` | `--cba-bg-elevated` | `--cba-text-primary` |
 | disabled | `disabled` input or `setDisabledState` | `--cba-border-default` | `--cba-state-disabled-bg` | `--cba-state-disabled-text` |
 | readonly | `readonly` input | `--cba-border-default` | `--cba-bg-tertiary` | `--cba-text-primary` |
-| invalid | `error` input truthy | `--cba-state-invalid-border` | `--cba-bg-secondary` | `--cba-text-primary` |
-| valid | `valid` input `true` (and no `error`) | `--cba-state-valid-border` | `--cba-bg-secondary` | `--cba-text-primary` |
+| invalid | `error` input truthy | `2px solid --cba-state-invalid-border` | `--cba-bg-elevated` | `--cba-text-primary` |
+| valid | `valid` input `true` (and no `error`) | `2px solid --cba-state-valid-border` | `--cba-bg-elevated` | `--cba-text-primary` |
 
 Priority order (highest first): disabled > invalid > valid > readonly > focus-visible > hover > default.
 
@@ -157,9 +157,9 @@ focus ring come from the parent `CbaFieldComponent` wrapper.
 
 | Aspect | Token |
 | --- | --- |
-| Control background | `--cba-bg-secondary` |
+| Control background | `--cba-bg-elevated` |
 | Control border | `--cba-border-default` |
-| Focus border | `--cba-accent-primary` |
+| Focus border | `--cba-accent-info` |
 | Focus ring | `--cba-focus-ring` |
 | Invalid border | `--cba-state-invalid-border` |
 | Invalid text | `--cba-state-invalid-text` |

@@ -16,13 +16,14 @@
 
 .cba-field__control {
   display: block;
-  background-color: var(--cba-bg-secondary);
+  box-sizing: border-box;
+  background-color: var(--cba-bg-elevated);
   border: 1px solid var(--cba-border-default);
   border-radius: var(--cba-radius-sm);
   transition: border-color 120ms ease, box-shadow 120ms ease;
 
   &:focus-within {
-    border-color: var(--cba-accent-primary);
+    border-color: var(--cba-accent-info);
     box-shadow: var(--cba-focus-ring);
   }
 }
@@ -47,12 +48,12 @@
 }
 
 .cba-field--valid .cba-field__control {
-  border-color: var(--cba-state-valid-border);
+  border: 2px solid var(--cba-state-valid-border);
 }
 
 .cba-field--error .cba-field__control,
 .cba-field--invalid .cba-field__control {
-  border-color: var(--cba-state-invalid-border);
+  border: 2px solid var(--cba-state-invalid-border);
 }
 
 .cba-field__hint {

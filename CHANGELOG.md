@@ -32,6 +32,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.18.4] — 2026-08-20
 
+### Changed
+
+- Typography scale bumped by one step: `--cba-font-size-display` is now `1.5rem`, `--cba-font-size-heading-lg` `1.25rem`, `--cba-font-size-heading-md` `1.125rem`, `--cba-font-size-body` `1rem`, `--cba-font-size-small` `0.875rem`, `--cba-font-size-caption` `0.8125rem`. `--cba-line-height-caption` aligned to `1.385`. See `src/theme/_variables.scss`, `docs/THEME.md`, and `.agent/project-info/brief.md` §5.
+- Input field visual refresh: control background is now `--cba-bg-elevated`, focus border is `--cba-accent-info`, and valid/invalid borders render at `2px solid`. See `src/components/form-field/cba-field.component.scss`, `docs/CBA_INPUT.md`, and `docs/CBA_FORM_FIELD.md`.
+- Secondary button variant now uses `--cba-bg-secondary` background with `--cba-border-default` border for clearer distinction on panel surfaces. See `src/components/button/cba-button.component.scss`.
+
+### Fixed
+
+- "New customer" demo form no longer overflows in 50% modules: `.demo-customer-form`, `.cba-field__control`, and `%cba-native-control` all receive `box-sizing: border-box`, and the form receives `max-width: 100%`. See `projects/demo/src/app/components/demo-customer-form/demo-customer-form.component.scss`.
+- Added Cancel button to the "New customer" demo form, right-aligned with the primary Add customer button. See `projects/demo/src/app/components/demo-customer-form/demo-customer-form.component.html`.
+
 ## [0.18.3] — 2026-08-20
 
 ### Added

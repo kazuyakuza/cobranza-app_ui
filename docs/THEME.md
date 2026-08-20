@@ -136,16 +136,16 @@ See the [Consumer Guide §Form State Matrix](CONSUMER_GUIDE.md#form-state-matrix
 
 ## Typography Scale
 
-Six-step scale exposed as `--cba-font-size-*` + `--cba-line-height-*` tokens. Base stays Inter / 14px / 1.5.
+Six-step scale exposed as `--cba-font-size-*` + `--cba-line-height-*` tokens. Base stays Inter / 16px / 1.5.
 
 | Step | Font size | Line height | Weight | Context |
 |------|-----------|-------------|--------|---------|
-| display | `--cba-font-size-display` (1.25rem / 20px) | `--cba-line-height-display` (1.2) | 600 | Rare — large page titles |
-| heading-lg | `--cba-font-size-heading-lg` (1.125rem / 18px) | `--cba-line-height-heading-lg` (1.222) | 600 | Module title (prominent) |
-| heading-md | `--cba-font-size-heading-md` (1rem / 16px) | `--cba-line-height-heading-md` (1.25) | 600 | Module title, section title |
-| body | `--cba-font-size-body` (0.875rem / 14px) | `--cba-line-height-body` (1.5) | 400 | Default body text |
-| small | `--cba-font-size-small` (0.8125rem / 13px) | `--cba-line-height-small` (1.385) | 400–600 | Table header (semibold), metadata |
-| caption | `--cba-font-size-caption` (0.75rem / 12px) | `--cba-line-height-caption` (1.333) | 400 | Hints, tertiary metadata |
+| display | `--cba-font-size-display` (1.5rem / 24px) | `--cba-line-height-display` (1.2) | 600 | Rare — large page titles |
+| heading-lg | `--cba-font-size-heading-lg` (1.25rem / 20px) | `--cba-line-height-heading-lg` (1.222) | 600 | Module title (prominent) |
+| heading-md | `--cba-font-size-heading-md` (1.125rem / 18px) | `--cba-line-height-heading-md` (1.25) | 600 | Module title, section title |
+| body | `--cba-font-size-body` (1rem / 16px) | `--cba-line-height-body` (1.5) | 400 | Default body text |
+| small | `--cba-font-size-small` (0.875rem / 14px) | `--cba-line-height-small` (1.385) | 400–600 | Table header (semibold), metadata |
+| caption | `--cba-font-size-caption` (0.8125rem / 13px) | `--cba-line-height-caption` (1.385) | 400 | Hints, tertiary metadata |
 
 Utility classes: `.cba-text-display`, `.cba-text-heading-lg`, `.cba-text-heading-md`, `.cba-text-body`, `.cba-text-small`, `.cba-text-caption`. Generated in [`src/theme/_utilities.scss`](../src/theme/_utilities.scss).
 

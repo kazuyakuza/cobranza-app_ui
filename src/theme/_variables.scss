@@ -126,13 +126,13 @@
   --cba-space-8: 32px;
 
   /* Typography scale — six steps paired with line-heights.
-     Base stays Inter / 14px / 1.5. Utility classes in _utilities.scss. */
-  --cba-font-size-display: 1.25rem;
-  --cba-font-size-heading-lg: 1.125rem;
-  --cba-font-size-heading-md: 1rem;
-  --cba-font-size-body: 0.875rem;
-  --cba-font-size-small: 0.8125rem;
-  --cba-font-size-caption: 0.75rem;
+     Base stays Inter / 16px / 1.5. Utility classes in _utilities.scss. */
+  --cba-font-size-display: 1.5rem;
+  --cba-font-size-heading-lg: 1.25rem;
+  --cba-font-size-heading-md: 1.125rem;
+  --cba-font-size-body: 1rem;
+  --cba-font-size-small: 0.875rem;
+  --cba-font-size-caption: 0.8125rem;
 
   /* Iconography — distinct from typography scale; used for decorative icon sizing. */
   --cba-icon-size-md: 1.75rem;
@@ -142,5 +142,5 @@
   --cba-line-height-heading-md: 1.25;
   --cba-line-height-body: 1.5;
   --cba-line-height-small: 1.385;
-  --cba-line-height-caption: 1.333;
+  --cba-line-height-caption: 1.385;
 }

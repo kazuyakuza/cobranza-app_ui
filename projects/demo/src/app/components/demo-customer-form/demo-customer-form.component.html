@@ -10,10 +10,17 @@
     type="email"
     placeholder="juan@example.com" />
   <p class="demo-customer-form__hint cba-text-small">All fields are required for new customers.</p>
-  <cba-button
-    variant="primary"
-    type="button"
-    [icon]="faPlus">
-    Add customer
-  </cba-button>
+  <div class="demo-customer-form__actions">
+    <cba-button
+      variant="secondary"
+      type="button">
+      Cancel
+    </cba-button>
+    <cba-button
+      variant="primary"
+      type="button"
+      [icon]="faPlus">
+      Add customer
+    </cba-button>
+  </div>
 </form>

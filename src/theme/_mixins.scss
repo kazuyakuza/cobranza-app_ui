@@ -15,6 +15,7 @@
 /// datepicker wrappers. Extend via `@extend %cba-native-control`.
 %cba-native-control {
   width: 100%;
+  box-sizing: border-box;
   background: transparent;
   border: none;
   outline: none;
