@@ -42,6 +42,22 @@ function buildBlock(surfaceTitle: string, surfaceClass: string): ButtonMatrixBlo
   return { surfaceTitle, surfaceClass, rows };
 }
 
+/** Token/style info text shown under each button variant in the matrix. */
+function buttonTokenInfo(variant: CbaButtonVariant): string {
+  switch (variant) {
+    case 'primary':
+      return '.cba-button--primary · var(--cba-accent-primary) · inverse overlay';
+    case 'secondary':
+      return '.cba-button--secondary · var(--cba-bg-elevated) · var(--cba-border-subtle)';
+    case 'ghost':
+      return '.cba-button--ghost · transparent · dark overlay';
+    case 'danger':
+      return '.cba-button--danger · var(--cba-accent-danger) · inverse overlay';
+    case 'success':
+      return '.cba-button--success · var(--cba-accent-success) · inverse overlay';
+  }
+}
+
 /**
  * Demo-only button matrix: five variants × three surfaces × three states
  * (normal / disabled / loading), with a caption under each button.
@@ -59,24 +75,43 @@ function buildBlock(surfaceTitle: string, surfaceClass: string): ButtonMatrixBlo
       @for (block of blocks; track block.surfaceTitle) {
         <div [class]="'demo-surface ' + block.surfaceClass">
           <h3>{{ block.surfaceTitle }}</h3>
-          @for (row of block.rows; track row.state) {
-            <div class="demo-matrix-row">
-              <span class="demo-matrix-row__status">{{ row.state }}</span>
-              @for (cell of row.cells; track cell.variant) {
-                <div class="demo-matrix-cell">
-                  <cba-button
-                    [variant]="cell.variant"
-                    [disabled]="cell.state === 'disabled'"
-                    [loading]="cell.state === 'loading'">
-                    {{ cell.variant | titlecase }}
-                  </cba-button>
-                  <span class="demo-matrix-cell__caption">
-                    {{ cell.variant }} · .cba-button--{{ cell.variant }} · {{ row.state }} · {{ block.surfaceTitle }}
-                  </span>
-                </div>
+          <table class="demo-matrix-table">
+            <thead>
+              <tr>
+                <th scope="col" class="demo-matrix-table__status-head">status</th>
+                <th scope="col">primary</th>
+                <th scope="col">secondary</th>
+                <th scope="col">ghost</th>
+                <th scope="col">danger</th>
+                <th scope="col">success</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (row of block.rows; track row.state) {
+                <tr class="demo-matrix-table__control-row">
+                  <th scope="row" class="demo-matrix-table__status">{{ row.state }}</th>
+                  @for (cell of row.cells; track cell.variant) {
+                    <td class="demo-matrix-table__cell">
+                      <cba-button
+                        [variant]="cell.variant"
+                        [disabled]="cell.state === 'disabled'"
+                        [loading]="cell.state === 'loading'">
+                        {{ cell.variant | titlecase }}
+                      </cba-button>
+                    </td>
+                  }
+                </tr>
+                <tr class="demo-matrix-table__info-row">
+                  <td></td>
+                  @for (cell of row.cells; track cell.variant) {
+                    <td class="demo-matrix-table__info">
+                      {{ buttonTokenInfo(cell.variant) }}
+                    </td>
+                  }
+                </tr>
               }
-            </div>
-          }
+            </tbody>
+          </table>
         </div>
       }
     </div>
@@ -84,6 +119,8 @@ function buildBlock(surfaceTitle: string, surfaceClass: string): ButtonMatrixBlo
   styleUrl: './demo-button-matrix.component.scss',
 })
 export class DemoButtonMatrixComponent {
+  protected readonly buttonTokenInfo = buttonTokenInfo;
+
   protected readonly blocks: ButtonMatrixBlock[] = [
     buildBlock('bg-secondary', 'demo-surface--secondary'),
     buildBlock('bg-elevated', 'demo-surface--elevated'),
