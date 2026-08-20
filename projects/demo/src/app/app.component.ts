@@ -108,7 +108,7 @@ export class AppComponent {
     dueDate: null,
   };
 
-  private readonly COLOR_TOKEN_SOURCE: readonly { readonly name: string; readonly tag: string; readonly hex: string }[] = [
+  private readonly COLOR_TOKEN_SOURCE: readonly { readonly name: string; readonly tag: string; readonly hex: string; }[] = [
     { name: 'bg-primary', tag: 'Background', hex: '#BCB5A4' },
     { name: 'bg-secondary', tag: 'Background', hex: '#F2F0E8' },
     { name: 'bg-tertiary', tag: 'Background', hex: '#D8C3A5' },
@@ -143,7 +143,7 @@ export class AppComponent {
     { title: 'bg-tertiary', className: 'demo-surface--tertiary' },
   ];
 
-  protected readonly statusOptions: readonly { readonly value: string; readonly label: string }[] = [
+  protected readonly statusOptions: readonly { readonly value: string; readonly label: string; }[] = [
     { value: '', label: 'Choose…' },
     { value: 'active', label: 'Active' },
     { value: 'overdue', label: 'Overdue' },
@@ -156,8 +156,10 @@ export class AppComponent {
   }
 
   private needsSwatchInverseColor(token: ColorToken): boolean {
-    return token.tag === 'Text' && token.name !== 'text-inverse';
+    // Text tokens (except text-inverse itself) and selected-text need inverse color
+    // because they render on dark swatch backgrounds
+    return (token.tag === 'Text' && token.name !== 'text-inverse') || token.name === 'selected-text';
   }
 
-  protected noop(): void {}
+  protected noop(): void { }
 }
