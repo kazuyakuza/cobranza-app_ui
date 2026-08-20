@@ -55,12 +55,69 @@
   </demo-section>
 
   <!-- 7. Button / pill sizes variants -->
-  <demo-section title="Button and pill sizes" caption="sm vs md size variants.">
-    <div class="demo-size-row">
-      <cba-button variant="primary" size="sm">Small button</cba-button>
-      <cba-button variant="primary" size="md">Medium button</cba-button>
-      <span class="demo-pill demo-pill--primary demo-pill--sm">Small pill</span>
-      <span class="demo-pill demo-pill--primary demo-pill--md">Medium pill</span>
+  <demo-section title="Button and pill sizes" caption="sm vs md (normal) for every variant.">
+    <div class="demo-size-matrix">
+      <table class="demo-size-table">
+        <thead>
+          <tr>
+            <th scope="col">size</th>
+            <th scope="col">primary</th>
+            <th scope="col">secondary</th>
+            <th scope="col">ghost</th>
+            <th scope="col">danger</th>
+            <th scope="col">success</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">sm</th>
+            <td><cba-button variant="primary" size="sm">Small</cba-button></td>
+            <td><cba-button variant="secondary" size="sm">Small</cba-button></td>
+            <td><cba-button variant="ghost" size="sm">Small</cba-button></td>
+            <td><cba-button variant="danger" size="sm">Small</cba-button></td>
+            <td><cba-button variant="success" size="sm">Small</cba-button></td>
+          </tr>
+          <tr>
+            <th scope="row">md</th>
+            <td><cba-button variant="primary" size="md">Normal</cba-button></td>
+            <td><cba-button variant="secondary" size="md">Normal</cba-button></td>
+            <td><cba-button variant="ghost" size="md">Normal</cba-button></td>
+            <td><cba-button variant="danger" size="md">Normal</cba-button></td>
+            <td><cba-button variant="success" size="md">Normal</cba-button></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <table class="demo-size-table">
+        <thead>
+          <tr>
+            <th scope="col">size</th>
+            <th scope="col">primary</th>
+            <th scope="col">secondary</th>
+            <th scope="col">ghost</th>
+            <th scope="col">danger</th>
+            <th scope="col">success</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">sm</th>
+            <td><span class="demo-pill demo-pill--primary demo-pill--sm">Small</span></td>
+            <td><span class="demo-pill demo-pill--secondary demo-pill--sm">Small</span></td>
+            <td><span class="demo-pill demo-pill--ghost demo-pill--sm">Small</span></td>
+            <td><span class="demo-pill demo-pill--danger demo-pill--sm">Small</span></td>
+            <td><span class="demo-pill demo-pill--success demo-pill--sm">Small</span></td>
+          </tr>
+          <tr>
+            <th scope="row">md</th>
+            <td><span class="demo-pill demo-pill--primary demo-pill--md">Normal</span></td>
+            <td><span class="demo-pill demo-pill--secondary demo-pill--md">Normal</span></td>
+            <td><span class="demo-pill demo-pill--ghost demo-pill--md">Normal</span></td>
+            <td><span class="demo-pill demo-pill--danger demo-pill--md">Normal</span></td>
+            <td><span class="demo-pill demo-pill--success demo-pill--md">Normal</span></td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </demo-section>
 
@@ -134,11 +191,10 @@
 
   <!-- 14. Footer bar -->
   <footer class="shell-footer">
-    <div class="shell-footer__actions">
-      <cba-button variant="secondary" [icon]="faRefresh">Refresh</cba-button>
-      <cba-button variant="primary" [icon]="faPlus">New</cba-button>
-      <cba-button variant="ghost" [icon]="faDownload">Export</cba-button>
-    </div>
+    <demo-nav-items
+      class="shell-footer__pills demo-nav--large"
+      [items]="footerItems"
+      aria-label="Module sections" />
   </footer>
 
 </div>
