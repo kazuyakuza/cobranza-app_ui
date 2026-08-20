@@ -1,0 +1,74 @@
+// Demo-only payment schedule view. Uses theme tokens only.
+
+:host {
+  display: block;
+}
+
+.demo-payment-schedule {
+  display: flex;
+  flex-direction: column;
+  gap: var(--cba-space-3);
+}
+
+.demo-payment-schedule__month,
+.demo-payment-schedule__heading {
+  margin: 0;
+}
+
+.demo-calendar {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: var(--cba-space-1);
+}
+
+.demo-calendar__day {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1 / 1;
+  border-radius: var(--cba-radius-sm);
+  font-size: var(--cba-font-size-small);
+  color: var(--cba-text-primary);
+}
+
+.demo-calendar__day--selected {
+  background-color: var(--cba-accent-primary);
+  color: var(--cba-text-inverse);
+  font-weight: 600;
+}
+
+.demo-payment-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.demo-payment-list__item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--cba-space-2);
+  padding: var(--cba-space-2) 0;
+  border-bottom: 1px solid var(--cba-border-subtle);
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.demo-payment-list__meta {
+  display: flex;
+  align-items: center;
+  gap: var(--cba-space-2);
+}
+
+.demo-payment-list__customer {
+  font-size: var(--cba-font-size-body);
+  color: var(--cba-text-secondary);
+}
+
+.demo-payment-list__amount {
+  font-size: var(--cba-font-size-body);
+  font-weight: 500;
+  color: var(--cba-text-primary);
+}

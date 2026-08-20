@@ -1,0 +1,21 @@
+<form class="demo-customer-form" novalidate>
+  <cba-input
+    label="Name"
+    type="text"
+    placeholder="Juan Pérez" />
+  <cba-input
+    label="Document"
+    type="text"
+    placeholder="20-12345678-9" />
+  <cba-input
+    label="Email"
+    type="email"
+    placeholder="juan@example.com" />
+  <p class="demo-customer-form__hint cba-text-small">All fields are required for new customers.</p>
+  <cba-button
+    variant="primary"
+    type="button"
+    [icon]="faPlus">
+    Add customer
+  </cba-button>
+</form>

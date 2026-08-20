@@ -29,10 +29,7 @@
       status="success"
       footerStatus="success"
       footerText="Saved">
-      <div class="demo-actions">
-        <cba-button variant="primary" [icon]="faPlus">Add customer</cba-button>
-        <cba-button variant="secondary" [icon]="faRefresh">Sync</cba-button>
-      </div>
+      <demo-customer-form />
     </demo-module-card>
 
     <demo-module-card
@@ -78,7 +75,7 @@
       status="loaded"
       footerStatus="loaded"
       footerText="Up to date">
-      <p class="cba-text-body">Next payment: 2026-09-15</p>
+      <demo-payment-schedule />
     </demo-module-card>
   </div>
 

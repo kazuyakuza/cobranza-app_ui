@@ -1,0 +1,16 @@
+// Demo-only new-customer form. Uses theme tokens only.
+
+:host {
+  display: block;
+}
+
+.demo-customer-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--cba-space-3);
+}
+
+.demo-customer-form__hint {
+  margin: 0;
+  color: var(--cba-text-muted);
+}

@@ -1,0 +1,38 @@
+<div class="demo-payment-schedule">
+  <h3 class="demo-payment-schedule__month cba-text-heading-md">{{ monthYear }}</h3>
+
+  <div
+    class="demo-calendar"
+    role="img"
+    [attr.aria-label]="monthYear + ' calendar, day 15 selected'">
+    @for (day of days; track day) {
+      <div
+        class="demo-calendar__day"
+        [class.demo-calendar__day--selected]="day === 15"
+        [attr.aria-current]="day === 15 ? 'date' : null">
+        {{ day }}
+      </div>
+    }
+  </div>
+
+  <h3 class="demo-payment-schedule__heading cba-text-heading-md">Payments on {{ selectedDate }}</h3>
+
+  <ul class="demo-payment-list">
+    @for (payment of payments; track payment.customer) {
+      <li class="demo-payment-list__item">
+        <span class="demo-payment-list__customer">{{ payment.customer }}</span>
+        <div class="demo-payment-list__meta">
+          <span class="demo-payment-list__amount">{{ payment.amount }}</span>
+          @switch (payment.status) {
+            @case ('pending') {
+              <cba-badge variant="warning" appearance="outline">Pending</cba-badge>
+            }
+            @case ('paid') {
+              <cba-badge variant="success" appearance="outline">Paid</cba-badge>
+            }
+          }
+        </div>
+      </li>
+    }
+  </ul>
+</div>
