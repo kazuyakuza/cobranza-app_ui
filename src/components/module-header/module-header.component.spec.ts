@@ -109,10 +109,10 @@ describe('ModuleHeaderComponent', () => {
     expect(statusSection.querySelector('fa-icon')).not.toBeNull();
   });
 
-  it('renders the four built-in action buttons when no drag handle is projected (empty slot)', () => {
+  it('renders the five built-in action buttons when no drag handle is projected (empty slot)', () => {
     setup();
     const navButtons = fixture.nativeElement.querySelectorAll('nav button');
-    expect(navButtons).toHaveLength(4);
+    expect(navButtons).toHaveLength(5);
   });
 });
 
@@ -139,7 +139,7 @@ describe('ModuleHeaderComponent — drag handle projection slot', () => {
 
     expect(nav).not.toBeNull();
     expect(dragHandle).not.toBeNull();
-    expect(navButtons).toHaveLength(5);
+    expect(navButtons).toHaveLength(6);
     expect(navButtons[0]).toBe(dragHandle);
   });
 
