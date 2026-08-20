@@ -28,7 +28,7 @@ const DEFAULT_ITEMS: readonly NavItem[] = [
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <nav class="demo-nav" aria-label="Demo navigation">
+    <nav class="demo-nav" [attr.aria-label]="ariaLabel()">
       @for (item of items(); track item.label) {
         <a
           class="demo-nav-item"
@@ -46,4 +46,5 @@ const DEFAULT_ITEMS: readonly NavItem[] = [
 })
 export class DemoNavItemsComponent {
   readonly items = input<readonly NavItem[]>(DEFAULT_ITEMS);
+  readonly ariaLabel = input('Demo navigation');
 }
