@@ -63,6 +63,9 @@
   @include cba-solid-button(var(--cba-accent-primary));
 }
 
+// Secondary variant: uses --cba-bg-elevated (lighter cream) instead of --cba-bg-secondary
+// to remain visible when placed on module bodies or panels that use --cba-bg-secondary.
+// Border uses --cba-border-default for structural edge definition on light surfaces.
 :host(.cba-button--secondary) .cba-button__control {
   background-color: var(--cba-bg-elevated);
   border-color: var(--cba-border-default);

@@ -123,9 +123,9 @@ on panel, elevated, and canvas. Only `secondary` changes by surface.
 | `primary` | any | `--cba-accent-primary` | transparent | `--cba-text-inverse` |
 | `danger` | any | `--cba-accent-danger` | transparent | `--cba-text-inverse` |
 | `success` | any | `--cba-accent-success` | transparent | `--cba-text-inverse` |
-| `secondary` | panel | `--cba-bg-elevated` | `--cba-border-subtle` | `--cba-text-primary` |
+| `secondary` | panel | `--cba-bg-elevated` | `--cba-border-default` | `--cba-text-primary` |
 | `secondary` | elevated | `--cba-bg-secondary` | `--cba-border-default` | `--cba-text-primary` |
-| `secondary` | canvas | `--cba-bg-elevated` | `--cba-border-subtle` | `--cba-text-primary` |
+| `secondary` | canvas | `--cba-bg-elevated` | `--cba-border-default` | `--cba-text-primary` |
 | `ghost` | any | transparent | transparent | `--cba-text-primary` |
 
 **Rationale for `secondary` on elevated:** the default secondary fill is `--cba-bg-elevated`.
