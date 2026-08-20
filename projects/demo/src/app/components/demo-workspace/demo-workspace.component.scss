@@ -14,9 +14,6 @@
   grid-template-columns: repeat(2, 1fr);
   gap: var(--cba-space-3);
 }
-.workspace__row--single-50 {
-  grid-template-columns: repeat(2, 1fr);
-}
 .demo-actions {
   display: flex;
   flex-wrap: wrap;

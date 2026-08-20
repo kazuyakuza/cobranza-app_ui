@@ -27,25 +27,19 @@
   font-size: 0.875em;
 }
 
-.cba-module-footer__status--loading {
-  color: var(--cba-accent-info);
-}
+$status-colors: (
+  loading: var(--cba-accent-info),
+  loaded: var(--cba-accent-success),
+  success: var(--cba-accent-success),
+  warning: var(--cba-accent-warning),
+  error: var(--cba-accent-danger),
+  dirty: var(--cba-text-secondary),
+);
 
-.cba-module-footer__status--loaded,
-.cba-module-footer__status--success {
-  color: var(--cba-accent-success);
-}
-
-.cba-module-footer__status--warning {
-  color: var(--cba-accent-warning);
-}
-
-.cba-module-footer__status--error {
-  color: var(--cba-accent-danger);
-}
-
-.cba-module-footer__status--dirty {
-  color: var(--cba-text-secondary);
+@each $status, $color in $status-colors {
+  .cba-module-footer__status--#{$status} {
+    color: $color;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -45,7 +45,6 @@
 /* Task 7 — header band never scrolls, never shrinks. */
 .cba-module-container__header {
   flex: 0 0 auto;
-  min-width: 0;
 }
 
 /* Task 6 — body is the internal scroll container while expanded. */
@@ -92,8 +91,8 @@
 /* Round 2 — footer band never scrolls, never shrinks; separated from body. */
 .cba-module-container__footer {
   flex: 0 0 auto;
-  min-width: 0;
-  border-top: 1px solid var(--cba-border-default);
+  min-height: 0;
+  border-top: 1px solid var(--cba-border-subtle);
   background-color: var(--cba-bg-tertiary);
 }
 
