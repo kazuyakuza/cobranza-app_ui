@@ -39,3 +39,10 @@
 .demo-nav-item--disabled:hover {
   background-image: none;
 }
+
+:host(.demo-nav--large) {
+  .demo-nav-item {
+    padding: var(--cba-space-2) var(--cba-space-4);
+    font-size: var(--cba-font-size-body);
+  }
+}

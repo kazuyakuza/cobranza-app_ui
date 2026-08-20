@@ -1,11 +1,19 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 
 /** One navigation item shown in the demo nav row. */
-interface NavItem {
+export interface NavItem {
   readonly label: string;
   readonly selected: boolean;
   readonly disabled: boolean;
 }
+
+/** Default English items used when no `[items]` input is bound. */
+const DEFAULT_ITEMS: readonly NavItem[] = [
+  { label: 'Customers', selected: true, disabled: false },
+  { label: 'Invoices', selected: false, disabled: false },
+  { label: 'Reports', selected: false, disabled: false },
+  { label: 'Settings', selected: false, disabled: true },
+];
 
 /**
  * Demo-only horizontal navigation items example showing normal, selected,
@@ -37,10 +45,5 @@ interface NavItem {
   styleUrl: './demo-nav-items.component.scss',
 })
 export class DemoNavItemsComponent {
-  protected readonly items: NavItem[] = [
-    { label: 'Customers', selected: true, disabled: false },
-    { label: 'Invoices', selected: false, disabled: false },
-    { label: 'Reports', selected: false, disabled: false },
-    { label: 'Settings', selected: false, disabled: true },
-  ];
+  protected readonly items = input<readonly NavItem[]>(DEFAULT_ITEMS);
 }
