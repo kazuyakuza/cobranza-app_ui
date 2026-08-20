@@ -46,6 +46,13 @@ Wrapper that hosts a projected module header and the MFE body inside the Company
 
   <!-- Projected MFE body content -->
   <app-customers-mfe></app-customers-mfe>
+
+  <!-- Optional footer band; removed from the DOM when the module is collapsed. -->
+  <cba-module-footer
+    cbaModuleContainerFooter
+    status="loaded"
+    statusText="3 customers · total debt $ 1,730,000">
+  </cba-module-footer>
 </cba-module-container>
 ```
 
@@ -85,6 +92,7 @@ export class ShellComponent {
 | --- | --- | --- |
 | Header | `[cbaModuleContainerHeader]` attribute | Projects the module header (typically `<cba-module-header>`). Rendered in a fixed, non-scrollable flex band. |
 | Body | default `<ng-content>` | Projects the MFE content. This region is the internal scroll container while expanded. |
+| Footer | `[cbaModuleContainerFooter]` attribute | Projects an optional footer band (typically `<cba-module-footer>`). Rendered below the body, inside the same `@if (!isCollapsed())` block, so it is removed together with the body when collapsed. Non-scrollable, never shrinks. |
 
 ## Inputs
 
@@ -115,6 +123,7 @@ When `isCollapsed === true`:
 - No layout box is rendered and no scroll area exists while collapsed.
 - The host receives the `cba-module-container--collapsed` modifier.
 - The header band remains rendered and never scrolls.
+- The footer region (`.cba-module-container__footer`) is removed from the DOM together with the body via the same `@if` control flow; no footer band is rendered while collapsed.
 
 ## Fullscreen behaviour
 

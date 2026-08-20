@@ -89,6 +89,14 @@
   }
 }
 
+/* Round 2 — footer band never scrolls, never shrinks; separated from body. */
+.cba-module-container__footer {
+  flex: 0 0 auto;
+  min-width: 0;
+  border-top: 1px solid var(--cba-border-default);
+  background-color: var(--cba-bg-tertiary);
+}
+
 /* Task 5 — padding modifiers (body only, host-driven). */
 :host(.cba-module-container--padding-none) .cba-module-container__body {
   padding: 0;

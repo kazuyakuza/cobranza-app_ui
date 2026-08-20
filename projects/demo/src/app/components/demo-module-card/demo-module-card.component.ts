@@ -43,7 +43,10 @@ import {
         />
         <ng-content />
         @if (hasFooter) {
-          <cba-module-footer [status]="footerStatus" [statusText]="footerText" />
+          <cba-module-footer
+            cbaModuleContainerFooter
+            [status]="footerStatus"
+            [statusText]="footerText" />
         }
       </cba-module-container>
     </div>
