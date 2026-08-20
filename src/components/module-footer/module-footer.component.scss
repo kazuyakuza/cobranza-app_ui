@@ -17,6 +17,7 @@
 .cba-module-footer__status {
   display: inline-flex;
   align-items: center;
+  justify-content: flex-end;
   gap: var(--cba-space-2);
   font-size: var(--cba-font-size-body);
   line-height: var(--cba-line-height-body);
