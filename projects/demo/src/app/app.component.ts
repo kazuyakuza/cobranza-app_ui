@@ -17,7 +17,7 @@ import {
 } from '@cobranza-apps/ui';
 import { DemoButtonMatrixComponent } from './components/demo-button-matrix/demo-button-matrix.component';
 import { DemoIconGridComponent } from './components/demo-icon-grid/demo-icon-grid.component';
-import { DemoNavItemsComponent } from './components/demo-nav-items/demo-nav-items.component';
+import { DemoNavItemsComponent, NavItem } from './components/demo-nav-items/demo-nav-items.component';
 import { DemoPillMatrixComponent } from './components/demo-pill-matrix/demo-pill-matrix.component';
 import { DemoSectionComponent } from './components/demo-section/demo-section.component';
 import { DemoSwatchComponent } from './components/demo-swatch/demo-swatch.component';
@@ -91,6 +91,13 @@ export class AppComponent {
   protected readonly faPlus = faPlus;
   protected readonly faRefresh = faRefresh;
   protected readonly faDownload = faDownload;
+
+  protected readonly footerItems: readonly NavItem[] = [
+    { label: 'Clientes', selected: true, disabled: false },
+    { label: 'Deudas', selected: false, disabled: false },
+    { label: 'Pagos', selected: false, disabled: false },
+    { label: 'Reportes', selected: false, disabled: false },
+  ];
 
   protected sampleText = '';
   protected sampleSelect = '';
