@@ -32,9 +32,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.18.2] — 2026-08-20
 
+### Added
+
+- Module header icons (drag, expand/shrink width, collapse/expand, fullscreen, close, loading) included in the demo's predefined icons section (`demo-icon-grid`).
+- "Button and pill sizes" comparison section in the demo, including normal and bigger button/pill sizes for easy comparison.
+- "Texts, fonts, labels" and "Color tokens" `bg-primary` groups now carry a strong border to separate them from the workspace background.
+
+### Changed
+
+- Demo module footers now render as part of the module (rounded, integrated look), with the status info right-aligned as `[status/info text][status icon]`; honored the 50% module width; hidden entirely when the module is collapsed.
+- 50% module width fixed so a 50% module takes half the workspace width, minus left/right/middle gutter spacing.
+- Header search input now centered within the header bar.
+- Header drag icon (`faUpDownLeftRight`) added at the first position of the header action icons list (visual only, like the others).
+- Button and pill example matrices reorganized into tables with a token/style info row per variant (status × primary/secondary/ghost/danger/success).
+- Demo footer bar now uses navigation pills with section/category names (e.g. Clientes, Deudas, Pagos, Reportes).
+
 ### Fixed
 
-- (placeholder — will be populated during task completion)
+- "Color tokens" selected-text example text now visible.
 
 ## [0.18.1] — 2026-08-19
 
