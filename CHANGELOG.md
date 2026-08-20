@@ -30,6 +30,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > Releases prior to 0.8.1 predate this changelog and are not reconstructed retroactively.
 
+## [0.18.3] — 2026-08-20
+
+### Added
+
+- `ModuleContainerComponent` now exposes a dedicated footer projection slot `[cbaModuleContainerFooter]`, rendered below the body and removed together with the body when the module is collapsed. See `docs/CBA_MODULE_CONTAINER.md`.
+
+### Fixed
+
+- `CbaModuleFooterComponent` status region (`__status`) now aligns its text+icon group to the right edge via `justify-content: flex-end`.
+- Demo `demo-workspace` single 50% row (`.workspace__row--single-50`) now uses `grid-template-columns: repeat(2, 1fr)` so the module cell and the empty cell have equal widths.
+
 ## [0.18.2] — 2026-08-20
 
 ### Added
