@@ -47,6 +47,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - "New customer" demo form no longer overflows in 50% modules: `.demo-customer-form`, `.cba-field__control`, and `%cba-native-control` all receive `box-sizing: border-box`, and the form receives `max-width: 100%`. See `projects/demo/src/app/components/demo-customer-form/demo-customer-form.component.scss`.
 - Added Cancel button to the "New customer" demo form, right-aligned with the primary Add customer button. See `projects/demo/src/app/components/demo-customer-form/demo-customer-form.component.html`.
 - Demo pill matrix no longer hard-codes padding: `$pill-padding: 4px 12px` replaced with `padding: var(--cba-space-1) var(--cba-space-3)`. See `projects/demo/src/app/components/demo-pill-matrix/demo-pill-matrix.component.scss`.
+- Root base font-size corrected from `14px` to `16px` in `src/theme/_base.scss` so the bumped typography scale (`--cba-font-size-body: 1rem`, etc.) actually renders at the intended pixel sizes. See `.agent/project-info/brief.md` §5.
+- `npm run start:demo` now automatically clears `.angular/cache` before serving to prevent stale component/style artifacts between library rebuilds.
 
 ## [0.18.3] — 2026-08-20
 
