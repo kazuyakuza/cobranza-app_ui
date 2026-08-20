@@ -171,3 +171,4 @@ All values come from `--cba-*` spacing tokens (see `src/theme/_variables.scss`).
 - [USAGE.md](./USAGE.md)
 - [THEME.md](./THEME.md)
 - [CBA_MODULE_HEADER.md](./CBA_MODULE_HEADER.md)
+- [CBA_MODULE_FOOTER.md](./CBA_MODULE_FOOTER.md) — footer component typically projected into the `[cbaModuleContainerFooter]` slot.

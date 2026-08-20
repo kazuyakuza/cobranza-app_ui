@@ -59,8 +59,15 @@ const STATUS_VISUALS: Readonly<Record<Exclude<ModuleHeaderStatus, null>, StatusV
  * `aria-live="polite"` so screen readers announce status changes; the icon is
  * decorative (`aria-hidden="true"`).
  *
+ * **Status alignment**: The host flex row uses `justify-content: flex-end`, so
+ * the status region (text + icon) is right-aligned within the bar. Inside the
+ * status region, text appears before the icon: `[status text][status icon]`.
+ * The status region itself also uses `justify-content: flex-end` to keep the
+ * text-icon group flush to the right edge.
+ *
  * @see {@link ModuleHeaderStatus}
  * @see {@link ModuleHeaderComponent}
+ * @see [CBA_MODULE_FOOTER.md](/docs/CBA_MODULE_FOOTER.md) — full API docs.
  */
 @Component({
   selector: 'cba-module-footer',

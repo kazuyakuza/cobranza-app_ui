@@ -21,12 +21,17 @@ import {
  * - Header slot: any element carrying the `[cbaModuleContainerHeader]`
  *   attribute (typically `<cba-module-header cbaModuleContainerHeader>`).
  * - Body slot:   the default `<ng-content>` projection.
+ * - Footer slot: any element carrying the `[cbaModuleContainerFooter]`
+ *   attribute (typically `<cba-module-footer cbaModuleContainerFooter>`).
+ *   Rendered below the body inside the same `@if (!isCollapsed())` block,
+ *   so it is removed together with the body when collapsed. Non-scrollable,
+ *   never shrinks (`flex: 0 0 auto`).
  *
- * The body region is removed from the DOM while `isCollapsed` is `true`,
- * so it never participates in layout or scroll. In fullscreen mode the
- * container still hosts header + body; the chrome (border, border-radius,
- * box-shadow, overflow clipping) is suppressed via the
- * `cba-module-container--fullscreen` host class, while `background-color`
+ * The body and footer regions are removed from the DOM while `isCollapsed`
+ * is `true`, so they never participate in layout or scroll. In fullscreen
+ * mode the container still hosts header + body + footer; the chrome
+ * (border, border-radius, box-shadow, overflow clipping) is suppressed via
+ * the `cba-module-container--fullscreen` host class, while `background-color`
  * is retained so the panel keeps its cream surface.
  *
  * Scroll is contained inside the body by default (`overscroll-behavior: contain`).
@@ -55,6 +60,12 @@ import {
  *   </cba-module-header>
  *
  *   <app-customers-mfe></app-customers-mfe>
+ *
+ *   <cba-module-footer
+ *     cbaModuleContainerFooter
+ *     status="loaded"
+ *     statusText="3 customers · total debt $ 1,730,000">
+ *   </cba-module-footer>
  * </cba-module-container>
  * ```
  *

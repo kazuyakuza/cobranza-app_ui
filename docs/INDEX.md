@@ -19,7 +19,7 @@
 ## Workspace chrome
 
 - [CBA_MODULE_HEADER.md](./CBA_MODULE_HEADER.md)
-- [CBA_MODULE_CONTAINER.md](./CBA_MODULE_CONTAINER.md)
+- [CBA_MODULE_CONTAINER.md](./CBA_MODULE_CONTAINER.md) — layout wrapper with header, body, and footer (`[cbaModuleContainerFooter]` slot) projection.
 - [CBA_MODULE_FOOTER.md](./CBA_MODULE_FOOTER.md)
 
 ## Basic components
