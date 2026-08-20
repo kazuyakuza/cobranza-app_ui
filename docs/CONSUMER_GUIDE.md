@@ -124,7 +124,7 @@ on panel, elevated, and canvas. Only `secondary` changes by surface.
 | `danger` | any | `--cba-accent-danger` | transparent | `--cba-text-inverse` |
 | `success` | any | `--cba-accent-success` | transparent | `--cba-text-inverse` |
 | `secondary` | panel | `--cba-bg-elevated` | `--cba-border-default` | `--cba-text-primary` |
-| `secondary` | elevated | `--cba-bg-secondary` | `--cba-border-default` | `--cba-text-primary` |
+| `secondary` | elevated | `--cba-bg-elevated` | `--cba-border-default` | `--cba-text-primary` |
 | `secondary` | canvas | `--cba-bg-elevated` | `--cba-border-default` | `--cba-text-primary` |
 | `ghost` | any | transparent | transparent | `--cba-text-primary` |
 
