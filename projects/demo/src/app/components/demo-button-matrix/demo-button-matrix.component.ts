@@ -48,7 +48,7 @@ function buttonTokenInfo(variant: CbaButtonVariant): string {
     case 'primary':
       return '.cba-button--primary · var(--cba-accent-primary) · inverse overlay';
     case 'secondary':
-      return '.cba-button--secondary · var(--cba-bg-elevated) · var(--cba-border-subtle)';
+      return '.cba-button--secondary · var(--cba-bg-elevated) · var(--cba-border-default)';
     case 'ghost':
       return '.cba-button--ghost · transparent · dark overlay';
     case 'danger':
