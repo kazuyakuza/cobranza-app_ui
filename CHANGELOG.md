@@ -39,7 +39,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - `CbaModuleFooterComponent` status region (`__status`) now aligns its text+icon group to the right edge via `justify-content: flex-end`.
-- Demo `demo-workspace` single 50% row (`.workspace__row--single-50`) now uses `grid-template-columns: repeat(2, 1fr)` so the module cell and the empty cell have equal widths.
+- Demo `demo-workspace` base row grid now uses `grid-template-columns: repeat(2, 1fr)` universally, ensuring a single 50% module and its adjacent empty space have equal widths.
 
 ## [0.18.2] — 2026-08-20
 
