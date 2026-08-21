@@ -30,6 +30,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > Releases prior to 0.8.1 predate this changelog and are not reconstructed retroactively.
 
+## [0.18.6] — 2026-08-20
+
+### Fixed
+
+- Removed the incorrectly re-added built-in drag button from `ModuleHeader`. The library no longer renders a drag handle by default; consumers must project one via the `[cbaModuleDragHandle]` slot. See `docs/CBA_MODULE_HEADER.md` §Drag handle slot.
+- Updated the Angular demo app (`projects/demo/`) to project its own drag handle (`faUpDownLeftRight`) inside `<cba-module-header>` so the visual reference continues to show the handle.
+
 ## [0.18.5] — 2026-08-20
 
 ### Fixed
