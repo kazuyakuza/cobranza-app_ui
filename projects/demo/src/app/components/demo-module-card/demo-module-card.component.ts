@@ -7,6 +7,8 @@ import {
   ModuleHeaderComponent,
   ModuleHeaderStatus,
 } from '@cobranza-apps/ui';
+import { FaIconComponent } from '@fortawesome/angular-fontawesome';
+import { faUpDownLeftRight } from '@fortawesome/free-solid-svg-icons';
 
 /**
  * Demo-only wrapper combining a `cba-module-container` with its
@@ -24,7 +26,7 @@ import {
 @Component({
   selector: 'demo-module-card',
   standalone: true,
-  imports: [ModuleContainerComponent, ModuleHeaderComponent, CbaModuleFooterComponent],
+  imports: [ModuleContainerComponent, ModuleHeaderComponent, CbaModuleFooterComponent, FaIconComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <div class="demo-module-card" [class.demo-module-card--size-50]="size === '50%'">
@@ -39,8 +41,15 @@ import {
           (collapseToggle)="noop()"
           (sizeToggle)="noop()"
           (fullscreenToggle)="noop()"
-          (remove)="noop()"
-        />
+          (remove)="noop()">
+          <button
+            type="button"
+            cbaModuleDragHandle
+            class="cba-module-header__action cba-module-header__action--drag"
+            aria-label="Arrastrar módulo">
+            <fa-icon [icon]="faUpDownLeftRight" aria-hidden="true" />
+          </button>
+        </cba-module-header>
         <ng-content />
         @if (hasFooter) {
           <cba-module-footer
@@ -76,6 +85,9 @@ export class DemoModuleCardComponent {
   protected get hasFooter(): boolean {
     return this.footerStatus !== null || this.footerText.length > 0;
   }
+
+  /** Drag-handle icon projected into the library header slot (demo-only). */
+  protected readonly faUpDownLeftRight = faUpDownLeftRight;
 
   /** No-op handler bound to header outputs so the demo stays interactive without side effects. */
   protected noop(): void {}
