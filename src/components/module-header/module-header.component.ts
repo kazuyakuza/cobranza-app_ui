@@ -18,7 +18,6 @@ import {
   faPen,
   faSpinner,
   faTriangleExclamation,
-  faUpDownLeftRight,
   faWindowMaximize,
   faXmark,
 } from '@fortawesome/free-solid-svg-icons';
@@ -162,7 +161,6 @@ export class ModuleHeaderComponent {
   /** Icons referenced directly by the header template. */
   protected readonly faFullscreen = faWindowMaximize;
   protected readonly faXmark = faXmark;
-  protected readonly faDrag = faUpDownLeftRight;
 
   /** Aria/title defaults for header action buttons. Spanish-only, sourced from `CBA_UI_MESSAGES`. */
   protected readonly aria = CBA_UI_MESSAGES.moduleHeader.aria;
