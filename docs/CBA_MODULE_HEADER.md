@@ -146,6 +146,11 @@ does not render a default handle when the slot is empty, and emits no drag
 outputs. Drag-and-drop contracts live in `@cobranza-apps/mfe-events` and the
 Shell; the header only provides a stable place to paint the handle.
 
+> **Important:** The library does **not** render a built-in drag button under any
+> circumstance. The `[cbaModuleDragHandle]` projection slot is the **only**
+> source of a drag handle. If consumers need a drag handle, they must project
+> one through this slot.
+
 ### Slot contract
 
 | Selector | Required | Placement | Notes |

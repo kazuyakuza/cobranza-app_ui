@@ -48,10 +48,11 @@ const STATUS_VISUALS: Readonly<Record<Exclude<ModuleHeaderStatus, null>, StatusV
  *
  * Renders a three-section layout — status | title | actions — using only
  * `--cba-*` design tokens. In fullscreen mode only the title is shown. The
- * Shell projects an optional drag handle via the `[cbaModuleDragHandle]`
- * projection slot; drag-and-drop is intentionally NOT implemented here (owned
- * by the Shell + `@cobranza-apps/mfe-events`); the title is never editable
- * from this header.
+  * Shell projects an optional drag handle via the `[cbaModuleDragHandle]`
+  * projection slot; drag-and-drop is intentionally NOT implemented here (owned
+  * by the Shell + `@cobranza-apps/mfe-events`). **The library does NOT render
+  * a built-in drag button** — the projection slot is the only source of a drag
+  * handle; the title is never editable from this header.
  *
  * Exported from `@cobranza-apps/ui` via `src/public-api.ts`.
  *

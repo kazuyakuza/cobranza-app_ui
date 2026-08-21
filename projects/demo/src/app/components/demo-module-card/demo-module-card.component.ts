@@ -86,7 +86,12 @@ export class DemoModuleCardComponent {
     return this.footerStatus !== null || this.footerText.length > 0;
   }
 
-  /** Drag-handle icon projected into the library header slot (demo-only). */
+  /**
+   * Drag-handle icon projected into the library header slot (demo-only).
+   * The library component does NOT render a built-in drag button, so the demo
+   * must project one via `[cbaModuleDragHandle]` to show a drag handle.
+   * @see docs/CBA_MODULE_HEADER.md#drag-handle-slot
+   */
   protected readonly faUpDownLeftRight = faUpDownLeftRight;
 
   /** No-op handler bound to header outputs so the demo stays interactive without side effects. */

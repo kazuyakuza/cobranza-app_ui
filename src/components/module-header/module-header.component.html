@@ -18,7 +18,12 @@
 
   @if (!isFullscreen()) {
     <nav class="cba-module-header__section cba-module-header__section--actions">
-      <!-- Optional drag-handle projection slot. Shell projects a [cbaModuleDragHandle] element here (e.g. cdkDragHandle). Hidden in fullscreen mode. -->
+      <!--
+        Optional drag-handle projection slot. The Shell projects a [cbaModuleDragHandle]
+        element here (e.g. cdkDragHandle). The library does NOT render a built-in drag
+        button — this slot is the only source of a drag handle. Hidden in fullscreen.
+        @see docs/CBA_MODULE_HEADER.md#drag-handle-slot
+      -->
       <ng-content select="[cbaModuleDragHandle]"></ng-content>
 
       <button
