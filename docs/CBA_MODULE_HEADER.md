@@ -122,20 +122,20 @@ The built-in action icons are rendered left-to-right in the following fixed orde
 
 | Position | Action | Font Awesome icon | Output |
 | --- | --- | --- | --- |
-| 0 | Drag handle (projected, Shell-owned) | Shell-provided | — |
-| 1 | Drag (no-op) | `faUpDownLeftRight` | — |
-| 2 | Collapse / expand | `chevron-up` / `chevron-down` | `collapseToggle` |
-| 3 | Size toggle (50% ↔ 100%) | `arrows-left-right-to-line` / `arrows-left-right` | `sizeToggle` |
-| 4 | Fullscreen | `window-maximize` | `fullscreenToggle` |
-| 5 | Remove | `xmark` | `remove` |
+| 0 (optional, projected) | Drag handle (Shell-owned) | Shell-provided | — |
+| 0 / 1 | Collapse / expand | `chevron-up` / `chevron-down` | `collapseToggle` |
+| 1 / 2 | Size toggle (50% ↔ 100%) | `arrows-left-right-to-line` / `arrows-left-right` | `sizeToggle` |
+| 2 / 3 | Fullscreen | `window-maximize` | `fullscreenToggle` |
+| 3 / 4 | Remove | `xmark` | `remove` |
+
+> The dual position notation means: when a drag handle is projected it occupies position 0 and the built-ins shift right; otherwise the built-ins start at position 0.
 
 The order is hard-coded in the template and must not be rearranged by consumers.
 
 > **Optional drag handle:** When the Shell projects a `[cbaModuleDragHandle]`
-> element (see [Drag handle slot](#drag-handle-slot)), it is rendered at
-> position 0, before the built-in no-op drag icon (position 1) and the rest of
-> the fixed action set. The library renders nothing at position 0 when the slot
-> is empty; position 1 is always rendered as a no-op drag affordance.
+> element (see [Drag handle slot](#drag-handle-slot)), it is rendered before the
+> built-in action buttons. The library renders nothing at that position when the
+> slot is empty; only the four built-in action buttons are shown.
 
 ## Drag handle slot
 
@@ -156,7 +156,7 @@ Rules:
 
 - The projected element is rendered **before** the built-in action buttons.
 - The slot is hidden in fullscreen mode (title-only), exactly like the other actions.
-- When nothing is projected at position 0, no empty gap is left; the built-in no-op drag button (position 1) is always rendered.
+- When nothing is projected, no empty gap is left; only the four built-in action buttons are rendered.
 - Apply `class="cba-module-header__action cba-module-header__action--drag"` on the
   projected element to inherit the library's 32 × 32 px hit target, hover/active
   states, focus ring, and `grab`/`grabbing` cursor without any `::ng-deep` piercing.
