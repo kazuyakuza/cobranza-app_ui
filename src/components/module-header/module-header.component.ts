@@ -174,6 +174,9 @@ export class ModuleHeaderComponent {
     return current === null ? null : `cba-module-header__status--${current}`;
   });
 
+  /** Whether the status section is rendered: hidden while fullscreen or when `showStatus` is `false`. */
+  readonly showStatusSection = computed<boolean>(() => !this.isFullscreen() && this.showStatus());
+
   /** Icons referenced directly by the header template. */
   protected readonly faFullscreen = faWindowMaximize;
   protected readonly faXmark = faXmark;

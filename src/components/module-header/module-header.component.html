@@ -1,5 +1,5 @@
 <header class="cba-module-header">
-  @if (!isFullscreen() && showStatus()) {
+  @if (showStatusSection()) {
     <div
       class="cba-module-header__section cba-module-header__section--status"
       [class]="statusClass() ?? ''">
