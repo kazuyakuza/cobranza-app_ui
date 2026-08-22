@@ -135,6 +135,21 @@ export class ModuleHeaderComponent {
   /** Optional status indicator rendered in the left section. `null` renders nothing. */
   readonly status = input<ModuleHeaderStatus>(null);
 
+  /**
+   * Whether the status icon section is rendered.
+   * When `false` the left status section is removed from the DOM.
+   * Does not affect the status value itself.
+   * @default true
+   */
+  readonly showStatus = input<boolean>(true);
+
+  /**
+   * Whether the title section is rendered.
+   * When `false` the center title section is removed from the DOM.
+   * @default true
+   */
+  readonly showTitle = input<boolean>(true);
+
   /** Emitted when the user clicks the collapse / expand button. */
   readonly collapseToggle = output<void>();
 

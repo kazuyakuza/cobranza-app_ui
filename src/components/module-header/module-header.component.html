@@ -1,5 +1,5 @@
 <header class="cba-module-header">
-  @if (!isFullscreen()) {
+  @if (!isFullscreen() && showStatus()) {
     <div
       class="cba-module-header__section cba-module-header__section--status"
       [class]="statusClass() ?? ''">
@@ -12,9 +12,11 @@
     </div>
   }
 
-  <div class="cba-module-header__section cba-module-header__section--title cba-text-heading-md">
-    {{ title() }}
-  </div>
+  @if (showTitle()) {
+    <div class="cba-module-header__section cba-module-header__section--title cba-text-heading-md">
+      {{ title() }}
+    </div>
+  }
 
   @if (!isFullscreen()) {
     <nav class="cba-module-header__section cba-module-header__section--actions">

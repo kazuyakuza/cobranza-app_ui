@@ -84,6 +84,26 @@ export class ShellComponent {
 | isCollapsed | boolean | false | no | Whether the module body is collapsed. Drives collapse/expand icon. |
 | isFullscreen | boolean | false | no | When true, only the title is shown. |
 | status | 'loading' \| 'loaded' \| 'success' \| 'warning' \| 'error' \| 'dirty' \| null | null | no | Optional status indicator. |
+| showStatus | boolean | true | no | When `false`, the status icon section is hidden. |
+| showTitle | boolean | true | no | When `false`, the title section is hidden. |
+
+### Visibility inputs
+
+`showStatus` and `showTitle` are boolean inputs (default `true`) that remove their
+respective sections from the DOM when bound to `false`. They are independent of the
+status value and of each other.
+
+- `showStatus = false` removes the left `.cba-module-header__section--status` `<div>`.
+  The `status` input itself is unaffected; binding `status` while `showStatus` is
+  `false` simply has no visible effect.
+- `showTitle = false` removes the center `.cba-module-header__section--title` `<div>`.
+- `status = null` continues to render an **empty** status `<div>` (no icon) when
+  `showStatus` is not bound — this is the pre-existing behaviour and is still respected.
+  To remove the section entirely, bind `showStatus = false`.
+- `isFullscreen` takes precedence over `showStatus` for the status section: in
+  fullscreen the status section is hidden regardless of `showStatus`. `showTitle` is
+  **not** gated by `isFullscreen`, so `[isFullscreen]="true"` + `[showTitle]="false"`
+  renders no header content.
 
 ## Outputs
 
@@ -104,7 +124,7 @@ export class ShellComponent {
 | `warning` | Warning triangle icon | Soft validation / incomplete data. |
 | `error` | Error icon | Load failure / hard validation. |
 | `dirty` | Pencil icon | Unsaved changes present. |
-| `null` | Nothing rendered | Normal state. |
+| `null` | Nothing rendered | Normal state. Same as before and still respected when `showStatus` is not bound (the status `<div>` renders empty). |
 
 ## Fullscreen behaviour
 
@@ -112,6 +132,13 @@ When `isFullscreen === true`, the component renders **only** the title; status
 and action buttons are removed from the DOM. The host element receives the
 `cba-module-header--fullscreen` CSS class, which removes the background and
 border-bottom so the header blends into the Shell's fullscreen chrome.
+
+`isFullscreen` hides the status section and the actions nav **independently** of
+`showStatus` — the status section is removed in fullscreen even when `showStatus`
+is explicitly `true`. `showTitle` is **not** affected by fullscreen mode, so
+binding `[isFullscreen]="true"` together with `[showTitle]="false"` renders no
+header content at all. Do not add cross-guards between `isFullscreen` and
+`showTitle`; the two inputs are intentionally orthogonal.
 
 Back navigation and the "Workbench" action are owned by the Shell header/footer,
 not by this component.

@@ -114,6 +114,84 @@ describe('ModuleHeaderComponent', () => {
     const navButtons = fixture.nativeElement.querySelectorAll('nav button');
     expect(navButtons).toHaveLength(4);
   });
+
+  it('hides the status section when showStatus is false', () => {
+    setup();
+    fixture.componentRef.setInput('status', 'loading');
+    fixture.componentRef.setInput('showStatus', false);
+    fixture.detectChanges();
+
+    const statusSection = fixture.nativeElement.querySelector(
+      '.cba-module-header__section--status',
+    ) as HTMLElement;
+
+    expect(statusSection).toBeNull();
+  });
+
+  it('shows the status icon when showStatus is true and status is non-null', () => {
+    setup();
+    fixture.componentRef.setInput('status', 'success');
+    fixture.componentRef.setInput('showStatus', true);
+    fixture.detectChanges();
+
+    const statusSection = fixture.nativeElement.querySelector(
+      '.cba-module-header__section--status',
+    ) as HTMLElement;
+
+    expect(statusSection).not.toBeNull();
+    expect(statusSection.querySelector('fa-icon')).not.toBeNull();
+  });
+
+  it('still hides the status icon when status is null even if showStatus defaults to true', () => {
+    setup();
+    const statusSection = fixture.nativeElement.querySelector(
+      '.cba-module-header__section--status',
+    ) as HTMLElement;
+
+    expect(statusSection.querySelector('fa-icon')).toBeNull();
+  });
+
+  it('hides the title section when showTitle is false', () => {
+    setup();
+    fixture.componentRef.setInput('showTitle', false);
+    fixture.detectChanges();
+
+    const titleSection = fixture.nativeElement.querySelector(
+      '.cba-module-header__section--title',
+    ) as HTMLElement;
+
+    expect(titleSection).toBeNull();
+    expect(fixture.nativeElement.textContent).not.toContain('Test Module');
+  });
+
+  it('shows the title section when showTitle is true', () => {
+    setup();
+    fixture.componentRef.setInput('showTitle', true);
+    fixture.detectChanges();
+
+    const titleSection = fixture.nativeElement.querySelector(
+      '.cba-module-header__section--title',
+    ) as HTMLElement;
+
+    expect(titleSection).not.toBeNull();
+    expect(titleSection.textContent).toContain('Test Module');
+  });
+
+  it('hides status and actions in fullscreen even when showStatus is explicitly true', () => {
+    setup();
+    fixture.componentRef.setInput('status', 'loaded');
+    fixture.componentRef.setInput('showStatus', true);
+    fixture.componentRef.setInput('isFullscreen', true);
+    fixture.detectChanges();
+
+    const actionsNav = fixture.nativeElement.querySelector('nav');
+    const statusSection = fixture.nativeElement.querySelector(
+      '.cba-module-header__section--status',
+    );
+
+    expect(actionsNav).toBeNull();
+    expect(statusSection).toBeNull();
+  });
 });
 
 describe('ModuleHeaderComponent — drag handle projection slot', () => {
