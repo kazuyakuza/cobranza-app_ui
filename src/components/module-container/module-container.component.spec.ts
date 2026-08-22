@@ -21,6 +21,10 @@ describe('ModuleContainerComponent', () => {
     return bodyRegion() !== null;
   }
 
+  function headerRegion(): Element | null {
+    return fixture.nativeElement.querySelector('.cba-module-container__header');
+  }
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [ModuleContainerComponent],
@@ -86,5 +90,18 @@ describe('ModuleContainerComponent', () => {
     // CSS overscroll-behavior switch is not computable in jsdom; the host
     // modifier class is the contract (mirrors the fullscreen chrome test).
     expect(hostHasClass('cba-module-container--scroll-chaining')).toBe(true);
+  });
+
+  it('renders the header by default and visually hides it when showHeader is false', () => {
+    setup();
+    expect(headerRegion()).not.toBeNull();
+    expect(hostHasClass('cba-module-container--header-hidden')).toBe(false);
+
+    fixture.componentRef.setInput('showHeader', false);
+    fixture.detectChanges();
+
+    // The header band must remain in the DOM; visibility is CSS-driven only.
+    expect(headerRegion()).not.toBeNull();
+    expect(hostHasClass('cba-module-container--header-hidden')).toBe(true);
   });
 });

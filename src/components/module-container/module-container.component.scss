@@ -113,3 +113,8 @@
 :host(.cba-module-container--scroll-chaining) .cba-module-container__body {
   overscroll-behavior: auto;
 }
+
+/* Task 1 — visual header visibility toggle (header stays in the DOM). */
+:host(.cba-module-container--header-hidden) .cba-module-container__header {
+  display: none;
+}

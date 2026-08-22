@@ -90,6 +90,7 @@ import {
     '[class.cba-module-container--padding-sm]': "padding() === 'sm'",
     '[class.cba-module-container--padding-md]': "padding() === 'md'",
     '[class.cba-module-container--scroll-chaining]': 'scrollChaining()',
+    '[class.cba-module-container--header-hidden]': '!showHeader()',
   },
 })
 export class ModuleContainerComponent {
@@ -153,4 +154,17 @@ export class ModuleContainerComponent {
    * @default false
    */
   readonly scrollChaining = input<boolean>(false);
+
+  /**
+   * Visually hides the projected header band when `false`.
+   *
+   * The header element (`.cba-module-container__header`) remains in the DOM;
+   * hiding is achieved purely through CSS via the
+   * `cba-module-container--header-hidden` host modifier. This keeps the
+   * component's flex layout stable and avoids remounting the projected
+   * `cba-module-header` when visibility toggles.
+   *
+   * @default true
+   */
+  readonly showHeader = input<boolean>(true);
 }

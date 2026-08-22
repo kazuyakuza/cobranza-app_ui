@@ -13,6 +13,7 @@ Wrapper that hosts a projected module header and the MFE body inside the Company
 - [Fullscreen behaviour](#fullscreen-behaviour)
 - [Padding options](#padding-options)
 - [Scroll behaviour](#scroll-behaviour)
+- [Header visibility](#header-visibility)
 - [Accessibility](#accessibility)
 - [Related docs](#related-docs)
 
@@ -103,6 +104,7 @@ export class ShellComponent {
 | isFullscreen | `boolean` | `false` | no | When `true` module chrome (border-radius, shadow) is suppressed; the Shell fullscreen view owns the outer chrome. Adds the `cba-module-container--fullscreen` host modifier. |
 | padding | `'none' \| 'sm' \| 'md'` | `'sm'` | no | Internal padding of the body region. Drives the `cba-module-container--padding-none` / `cba-module-container--padding-sm` / `cba-module-container--padding-md` host modifiers. |
 | scrollChaining | `boolean` | `false` | no | When `true`, wheel events chain to the workspace once the module body reaches its scroll edge (sets `overscroll-behavior: auto` on `.cba-module-container__body`). Default `false` keeps scroll contained inside the module body. Drives the `cba-module-container--scroll-chaining` host modifier. |
+| showHeader | `boolean` | `true` | no | When `false`, the header band is visually hidden via CSS (`display: none`). The header remains in the DOM. Adds the `cba-module-container--header-hidden` host modifier. |
 
 The container never mutates these values — the Shell owns the source of truth and re-binds state on every change.
 
@@ -152,6 +154,16 @@ All values come from `--cba-*` spacing tokens (see `src/theme/_variables.scss`).
 - The body region (`.cba-module-container__body`) is the scroll container: `overflow-y: auto`, `flex: 1 1 auto`, `min-height: 0`, and `overscroll-behavior: contain` (default).
 - By default scroll is contained inside the body — wheel events stop at the module's edge and the Shell workspace scrolls independently. Set `[scrollChaining]="true"` to switch the body to `overscroll-behavior: auto` so wheel events chain to the workspace once the module body reaches its scroll boundary.
 - Scrollbar styling is CSS-only and thin by default; the WebKit thumb widens on hover. Optional top/bottom jump buttons are out of scope for this phase.
+
+## Header visibility
+
+By default the projected header band is visible.
+
+When `showHeader === false`:
+
+- The host receives the `cba-module-container--header-hidden` modifier.
+- The header region (`.cba-module-container__header`) is hidden with `display: none` through the `:host(.cba-module-container--header-hidden) .cba-module-container__header` selector.
+- The header element **remains in the DOM** — this is a visual toggle only, unlike the footer slot which is removed from the DOM when the module is collapsed.
 
 ## Accessibility
 
