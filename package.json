@@ -33,7 +33,7 @@
     "build": "npm run build:lib && npm run build:demo",
     "build:lib": "ng-packagr -p ng-package.json -c tsconfig.lib.json",
     "build:demo": "ng build demo",
-    "start:demo": "rimraf .angular/cache && ng serve demo",
+    "start:demo": "npm run build:lib && rimraf .angular/cache && ng serve demo",
     "test": "jest --passWithNoTests",
     "lint": "eslint \"src/**/*.ts\"",
     "format": "prettier --write \"src/**/*.{ts,scss,css,json,md}\""
