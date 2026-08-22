@@ -286,6 +286,12 @@ Rules:
   only from the header handle.
 - The library owns the visual styling contract (`.cba-module-header__action*`
   classes); the Shell owns the drag behaviour and the accessible name.
+- The **show / hide / enable** state of the drag handle is owned by the **Shell
+  consumer**, not the library. The library exposes **no** `showDragHandle` or
+  `enableDragHandle` input and will not add them — the handle is a projected
+  element, so the Shell controls its presence, visibility, and `disabled` state
+  directly (e.g. via `@if`, `[hidden]`, or `[disabled]` on the projected
+  `<button>`). `actionsConfig` never affects the drag handle.
 - **Anti-pattern:** asking the UI library to implement drag behaviour or to add
   `@angular/cdk` as a dependency. See `docs/CONSUMER_GUIDE.md` §Shell checklist.
 
