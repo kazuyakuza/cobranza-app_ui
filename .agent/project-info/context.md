@@ -16,6 +16,7 @@
 
 ## Current Work Focus
 
+- **Module header visibility & action controls complete (v0.19.0)**: `ModuleContainer.showHeader`, `ModuleHeader.showStatus` / `showTitle`, and `ModuleHeader.actionsConfig` (per-action visibility + enabled/disabled) delivered. Backward compatible; drag handle stays consumer-owned via the `[cbaModuleDragHandle]` slot. All merged to `main`.
 - **Phase 12 — Part C complete (v0.18.0)**: demo app delivered and static HTML preview removed. See "Recent Changes" for full details.
 - **Shell UI Bug Fixes Round 2 complete (v0.14.0)**: six library-side fixes identified during Shell UI Bug Fixes Round 2 have been implemented and published. ModuleContainer now exposes `scrollChaining` and retains background color in fullscreen mode. CbaButton gained `truncate`, `iconOnly`, and `block` inputs. The theme preview HTML was completely rewritten with a minimizable sidebar, Shell+MFE workspace mockup, seven module examples, and an expanded style showcase. All changes merged to `main` and pushed to `origin`.
 - **Phase 10 — Theme Hardening complete (v0.12.1)**: theme is hardened and ready as platform foundation for real MFEs. Preview now accurately reflects actual component rendering. Surfaces and borders retuned for multi-module density, selected/form-state/typography tokens added, ModuleHeader actions reworked, form controls wired to visual states, and consumer docs (THEME.md, CONSUMER_GUIDE.md) updated. Next focus: real product UI on top of tokens + consumer guide.
@@ -24,6 +25,8 @@
 - Active branch: `fix/theme-import-dev-server` (v0.15.2 — theme dev-server directory-index fix in progress).
 
 ## Recent Changes
+
+- **Module header visibility & action controls (2026-08-21, v0.19.0)** — `ModuleContainerComponent` gained `showHeader` (visual header band show/hide via host modifier). `ModuleHeaderComponent` gained `showStatus` and `showTitle` explicit boolean inputs (replacing the `status = null` workaround, backward compatible) and an `actionsConfig` input for per-action visibility and enabled/disabled control of the collapse, size toggle, fullscreen, and remove buttons. Drag handle ownership remains with the Shell consumer via the `[cbaModuleDragHandle]` slot. Docs updated (`docs/CBA_MODULE_CONTAINER.md`, `docs/CBA_MODULE_HEADER.md`); `CHANGELOG.md` dated `[0.19.0] — 2026-08-21`. See `.agent/todos/20260821/20260821-todo-0.md`.
 
 - **Demo header search input centering spec (2026-08-20)** — Front-end technical specification created at `.kilo/plans/20260820-fix-demo-bugs-task2-frontend-spec.md`. Identifies the root cause as unequal left/right header group widths combined with `margin: 0 auto`, and prescribes a flexbox equal-gutter layout with no markup changes.
 

@@ -30,6 +30,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > Releases prior to 0.8.1 predate this changelog and are not reconstructed retroactively.
 
+## [0.19.0] — 2026-08-21
+
+### Added
+
+- `ModuleContainerComponent.showHeader` input (boolean, default `true`) — visually hides the header band (`.cba-module-container__header`) via a host modifier when `false`. The header stays in the DOM; this is a visual effect only, not structural removal like the optional footer slot. See `docs/CBA_MODULE_CONTAINER.md`.
+- `ModuleHeaderComponent.showStatus` input (boolean, default `true`) — independently shows/hides the status icon, replacing the `status = null` workaround. Backward compatible: `status = null` still hides the icon when `showStatus` is not explicitly bound.
+- `ModuleHeaderComponent.showTitle` input (boolean, default `true`) — independently shows/hides the title.
+- `ModuleHeaderComponent.actionsConfig` input — per-action visibility and enabled/disabled control for the collapse, size toggle, fullscreen, and remove action buttons. Each action exposes a `showXxx` flag (visual) and an `enableXxx` flag (sets `[disabled]` on the native `<button>`). See `docs/CBA_MODULE_HEADER.md`.
+
+### Notes
+
+- Source TODO: `.agent/todos/20260821/20260821-todo-0.md` (Tasks 1–4).
+- The drag handle remains fully consumer-controlled via the `[cbaModuleDragHandle]` projection slot; no library-level show/hide/enable flag was added for it. See `docs/CBA_MODULE_HEADER.md` §Drag handle slot.
+- All new inputs default to previous behaviour; the change is additive and backward-compatible. No `--cba-*` token names, component selectors, or public exports changed.
+- Compliance: no `[Unreleased]` section introduced (per `.kilo/rules/changelog-versioning.md`).
+
 ## [0.18.6] — 2026-08-20
 
 ### Fixed
