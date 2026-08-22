@@ -71,6 +71,12 @@
   background-color: var(--cba-active);
 }
 
+.cba-module-header__action:disabled {
+  color: var(--cba-state-disabled-text);
+  background-color: transparent;
+  cursor: not-allowed;
+}
+
 .cba-module-header__action--drag {
   cursor: grab;
 }

@@ -8,6 +8,7 @@ Shell-injected header rendered above each MFE module in the Company Back-office 
 - [Basic usage](#basic-usage)
 - [Inputs](#inputs)
 - [Outputs](#outputs)
+- [Action controls](#action-controls)
 - [Status values](#status-values)
 - [Fullscreen behaviour](#fullscreen-behaviour)
 - [Icon order](#icon-order)
@@ -86,6 +87,7 @@ export class ShellComponent {
 | status | 'loading' \| 'loaded' \| 'success' \| 'warning' \| 'error' \| 'dirty' \| null | null | no | Optional status indicator. |
 | showStatus | boolean | true | no | When `false`, the status icon section is hidden. |
 | showTitle | boolean | true | no | When `false`, the title section is hidden. |
+| actionsConfig | ModuleHeaderActionsConfig | all actions visible and enabled | no | Per-action visibility (`showXxx`) and disabled state (`enableXxx`) for each built-in action button. Partial objects are merged with defaults. |
 
 ### Visibility inputs
 
@@ -104,6 +106,56 @@ status value and of each other.
   fullscreen the status section is hidden regardless of `showStatus`. `showTitle` is
   **not** gated by `isFullscreen`, so `[isFullscreen]="true"` + `[showTitle]="false"`
   renders no header content.
+
+### Action controls
+
+The `actionsConfig` input accepts a `ModuleHeaderActionsConfig` object that bundles
+eight optional boolean flags — one `showXxx` and one `enableXxx` for each built-in
+action button (collapse, size toggle, fullscreen, remove). All flags default to
+`true`, so consumers that do not bind `actionsConfig` continue to see every action
+visible and enabled with identical output behaviour (full backward compatibility).
+
+- `showXxx = false` **removes** the corresponding button from the DOM via `@if`,
+  consistent with `showStatus` / `showTitle`. Hidden buttons emit nothing and are
+  absent from the tab order.
+- `enableXxx = false` keeps the button in the DOM but sets `[disabled]` on the
+  native `<button>`. Disabled buttons remain in the tab order (native
+  `<button disabled>` behaviour) and keep their `aria-label` / `title`, but clicks
+  do not emit the corresponding output.
+- `isFullscreen` takes precedence: in fullscreen the entire actions `<nav>` is
+  removed from the DOM regardless of any `showXxx` value.
+- The projected drag handle (`[cbaModuleDragHandle]` slot) is **not** affected by
+  `actionsConfig`; its show/hide/enable behaviour is owned by the Shell consumer.
+
+Partial config example — hide the remove button and disable the fullscreen button:
+
+```html
+<cba-module-header
+  title="Customer Module"
+  [size]="size"
+  [isCollapsed]="isCollapsed"
+  [isFullscreen]="isFullscreen"
+  [actionsConfig]="{ showRemove: false, enableFullscreen: false }"
+  (collapseToggle)="onCollapse()"
+  (sizeToggle)="onSizeChange($event)"
+  (fullscreenToggle)="onFullscreen()">
+</cba-module-header>
+```
+
+The `actionsConfig` type is exported from `@cobranza-apps/ui`:
+
+```ts
+export interface ModuleHeaderActionsConfig {
+  showCollapse?: boolean;
+  showSizeToggle?: boolean;
+  showFullscreen?: boolean;
+  showRemove?: boolean;
+  enableCollapse?: boolean;
+  enableSizeToggle?: boolean;
+  enableFullscreen?: boolean;
+  enableRemove?: boolean;
+}
+```
 
 ## Outputs
 
@@ -158,6 +210,11 @@ The built-in action icons are rendered left-to-right in the following fixed orde
 > The dual position notation means: when a drag handle is projected it occupies position 0 and the built-ins shift right; otherwise the built-ins start at position 0.
 
 The order is hard-coded in the template and must not be rearranged by consumers.
+
+> **Hidden actions:** when an action is removed via `actionsConfig.showXxx = false`,
+> it is skipped entirely (no empty slot is rendered). Built-in positions shift only
+> relative to the projected drag handle, not relative to hidden built-ins. See
+> [Action controls](#action-controls).
 
 > **Optional drag handle:** When the Shell projects a `[cbaModuleDragHandle]`
 > element (see [Drag handle slot](#drag-handle-slot)), it is rendered before the
@@ -258,6 +315,10 @@ unless absolutely necessary; if a different weight is required, use the
 - Status icons use `aria-hidden="true"` — they are decorative; the status meaning is conveyed to assistive technology via the host component's own semantics.
 - `:focus-visible` uses the `--cba-focus-ring` token for a visible focus indicator.
 - The `prefers-reduced-motion: reduce` media query disables all transitions and the spin animation.
+- Disabled action buttons (`actionsConfig.enableXxx = false`) remain visible and in
+  the tab order (native `<button disabled>` behaviour) and keep their `aria-label` /
+  `title`; only their click interaction is suppressed. Buttons hidden via
+  `actionsConfig.showXxx = false` are removed from the DOM and the tab order entirely.
 
 ## Related docs
 

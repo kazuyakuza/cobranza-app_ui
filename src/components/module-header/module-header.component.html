@@ -28,41 +28,53 @@
       -->
       <ng-content select="[cbaModuleDragHandle]"></ng-content>
 
-      <button
-        type="button"
-        class="cba-module-header__action"
-        [attr.aria-label]="collapseLabel()"
-        [title]="collapseLabel()"
-        (click)="collapseToggle.emit()">
-        <fa-icon [icon]="collapseIcon()" aria-hidden="true" />
-      </button>
+      @if (effectiveActionsConfig().showCollapse) {
+        <button
+          type="button"
+          class="cba-module-header__action"
+          [attr.aria-label]="collapseLabel()"
+          [title]="collapseLabel()"
+          [disabled]="!effectiveActionsConfig().enableCollapse"
+          (click)="collapseToggle.emit()">
+          <fa-icon [icon]="collapseIcon()" aria-hidden="true" />
+        </button>
+      }
 
-      <button
-        type="button"
-        class="cba-module-header__action"
-        [attr.aria-label]="sizeToggleLabel()"
-        [title]="sizeToggleLabel()"
-        (click)="sizeToggle.emit(sizeToggleTarget())">
-        <fa-icon [icon]="sizeToggleIcon()" aria-hidden="true" />
-      </button>
+      @if (effectiveActionsConfig().showSizeToggle) {
+        <button
+          type="button"
+          class="cba-module-header__action"
+          [attr.aria-label]="sizeToggleLabel()"
+          [title]="sizeToggleLabel()"
+          [disabled]="!effectiveActionsConfig().enableSizeToggle"
+          (click)="sizeToggle.emit(sizeToggleTarget())">
+          <fa-icon [icon]="sizeToggleIcon()" aria-hidden="true" />
+        </button>
+      }
 
-      <button
-        type="button"
-        class="cba-module-header__action"
-        [attr.aria-label]="aria.fullscreen"
-        [title]="aria.fullscreen"
-        (click)="fullscreenToggle.emit()">
-        <fa-icon [icon]="faFullscreen" aria-hidden="true" />
-      </button>
+      @if (effectiveActionsConfig().showFullscreen) {
+        <button
+          type="button"
+          class="cba-module-header__action"
+          [attr.aria-label]="aria.fullscreen"
+          [title]="aria.fullscreen"
+          [disabled]="!effectiveActionsConfig().enableFullscreen"
+          (click)="fullscreenToggle.emit()">
+          <fa-icon [icon]="faFullscreen" aria-hidden="true" />
+        </button>
+      }
 
-      <button
-        type="button"
-        class="cba-module-header__action"
-        [attr.aria-label]="aria.remove"
-        [title]="aria.remove"
-        (click)="remove.emit()">
-        <fa-icon [icon]="faXmark" aria-hidden="true" />
-      </button>
+      @if (effectiveActionsConfig().showRemove) {
+        <button
+          type="button"
+          class="cba-module-header__action"
+          [attr.aria-label]="aria.remove"
+          [title]="aria.remove"
+          [disabled]="!effectiveActionsConfig().enableRemove"
+          (click)="remove.emit()">
+          <fa-icon [icon]="faXmark" aria-hidden="true" />
+        </button>
+      }
     </nav>
   }
 </header>

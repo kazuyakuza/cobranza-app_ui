@@ -23,6 +23,8 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { CBA_UI_MESSAGES } from '../../i18n/ui-messages';
 import {
+  DEFAULT_MODULE_HEADER_ACTIONS_CONFIG,
+  ModuleHeaderActionsConfig,
   ModuleHeaderSize,
   ModuleHeaderStatus,
 } from './module-header.types';
@@ -149,6 +151,20 @@ export class ModuleHeaderComponent {
    * @default true
    */
   readonly showTitle = input<boolean>(true);
+
+  /**
+   * Visibility and disabled-state controls for the built-in action buttons.
+   * Partial values are merged with {@link DEFAULT_MODULE_HEADER_ACTIONS_CONFIG}.
+   * @default DEFAULT_MODULE_HEADER_ACTIONS_CONFIG
+   */
+  readonly actionsConfig = input<ModuleHeaderActionsConfig>(
+    DEFAULT_MODULE_HEADER_ACTIONS_CONFIG,
+  );
+
+  /** Effective action controls after merging the user-provided partial config with defaults. */
+  protected readonly effectiveActionsConfig = computed<Required<ModuleHeaderActionsConfig>>(
+    () => ({ ...DEFAULT_MODULE_HEADER_ACTIONS_CONFIG, ...this.actionsConfig() }),
+  );
 
   /** Emitted when the user clicks the collapse / expand button. */
   readonly collapseToggle = output<void>();

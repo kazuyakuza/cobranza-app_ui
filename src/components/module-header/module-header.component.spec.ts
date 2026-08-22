@@ -1,7 +1,7 @@
 import { Component, OutputEmitterRef } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ModuleHeaderComponent } from './module-header.component';
-import { ModuleHeaderSize } from './module-header.types';
+import { ModuleHeaderActionsConfig, ModuleHeaderSize } from './module-header.types';
 
 interface ActionCase {
   readonly label: string;
@@ -191,6 +191,107 @@ describe('ModuleHeaderComponent', () => {
 
     expect(actionsNav).toBeNull();
     expect(statusSection).toBeNull();
+  });
+
+  interface VisibilityCase {
+    readonly label: string;
+    readonly hideFlag: keyof ModuleHeaderActionsConfig;
+  }
+
+  const VISIBILITY_CASES: readonly VisibilityCase[] = [
+    { label: 'Colapsar módulo', hideFlag: 'showCollapse' },
+    { label: 'Reducir módulo a 50%', hideFlag: 'showSizeToggle' },
+    { label: 'Pantalla completa', hideFlag: 'showFullscreen' },
+    { label: 'Quitar módulo', hideFlag: 'showRemove' },
+  ];
+
+  it.each(VISIBILITY_CASES)(
+    'removes the $label button from the DOM when $hideFlag is false',
+    ({ label, hideFlag }) => {
+      setup();
+      fixture.componentRef.setInput('actionsConfig', { [hideFlag]: false });
+      fixture.detectChanges();
+
+      expect(queryButton(label)).toBeNull();
+    },
+  );
+
+  interface DisabledCase {
+    readonly label: string;
+    readonly disableFlag: keyof ModuleHeaderActionsConfig;
+  }
+
+  const DISABLED_CASES: readonly DisabledCase[] = [
+    { label: 'Colapsar módulo', disableFlag: 'enableCollapse' },
+    { label: 'Reducir módulo a 50%', disableFlag: 'enableSizeToggle' },
+    { label: 'Pantalla completa', disableFlag: 'enableFullscreen' },
+    { label: 'Quitar módulo', disableFlag: 'enableRemove' },
+  ];
+
+  it.each(DISABLED_CASES)(
+    'disables the $label button when $disableFlag is false',
+    ({ label, disableFlag }) => {
+      setup();
+      fixture.componentRef.setInput('actionsConfig', { [disableFlag]: false });
+      fixture.detectChanges();
+
+      expect(queryButton(label).disabled).toBe(true);
+    },
+  );
+
+  interface EmissionCase {
+    readonly label: string;
+    readonly disableFlag: keyof ModuleHeaderActionsConfig;
+    readonly output: 'collapseToggle' | 'sizeToggle' | 'remove' | 'fullscreenToggle';
+  }
+
+  const EMISSION_CASES: readonly EmissionCase[] = [
+    { label: 'Colapsar módulo', disableFlag: 'enableCollapse', output: 'collapseToggle' },
+    { label: 'Reducir módulo a 50%', disableFlag: 'enableSizeToggle', output: 'sizeToggle' },
+    { label: 'Pantalla completa', disableFlag: 'enableFullscreen', output: 'fullscreenToggle' },
+    { label: 'Quitar módulo', disableFlag: 'enableRemove', output: 'remove' },
+  ];
+
+  it.each(EMISSION_CASES)(
+    'does not emit $output when the $label button is disabled',
+    ({ label, disableFlag, output }) => {
+      const component = setup();
+      const emitted: unknown[] = [];
+      (component[output] as OutputEmitterRef<unknown>).subscribe((value) =>
+        emitted.push(value),
+      );
+
+      fixture.componentRef.setInput('actionsConfig', { [disableFlag]: false });
+      fixture.detectChanges();
+
+      queryButton(label).click();
+
+      expect(emitted).toHaveLength(0);
+    },
+  );
+
+  it('renders all four action buttons enabled by default', () => {
+    setup();
+    const navButtons = fixture.nativeElement.querySelectorAll('nav button');
+
+    expect(navButtons).toHaveLength(4);
+    navButtons.forEach((button: HTMLButtonElement) => {
+      expect(button.disabled).toBe(false);
+    });
+  });
+
+  it('hides all action buttons in fullscreen regardless of actionsConfig', () => {
+    setup();
+    fixture.componentRef.setInput('actionsConfig', {
+      showCollapse: true,
+      showSizeToggle: true,
+      showFullscreen: true,
+      showRemove: true,
+    });
+    fixture.componentRef.setInput('isFullscreen', true);
+    fixture.detectChanges();
+
+    expect(fixture.nativeElement.querySelector('nav')).toBeNull();
   });
 });
 
