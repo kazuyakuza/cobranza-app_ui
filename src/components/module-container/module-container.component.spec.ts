@@ -1,8 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { InputSignal } from '@angular/core';
 import { ModuleContainerComponent } from './module-container.component';
 
 describe('ModuleContainerComponent', () => {
   let fixture: ComponentFixture<ModuleContainerComponent>;
+
+  function setInput<T extends keyof ModuleContainerComponent>(
+    name: T,
+    value: ModuleContainerComponent[T] extends InputSignal<infer V> ? V : never,
+  ): void {
+    fixture.componentRef.setInput(name, value);
+    fixture.detectChanges();
+  }
 
   function setup(): void {
     fixture = TestBed.createComponent(ModuleContainerComponent);
@@ -36,8 +45,7 @@ describe('ModuleContainerComponent', () => {
     expect(hostHasClass('cba-module-container--size-100')).toBe(true);
     expect(hostHasClass('cba-module-container--size-50')).toBe(false);
 
-    fixture.componentRef.setInput('size', '50%');
-    fixture.detectChanges();
+    setInput('size', '50%');
 
     expect(hostHasClass('cba-module-container--size-50')).toBe(true);
     expect(hostHasClass('cba-module-container--size-100')).toBe(false);
@@ -48,8 +56,7 @@ describe('ModuleContainerComponent', () => {
     expect(bodyIsRendered()).toBe(true);
     expect(hostHasClass('cba-module-container--collapsed')).toBe(false);
 
-    fixture.componentRef.setInput('isCollapsed', true);
-    fixture.detectChanges();
+    setInput('isCollapsed', true);
 
     expect(bodyIsRendered()).toBe(false);
     expect(hostHasClass('cba-module-container--collapsed')).toBe(true);
@@ -59,8 +66,7 @@ describe('ModuleContainerComponent', () => {
     setup();
     expect(hostHasClass('cba-module-container--fullscreen')).toBe(false);
 
-    fixture.componentRef.setInput('isFullscreen', true);
-    fixture.detectChanges();
+    setInput('isFullscreen', true);
 
     // CSS chrome suppression and background-color retention are not testable
     // in jsdom; the host modifier is the contract.
@@ -71,12 +77,10 @@ describe('ModuleContainerComponent', () => {
     setup();
     expect(hostHasClass('cba-module-container--padding-sm')).toBe(true);
 
-    fixture.componentRef.setInput('padding', 'none');
-    fixture.detectChanges();
+    setInput('padding', 'none');
     expect(hostHasClass('cba-module-container--padding-none')).toBe(true);
 
-    fixture.componentRef.setInput('padding', 'md');
-    fixture.detectChanges();
+    setInput('padding', 'md');
     expect(hostHasClass('cba-module-container--padding-md')).toBe(true);
   });
 
@@ -84,8 +88,7 @@ describe('ModuleContainerComponent', () => {
     setup();
     expect(hostHasClass('cba-module-container--scroll-chaining')).toBe(false);
 
-    fixture.componentRef.setInput('scrollChaining', true);
-    fixture.detectChanges();
+    setInput('scrollChaining', true);
 
     // CSS overscroll-behavior switch is not computable in jsdom; the host
     // modifier class is the contract (mirrors the fullscreen chrome test).
@@ -97,8 +100,7 @@ describe('ModuleContainerComponent', () => {
     expect(headerRegion()).not.toBeNull();
     expect(hostHasClass('cba-module-container--header-hidden')).toBe(false);
 
-    fixture.componentRef.setInput('showHeader', false);
-    fixture.detectChanges();
+    setInput('showHeader', false);
 
     // The header band must remain in the DOM; visibility is CSS-driven only.
     expect(headerRegion()).not.toBeNull();

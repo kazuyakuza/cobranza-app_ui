@@ -24,7 +24,7 @@
   background-color: var(--cba-bg-secondary);
 }
 
-/* Task 3 — width mode driven by Shell. */
+/* Width modes */
 :host(.cba-module-container--size-50) {
   width: 50%;
 }
@@ -33,7 +33,7 @@
   width: 100%;
 }
 
-/* Task 4 — chrome applied only when NOT fullscreen. */
+/* Module chrome (suppressed in fullscreen) */
 :host(:not(.cba-module-container--fullscreen)) {
   border: 1px solid var(--cba-border-default);
   border-radius: var(--cba-radius-md);
@@ -42,12 +42,12 @@
   overflow: hidden;
 }
 
-/* Task 7 — header band never scrolls, never shrinks. */
+/* Header band */
 .cba-module-container__header {
   flex: 0 0 auto;
 }
 
-/* Task 6 — body is the internal scroll container while expanded. */
+/* Body scroll container */
 .cba-module-container__body {
   flex: 1 1 auto;
   min-height: 0;
@@ -88,7 +88,7 @@
   }
 }
 
-/* Round 2 — footer band never scrolls, never shrinks; separated from body. */
+/* Footer band */
 .cba-module-container__footer {
   flex: 0 0 auto;
   min-height: 0;
@@ -96,7 +96,7 @@
   background-color: var(--cba-bg-tertiary);
 }
 
-/* Task 5 — padding modifiers (body only, host-driven). */
+/* Body padding modifiers */
 :host(.cba-module-container--padding-none) .cba-module-container__body {
   padding: 0;
 }
@@ -109,12 +109,12 @@
   padding: var(--cba-space-4);
 }
 
-/* Task 1 (Round 2) — opt-in scroll chaining. */
+/* Scroll chaining modifier */
 :host(.cba-module-container--scroll-chaining) .cba-module-container__body {
   overscroll-behavior: auto;
 }
 
-/* Task 1 — visual header visibility toggle (header stays in the DOM). */
+/* Header visibility modifier */
 :host(.cba-module-container--header-hidden) .cba-module-container__header {
   display: none;
 }
