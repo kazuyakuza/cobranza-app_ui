@@ -12,7 +12,7 @@ import {
  * Wrapper that hosts a projected module header + the MFE body inside the
  * Shell workspace.
  *
- * Visual state (size, collapse, fullscreen, padding) is driven entirely by
+ * Visual state (size, collapse, fullscreen, padding, header visibility) is driven entirely by
  * inputs and reflected on the host element as modifier classes. The
  * component never mutates these values; the Shell owns the source of
  * truth and re-binds state on every change.
